@@ -7,6 +7,6 @@ class Payment < ActiveRecord::Base
 
   validates :payment_date, :payment_amount, :payment_method, :presence => true
   validates_numericality_of :payment_amount
-  validates_inclusion_of :payment_type, :in => ['Deposit', 'Second', 'Final', 'Other'], :message => "Invalid payment type"
+  validates_inclusion_of :payment_type, :in => ['Initial', 'Deposit', 'Second', 'Final', 'Other'], :message => "Invalid payment type"
 
 end

@@ -88,14 +88,16 @@ class RegistrationController < ApplicationController
         @payment.payment_amount=@registration.amount_paid
         @payment.payment_date=Date.today
         @payment.payment_notes=@registration.payment_notes
+        @payment.payment_type = 'Initial'
         @church.registered=true
         if @payment.save && @church.save then
           flash[:notice] = "Successful completion of step 3"
           redirect_to registration_success_path(:id => @registration.id)
         else
+          flash[:error] = "Save of payment/registration failed."
           @title = "Registration Step 3"
           @page_title = "Register A Group: Step 3"
-          render "update"
+          redirect_to registration_payment_path(:id => @registration.id)
         end
       end
     end
