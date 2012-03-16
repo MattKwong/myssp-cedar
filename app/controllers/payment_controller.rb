@@ -1,5 +1,5 @@
 class PaymentController < ApplicationController
-#  load_and_authorize_resource
+  authorize_resource
   before_filter :check_for_cancel, :only => [:create]
 
 #  def show
@@ -38,7 +38,7 @@ class PaymentController < ApplicationController
         group.second_payment_date = payment.payment_date
         group.second_payment_total=group.current_total
         if group.save!
-          log_activity("Scheduled Group second payment date recorded: ", "$#{payment.payment_date} for #{scheduled_group.name}")
+          log_activity("Scheduled Group second payment date recorded: ", "#{payment.payment_date} for #{scheduled_group.name}")
         else
           flash[:error] = "Unable to updated group record."
         end
@@ -72,9 +72,9 @@ private
     a.activity_date = Time.now
     a.activity_type = activity_type
     a.activity_details = activity_details
-    a.user_id = 1 #@current_admin_user.id
-    a.user_name = "Name" #@current_admin_user.name
-    a.user_role = "Liaison" #@current_admin_user.user_role
+    a.user_id = current_admin_user.id
+    a.user_name = current_admin_user.name
+    a.user_role = current_admin_user.user_role
     unless a.save!
       flash[:error] = "Unknown problem occurred logging a transaction."
     end

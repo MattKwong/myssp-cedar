@@ -57,7 +57,7 @@ class LiaisonsController < ApplicationController
     user.user_role = "Liaison"
 #    user.reset_password_token = AdminUser.reset_password_token
 #    user.password = random_pronouncable_password(8)
-#TODO: change logic t o update the admin user record if one exists.
+#TODO: change logic to update the admin user record if one exists.
     unless user.save!
       flash[:error] = "A problem occurred in create a logon for this liaison."
     else

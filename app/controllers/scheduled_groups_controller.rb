@@ -8,14 +8,8 @@ class ScheduledGroupsController < ApplicationController
   layout 'admin_layout'
 
   def program_session
-#TODO: This doesn't seem to be working
-#    if current_admin_user.admin?
-#      skip_authorize_resource
-#    end
     session = Session.find(params[:session])
-#   group = ScheduledGroup.find(params[:id])
     @groups = ScheduledGroup.find_all_by_session_id(session.id)
-#   session = Session.find(group.session_id)
     @session_week = Period.find(session.period.id).name
     @session_site = Site.find(session.site_id).name
   end

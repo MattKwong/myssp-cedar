@@ -40,7 +40,7 @@ ActiveAdmin.register Church do
         column "Counselors", :current_counselors
         column "Total", :current_total
         column "Session", :session_id do |session|
-          link_to session.session.name, sched_program_session_path(session.session.id)
+          session.session.name
         end
         column "Site", :session_id do |session|
           session.session.site.name
