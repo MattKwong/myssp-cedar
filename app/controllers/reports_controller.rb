@@ -76,8 +76,6 @@ class ReportsController < ApplicationController
           row << l.liaison.name << l.church.name << l.liaison.email1
           @rows << row
       end
-
-      logger.debug @rows
       return @rows
    end
 

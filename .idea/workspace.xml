@@ -4,9 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/app/controllers/payment_controller.rb" line="59" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="Update to format of confirmation/invitation email.">
+    <list default="true" id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/reports_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/reports_controller.rb" />
     </list>
     <list id="6515e16b-01b0-44f6-bd49-9d9ce8271564" name="Failed commit: Default" comment="Added update of second payment fields in ScheduledGroup to payment controller code." />
     <ignored path="spoic3.iws" />
@@ -60,10 +60,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="confirmation_instructions.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="confirmation_instructions.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="99" selection-start="414" selection-end="414" vertical-scroll-proportion="0.12623763">
+            <state line="25" column="75" selection-start="1584" selection-end="1586" vertical-scroll-proportion="-15.461538">
+              <folding>
+                <marker date="1333651375062" expanded="true" signature="41:312" placeholder="..." />
+                <marker date="1333651375062" expanded="true" signature="317:618" placeholder="..." />
+                <marker date="1333651375062" expanded="true" signature="832:978" placeholder="..." />
+                <marker date="1333651375062" expanded="true" signature="983:1294" placeholder="..." />
+                <marker date="1333651375062" expanded="true" signature="1383:1583" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reports_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/reports_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="6" selection-start="1503" selection-end="1503" vertical-scroll-proportion="0.06981132">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_header.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="45" selection-start="3154" selection-end="3154" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -72,8 +105,66 @@
       <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/liaisons/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="43.153847">
-              <folding />
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1331920005336" expanded="true" signature="56:10856" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="90:8452" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="118:8437" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="142:1251" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="257:1231" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="328:1218" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="412:1201" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="436:715" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="460:710" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1316:2499" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1415:2480" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1486:2457" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1518:1872" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1551:1839" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1904:2428" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="1987:2361" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="2564:5882" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="2669:5863" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="2740:5840" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="2772:3403" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="2805:3370" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="3446:5811" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="3522:5769" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="3559:3702" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="3936:4221" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="4258:4562" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="4599:4767" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="4804:5021" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="5058:5264" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="5371:5559" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="5940:6765" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="6029:6746" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="6100:6723" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="6129:6330" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="6362:6694" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="6883:8400" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="6963:8381" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="7034:8358" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="7066:7528" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="7099:7495" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="7560:8329" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="7680:8258" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="8508:10846" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="8593:9952" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="8679:9933" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="8768:9910" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="8843:9883" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="8876:9032" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="9065:9850" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="9102:9241" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="9361:9543" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="9625:9774" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="10079:10830" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="10165:10811" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="10252:10788" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="10327:10761" placeholder="..." />
+                <marker date="1331920005336" expanded="true" signature="10363:10728" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,7 +172,7 @@
       <file leaf-file-name="_footer.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/_footer.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="12" selection-start="199" selection-end="269" vertical-scroll-proportion="-1.9615384">
+            <state line="3" column="12" selection-start="199" selection-end="269" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,8 +219,8 @@
         <option value="$PROJECT_DIR$/app/models/admin_ability.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/reports_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/reports_controller.rb" />
       </list>
     </option>
   </component>
@@ -143,8 +234,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1380" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -187,6 +278,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="myssp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spoic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myssp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,34 +477,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spoic3" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spoic3" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -486,6 +563,16 @@
             <PATH_ELEMENT USER_OBJECT=".idea">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spoic3" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1127,7 +1214,7 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -1200,7 +1287,11 @@
       <created>1333650488837</created>
       <updated>1333650488837</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Update to format of confirmation/invitation email.">
+      <created>1333651397622</created>
+      <updated>1333651397622</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1224,15 +1315,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1380" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32623318" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13357843" sideWeight="0.6087444" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13297872" sideWeight="0.6087444" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21860987" sideWeight="0.80649114" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3251121" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21494183" sideWeight="0.21516165" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28982842" sideWeight="0.6087444" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2993921" sideWeight="0.6087444" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39910814" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1244,6 +1334,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33442622" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3277592" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32623318" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -1284,7 +1375,9 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" value="Update to format of confirmation/invitation email." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -1328,16 +1421,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="96" selection-start="3703" selection-end="3703" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbElement:/859ba19f/e135c933-ec04-4558-8d40-01762d8a32c2/..scheduled_groups">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/reports/church_and_liaison.csv.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1346,11 +1429,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/reports/scheduled_liaisons.csv.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/reports_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="0" selection-start="2034" selection-end="2034" vertical-scroll-proportion="0.3529412" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/admin_ability.rb">
@@ -1368,58 +1446,71 @@
         <state line="12" column="84" selection-start="515" selection-end="515" vertical-scroll-proportion="0.23887588" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120102210353_add_fields_to_admin_user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/liaisons_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="90" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="10" column="90" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20120102221728_create_user_roles.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120102210353_add_fields_to_admin_user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120103035542_add_liaison_to_admin_user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20120102224209_change_admin_user_fields.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="275" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="275" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/liaisons/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="43.153847">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/_footer.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="12" selection-start="199" selection-end="269" vertical-scroll-proportion="-1.9615384">
-          <folding />
-        </state>
+        <state line="3" column="12" selection-start="199" selection-end="269" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120103035542_add_liaison_to_admin_user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="99" selection-start="414" selection-end="414" vertical-scroll-proportion="0.12623763">
+        <state line="25" column="75" selection-start="1584" selection-end="1586" vertical-scroll-proportion="-15.461538">
+          <folding>
+            <marker date="1333651375062" expanded="true" signature="41:312" placeholder="..." />
+            <marker date="1333651375062" expanded="true" signature="317:618" placeholder="..." />
+            <marker date="1333651375062" expanded="true" signature="832:978" placeholder="..." />
+            <marker date="1333651375062" expanded="true" signature="983:1294" placeholder="..." />
+            <marker date="1333651375062" expanded="true" signature="1383:1583" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="45" selection-start="3154" selection-end="3154" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/reports_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="6" selection-start="1503" selection-end="1503" vertical-scroll-proportion="0.06981132">
           <folding />
         </state>
       </provider>
