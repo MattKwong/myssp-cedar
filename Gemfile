@@ -4,8 +4,8 @@ gem 'rails', '3.0.1'
 gem 'jquery-rails'
 gem 'rake', '0.8.7'
 gem 'haml'
-gem 'formtastic'
-gem 'activeadmin'
+gem "formtastic", "~> 2.1.1"
+gem "activeadmin", "~> 0.4.3"
 gem 'validates_timeliness'
 gem 'cancan'
 gem 'prawn_rails'
