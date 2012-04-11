@@ -7,17 +7,20 @@ class LiaisonsController < ApplicationController
   end
 
   def update
+    logger.debug @liaison.inspect
     if @liaison.update_attributes(params[:liaison])
       flash[:success] = "Successful update of liaison information"
+      redirect_to myssp_path(@liaison.id)
     else
       flash[:error] = "Update of liaison information failed."
+      render 'edit'
     end
-    redirect_to myssp_path(current_admin_user.liaison_id)
+
   end
 
   def show
     liaison = Liaison.find(params[:id])
-    @page_title = "My SSP Information Portal. Welcome, #{liaison.first_name}!"
+    @page_title = "MySSP Information Portal. Welcome, #{liaison.first_name}!"
     church = Church.find(liaison.church_id)
     registrations = Registration.find_all_by_liaison_id(liaison.id) || []
     groups = ScheduledGroup.find_all_by_liaison_id(liaison.id)
@@ -28,7 +31,7 @@ class LiaisonsController < ApplicationController
 
     checklists = []
     for j in 0..groups.size - 1
-      checklist = ChecklistItem.find(:all, :order => 'seq_number')
+      checklist = ChecklistItem.all(:order => 'seq_number')
       checklist_item = []
       for i in 0..checklist.length - 1
         checklist_item[i] = {:name => checklist[i].name, :due_date => checklist[i].due_date,

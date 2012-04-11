@@ -8,6 +8,10 @@ class RosterItem < ActiveRecord::Base
 
   belongs_to :roster
 
+  before_validation do
+    self.state = self.state.upcase.first(2)
+    end
+
   validates :roster_id, :first_name, :last_name, :address1, :city, :state, :group_id,
     :shirt_size, :presence => true
 

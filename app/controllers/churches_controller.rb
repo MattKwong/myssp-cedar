@@ -5,16 +5,17 @@ class ChurchesController < ApplicationController
   layout 'admin_layout'
 
   def edit
-    @page_title = "Edit Church Information"
+    @page_title = "Edit Church Information: #{@church.name}"
   end
 
   def update
     if @church.update_attributes(params[:church])
       flash[:success] = "Successful update of church information"
+      redirect_to myssp_path(Liaison.find_by_church_id(@church.id).id)
     else
       flash[:error] = "Update of church information failed."
+      render 'edit'
     end
-    redirect_to myssp_path(current_admin_user.liaison_id)
   end
 end
 
