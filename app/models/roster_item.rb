@@ -3,8 +3,17 @@ class RosterItem < ActiveRecord::Base
   attr_accessible :id, :roster_id, :first_name, :last_name, :address1, :address2, :city, :state, :zip,
     :group_id, :male, :youth, :shirt_size, :email, :grade_in_fall, :disclosure_status, :covenant_status,
       :background_status
+
   scope :youth, (where :youth => 't')
-  scope :adult, (where :youth => 'f')
+  scope :adults, (where :youth => 'f')
+  scope :disclosure_received_all, (where :disclosure_status => 'Received')
+  scope :disclosure_received, adults.disclosure_received_all
+  scope :disclosure_incomplete_all, (where :disclosure_status => 'Incomplete')
+  scope :disclosure_incomplete, adults.disclosure_incomplete_all
+  scope :disclosure_not_received_all, (where :disclosure_status => 'Not Received')
+  scope :disclosure_not_received, adults.disclosure_not_received_all
+  scope :covenant_received,  (where :covenant_status => 'Received')
+
 
   belongs_to :roster
 
@@ -39,6 +48,9 @@ class RosterItem < ActiveRecord::Base
 
   def adult?
     youth == 'f' || nil
+  end
+  def group_name
+    self.roster.scheduled_group.name
   end
 
 end
