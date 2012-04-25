@@ -6,14 +6,27 @@ class RosterItem < ActiveRecord::Base
 
   scope :youth, (where :youth => 't')
   scope :adults, (where :youth => 'f')
+
   scope :disclosure_received_all, (where :disclosure_status => 'Received')
   scope :disclosure_received, adults.disclosure_received_all
   scope :disclosure_incomplete_all, (where :disclosure_status => 'Incomplete')
   scope :disclosure_incomplete, adults.disclosure_incomplete_all
   scope :disclosure_not_received_all, (where :disclosure_status => 'Not Received')
   scope :disclosure_not_received, adults.disclosure_not_received_all
-  scope :covenant_received,  (where :covenant_status => 'Received')
 
+  scope :covenant_received_all, (where :covenant_status => 'Received')
+  scope :covenant_received, adults.covenant_received_all
+  scope :covenant_incomplete_all,  (where :covenant_status => 'Incomplete')
+  scope :covenant_incomplete, adults.covenant_incomplete_all
+  scope :covenant_not_received_all,  (where :covenant_status => 'Not Received')
+  scope :covenant_not_received, adults.covenant_not_received_all
+
+  scope :background_church_verified_all, (where :background_status => 'Church Verified')
+  scope :background_church_verified, adults.background_church_verified_all
+  scope :background_church_online_ver_all,  (where :background_status => 'Online Verified')
+  scope :background_church_online_ver, adults.background_church_online_ver_all
+  scope :background_not_received_all,  (where :background_status => 'Not Received')
+  scope :background_not_received, adults.background_not_received_all
 
   belongs_to :roster
 
@@ -22,7 +35,7 @@ class RosterItem < ActiveRecord::Base
     end
 
   validates :roster_id, :first_name, :last_name, :address1, :city, :state, :group_id,
-    :shirt_size, :presence => true
+    :shirt_size, :email, :presence => true
 
   validates :state, :presence => true,
                     :length => { :is => 2}
@@ -47,10 +60,27 @@ class RosterItem < ActiveRecord::Base
   end
 
   def adult?
-    youth == 'f' || nil
+    !youth || nil
   end
+
   def group_name
-    self.roster.scheduled_group.name
+    roster.scheduled_group.name
+  end
+
+  def youth_or_counselor
+    if youth
+      "Youth"
+    else
+      "Counselor"
+    end
+  end
+
+  def gender
+    if male
+      "Male"
+    else
+      "Female"
+    end
   end
 
 end

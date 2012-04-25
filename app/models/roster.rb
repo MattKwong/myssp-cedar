@@ -4,4 +4,10 @@ class Roster < ActiveRecord::Base
     has_many :roster_items
 
     validates :group_id, :group_type, :presence => true
+
+  def name
+    unless group_id.nil?
+      scheduled_group.name
+    end
+  end
 end
