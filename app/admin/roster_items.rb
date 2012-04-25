@@ -27,6 +27,7 @@ ActiveAdmin.register RosterItem do
     column "Disclosure Status", :disclosure_status
     column "Gender",  :gender, :sortable => :male
     column "Youth/Counselor", :youth_or_counselor, :sortable => :youth
+    column "Special Needs", :special_need
     default_actions
   end
 end

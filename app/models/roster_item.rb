@@ -2,7 +2,7 @@ class RosterItem < ActiveRecord::Base
 
   attr_accessible :id, :roster_id, :first_name, :last_name, :address1, :address2, :city, :state, :zip,
     :group_id, :male, :youth, :shirt_size, :email, :grade_in_fall, :disclosure_status, :covenant_status,
-      :background_status
+      :background_status, :special_need
 
   scope :youth, (where :youth => 't')
   scope :adults, (where :youth => 'f')
@@ -30,6 +30,7 @@ class RosterItem < ActiveRecord::Base
 
   belongs_to :roster
 
+
   before_validation do
     self.state = self.state.upcase.first(2)
     end
@@ -40,6 +41,8 @@ class RosterItem < ActiveRecord::Base
   validates :state, :presence => true,
                     :length => { :is => 2}
   validates_inclusion_of :state, :in => State::STATE_ABBREVIATIONS, :message => 'Invalid state.'
+
+  validates_inclusion_of :special_need, :in => SpecialNeed.all.map {|need| need.name}, :message => 'Invalid state.'
   validates :zip,   :presence => true,
                     :length => { :is => 5},
                     :numericality => true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308172459) do
+ActiveRecord::Schema.define(:version => 20120425225235) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer   "resource_id",   :null => false
@@ -329,25 +329,26 @@ ActiveRecord::Schema.define(:version => 20120308172459) do
   end
 
   create_table "roster_items", :force => true do |t|
-    t.integer   "group_id"
-    t.boolean   "youth"
-    t.boolean   "male"
-    t.string    "first_name"
-    t.string    "last_name"
-    t.string    "address1"
-    t.string    "address2"
-    t.string    "city"
-    t.string    "state"
-    t.string    "zip"
-    t.string    "email"
-    t.string    "shirt_size"
-    t.string    "grade_in_fall"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "roster_id"
-    t.string    "disclosure_status"
-    t.string    "covenant_status"
-    t.string    "background_status"
+    t.integer  "group_id"
+    t.boolean  "youth"
+    t.boolean  "male"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "email"
+    t.string   "shirt_size"
+    t.string   "grade_in_fall"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "roster_id"
+    t.string   "disclosure_status"
+    t.string   "covenant_status"
+    t.string   "background_status"
+    t.string   "special_need"
   end
 
   create_table "rosters", :force => true do |t|
@@ -417,6 +418,13 @@ ActiveRecord::Schema.define(:version => 20120308172459) do
     t.integer   "listing_priority"
     t.boolean   "active"
     t.boolean   "summer_domestic"
+  end
+
+  create_table "special_needs", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "list_priority"
   end
 
   create_table "user_roles", :force => true do |t|
