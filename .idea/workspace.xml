@@ -4,19 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/app/controllers/payment_controller.rb" line="59" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="Two more minor tweeks to css.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20120425220453_create_special_needs.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20120425220558_add_needs_field_to_roster_item.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20120425220559_add_needs_field_to_roster_item2.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20120425225235_add_field_to_special_need.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+    <list default="true" id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="Addition of special needs to roster item.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/roster_items.rb" afterPath="$PROJECT_DIR$/app/admin/roster_items.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/roster_item.rb" afterPath="$PROJECT_DIR$/app/models/roster_item.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/roster_item/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/roster_item/edit.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/roster_item/new.html.erb" afterPath="$PROJECT_DIR$/app/views/roster_item/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/rosters/show.html.erb" afterPath="$PROJECT_DIR$/app/views/rosters/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <list id="6515e16b-01b0-44f6-bd49-9d9ce8271564" name="Failed commit: Default" comment="Added update of second payment fields in ScheduledGroup to payment controller code." />
     <ignored path="spoic3.iws" />
@@ -43,15 +33,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="special_need.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/special_need.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="26" selection-start="210" selection-end="210" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="roster_item.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/roster_item.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,15 +58,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/rosters/show.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="96" selection-start="1169" selection-end="1169" vertical-scroll-proportion="-5.269231">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="new.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/roster_item/new.html.erb">
           <provider selected="true" editor-type-id="text-editor">
@@ -104,28 +76,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="20120425220558_add_needs_field_to_roster_item.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="20120425220558_add_needs_field_to_roster_item.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/migrate/20120425220558_add_needs_field_to_roster_item.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="44" selection-start="212" selection-end="212" vertical-scroll-proportion="0.29651162">
+            <state line="9" column="59" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="special_needs.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/admin/special_needs.rb">
+      <file leaf-file-name="20120425220559_add_needs_field_to_roster_item2.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20120425220559_add_needs_field_to_roster_item2.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="66" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0">
+            <state line="11" column="31" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="roster_items.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/admin/roster_items.rb">
+      <file leaf-file-name="20120425220453_create_special_needs.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20120425220453_create_special_needs.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="4" selection-start="1457" selection-end="1457" vertical-scroll-proportion="0.0">
+            <state line="10" column="0" selection-start="176" selection-end="205" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20120425233651_create_special_needs.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="17" selection-start="246" selection-end="246" vertical-scroll-proportion="0.4455645">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20120110173914_create_activities.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20120110173914_create_activities.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -156,9 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/config/initializers/active_admin.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/admin_layout.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/pages/home.html.erb" />
         <option value="$PROJECT_DIR$/public/stylesheets/active_admin.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/custom_aa.css" />
         <option value="$PROJECT_DIR$/app/models/special_needs.rb" />
@@ -172,6 +159,9 @@
         <option value="$PROJECT_DIR$/app/views/rosters/show.html.erb" />
         <option value="$PROJECT_DIR$/app/models/roster_item.rb" />
         <option value="$PROJECT_DIR$/app/views/roster_item/edit.html.erb" />
+        <option value="$PROJECT_DIR$/db/migrate/20120425220558_add_needs_field_to_roster_item.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20120425233651_create_special_need.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb" />
       </list>
     </option>
   </component>
@@ -1271,7 +1261,11 @@
       <created>1335391014228</created>
       <updated>1335391014228</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Addition of special needs to roster item.">
+      <created>1335396196382</created>
+      <updated>1335396196382</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1358,7 +1352,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Two more minor tweeks to css." />
+    <option name="LAST_COMMIT_MESSAGE" value="Addition of special needs to roster item." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1371,7 +1365,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Corrected csv report problem; changed from saving file to downloading file. Now test on server." />
     <MESSAGE value="Minor changes to CSV variables." />
     <MESSAGE value="CSS File Changes" />
     <MESSAGE value="CSS File Changes and layout changes" />
@@ -1396,39 +1389,12 @@
     <MESSAGE value="Create roster_id active admin page with scopes for reporting." />
     <MESSAGE value="Added roster report and separated aa stylesheet changes into separate sheet." />
     <MESSAGE value="Two more minor tweeks to css." />
+    <MESSAGE value="Addition of special needs to roster item." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/site.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="247" selection-end="265" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin/activities.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120425220559_add_needs_field_to_roster_item2.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="31" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin/user_roles.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="92" selection-end="195" vertical-scroll-proportion="0.05304212">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/state.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1504,9 +1470,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120425220559_add_needs_field_to_roster_item2.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="31" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20120425220558_add_needs_field_to_roster_item.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="44" selection-start="212" selection-end="212" vertical-scroll-proportion="0.29651162">
+        <state line="9" column="59" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120425220453_create_special_needs.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="176" selection-end="205" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120110173914_create_activities.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="246" selection-end="246" vertical-scroll-proportion="0.4455645">
           <folding />
         </state>
       </provider>
