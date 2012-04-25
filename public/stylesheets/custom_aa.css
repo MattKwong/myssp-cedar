@@ -23,6 +23,12 @@ h1, h2, h3, h4, h5, h6 {
     color: #1B3664;
     font-weight: normal;
 }
+h2 {
+    font-size: 2em;
+    margin-bottom: 0.75em;
+    padding-top: 5px;
+    padding-left: 5px;
+}
 
 caption, th, td {
   text-align: left;
@@ -545,3 +551,17 @@ table.dashboard {
 
 th.status {
   text-transform: none; }
+
+body.logged_in .flash {
+    /*background: -moz-linear-gradient(-90deg, #F7F1D3, #F5EDC5) repeat scroll 0 0 transparent;*/
+    /*border-bottom: 1px solid #EEE098;*/
+    /*color: #CB9810;*/
+    /*font-size: 1.1em;*/
+    /*font-weight: bold;*/
+    /*line-height: 1em;*/
+    /*margin-bottom: 10px;*/
+    /*padding: 13px 30px 11px;*/
+    /*position: relative;*/
+    /*text-shadow: 0 1px 0 #FAFAFA;*/
+    top: 0px;
+}
