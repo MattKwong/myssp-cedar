@@ -4,8 +4,7 @@ class CreateSpecialNeeds < ActiveRecord::Migration
       t.string :name
       t.integer :list_priority
       t.timestamps
-
-    end
+     end
   end
 
   def self.down
