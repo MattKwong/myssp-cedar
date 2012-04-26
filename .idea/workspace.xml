@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20120426000206_add2nd_field_to_roster_item.rb" />
-      <change type="DELETED" beforePath="C:\Users\Rick\railsprojects\myssp\db\migrate\20120425220453_create_special_needs.rb" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Rick\railsprojects\myssp\db\migrate\20120425220558_add_needs_field_to_roster_item.rb" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Rick\railsprojects\myssp\db\migrate\20120425220559_add_needs_field_to_roster_item2.rb" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Rick\railsprojects\myssp\db\migrate\20120425225235_add_field_to_special_need.rb" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb" afterPath="$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/roster_item.rb" afterPath="$PROJECT_DIR$/app/models/roster_item.rb" />
     </list>
     <list id="6515e16b-01b0-44f6-bd49-9d9ce8271564" name="Failed commit: Default" comment="Added update of second payment fields in ScheduledGroup to payment controller code." />
     <ignored path="spoic3.iws" />
@@ -38,10 +33,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="roster_item.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="roster_item.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/roster_item.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0">
+            <state line="74" column="37" selection-start="3387" selection-end="3387" vertical-scroll-proportion="0.75775194">
               <folding />
             </state>
           </provider>
@@ -72,10 +67,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="20120425233651_create_special_needs.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="20120425233651_create_special_needs.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="9" selection-start="247" selection-end="247" vertical-scroll-proportion="0.42829457">
+            <state line="13" column="9" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -117,11 +112,11 @@
         <option value="$PROJECT_DIR$/app/views/roster_item/new.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/roster_item_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/rosters/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/models/roster_item.rb" />
         <option value="$PROJECT_DIR$/app/views/roster_item/edit.html.erb" />
         <option value="$PROJECT_DIR$/db/migrate/20120425220558_add_needs_field_to_roster_item.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20120425233651_create_special_need.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb" />
+        <option value="$PROJECT_DIR$/app/models/roster_item.rb" />
       </list>
     </option>
   </component>
@@ -1233,7 +1228,11 @@
       <created>1335397601622</created>
       <updated>1335397601622</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Special commit for heroku">
+      <created>1335398637273</created>
+      <updated>1335398637273</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1398,13 +1397,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/roster_item.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbElement:/859ba19f/e135c933-ec04-4558-8d40-01762d8a32c2/..roster_items">
       <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
         <state />
@@ -1447,7 +1439,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20120425233651_create_special_needs.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="9" selection-start="247" selection-end="247" vertical-scroll-proportion="0.42829457">
+        <state line="13" column="9" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/roster_item.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="37" selection-start="3387" selection-end="3387" vertical-scroll-proportion="0.75775194">
           <folding />
         </state>
       </provider>
