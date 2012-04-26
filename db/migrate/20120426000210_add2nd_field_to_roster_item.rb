@@ -4,6 +4,7 @@ class Add2ndFieldToRosterItem < ActiveRecord::Migration
   end
 
   def self.down
+
     remove_column :roster_items, :special_need
   end
 end
