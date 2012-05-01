@@ -2,7 +2,7 @@ class RosterItem < ActiveRecord::Base
 
   attr_accessible :id, :roster_id, :first_name, :last_name, :address1, :address2, :city, :state, :zip,
     :group_id, :male, :youth, :shirt_size, :email, :grade_in_fall, :disclosure_status, :covenant_status,
-      :background_status, :special_need
+      :background_status, :special_need, :updated_at
 
   scope :youth, (where :youth => 't')
   scope :adults, (where :youth => 'f')

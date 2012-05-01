@@ -43,5 +43,7 @@ ActiveAdmin.register RosterItem do
     column :gender
     column :youth_or_counselor
     column :special_need
+    column("Last Updated") { |item| item.updated_at.localtime }
+
   end
 end
