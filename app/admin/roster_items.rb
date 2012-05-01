@@ -30,4 +30,18 @@ ActiveAdmin.register RosterItem do
     column "Special Needs", :special_need
     default_actions
   end
+
+  csv do
+    column :last_name
+    column :first_name
+    column :email
+    column("Group Name") { |item| item.group_name }
+    column("Site") { |item| item.roster.scheduled_group.session.site.name }
+    column("Week"){ |item| item.roster.scheduled_group.session.period.name }
+    column("Church Name") { |item| item.roster.scheduled_group.church.name }
+    column :disclosure_status
+    column :gender
+    column :youth_or_counselor
+    column :special_need
+  end
 end
