@@ -181,6 +181,7 @@ class ScheduledGroupsController < ApplicationController
     church = Church.find(@scheduled_group.church_id)
     invoice_items = create_invoice_items(invoice)
 
+    logger.debug invoice.inspect
     @screen_info = {:scheduled_group => @scheduled_group, :invoice_items => invoice_items,
       :site_name => site_name, :period_name => period_name, :start_date => start_date,
       :end_date => end_date,  :session_type => session_type, :invoice_data => invoice,
@@ -193,11 +194,12 @@ class ScheduledGroupsController < ApplicationController
     invoice = calculate_invoice_data(params[:id])
     @event_list = invoice[:event_list]
 
+
 #Add header and footers to event_list for statement
     @event_list.insert(0, ["Date", "Item", "Amount Due", "Amount Received"])
     footer = ["", "Totals", number_to_currency(invoice[:total_due]), number_to_currency(invoice[:amount_paid])]
     @event_list << footer
-    footer = ["", "Totals", number_to_currency(invoice[:current_balance]), ""]
+    footer = ["", "Current Balance Due", number_to_currency(invoice[:current_balance]), ""]
     @event_list << footer
 #Convert date column to formatted dates
     for i in 0..@event_list.size - 1
@@ -500,8 +502,7 @@ private
     group = ScheduledGroup.find(group_id)
     original_reg = Registration.find(group.registration_id)
     payment_schedule = PaymentSchedule.find(Session.find(group.session_id).payment_schedule_id)
-    payments = Payment.find_all_by_scheduled_group_id(group_id, :order => 'payment_date')
-    logger.debug payments.inspect
+    payments = Payment.find_all_by_scheduled_group_id(group_id, :order => :payment_date)
     adjustments = Adjustment.find_all_by_group_id(group.id)
     adjustment_total = Adjustment.sum(:amount, :conditions => ['group_id = ?', group.id])
     changes = ChangeHistory.find_all_by_group_id(group_id)
@@ -546,13 +547,13 @@ private
     event_list = Array.new
 
     adjustments.each do |a|
-      event = [a.created_at.to_date, "Adjustment Code #{a.reason_code} (#{AdjustmentCode.find(a.reason_code).short_name})",
+      event = [a.created_at.to_date, "Adjustment: #{AdjustmentCode.find(a.reason_code).short_name}. Notes: #{a.note}",
           number_to_currency(-a.amount), ""]
       event_list << event
     end
 
     payments.each do |p|
-      event = [p.payment_date.to_date, "Payment Received", "", number_to_currency(p.payment_amount), shorten(p.payment_notes), p.id]
+      event = [p.payment_date.to_date, "Payment Received: #{shorten(p.payment_notes)}", "", number_to_currency(p.payment_amount)]
       event_list << event
     end
 

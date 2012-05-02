@@ -246,7 +246,27 @@ class LiaisonsController < ApplicationController
          else
            non_default_status.status
          end
-
+       when "Disclosures Completed"
+          non_default_status = GroupChecklistStatus.find_by_group_id_and_checklist_item_id(group.id, checklist.id)
+          if non_default_status.nil?
+             calculate_disclosure_status(group)
+          else
+            non_default_status.status
+          end
+       when "Covenants Completed"
+          non_default_status = GroupChecklistStatus.find_by_group_id_and_checklist_item_id(group.id, checklist.id)
+          if non_default_status.nil?
+             calculate_covenant_status(group)
+          else
+            non_default_status.status
+          end
+       when "Background Checks Completed"
+          non_default_status = GroupChecklistStatus.find_by_group_id_and_checklist_item_id(group.id, checklist.id)
+          if non_default_status.nil?
+             calculate_background_status(group)
+          else
+            non_default_status.status
+          end
       else ""
     end
     return status
@@ -293,4 +313,45 @@ class LiaisonsController < ApplicationController
     end
   end
 
+  def calculate_disclosure_status(group)
+    items = RosterItem.adults.find_all_by_group_id(group.id).length
+    disclosures_received = RosterItem.adults.find_all_by_group_id_and_disclosure_status(group.id, "Received")
+    if items == 0
+      "Roster not started"
+    else
+      if items > disclosures_received.size
+        "Incomplete: missing #{items - disclosures_received.size} of #{items}"
+      else
+        "Disclosures complete"
+      end
+    end
+  end
+
+  def calculate_covenant_status(group)
+    items = RosterItem.adults.find_all_by_group_id(group.id).length
+    received = RosterItem.adults.find_all_by_group_id_and_covenant_status(group.id, "Received")
+    if items == 0
+      "Roster not started"
+    else
+      if items > received.size
+        "Incomplete: missing #{items - received.size} of #{items}"
+      else
+        "Covenants complete"
+      end
+    end
+  end
+
+  def calculate_background_status(group)
+    items = RosterItem.adults.find_all_by_group_id(group.id).length
+    not_received = RosterItem.adults.find_all_by_group_id_and_background_status(group.id, "Not Received")
+    if items == 0
+      "Roster not started"
+    else
+      if not_received.size == 0
+        "Covenants complete"
+      else
+        "Incomplete: missing #{not_received.size} of #{items}"
+      end
+    end
+  end
 end

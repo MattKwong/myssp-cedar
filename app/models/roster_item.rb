@@ -36,7 +36,7 @@ class RosterItem < ActiveRecord::Base
     end
 
   validates :roster_id, :first_name, :last_name, :address1, :city, :state, :group_id,
-    :shirt_size, :email, :presence => true
+    :shirt_size, :presence => true
 
   validates :state, :presence => true,
                     :length => { :is => 2}
