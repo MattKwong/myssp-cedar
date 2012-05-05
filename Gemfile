@@ -1,10 +1,10 @@
-source 'http://rubygems.org'
+ source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
+gem 'rails', '3.0.12'
 gem 'jquery-rails'
 gem 'rake', '0.8.7'
 gem 'haml'
-gem "formtastic", "~> 2.1.1"
+gem "formtastic", "~> 2.0.2"
 gem "activeadmin", "~> 0.4.3"
 gem 'validates_timeliness'
 gem 'cancan'
