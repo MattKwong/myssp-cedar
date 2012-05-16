@@ -30,7 +30,14 @@ class PaymentController < ApplicationController
     scheduled_group = ScheduledGroup.find(payment.scheduled_group_id)
 # The registration step check is here because some abandoned registration records exist in the db.
 # The fix is to change the registration process and to store group_id in the payment record.
-    payment.registration_id = Registration.find_by_liaison_id_and_registration_step(scheduled_group.liaison_id, 'Step 3').id
+#The if-else is a total kludge to handle the case where the liaison_id has been changed and the reg record
+#has an old and invalid liaison_id
+
+    if reg_record =  Registration.find_by_liaison_id_and_registration_step(scheduled_group.liaison_id, 'Step 3')
+      payment.registration_id = reg_record.id
+    else
+      payment.registration_id = Registration.where('name = ? and registration_step = ?', scheduled_group.name, 'Step 3').first.id
+    end
 
     if payment.valid?
       if payment.payment_type == 'Second'
