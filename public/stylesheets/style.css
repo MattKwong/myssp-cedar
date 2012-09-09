@@ -12,12 +12,20 @@ h1 {
   color: #d1e0e7; }
 
 h2, h3 {
+<<<<<<< HEAD
   color: #5c91aa;
+=======
+  color: #1b3664;
+>>>>>>> upstream/master
   font-weight: bold; }
 
 /* Header Styling */
 #header {
+<<<<<<< HEAD
   background-color: #5c91aa; }
+=======
+  background-color: #1b3664; }
+>>>>>>> upstream/master
 
 #header h1 {
   padding: 15px; }
@@ -34,7 +42,11 @@ h2, h3 {
 
 #user-pane > div span.gravatar {
   padding: 3px;
+<<<<<<< HEAD
   background-color: #d1e0e7;
+=======
+  background-color: #1b3664;
+>>>>>>> upstream/master
   border-top-left-radius: 7px;
   -moz-border-radius-top-left: 7px;
   -webkit-border-top-left-radius: 7px;
@@ -59,7 +71,11 @@ h2, h3 {
 #main-nav {
   position: relative;
   z-index: 2;
+<<<<<<< HEAD
   background-color: #5c91aa;
+=======
+  background-color: #4D7194;
+>>>>>>> upstream/master
   height: 22px;
   border-bottom-left-radius: 15px;
   -moz-border-radius-bottom-left: 15px;
@@ -92,7 +108,11 @@ h2, h3 {
   background-color: white; }
 
 #main-nav ul li.selected a {
+<<<<<<< HEAD
   color: #5c91aa; }
+=======
+  color: #4D7194; }
+>>>>>>> upstream/master
 
 /* Page title and site navigation */
 #page-info {
@@ -111,7 +131,11 @@ h2, h3 {
   -webkit-border-top-right-radius: 10px; }
 
 #page-info div.blank {
+<<<<<<< HEAD
   background-color: #d1e0e7;
+=======
+  background-color: #4D7194;
+>>>>>>> upstream/master
   border-bottom-right-radius: 5px;
   -moz-border-radius-bottom-right: 5px;
   -webkit-border-bottom-right-radius: 5px;
@@ -125,7 +149,11 @@ h2, h3 {
 #site-nav {
   margin-top: -20px;
   padding-top: 20px;
+<<<<<<< HEAD
   background-color: #d1e0e7;
+=======
+  background-color: #efefef;
+>>>>>>> upstream/master
   border-bottom-left-radius: 10px;
   -moz-border-radius-bottom-left: 10px;
   -webkit-border-bottom-left-radius: 10px;
@@ -158,9 +186,22 @@ h2, h3 {
 
 /* Page action stylings */
 #action-links > div {
+<<<<<<< HEAD
   padding-top: 5px; }
 
 /* Table styling */
+=======
+  margin-top: 0px;
+  padding-bottom: 5px; }
+
+#action-anchors a {
+  margin-left: 25px;
+  padding-right: 5px; }
+
+.span-6 h5 {
+    margin-bottom: 0;}
+/* #Table styling */
+>>>>>>> upstream/master
 table thead tr th {
   background-color: #9fbecd; }
 
@@ -176,6 +217,7 @@ table tbody thead tr:first th:first {
   -moz-border-radius-top-left: 10px;
   -webkit-border-top-left-radius: 10px; }
 
+<<<<<<< HEAD
 div.tablewrapper {
   padding: 3px;
   border-top-left-radius: 3px;
@@ -193,6 +235,8 @@ div.tablewrapper {
   background-color: #9fbecd;
   margin-bottom: 1.4em; }
 
+=======
+>>>>>>> upstream/master
 div.tablewrapper table {
   margin-bottom: 0; }
 
@@ -250,6 +294,7 @@ form input.ui-combobox {
 form button.ui-combobox-button {
   margin-left: -1px; }
 
+<<<<<<< HEAD
 div.properties dl dt {
   color: #5c91aa;
   clear: left;
@@ -265,11 +310,32 @@ div.properties dl dt {
   border-bottom-left-radius: 10px;
   -moz-border-radius-bottom-left: 10px;
   -webkit-border-bottom-left-radius: 10px;
+=======
+div.notes-area dt {
+    color: #4D7194;
+}
+div.properties dl dt {
+  color: #4D7194;
+  clear: left;
+  float: left;
+  width: 100px;
+  background-color: #efefef;
+  text-align: right;
+  margin: 5px 0;
+  padding: 1px;
+  border-top-left-radius: 5px;
+  -moz-border-radius-top-left: 5px;
+  -webkit-border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-radius-bottom-left: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+>>>>>>> upstream/master
   border: solid 1px #d1e0e7; }
 
 div.properties dl dd {
   float: left;
   margin: 5px 0;
+<<<<<<< HEAD
   width: 100px;
   padding: 5px;
   border-top-right-radius: 10px;
@@ -280,6 +346,22 @@ div.properties dl dd {
   -webkit-border-bottom-right-radius: 10px;
   border: 1px solid #d1e0e7; }
 
+=======
+  text-align: right;
+  width: 100px;
+  padding: 1px;
+  border-top-right-radius: 5px;
+  -moz-border-radius-top-right: 5px;
+  -webkit-border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-bottom-right: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border: 1px solid #d1e0e7; }
+
+div.prepend-top, .prepend-top {margin-top:0em;}
+form.material_item_estimated {
+    margin: 5px; }
+>>>>>>> upstream/master
 div.properties dl dd.wide {
   width: 60%; }
 

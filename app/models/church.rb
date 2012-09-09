@@ -39,6 +39,9 @@ class Church < ActiveRecord::Base
   attr_accessible :name, :active, :address1, :address2, :city, :email1, :fax,
                     :church_type_id, :liaison_id, :office_phone, :state, :zip,
                     :registered
+  before_validation do
+    self.state = self.state.upcase.first(2)
+  end
 
   before_validation do
      self.state = self.state.upcase.first(2)
@@ -55,6 +58,7 @@ class Church < ActiveRecord::Base
   validates :zip,   :presence => true,
                     :length => { :is => 5},
                     :numericality => true
+  validates :email1, :uniqueness => true
   validates_format_of :email1,
             :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
             :message => 'Email appears to be invalid.', :allow_blank => true

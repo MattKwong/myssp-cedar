@@ -5,6 +5,7 @@ Spoic3::Application.configure do
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
   config.cache_classes = false
+#  config.assets.debug = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
@@ -20,6 +21,7 @@ Spoic3::Application.configure do
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
+
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
@@ -28,6 +30,8 @@ Spoic3::Application.configure do
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.log_tags = [:uuid, :remote_ip]
+
+#  config.log_level = :warn
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin

@@ -1,0 +1,26 @@
+<% remote ||= false %>
+<%= semantic_form_for @material_item_delivered, :url => (@material_item_delivered.new_record? ?
+        add_material_item_path(@material_item_delivered.id)
+                : new_material_item_delivered(@material_item_delivered.project )) do |form| %>
+  <%= form.inputs do %>
+    <h3>Deliver or return material</h3>
+    <%= form.input :item, :collection => @item_list,
+                            #:prompt => "Select an item",
+                            :include_blank => false,
+                            :hint => "Items must be estimated for project before delivery.",
+                           :input_html => { :class => "jq-combo" } %>
+     <%= form.input :delivered_by, :as => :select, :collection => options_for_select(@user_list, current_admin_user.id),
+                            :include_blank => false,
+                           :input_html => { :class => "jq-combo" }%>
+    <%= form.input :delivery_date, :as => :date %>
+    <%= form.input :quantity, :hint => "Enter in this item's base units. Use negative quantity to return previously delivered items.",
+                   :input_html => { :size => 4 } %>
+    <input type = "hidden" name="material_item_delivered[project_id]" value= <%= @material_item_delivered.project_id %> />
+  <% end %>
+    <%= form.buttons do %>
+      <div class="actions">
+          <%= form.submit "Record Delivery or Return" %>
+       </div>
+    <% end %>
+<% end %>
+

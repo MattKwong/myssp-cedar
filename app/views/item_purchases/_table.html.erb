@@ -1,0 +1,24 @@
+<div class='index_as_table'>
+  <table class='index_table' id="item_purchases">
+    <thead>
+      <tr>
+        <th>Item name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Taxed?</th>
+        <th>Budget Type</th>
+        <th>Base Units</th>
+        <th>Total Base Units</th>
+        <th>Price per Base Unit</th>
+        <th colspan="2">Actions</th>
+      </th>
+    </thead>
+    <tbody>
+      <%= render item_purchases %>
+      <% if item_purchases.empty? %>
+        <tr id="item_purchase_new_row"><td colspan=10>No items have been added for this purchase</td></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -52,7 +52,6 @@ class RosterItemController < ApplicationController
   def edit
     @page_title = 'Edit Participant Information'
     @roster_item = RosterItem.find(params[:id])
-    @title = "Edit Participant Information"
     set_grade_list
     @size_list = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
     @youth_list = [["Youth", true], ["Counselor", false]]
@@ -90,9 +89,8 @@ class RosterItemController < ApplicationController
     else
       flash[:notice] = "Unexpected problem occurred deleting this entry"
     end
-  end
-
-  private
+    end
+private
   def set_grade_list
     if @roster_item.roster.scheduled_group.senior_high?
       @grade_list = ['9th', '10th', '11th', '12th', '13th', 'Adult']
@@ -104,4 +102,3 @@ class RosterItemController < ApplicationController
     end
   end
 end
-

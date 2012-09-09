@@ -17,8 +17,15 @@ class Roster < ActiveRecord::Base
     validates :group_id, :group_type, :presence => true
 
   def name
+<<<<<<< HEAD
     unless group_id.nil?
       scheduled_group.name
+=======
+    unless self.scheduled_group.nil?
+      self.scheduled_group.name
+    else
+      "None"
+>>>>>>> upstream/master
     end
   end
 end

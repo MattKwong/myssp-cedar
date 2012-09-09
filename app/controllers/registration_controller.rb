@@ -2,6 +2,10 @@ class RegistrationController < ApplicationController
   load_and_authorize_resource
   layout 'admin_layout'
 
+  def new
+    @page_title = "Register a New Group"
+  end
+
   def index
     @title = "Manage Groups"
   end

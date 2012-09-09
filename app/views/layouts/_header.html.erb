@@ -1,9 +1,14 @@
 <div id= "header">
     <ul class="header_item" id="tabs">
-
         <% if signed_in? && current_admin_user.admin? %>
-             <h1 id="site_title">Sierra Service Project Manager</h1>
-             <li><%= link_to "Home", root_path, %></li>
+          <h1 id="site_title">SSP Manager</h1>
+          <!--<span class="breadcrumb">-->
+            <%= link_to "Home", root_path %>
+            <!--<span class="breadcrumb_sep">/</span>-->
+            <!--<%= link_to "Site", @program_return_path %>-->
+            <!--<span class="breadcrumb_sep">/</span>-->
+          <!--</span>-->
+
              <li class="has_nested" ><a href="#">Group Manager</a>
                 <ul>
                   <li><%= link_to "Register a group", registration_register_path%></li>
@@ -25,8 +30,11 @@
                   <li><%= link_to "All Churches and Liaisons: CSV", church_and_liaison_csv_path(:format => :csv)%></li>
                   <li><%= link_to "Show the schedule - scheduled summer domestic",
                           registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'summer_domestic')%></li>
-                  <li><%= link_to "Show the schedule - unscheduled summer domestic",
-                          registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'summer_domestic')%></li>
+                  <li><%= link_to "Show t-shirt order report", tshirt_report_path %></li>
+                  <li><%= link_to "Roster Summary: CSV", rosters_csv_path(:format => :csv)%></li>
+                  <li><%= link_to "Purchases with Unaccounted $", unaccounted_report_path%></li>
+                  <li><%= link_to "Spending Report", spending_by_site_report_path%></li>
+                  <li><%= link_to "Participant Summary: CSV", part_sum_csv_path(:format => :csv)%></li>
                 </ul>
             </li>
             <li class="has_nested" ><a href="#">Budgets</a>
@@ -40,19 +48,42 @@
                <ul>
                   <li><%= link_to "Churches", admin_churches_path %></li>
                   <li><%= link_to "Liaisons", admin_liaisons_path %></li>
+                  <li><%= link_to "Purchases", admin_purchases_path %></li>
                   <li><%= link_to "Admin Center", admin_path %></li>
                </ul>
-            <% if signed_in? && current_admin_user.food_admin? %>
-              <li><%= link_to "Food/Tabatha", food_path %></li>
-            <% end %>
-            <% if signed_in? && current_admin_user.construction_admin? %>
-              <li><%= link_to "Construction", construction_path %></li>
-            <% end %>
+            </li>
+            <li class="has_nested" ><a href='#'>SiteManager</a>
+               <ul>
+                 <li><%= link_to "All Sites", ops_pages_show_path  %></li>
+                 <li><%= link_to "Vendors", vendors_path %></li>
+                 <li><%= link_to "Items", items_path %></li>
+                 <li><%= link_to "Purchases", admin_purchases_path %></li>
+                 <li><%= link_to "Reports", staff_reports_path %></li>
+                 <li><%= link_to "Projects", projects_path %></li>
+                 <li><%= link_to "Food Inventories", food_inventories_path %></li>
+               </ul>
+            </li>
+      <% end %>
+        <% if signed_in? && current_admin_user.field_staff? %>
+                <li class="has_nested" ><a href='#'>SiteManager</a>
+                  <ul>
+                    <!--These are single site users-->
+                      <li><%= link_to "Vendors", site_vendors_path(current_admin_user.program_user.program.site) %></li>
+                      <li><%= link_to "Items", program_items_path(current_admin_user.program_user.program) %></li>
+                      <li><%= link_to "Purchases", program_purchases_path(current_admin_user.program_user.program) %></li>
+                      <li><%= link_to "Reports", staff_reports_path %></li>
+                      <li><%= link_to "Projects", program_projects_path(current_admin_user.program_user.program)  if current_admin_user.construction? || current_admin_user.sd? %></li>
+                      <li><%= link_to "Food Inventories", program_food_inventories_path(current_admin_user.program_user.program) if current_admin_user.cook? || current_admin_user.sd?%></li>
+                  </ul>
+                </li>
+                <li><%= link_to "Site Home", current_admin_user.program_user.program %></li>
+
         <% end %>
         <% if signed_in? && current_admin_user.liaison? %>
             <li><%= link_to "MySSP", myssp_path(current_admin_user.liaison_id) %></li>
-        <li><%= link_to "Help", help_path %></li>
+            <li><%= link_to "Register a Group", register_group_path(current_admin_user.liaison_id) %></li>
         <% end %>
+      <li><%= link_to "Help", help_path %></li>
     </ul>
     <p class="header-item" id="utility_nav"><span class="current_user">
     <% if signed_in? %><%= current_admin_user.name %></span>

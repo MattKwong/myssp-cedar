@@ -1,0 +1,37 @@
+#active_admin_content
+  = paginate @purchases
+
+  .index_content
+    .index_as_table
+      %table.index_table
+        %thead
+          %tr
+            - unless @program
+              %th Program
+            %th Purchase
+            %th Date
+            %th Purchaser
+            %th Purchase Type
+            %th Total Spent
+            %th Unaccounted
+
+        %tbody
+          - @purchases.each do |purchase|
+            %tr
+              - unless @program
+                %td= link_to purchase.program, program_purchases_path(purchase.program)
+              %td= link_to purchase.to_s, purchase
+              %td= purchase.date.strftime("%b %d, %Y")
+              %td= purchase.purchaser
+              %td= purchase.purchase_type
+              %td= number_to_currency purchase.total, :unit => "&dollar;"
+              %td= number_to_currency purchase.unaccounted_for, :unit => "&dollar;"
+
+  -#- if @purchases.size > 20
+  -#  .paginator.append-bottom
+  -#    %span.wrapper
+  -#      = paginate @purchases
+  .span-12.properties.last
+    %dl.properties
+      -if @program
+        %dlt= link_to "Add a New Purchase", new_program_purchase_path(@program)

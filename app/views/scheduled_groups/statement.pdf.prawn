@@ -1,5 +1,10 @@
 prawn_document() do |pdf|
+<<<<<<< HEAD
     logopath = "#{::Rails.root.to_s}/public/images/logo.png"
+=======
+
+logopath = "#{::Rails.root.to_s}/public/images/logo.png"
+>>>>>>> upstream/master
     pdf.image logopath, :width => 80, :height => 80
 
     pdf.text "Statement", :align => :center, :style => :bold, :size => 20
@@ -26,13 +31,14 @@ prawn_document() do |pdf|
     pdf.move_down(30)
 
     pdf.table(@event_list, :header => true,
-            :column_widths => {0 => 80, 1 => 240, 2 => 100, 3 => 100 },
+            :column_widths => {0 => 60, 1 => 170, 2 => 150, 3 => 70, 4 => 70 },
             :row_colors => ["F0F0F0", "FFFFCC"] ) do
             cells.size = 10
             row(0).style :align => :left
             column(1).style :align => :left
-            column(2).style :align => :right
+            column(2).style :align => :left
             column(3).style :align => :right
+            column(4).style :align => :right
     end
 
     pdf.move_down(20)

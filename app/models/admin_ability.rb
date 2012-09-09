@@ -5,18 +5,19 @@ class AdminAbility
   include CanCan::Ability
 
   def initialize(user)
-
     if user.liaison?
        liaison = Liaison.find(user.liaison_id)
 #      can :manage, Payment
       if liaison then
         can [:edit, :update], Church, :id => liaison.church_id
         can [:read, :edit, :update], Liaison, :id => liaison.id
+        cannot :index, Church
       end
       groups = ScheduledGroup.find_all_by_liaison_id(user.liaison_id)
       if groups then
         can [:manage], ScheduledGroup, :liaison_id => user.liaison_id
         groups.each do |group|
+          can [:manage], group, :liaison_id => user.liaison_id
           roster = Roster.find_by_group_id(group.id)
           can :manage, Roster, :id => group.roster_id
           can :manage, RosterItem, :roster_id => group.roster_id
@@ -25,6 +26,35 @@ class AdminAbility
       end
   #move is defined as being able to move a scheduled group and to increase their numbers
       cannot :move, ScheduledGroup
+    end
+
+    if user.staff?
+      can :read, Liaison
+      can :read, Church
+      can :read, ScheduledGroup
+      can :read, Roster
+      can :read, RosterItem
+      can :read, Session
+      can :read, Period
+      can :read, Site
+      can :index, Vendor #, :site_id => user.program_user.program.site_id
+      can :manage, Vendor #, :site_id => user.program_user.program.site_id
+      can :index, Item
+      cannot :index, Church
+      can :manage, Item, :program_id => user.program_id
+      can :manage, Program #, :id => user.program_user.program_id
+#      can :report, Program
+    end
+    if user.construction_admin?
+      can :manage, ProjectType
+      can :manage, ProjectCategory
+      can :manage, ProjectSubtype
+      can :manage, StandardItem
+    end
+    if user.construction_admin? || user.food_admin?
+      can :manage, Item
+      can :manage, ItemType
+      can :manage, ItemCategory
     end
 
     if user.admin?

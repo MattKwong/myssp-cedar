@@ -1,0 +1,25 @@
+<div id = 'active_admin_content'>
+  <div class='index_content'>
+    <div class='index_as_table'>
+
+        <table class='index_table'>
+
+
+    <thead>
+      <tr>
+        <th>Vendor Name </th>
+        <th>Address </th>
+        <th>Contact</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial => 'vendor', :collection => vendors %>
+    </tbody>
+  </table>
+  <% if can? :create, Vendor %>
+        <%= link_to "Create a New Vendor", new_site_vendor_path(@site) %>
+  <% end %>
+</div>
+</div>
+</div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: special_needs
@@ -8,6 +9,8 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #
+=======
+>>>>>>> upstream/master
 
 class SpecialNeed < ActiveRecord::Base
   attr_accessible :name, :list_priority

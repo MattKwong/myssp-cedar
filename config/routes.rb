@@ -6,15 +6,98 @@ Spoic3::Application.routes.draw do
 
   get "scheduled_group/confirmation"
   ActiveAdmin.routes(self)
+
 #  devise_for :admin_users, ActiveAdmin::Devise.config
   as :admin_user do
     match '/admin_user/confirmation' => 'confirmations#update', :via => :put, :as => :update_admin_user_confirmation
   end
-  devise_for :admin_users, :controllers => { :passwords => "passwords",
+
+  devise_for :admin_users, :controllers => { :admin_users => "admin_users", :passwords => "passwords",
             :confirmations => "confirmations", :sessions => "sessions" }
+
+  resources :admin_users
 
 #  match "admin/confirmation/new", :to => 'active_admin/devise/confirmations#new', :as => 'new_admin_user_confirmation'
 
+  resources :sites do
+      resources :vendors, :shallow => true
+  end
+
+  resources :programs do
+    resources :projects do
+      resources :material_item_estimateds, :shallow => true
+      resources :material_item_delivereds, :shallow => true
+      resources :labor_items, :shallow => true
+      resources :standard_items, :shallow => true
+      end
+    resources :periods, :shallow => true
+    resources :purchases, :shallow => true do
+      resources :item_purchases, :shallow => true
+    end
+    resources :food_inventories, :shallow => true do
+      resources :food_inventory_food_items, :shallow => true
+    end
+    resources :items, :shallow => true
+    get :autocomplete_user_name
+    get :autocomplete_item
+    get :activation
+  end
+
+
+  match "ops_pages/timeout" => 'ops_pages#timeout', :as => 'timeout_error'
+  match "item_purchases/:program_id/index/:id" => 'item_purchases#index', :as => 'item_purchases'
+  match "purchases/:id/delete" => 'purchases#destroy', :as => 'delete_purchase'
+  match "food_inventory/:id/delete" => 'food_inventories#destroy', :as => 'delete_food_inventory'
+  match "food_inventory_food_items/:id/delete" => 'food_inventory_food_items#destroy', :as => 'delete_item_inventory'
+#Routes for jquery calls
+  match 'food_inventories/:food_inventory_id/food_inventory_food_items/update_item_info/:id', :to => 'food_inventory_food_items#update_item_info'
+  match 'programs/:program_id/items/show_similar_items', :to => 'items#show_similar_items'
+  match 'programs/:id/get_budget_info', :to => 'programs#get_budget_items'
+  match 'programs/:id/get_food_info', :to => 'programs#get_food_items'
+  match 'programs/:id/get_projects_info', :to => 'programs#get_projects_items'
+  match 'programs/:id/get_purchases_info', :to => 'programs#get_purchases_items'
+  match 'programs/:id/get_sessions_info', :to => 'programs#get_sessions_items'
+  match 'programs/:id/get_staff_info', :to => 'programs#get_staff_items'
+
+  match "items/new", :to => 'items#new', :as => 'add_item'
+  resources :vendors #, :only => [:index]
+  resources :purchases, :only => [:index]
+  resources :food_inventories, :only => [:index]
+  resources :items
+  resources :projects
+  resources :material_item_estimateds
+  resources :material_item_delivereds, :only => [:index]
+  resources :labor_items, :only => [:index]
+  resources :standard_items
+
+  match "purchase/show_budgets/:id", :to => 'purchases#show_budgets', :as => 'purchase_budget'
+  match "material_item_estimated/add_standard/:id", :to => 'material_item_estimateds#add_standard', :as => 'add_standard_item'
+
+  #reports
+
+  get "staff_reports", :controller => :staff_reports, :action => 'show', :as => 'staff_reports'
+  get "staff_reports/food_reconciliation/:id", :controller => :staff_reports, :action => 'food_reconciliation', :as => 'food_reconciliation_report'
+  get "staff_reports/food_inventory/:id", :controller => :staff_reports, :action => 'food_inventory', :as => 'food_inventory_report'
+  get "staff_reports/materials_inventory/:id", :controller => :staff_reports, :action => 'materials_inventory', :as => 'materials_inventory_report'
+  get "staff_reports/food_budget/:id", :controller => :staff_reports, :action => :food_budget, :as => 'food_budget_report'
+  get "staff_reports/food_consumption/:id", :controller => :staff_reports, :action => :food_consumption, :as => 'food_consumption_report'
+  get "staff_reports/session/:id", :controller => :staff_reports, :action => :session, :as => 'session_report'
+  get "food_inventories/:program_id/inventory_prep_report", :controller => :food_inventories, :action => 'inventory_prep_report', :as => 'inventory_prep_report'
+
+  match "material_item_delivereds/add/:id", :to => 'material_item_delivereds#new', :as => 'deliver_project'
+  match "material_item_delivereds", :to => 'material_item_delivereds#create', :as => 'add_material_item'
+  match "material_item_estimateds/:id/edit", :to => 'material_item_estimateds#edit', :as => 'edit_material_item_estimated'
+  match "material_item_estimateds", :to => 'material_item_estimateds#delete', :as => 'delete_material_item_estimated'
+  match "material_item_estimateds", :to => 'material_item_estimateds#create', :as => 'add_material_item_estimated'
+  match "labor_item", :to => 'labor_items#create', :as => 'add_labor_item'
+  match "labor_items/add/:id", :to => 'labor_items#new', :as =>'labor_project'
+
+  #match "food_inventory_food_item/:id/new", :to => 'food_inventory_food_items#new', :as => 'add_food_inventory_food_item'
+#New registration routes
+  match "registration/:id/register", :to => 'registration#new', :as => 'register_group'
+
+# Old registration routes
+  match "move_stage/:id" => 'projects#move_stage', :as =>'project_review'
   match "registration/schedule", :to => 'registration#schedule', :as => "registration_schedule"
   match "registration/register", :to => 'registration#register'
   match "registration/:id/update", :to => 'registration#process_payment', :as => 'registration_payment'
@@ -60,10 +143,23 @@ Spoic3::Application.routes.draw do
   end
   match "scheduled_groups/invoice_report" => 'scheduled_groups#invoice_report', :as => 'invoice_report'
   match "scheduled_groups/invoice_report.csv" => 'scheduled_groups#invoice_report', :as => 'invoice_report_csv'
+  match "scheduled_groups/tshirt_report" => 'scheduled_groups#tshirt_report', :as => 'tshirt_report'
+  match "scheduled_groups/tshirt_report.csv" => 'scheduled_groups#tshirt_report', :as => 'tshirt_report_csv'
   match "reports/church_and_liaison" => 'reports#church_and_liaison', :as => 'church_and_liaison_csv'
   match "reports/scheduled_liaisons" => 'reports#scheduled_liaisons', :as => 'scheduled_liaisons_csv'
   match "reports/scheduled_liaisons" => 'reports#scheduled_liaisons', :as => 'scheduled_liaisons_html'
+<<<<<<< HEAD
+=======
+  match "reports/rosters" => 'reports#rosters', :as => 'rosters_csv'
+  match "reports/rosters" => 'reports#rosters', :as => 'rosters_html'
+  match "reports/participation_summary" => 'reports#participation_summary', :as => 'part_sum_csv'
 
+  match "reports/purchases_with_unaccounted" => 'purchases#show_all_unaccounted', :as => 'unaccounted_report'
+  match "staff_reports/spending_by_site" => 'staff_reports#spending_by_site', :as => 'spending_by_site_report'
+  match "staff_reports/get_spending_info" => 'staff_reports#get_spending_items'
+>>>>>>> upstream/master
+
+  resources :vendors
   resources :churches
   resources :liaisons
   resources :scheduled_groups
@@ -75,11 +171,15 @@ Spoic3::Application.routes.draw do
   match "registration/show_schedule", :to => 'registration#show_schedule'
   match "registration/update", :to => 'registration#update'
   match "registration/delete", :to => 'registration#delete'
+  match 'RegistrationController', :to => 'pages#groups'
 
   match '/admin', :to => 'admin#index'
-  match '/food', :to => 'pages#food'
-  match 'RegistrationController', :to => 'pages#groups'
-  match '/construction', :to => 'pages#construction'
+  match 'ops_pages/food', :to => 'ops_pages#food', :as => 'food'
+  match 'ops_pages/show', :to => 'ops_pages#show', :as => 'ops_pages_show'
+  match 'ops_pages/construction', :to => 'ops_pages#construction', :as => 'construction'
+  match 'ops_pages/staff', :to => 'ops_pages#staff', :as => 'staff'
+  match 'ops_pages/index', :to => 'ops_pages#index', :as => 'ops_indx'
+
   match '/help', :to => 'pages#help', :as => 'help'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'

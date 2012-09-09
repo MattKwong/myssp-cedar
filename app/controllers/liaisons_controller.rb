@@ -7,7 +7,8 @@ class LiaisonsController < ApplicationController
   end
 
   def update
-    logger.debug @liaison.inspect
+    #logger.debug @liaison.inspect
+
     if @liaison.update_attributes(params[:liaison])
       flash[:success] = "Successful update of liaison information"
       redirect_to myssp_path(@liaison.id)
@@ -20,7 +21,14 @@ class LiaisonsController < ApplicationController
 
   def show
     liaison = Liaison.find(params[:id])
-    @page_title = "MySSP Information Portal. Welcome, #{liaison.first_name}!"
+
+
+    if can? :edit, liaison
+      @page_title = "MySSP Information Portal. Welcome, #{liaison.first_name}!"
+    else
+      @page_title = "Information Abouts Groups Led By: #{liaison.name}"
+    end
+
     church = Church.find(liaison.church_id)
     registrations = Registration.find_all_by_liaison_id(liaison.id) || []
     groups = ScheduledGroup.find_all_by_liaison_id(liaison.id)
@@ -57,9 +65,16 @@ class LiaisonsController < ApplicationController
     user.last_name = liaison.last_name
     user.liaison_id = liaison.id
     user.name = liaison.name
+
     user.user_role = "Liaison"
 #    user.reset_password_token = AdminUser.reset_password_token
 #    user.password = random_pronouncable_password(8)
+
+    user.user_role_id = UserRole.find_by_name('Liaison').id
+    user.username = liaison.first_name + liaison.last_name + liaison.id.to_s
+    #logger.debug liaison.inspect
+    #logger.debug user.inspect
+
 #TODO: change logic to update the admin user record if one exists.
     unless user.save!
       flash[:error] = "A problem occurred in create a logon for this liaison."
@@ -130,7 +145,7 @@ class LiaisonsController < ApplicationController
     end
 
     payments.each do |p|
-      event = [p.payment_date.to_date, "Payment Received", "", number_to_currency(p.payment_amount)]
+      event = [p.payment_date.to_date, "Payment Received", shorten(p.payment_notes), "Blank", number_to_currency(p.payment_amount)]
       event_list << event
     end
 
@@ -354,4 +369,13 @@ class LiaisonsController < ApplicationController
       end
     end
   end
+
+  def shorten(s)
+    limit = 40
+    if s.length > limit
+      s = s[0, limit] + '...'
+    end
+    s
+  end
+
 end

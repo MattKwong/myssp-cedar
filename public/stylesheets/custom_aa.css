@@ -1,9 +1,74 @@
+<<<<<<< HEAD
+=======
+body.logged_in .flash {
+    background: #93A9BE;
+    border-bottom: 1px solid #EEE098;
+    color: black;
+    font-size: 1.1em;
+    font-weight: normal;
+    line-height: 1em;
+    margin-bottom: 10px;
+    padding: 13px 30px 11px;
+    position: relative;
+    text-shadow: none;
+    top: -15px;
+}
+
+#header {
+  /*background: #6a7176;*/
+  /*background: -webkit-gradient(linear, left top, left bottom, from(#6a7176), to(#4d5256));*/
+  /*background: -moz-linear-gradient(-90deg, #6a7176, #4d5256);*/
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#6a7176, endColorstr=#4d5256);*/
+  /*-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#6a7176, endColorstr=#4d5256);*/
+  /*border-bottom: 1px solid #44484b;*/
+  /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);*/
+  /*-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);*/
+  /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);*/
+  text-shadow: black 0 1px 0;
+    background: #4D7194;
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#93A9BE), to(#4D7194));*/
+    /*background: -moz-linear-gradient(-90deg, #93A9BE, #4D7194);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#93A9BE, endColorstr=#4D7194);*/
+    /*-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#93A9BE, endColorstr=#4D7194);*/
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+    border-bottom: 1px solid #4D7194;
+  height: 20px;
+  overflow: visible;
+  position: inherit;
+  padding: 9px 30px;
+  z-index: 900; }
+
+#header ul#tabs > ul.second_level {
+    display: inline-block;
+    font-size: 1em;
+    margin-right: 40px;
+    position: absolute;
+    color: red;
+}
+
+>>>>>>> upstream/master
 #logo {
     float:left;
     margin:0 auto;
     width: 110px;
 }
 
+<<<<<<< HEAD
+=======
+div#plan-material-info form fieldset.inputs {
+    background: none repeat scroll 0 0 #FFFFFF;
+    /*border-radius: none;*/
+    box-shadow: 0 1px 4px #FFFFFF inset;
+}
+div#deliver-material-info form fieldset.inputs {
+    background: none repeat scroll 0 0 #FFFFFF;
+    /*border-radius: none;*/
+    box-shadow: 0 1px 4px #FFFFFF inset;
+}
+
+>>>>>>> upstream/master
 span.icon {
   vertical-align: middle;
   display: inline-block; }
@@ -29,11 +94,29 @@ h2 {
     padding-top: 5px;
     padding-left: 5px;
 }
+<<<<<<< HEAD
 
+=======
+thead th {
+    background: -moz-linear-gradient(-90deg, #93A9BE, #4D7194) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #4D7194;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+}
+tfoot td, th {
+    background: -moz-linear-gradient(-90deg, #93A9BE, #4D7194) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #4D7194;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+    /*background: none repeat scroll 0 0 #4D7194;*/
+}
+>>>>>>> upstream/master
 caption, th, td {
   text-align: left;
   font-weight: normal;
   /*vertical-align: middle; */
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
     border-bottom: 1px solid #E8E8E8;
         padding: 8px 12px 6px;
         vertical-align: top;
@@ -564,4 +647,25 @@ body.logged_in .flash {
     /*position: relative;*/
     /*text-shadow: 0 1px 0 #FAFAFA;*/
     top: 0px;
+<<<<<<< HEAD
 }
+=======
+}
+table.index_table th a.sortable {
+    background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+    padding-left: 13px; }
+table.index_table th a.sorted-asc {
+    background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+    background-position: 0 -27px;
+    padding-left: 13px;}
+table.index_table th a.sorted-desc {
+    background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+    background-position: 0 -56px;
+    padding-left: 13px;}
+table.index_table th.sorted-asc, table.index_table th.sorted-desc {
+    background: #e2e2e2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#e2e2e2), to(#d2d4d6));
+    background: -moz-linear-gradient(-90deg, #e2e2e2, #d2d4d6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e2e2e2, endColorstr=#d2d4d6);
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e2e2e2, endColorstr=#d2d4d6); }
+>>>>>>> upstream/master

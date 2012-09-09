@@ -1,0 +1,44 @@
+#active_admin_content
+  .paginator.append-bottom
+    %span.wrapper
+      = paginate @food_inventories
+
+  .index_content
+    .index_as_table
+      %table.index_table
+        %thead
+          %tr
+            -if @program.nil?
+              %th= "Program"
+            %th Date
+            %th Previous Inventory Value
+            %th Value Inventoried
+            %th Value Consumed
+            %th{:colspan => 2} Actions
+        %tbody
+          - @food_inventories.each do |inventory|
+            %tr
+              -if @program.nil?
+                %td= link_to inventory.program, program_food_inventories_path(inventory.program)
+              %td= inventory.date
+              %td= number_to_currency(inventory.value_previously_in_inventory)
+              %td= number_to_currency(inventory.value_in_inventory)
+              %td= number_to_currency(inventory.value_consumed)
+              %td= link_to "view/edit", inventory
+              -if can? :delete, inventory
+                %td= link_to "delete", delete_food_inventory_path(inventory), :action => ":delete", :confirm => "Are you sure you want to delete this food inventory?"
+
+
+  .paginator.prepend-top
+    %span.wrapper
+      = paginate @food_inventories
+  .span-8.properties.last
+    %dl.properties
+      -if @program
+        %dlt= link_to "Record a New Food Inventory", new_program_food_inventory_path(@program)
+
+  .span-8.properties.last
+    %dl.properties
+      -if @program
+        %dlt= link_to "Run an Inventory Prep Report", inventory_prep_report_path(@program)
+

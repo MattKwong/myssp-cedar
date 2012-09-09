@@ -1,0 +1,54 @@
+!!!
+%html
+  %head
+    %title SSP | #{@title}
+    = stylesheet_link_tag 'blueprint/screen', :media => 'screen'
+    = stylesheet_link_tag 'jqueryui/jquery-ui-1.8.11.custom.css'
+    = stylesheet_link_tag 'active_admin', :media => 'screen'
+    = stylesheet_link_tag 'custom', :media => 'screen'
+    = stylesheet_link_tag 'custom_aa', :media => 'screen'
+    = stylesheet_link_tag 'formtastic', :media => 'screen'
+    = stylesheet_link_tag 'formtastic_changes', :media => 'screen'
+    = stylesheet_link_tag 'style', :media => 'screen'
+    = stylesheet_link_tag 'print', :media => 'print'
+    -#-#= javascript_include_tag 'jquery/jquery-1.5.1.min'
+    -#-#= javascript_include_tag 'jquery/jquery-ui-1.8.11.custom.min.js'
+    -#-#= javascript_include_tag 'jquery/jquery-ui-widgets.js'
+    -#= javascript_include_tag :all
+    -#%script(src='01.js')
+    -#= yield :javascript
+
+
+  %body.logged_in
+    #title_bar
+      #titlebar_left
+        #logo
+          = link_to image_tag('logo.png', :alt => "Sierra Service Project", :width => 60, :height => 60), "http://www.sierraserviceproject.org", :title => "Go to SSP Website"
+        %span
+          .breadcrumb
+            %a{:href => '/ops_pages/show'} SSP SiteManager
+            .breadcrumb_sep |
+        %h2
+          SSP SiteManager: #{@title}
+    - flash.each do |key, value|
+      .flash
+
+        = value
+
+    .container
+      - short_nav = (render_navigation :level => 2, :renderer => :text)
+      - skip_second_nav = short_nav.nil? || short_nav.empty?
+      #main-nav.span-24.last.nav-bar{:class => skip_second_nav ? "non-admin" : ""}
+        = render_navigation :level => 1
+      - unless skip_second_nav
+        #page-info.span-24.last
+          #site-nav= render_navigation :level => 2
+      #action-links.span-24.last.prepend-top
+        #action-anchors
+          = render_navigation :context => :actions, :renderer => :links
+      #content.span-24.last
+
+        .span-24.last= yield
+
+      #footer.span-24.last
+

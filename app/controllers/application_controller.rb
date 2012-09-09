@@ -1,24 +1,49 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery :only => [:create, :update]
+  add_breadcrumb "Home", '/'
 
- def after_sign_in_path_for(resource)
+  rescue_from Timeout::Error, :with => :rescue_from_timeout
+
+  protected
+
+  def after_sign_in_path_for(resource)
  #this overrides the default method in the devise library
 
-    if resource.liaison?
-       liaison = Liaison.find(resource.liaison_id)
-       church = Church.find(liaison.church_id)
-       if church.nil? #the liaison is unassigned to a church, so he/she can't do anything
-         log_activity(Time.now, "Invaild Login", "Unassigned to church - logged off", resource.id, resource.name, resource.user_role)     #redirect_to :back
-         destroy_admin_user_session_path #log out
+   program_user = ProgramUser.find_by_user_id(resource.id)
+
+   if resource.liaison?
+     liaison = Liaison.find(resource.liaison_id)
+     church = Church.find(liaison.church_id)
+     if church.nil? #the liaison is unassigned to a church, so he/she can't do anything
+       log_activity(Time.now, "Invalid Login", "Unassigned to church - logged off", resource.id, resource.name, resource.user_role)     #redirect_to :back
+       destroy_admin_user_session_path #log out
+     else
+       log_activity(Time.now, "Liaison Login", "Logged on to system", resource.id, resource.name, resource.user_role)
+       return myssp_path(liaison.id)
+     end
+   else
+   if resource.admin?
+     log_activity(Time.now, "Admin Login", "Logged on to system", resource.id, resource.name, resource.user_role)
+     return '/admin'
+   else
+     if resource.construction_admin?
+       log_activity(Time.now, "Construction Admin Login", "Logged on to system", resource.id, resource.name, resource.user_role)
+       return ops_pages_show_path
+     else
+       if resource.food_admin?
+         log_activity(Time.now, "Food Admin Login", "Logged on to system", resource.id, resource.name, resource.user_role)
+         return ops_pages_show_path
        else
-        log_activity(Time.now, "Liaison Login", "Logged on to system", resource.id, resource.name, resource.user_role)
-        myssp_path(liaison.id)
-      end
-    else if resource.admin?
-      log_activity(Time.now, "Admin Login", "Logged on to system", resource.id, resource.name, resource.user_role)
-      '/admin'
-      end
-    end
+         if resource.staff?
+           program_user = ProgramUser.find_by_user_id(resource.id)
+           log_activity(Time.now, "#{program_user.job.job_type.name} Login", "Logged on to system", resource.id, resource.name, resource.user_role)
+             return program_path(program_user.program_id)
+         end
+       end
+     end
+   end
+ end
+
  end
 
   def current_ability
@@ -48,5 +73,11 @@ class ApplicationController < ActionController::Base
       redirect_to '/admin'
          end
     end
+  end
+
+  private
+  def rescue_from_timeout
+    log_activity(Time.now, "Error", "System timeout error", @current_admin_user.id, current_admin_user.name, "")
+    redirect_to timeout_error_path
   end
 end

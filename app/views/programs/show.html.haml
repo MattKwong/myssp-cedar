@@ -1,0 +1,75 @@
+#active_admin_content
+  .hidden-field#program-number
+    =@program.id
+  .span-7.properties
+    %dl
+      %dt Site
+      %dd= @program.site.name
+      %dt Program Type
+      %dd= @program.program_type.name
+      %dt Start Date
+      %dd= @program.start_date.strftime("%B %d")
+  .span-7.properties
+    %dl.properties
+      -if can? :create, Item
+        %dlt= link_to "Create a New Item", new_program_item_path(@program)
+      -if can? :create, Project
+        %dlt= link_to "Create a New Project", new_program_project_path(@program)
+      -if can? :create, Vendor
+
+        %dlt= link_to "Create a New Vendor", new_site_vendor_path(@program.site)
+
+  .span-7.properties
+    %dl.properties
+      -if can? :create, FoodInventory
+        %dlt= link_to "Create a New Food Inventory", new_program_food_inventory_path(@program)
+      -if can? :create, FoodInventory
+        %dlt= link_to "Run an Inventory Prep Report", inventory_prep_report_path(@program)
+      -if can? :create, Purchase
+        %dlt= link_to "Create a New Purchase", new_program_purchase_path(@program)
+
+  %br
+  %br
+  %p
+  .span-24.prepend-top
+    .group-header
+      #budget-toggle
+        %h3 Budget
+    #budget-info
+      -#= render 'budget_items'
+
+  - if !current_admin_user.construction?
+    .span-24.prepend-top
+      .group-header
+        #food-snapshot-toggle
+          %h3 Food Program Snapshot
+      #food-snapshot-info
+
+
+  -if !current_admin_user.cook?
+    .span-24.prepend-top
+      .group-header
+        #projects-toggle
+          %h3 Projects
+      #projects-info
+
+  .span-24.prepend-top
+    .group-header
+      #purchases-toggle
+        %h3 Purchases
+    #purchases-info
+
+  .span-24.prepend-top
+    .group-header
+      #sessions-toggle
+        %h3 Sessions
+    .div#sessions-info
+
+
+  .span-24.prepend-top
+    .group-header
+      #staff-toggle
+        %h3 Staff
+    .div#staff-info
+
+

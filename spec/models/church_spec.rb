@@ -24,11 +24,18 @@ require 'spec_helper'
 
 describe Church do
   before (:each) do
+    if Church.find_by_name("First Church")
+      Church.find_by_name("First Church").delete
+    end
     @attr = { :name => "First Church", :address1 => "4410 S. Budlong Avenue", :city => "Los Angeles", :state => "CA",
               :zip => "90037", :email1 => "info@example.com", :registered => false,
     :office_phone => "123-456-7890", :fax => "123-456-7890", :liaison_id => 1, :active => true, :church_type_id => 1 }
   end
-
+  describe "Valid Church" do
+    it "should be valid" do
+      Church.new(@attr).should be_valid
+    end
+  end
   describe "Church name tests" do
     it "should require a name" do
       no_name_church = Church.new(@attr.merge(:name => ""))
@@ -39,11 +46,6 @@ describe Church do
       short_name = "a" * 5
       short_name_church = Church.new(@attr.merge(:name => short_name))
       short_name_church.should_not be_valid
-    end
-
-    it "should accept a valid name" do
-      church = Church.new(@attr.merge(:name => 'Church of the Valid Name'))
-      church.should be_valid
     end
 
     it "should reject a long name" do
@@ -120,9 +122,11 @@ describe Church do
       bad_email.should_not be_valid
     end
 
-    it "should accept a valid email" do
+    it "should reject a duplicate email" do
       good_email = Church.new(@attr)
-      good_email.should be_valid
+      good_email.save
+      dup_email = Church.new(@attr.merge(:name => "Duplicate email church"))
+      dup_email.should_not be_valid
     end
   end
   
@@ -137,18 +141,8 @@ describe Church do
       bad_phone.should_not be_valid
     end
 
-    it "should accept a valid cell phone" do
-      good_phone = Church.new(@attr)
-      good_phone.should be_valid
-    end
- 
     it "should reject an invalid fax phone" do
       bad_phone = Church.new(@attr.merge(:fax => "123-4567"))
       bad_phone.should_not be_valid
     end
-
-    it "should accept a valid fax phone" do
-      good_phone = Church.new(@attr)
-      good_phone.should be_valid
-    end  
 end

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="DataSourceManagerImpl" compressed="false" hash="3000799825" />
+=======
+  <component name="DataSourceManagerImpl" compressed="false" hash="1262981030" />
+>>>>>>> upstream/master
 </project>
 
