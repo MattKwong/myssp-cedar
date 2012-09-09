@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: payment_schedules
+#
+#  id                       :integer          not null, primary key
+#  name                     :string(255)
+#  deposit                  :decimal(, )
+#  second_payment           :decimal(, )
+#  total_payment            :decimal(, )
+#  final_payment            :decimal(, )
+#  created_at               :datetime
+#  updated_at               :datetime
+#  second_payment_date      :date
+#  final_payment_date       :date
+#  second_payment_late_date :date
+#  final_payment_late_date  :date
+#
+
 require 'spec_helper'
 
 describe PaymentSchedule do

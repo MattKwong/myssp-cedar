@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: rosters
+#
+#  id         :integer          not null, primary key
+#  group_id   :integer
+#  group_type :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Roster < ActiveRecord::Base
   attr_accessible :id, :group_id, :group_type
     belongs_to :scheduled_group, :foreign_key => :group_id

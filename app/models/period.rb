@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: periods
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  start_date      :datetime
+#  end_date        :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#  active          :boolean
+#  summer_domestic :boolean
+#
+
 class Period < ActiveRecord::Base
   attr_accessible :name, :start_date, :end_date, :active, :summer_domestic
   default_scope :order => 'start_date'

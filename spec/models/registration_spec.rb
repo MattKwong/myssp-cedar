@@ -1,3 +1,36 @@
+# == Schema Information
+#
+# Table name: registrations
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  liaison_id           :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  request1             :integer
+#  request2             :integer
+#  request3             :integer
+#  request4             :integer
+#  request5             :integer
+#  request6             :integer
+#  request7             :integer
+#  request8             :integer
+#  request9             :integer
+#  request10            :integer
+#  requested_counselors :integer
+#  requested_youth      :integer
+#  requested_total      :integer
+#  scheduled            :boolean
+#  comments             :text
+#  amount_due           :decimal(, )
+#  amount_paid          :decimal(, )
+#  payment_method       :string(255)
+#  payment_notes        :text
+#  group_type_id        :integer
+#  church_id            :integer
+#  registration_step    :string(255)
+#
+
 require 'spec_helper'
 
 describe "Registration" do

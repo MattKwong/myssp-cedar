@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: reminders
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  seq_number  :integer
+#  first_line  :string(255)
+#  second_line :string(255)
+#  active      :boolean
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Reminder < ActiveRecord::Base
   attr_accessible :active, :first_line, :name, :second_line, :name, :seq_number
 

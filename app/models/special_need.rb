@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: special_needs
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  list_priority :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class SpecialNeed < ActiveRecord::Base
   attr_accessible :name, :list_priority
 

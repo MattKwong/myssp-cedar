@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: sites
+#
+#  id               :integer          not null, primary key
+#  name             :string(255)
+#  address1         :string(255)
+#  address2         :string(255)
+#  city             :string(255)
+#  state            :string(255)
+#  zip              :string(255)
+#  phone            :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  listing_priority :integer
+#  active           :boolean
+#  summer_domestic  :boolean
+#  abbr             :string(255)
+#
+
 class Site < ActiveRecord::Base
   default_scope :order => 'listing_priority'
   scope :inactive, where(:active => 'f')

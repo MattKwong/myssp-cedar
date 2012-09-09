@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: church_types
+#
+#  id              :integer          not null, primary key
+#  created_at      :datetime
+#  updated_at      :datetime
+#  name            :string(255)
+#  denomination_id :integer
+#  conference_id   :integer
+#  organization_id :integer
+#
+
 require 'spec_helper'
 
 describe ChurchType do

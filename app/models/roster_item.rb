@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: roster_items
+#
+#  id                :integer          not null, primary key
+#  group_id          :integer
+#  youth             :boolean
+#  male              :boolean
+#  first_name        :string(255)
+#  last_name         :string(255)
+#  address1          :string(255)
+#  address2          :string(255)
+#  city              :string(255)
+#  state             :string(255)
+#  zip               :string(255)
+#  email             :string(255)
+#  shirt_size        :string(255)
+#  grade_in_fall     :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  roster_id         :integer
+#  disclosure_status :string(255)
+#  covenant_status   :string(255)
+#  background_status :string(255)
+#  special_need      :string(255)
+#
+
 class RosterItem < ActiveRecord::Base
 
   attr_accessible :id, :roster_id, :first_name, :last_name, :address1, :address2, :city, :state, :zip,
@@ -42,7 +69,7 @@ class RosterItem < ActiveRecord::Base
                     :length => { :is => 2}
   validates_inclusion_of :state, :in => State::STATE_ABBREVIATIONS, :message => 'Invalid state.'
 
-  validates_inclusion_of :special_need, :in => SpecialNeed.all.map {|need| need.name}, :message => 'Invalid need type.'
+  #validates_inclusion_of :special_need, :in => SpecialNeed.all.map {|need| need.name}, :message => 'Invalid need type.'
   validates :zip,   :presence => true,
                     :length => { :is => 5},
                     :numericality => true

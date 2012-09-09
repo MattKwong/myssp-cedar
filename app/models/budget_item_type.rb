@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: budget_item_types
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  seq_number  :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class BudgetItemType < ActiveRecord::Base
   has_many :budget_items
 

@@ -1,11 +1,13 @@
- source 'http://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
+gem 'rails', '3.2.8'
 gem 'jquery-rails'
-gem 'rake', '0.8.7'
+gem 'rake'
 gem 'haml'
 gem "formtastic", "~> 2.0.2"
 gem "activeadmin", "~> 0.4.3"
+gem 'meta_search', '>= 1.1.0.pre'
+gem 'sass-rails'
 gem 'validates_timeliness'
 gem 'cancan'
 gem 'prawn_rails'
@@ -18,9 +20,10 @@ group :production, :staging do
 end
 
 group :development do
+  gem 'taps'
   gem 'faker', '0.3.1'
-  gem 'sqlite3-ruby', :require => 'sqlite3'
-#  gem 'annotate-models', '1.0.4'
+  gem 'sqlite3', :require => 'sqlite3'
+  gem 'annotate', ">=2.5.0"
 end
 
 group :test do
@@ -30,5 +33,5 @@ group :test do
   gem "capybara"
   gem "guard-rspec"
   gem 'database_cleaner'
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  #gem 'sqlite3-ruby', :require => 'sqlite3'
 end

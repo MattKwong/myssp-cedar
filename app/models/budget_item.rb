@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: budget_items
+#
+#  id                  :integer          not null, primary key
+#  site_id             :integer
+#  budget_item_type_id :integer
+#  amount              :decimal(, )
+#  created_at          :datetime
+#  updated_at          :datetime
+#  program_id          :integer
+#
+
 class BudgetItem < ActiveRecord::Base
   belongs_to :budget_item_type, :foreign_key => :item_id
   belongs_to :site

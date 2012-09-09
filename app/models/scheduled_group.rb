@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: scheduled_groups
+#
+#  id                   :integer          not null, primary key
+#  current_youth        :integer
+#  current_counselors   :integer
+#  current_total        :integer
+#  session_id           :integer
+#  church_id            :integer
+#  history              :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  name                 :string(255)
+#  comments             :string(255)
+#  registration_id      :integer
+#  scheduled_priority   :integer
+#  liaison_id           :integer
+#  roster_id            :integer
+#  group_type_id        :integer
+#  second_payment_total :integer
+#  second_payment_date  :date
+#
+
 class ScheduledGroup < ActiveRecord::Base
 
   attr_accessible :name,:comments, :current_counselors, :current_youth,

@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: churches
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  city           :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  liaison_id     :integer
+#  address2       :string(255)
+#  state          :string(255)
+#  zip            :string(255)
+#  office_phone   :string(255)
+#  fax            :string(255)
+#  email1         :string(255)
+#  address1       :string(255)
+#  active         :boolean
+#  registered     :boolean
+#  church_type_id :integer
+#
+
 require 'spec_helper'
 
 describe Church do

@@ -635,7 +635,7 @@ form {
       -o-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
       box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
       border-color: #c7c7c7;
-      border-top-color: #d3d3d3;
+      border-top-color: lightgrey;
       border-right-color: #c7c7c7;
       border-bottom-color: #c2c2c2;
       border-left-color: #c7c7c7;
@@ -780,7 +780,7 @@ form.filter_form a.clear_filters_btn {
   -o-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   border-color: #c7c7c7;
-  border-top-color: #d3d3d3;
+  border-top-color: lightgrey;
   border-right-color: #c7c7c7;
   border-bottom-color: #c2c2c2;
   border-left-color: #c7c7c7;
@@ -1316,7 +1316,7 @@ a:hover {
     -o-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     border-color: #c7c7c7;
-    border-top-color: #d3d3d3;
+    border-top-color: lightgrey;
     border-right-color: #c7c7c7;
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
@@ -1613,7 +1613,7 @@ a.table_tools_button {
   -o-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   border-color: #c7c7c7;
-  border-top-color: #d3d3d3;
+  border-top-color: lightgrey;
   border-right-color: #c7c7c7;
   border-bottom-color: #c2c2c2;
   border-left-color: #c7c7c7;
@@ -2004,7 +2004,7 @@ body.logged_out {
     -o-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
     border-color: #c7c7c7;
-    border-top-color: #d3d3d3;
+    border-top-color: lightgrey;
     border-right-color: #c7c7c7;
     border-bottom-color: #c2c2c2;
     border-left-color: #c7c7c7;
