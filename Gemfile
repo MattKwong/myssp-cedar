@@ -1,8 +1,7 @@
 source 'http://rubygems.org'
-ruby '1.9.3'
 
 gem 'rails', '3.2.8'
-
+gem 'bundler', '1.2.0'
 gem 'rake'
 gem 'haml'
 gem "formtastic", "~> 2.0.2"
@@ -20,9 +19,9 @@ gem 'fastercsv'
 gem 'rails3-jquery-autocomplete'
 gem 'ruby-units'
 gem 'breadcrumbs_on_rails'
-#Must be loaded before deploying
-#gem 'newrelic_rpm'
+gem 'newrelic_rpm'
 gem "rack-timeout"
+gem "taps"
 gem "heroku"
 
 # Gems used only for assets and not required
@@ -39,7 +38,6 @@ group :production, :staging do
 end
 
 group :development do
-  gem 'taps'
   gem 'faker', '0.3.1'
   gem 'sqlite3', :require => 'sqlite3'
   gem 'annotate', ">=2.5.0"
