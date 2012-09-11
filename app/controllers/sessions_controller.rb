@@ -2,14 +2,14 @@ class SessionsController < Devise::SessionsController
 
   prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
   prepend_before_filter :allow_params_authentication!, :only => :create
-  include Devise::Controllers::InternalHelpers
+  #include Devise::Controllers::InternalHelpers
   layout 'admin_layout'
   # GET /resource/sign_in
   def new
     @page_title = "Welcome to the SSP Information Center. Please Sign In"
     resource = build_resource
     clean_up_passwords(resource)
-    respond_with_navigational(resource, stub_options(resource)){ render_with_scope :new }
+    respond_with_navigational(resource, stub_options(resource)){ render :new }
   end
 
   # POST /resource/sign_in

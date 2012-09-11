@@ -148,8 +148,6 @@ Spoic3::Application.routes.draw do
   match "reports/church_and_liaison" => 'reports#church_and_liaison', :as => 'church_and_liaison_csv'
   match "reports/scheduled_liaisons" => 'reports#scheduled_liaisons', :as => 'scheduled_liaisons_csv'
   match "reports/scheduled_liaisons" => 'reports#scheduled_liaisons', :as => 'scheduled_liaisons_html'
-<<<<<<< HEAD
-=======
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_csv'
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_html'
   match "reports/participation_summary" => 'reports#participation_summary', :as => 'part_sum_csv'
@@ -157,8 +155,6 @@ Spoic3::Application.routes.draw do
   match "reports/purchases_with_unaccounted" => 'purchases#show_all_unaccounted', :as => 'unaccounted_report'
   match "staff_reports/spending_by_site" => 'staff_reports#spending_by_site', :as => 'spending_by_site_report'
   match "staff_reports/get_spending_info" => 'staff_reports#get_spending_items'
->>>>>>> upstream/master
-
   resources :vendors
   resources :churches
   resources :liaisons

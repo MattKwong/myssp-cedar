@@ -166,14 +166,23 @@ class Item < ActiveRecord::Base
 
     def in_inventory_for_program_at(program, date)
       last_inventory = last_inventory_for_program_at_date(program, date)
+      logger.debug "In in_inventory for program at...last inventory= #{last_inventory}"
       if last_inventory.nil?
         r = (purchases_between(program, program.start_date, date).map &:total_size_in_base_units).sum
       else
-        purchase = (purchases_between(program, last_inventory.food_inventory.date, date).map &:total_size_in_base_units).sum
-        unless purchase == 0
-          purchase = purchase.scalar
+        purchases = purchases_between(program, last_inventory.food_inventory.date, date)
+        logger.debug "In in_inventory for _program _at...parchase between= #{purchases.inspect}"
+        purchase_sum = 0
+        purchases.each do |p|
+          logger.debug "In in_inventory loop, item_id...#{p.item.id}"
+          purchase_sum += p.total_size_in_base_units
         end
-        r = last_inventory.in_base_units + purchase
+        #purchase_sum = (purchases.map &:total_size_in_base_units).sum
+        logger.debug "In in_inventory...purchase_sum= #{purchase_sum.inspect}"
+        unless purchase_sum == 0
+          purchase_sum = purchase_sum.scalar
+        end
+        r = last_inventory.in_base_units + purchase_sum
       end
       if r.class == Unit
         r = r.scalar

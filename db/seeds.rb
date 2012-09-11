@@ -26,25 +26,19 @@ UserRole.create(:name => 'Admin', :description => 'Admin user with full capabili
 
 if UserRole.find_by_name("Liaison")
   UserRole.find_by_name("Liaison").delete
-<<<<<<< HEAD
 end
-=======
-  end
->>>>>>> upstream/master
+
 UserRole.create(:name => 'Liaison', :description => 'Liaison user role')
 
 if UserRole.find_by_name("Staff")
   UserRole.find_by_name("Staff").delete
-<<<<<<< HEAD
+
 end
-=======
-  end
->>>>>>> upstream/master
+
 UserRole.create(:name => 'Staff', :description => 'Field staff, work limited to one site only')
 
 if Site.find_by_name("Test Site 1")
   Site.find_by_name("Test Site 1").delete
-<<<<<<< HEAD
 end
 Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Susanville", :state => "CA", :zip => "90000", :listing_priority => 10,
              :active => true, :phone => "800-700-6000")
@@ -61,36 +55,14 @@ if JobType.find_by_name(name)
     JobType.find_by_name(name).delete
   end
   JobType.create(:name => name)
-=======
-  end
-Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Susanville", :state => "CA", :zip => "90000", :listing_priority => 10,
-            :abbr => "T1", :active => true, :phone => "800-700-6000")
-
-if Site.find_by_name("Test Site 2")
-  Site.find_by_name("Test Site 2").delete
-  end
-Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city => "McDermitt", :state => "NV", :zip => "80000", :listing_priority => 20,
-            :abbr => "T2", :active => true, :phone => "800-700-6000")
-
-['Site Director', 'Food', 'Construction', 'SLC'].each do |name|
-  if JobType.find_by_name(name)
-    JobType.find_by_name(name).delete
-  end
-  JobType.create(:name => name)
 end
 
 
 if Job.find_by_name('Site Director')
   Job.find_by_name('Site Director').delete
->>>>>>> upstream/master
 end
 Job.create(:name => 'Site Director', :job_type_id => JobType.find_by_name('Site Director').id)
 
-<<<<<<< HEAD
-
-if Job.find_by_name('Site Director')
-  Job.find_by_name('Site Director').delete
-=======
 if Job.find_by_name('Spiritual Life Coordinator')
   Job.find_by_name('Spiritual Life Coordinator').delete
 end
@@ -124,7 +96,6 @@ ProgramType.create(:name => 'Summer Domestic', :description => 'Standard summer 
     BudgetItemType.find_by_name(item[0]).delete
   end
   BudgetItemType.create(:name => item[0], :description => item[1], :seq_number => item[2])
->>>>>>> upstream/master
 end
 Job.create(:name => 'Site Director', :job_type_id => JobType.find_by_name('Site Director').id)
 
@@ -187,7 +158,6 @@ Church.create(:active => 't', :address1 => "100 Highway 99", :city => "Stockton"
               :name => 'Stockton First UMC', :office_phone => "799-234-1888", :registered => 'n',
               :zip => "98750")
 
-<<<<<<< HEAD
 Liaison.delete_all
 Liaison.create(:address1 => "100 Elm Street", :city => "Sacramento", :state => "CA",
                :zip => "95608", :first_name => "Susan", :last_name => "Liaison", :name => "Susan Liaison",
@@ -195,7 +165,7 @@ Liaison.create(:address1 => "100 Elm Street", :city => "Sacramento", :state => "
                :home_phone => "800-123-1234", :fax => "800-123-1234", :church_id => Church.first.id,
                :liaison_type_id => LiaisonType.find_by_name('Both Junior and Senior High').id,
                :email1 => "liaison@church.com")
-=======
+
 Program.delete_all
 Program.create(:site_id => Site.find_by_name('Test Site 1').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
                :start_date => Date.strptime("06/01/2012", "%m/%d/%Y"),
@@ -228,5 +198,3 @@ Liaison.create(:address1 => "100 Elm Street", :city => "Sacramento", :state => "
     :liaison_type_id => LiaisonType.find_by_name('Both Junior and Senior High').id,
     :email1 => "liaison@church.com")
 
-
->>>>>>> upstream/master

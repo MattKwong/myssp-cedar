@@ -56,7 +56,15 @@ class ItemPurchase < ActiveRecord::Base
    end
 
   def total_size_in_base_units
-    size_in_base_units * quantity
+    logger.debug item_id
+    result = size_in_base_units * quantity
+    logger.debug "In total_size...result class= #{result.scalar.class}"
+    if result.scalar.is_a?(Rational)
+      new_scalar = result.scalar.to_d
+      result = Unit.new(new_scalar, result.units)
+    end
+    logger.debug "In total_size_in_base_units...#{result.inspect}"
+    result
   end
 
   def total_price

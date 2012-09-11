@@ -57,19 +57,13 @@ class RosterItem < ActiveRecord::Base
 
   belongs_to :roster
 
-<<<<<<< HEAD
-
-  before_validation do
-    self.state = self.state.upcase.first(2)
-=======
   before_validation do
     self.state = self.state.upcase.first(2)
     self.first_name = self.first_name.rstrip
     self.last_name = self.last_name.rstrip
     self.city = self.city.rstrip
     self.email = self.email.rstrip
->>>>>>> upstream/master
-    end
+ end
 
   validates :roster_id, :first_name, :last_name, :address1, :city, :state, :group_id,
     :shirt_size, :zip, :presence => true

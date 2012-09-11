@@ -18,10 +18,10 @@ ActiveAdmin.register MaterialItemDelivered do
     end
     column :delivery_date
     column :cost do |delivered_item|
-      delivered_item.item.average_cost(delivered_item.project.program, Date.today)
+      number_to_currency delivered_item.item.average_cost(delivered_item.project.program, Date.today)
     end
     column :default_cost do |delivered_item|
-      delivered_item.item.default_cost
+      number_to_currency delivered_item.item.default_cost
     end
   end
 

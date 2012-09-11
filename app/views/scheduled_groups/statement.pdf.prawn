@@ -1,10 +1,6 @@
 prawn_document() do |pdf|
-<<<<<<< HEAD
     logopath = "#{::Rails.root.to_s}/public/images/logo.png"
-=======
 
-logopath = "#{::Rails.root.to_s}/public/images/logo.png"
->>>>>>> upstream/master
     pdf.image logopath, :width => 80, :height => 80
 
     pdf.text "Statement", :align => :center, :style => :bold, :size => 20

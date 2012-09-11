@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 body.logged_in .flash {
     background: #93A9BE;
     border-bottom: 1px solid #EEE098;
@@ -47,16 +46,12 @@ body.logged_in .flash {
     position: absolute;
     color: red;
 }
-
->>>>>>> upstream/master
 #logo {
     float:left;
     margin:0 auto;
     width: 110px;
 }
 
-<<<<<<< HEAD
-=======
 div#plan-material-info form fieldset.inputs {
     background: none repeat scroll 0 0 #FFFFFF;
     /*border-radius: none;*/
@@ -68,7 +63,6 @@ div#deliver-material-info form fieldset.inputs {
     box-shadow: 0 1px 4px #FFFFFF inset;
 }
 
->>>>>>> upstream/master
 span.icon {
   vertical-align: middle;
   display: inline-block; }
@@ -94,9 +88,6 @@ h2 {
     padding-top: 5px;
     padding-left: 5px;
 }
-<<<<<<< HEAD
-
-=======
 thead th {
     background: -moz-linear-gradient(-90deg, #93A9BE, #4D7194) repeat scroll 0 0 transparent;
     border-bottom: 1px solid #4D7194;
@@ -108,15 +99,10 @@ tfoot td, th {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
     /*background: none repeat scroll 0 0 #4D7194;*/
 }
->>>>>>> upstream/master
 caption, th, td {
   text-align: left;
   font-weight: normal;
   /*vertical-align: middle; */
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/master
     border-bottom: 1px solid #E8E8E8;
         padding: 8px 12px 6px;
         vertical-align: top;
@@ -647,9 +633,6 @@ body.logged_in .flash {
     /*position: relative;*/
     /*text-shadow: 0 1px 0 #FAFAFA;*/
     top: 0px;
-<<<<<<< HEAD
-}
-=======
 }
 table.index_table th a.sortable {
     background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
@@ -668,4 +651,3 @@ table.index_table th.sorted-asc, table.index_table th.sorted-desc {
     background: -moz-linear-gradient(-90deg, #e2e2e2, #d2d4d6);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e2e2e2, endColorstr=#d2d4d6);
     -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e2e2e2, endColorstr=#d2d4d6); }
->>>>>>> upstream/master

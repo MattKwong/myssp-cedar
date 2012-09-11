@@ -1,14 +1,15 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'jquery-rails'
+
 gem 'rake'
 gem 'haml'
 gem "formtastic", "~> 2.0.2"
 gem "activeadmin", "~> 0.4.3"
 gem 'meta_search', '>= 1.1.0.pre'
-gem 'sass-rails'
-
+#gem 'sass-rails'
+gem 'webrick', '1.3.1'
+gem 'sprockets'
 gem 'validates_timeliness'
 gem 'cancan'
 gem 'prawn_rails'
@@ -18,9 +19,19 @@ gem 'fastercsv'
 gem 'rails3-jquery-autocomplete'
 gem 'ruby-units'
 gem 'breadcrumbs_on_rails'
-gem 'newrelic_rpm'
+#Must be loaded before deploying
+#gem 'newrelic_rpm'
 gem "rack-timeout"
 gem "heroku"
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails'#, "  ~> 3.1.0"
+  #gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+  gem 'jquery-rails'
+end
 
 group :production, :staging do
   gem "pg"

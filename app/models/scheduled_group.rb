@@ -50,10 +50,7 @@ class ScheduledGroup < ActiveRecord::Base
                             :only_integer => true
   validates_numericality_of :current_counselors, :greater_than_or_equal_to => 0,
                             :only_integer => true
-<<<<<<< HEAD
 
-=======
->>>>>>> upstream/master
   def senior_high?
      session_type.name.include?("Senior High")
   end

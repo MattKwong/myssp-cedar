@@ -1,3 +1,8 @@
+/*
+*= require_self
+*= require_tree .
+*/
+
 /*From blueprint*/
 .column, .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span-13, .span-14, .span-15, .span-16, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {float:left;margin-right:10px;}
 .last {margin-right:0;}
@@ -39,48 +44,48 @@ th {font-weight:bold;}
 /* From style*/
 
 #map {
-  height: 350px;
-  background-color: #d1e0e7; }
+    height: 350px;
+    background-color: #d1e0e7; }
 
 div.notes-area dt {
     color: #4D7194;
 }
 div.properties dl dt {
-  color: #4D7194;
-  clear: left;
-  float: left;
-  width: 120px;
-  background-color: #efefef;
-  text-align: right;
-  margin: 5px 0;
-  padding: 1px;
-  border-top-left-radius: 5px;
-  -moz-border-radius-top-left: 5px;
-  -webkit-border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  -moz-border-radius-bottom-left: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  border: solid 1px #d1e0e7; }
+    color: #4D7194;
+    clear: left;
+    float: left;
+    width: 120px;
+    background-color: #efefef;
+    text-align: right;
+    margin: 5px 0;
+    padding: 1px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-top-left: 5px;
+    -webkit-border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottom-left: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border: solid 1px #d1e0e7; }
 
 div.properties dl dd {
-  float: left;
-  margin: 5px 0;
-  text-align: right;
-  width: 100px;
-  padding: 1px;
-  border-top-right-radius: 5px;
-  -moz-border-radius-top-right: 5px;
-  -webkit-border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  -moz-border-radius-bottom-right: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  border: 1px solid #d1e0e7; }
+    float: left;
+    margin: 5px 0;
+    text-align: right;
+    width: 100px;
+    padding: 1px;
+    border-top-right-radius: 5px;
+    -moz-border-radius-top-right: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-bottom-right: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border: 1px solid #d1e0e7; }
 
 div.prepend-top, .prepend-top {margin-top:0em;}
 form.material_item_estimated {
     margin: 5px; }
 div.properties dl dd.wide {
-  width: 60%; }
+    width: 60%; }
 
 div.properties dl dlt {
     background-color: #EFEFEF;
@@ -119,11 +124,11 @@ td.number {
     vertical-align: middle;
 }
 .plus-minus {
-  /*vertical-align: middle;*/
-  float: left;
-  margin: 0 auto;
-  width: 40px;
-  ;
+    /*vertical-align: middle;*/
+    float: left;
+    margin: 0 auto;
+    width: 40px;
+;
 
 }
 .toggle-image {
@@ -152,22 +157,22 @@ div.group-container {
     margin-bottom: 1.4em;
 }div.group-container-clear {
 
-    overflow: auto;
-    width:100%;
-    /*border-top-left-radius: 3px;*/
-    /*-moz-border-radius-top-left: 3px;*/
-    /*-webkit-border-top-left-radius: 3px;*/
-    /*border-top-right-radius: 3px;*/
-    /*-moz-border-radius-top-right: 3px;*/
-    /*-webkit-border-top-right-radius: 3px;*/
-    /*border-bottom-left-radius: 3px;*/
-    /*-moz-border-radius-bottom-left: 3px;*/
-    /*-webkit-border-bottom-left-radius: 3px;*/
-    /*border-bottom-right-radius: 3px;*/
-    /*-moz-border-radius-bottom-right: 3px;*/
-    /*-webkit-border-bottom-right-radius: 3px;*/
-    margin-bottom: 1.4em;
-}
+     overflow: auto;
+     width:100%;
+     /*border-top-left-radius: 3px;*/
+     /*-moz-border-radius-top-left: 3px;*/
+     /*-webkit-border-top-left-radius: 3px;*/
+     /*border-top-right-radius: 3px;*/
+     /*-moz-border-radius-top-right: 3px;*/
+     /*-webkit-border-top-right-radius: 3px;*/
+     /*border-bottom-left-radius: 3px;*/
+     /*-moz-border-radius-bottom-left: 3px;*/
+     /*-webkit-border-bottom-left-radius: 3px;*/
+     /*border-bottom-right-radius: 3px;*/
+     /*-moz-border-radius-bottom-right: 3px;*/
+     /*-webkit-border-bottom-right-radius: 3px;*/
+     margin-bottom: 1.4em;
+ }
 
 #material_item_delivereds {
     display: normal;
@@ -192,13 +197,13 @@ div.group-container {
     text-decoration: none;
 }
 td.money {
-  text-align :right;
-    }
+    text-align :right;
+}
 
 a {
     color: #09c;
     text-decoration: none;
-    }
+}
 
 a:hover {
     color: #069;
@@ -213,7 +218,7 @@ nav {
     background-color: white;
     padding: 0 0.7em;
     white-space: nowrap;
-    }
+}
 
 nav ul {
     margin: 0;
@@ -275,7 +280,7 @@ table.home {
 /* User show page */
 table.profile {
     width: 100%;
-margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 td.main{
@@ -351,21 +356,21 @@ ul.liaisons {
     list-style: none;
 }
 div.tablewrapper {
-  padding: 3px;
-  border-top-left-radius: 3px;
-  -moz-border-radius-top-left: 3px;
-  -webkit-border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  -moz-border-radius-top-right: 3px;
-  -webkit-border-top-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  -moz-border-radius-bottom-left: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  -moz-border-radius-bottom-right: 3px;
-  -webkit-border-bottom-right-radius: 3px;
-  background-color: #9FBECD;
-  margin-bottom: 1.4em; }
+    padding: 3px;
+    border-top-left-radius: 3px;
+    -moz-border-radius-top-left: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    -moz-border-radius-top-right: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    -moz-border-radius-bottom-left: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -moz-border-radius-bottom-right: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    background-color: #9FBECD;
+    margin-bottom: 1.4em; }
 
 .hover {
     cursor: pointer;
@@ -390,11 +395,11 @@ div#loading {
 html.wait, html.wait * {cursor:wait;}
 
 /*#current_section_title {*/
-    /*width: 100%;*/
-    /*border-top-left-radius: 3px;*/
-    /*text-align: center;*/
-    /*background-color: #9FBECD;*/
-    /*display: none;*/
+/*width: 100%;*/
+/*border-top-left-radius: 3px;*/
+/*text-align: center;*/
+/*background-color: #9FBECD;*/
+/*display: none;*/
 /*}*/
 h1.process_step {
     border: 1px solid #CCC;

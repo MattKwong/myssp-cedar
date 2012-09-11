@@ -66,6 +66,7 @@ class StaffReportsController < ApplicationController
           index += 1
         end
       end
+      logger.debug "In assemble_items...item id = #{item.id}"
       item = {:item => item, :name => item.name, :total_purchased => item.purchased_for_program(program, program.start_date, date),
               :current_in_inventory => item.in_inventory_for_program_at(program, date),
               :base_unit => item.base_unit, :average_cost => item.average_cost(program, date),
