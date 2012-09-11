@@ -7,127 +7,8 @@
     <list id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="" />
     <list id="6515e16b-01b0-44f6-bd49-9d9ce8271564" name="Failed commit: Default" comment="Added update of second payment fields in ScheduledGroup to payment controller code." />
     <list default="true" id="c348ecdd-aae3-4f28-9dd6-ff71435a4076" name="Postponed" comment="Merge corrections">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/model.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/features/support/env.rb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery-ui.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery-ui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery.cookie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery/jquery-1.5.1.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery/jquery-ui-1.8.11.custom.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery/jquery-ui-widgets.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/jquery_ujs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/rails.js-delete" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/stylesheets/formtastic.css" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/admin_notes_icon.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/admin_notes_icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/datepicker/datepicker-header-bg.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/datepicker/datepicker-header-bg.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/datepicker/datepicker-input-icon.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/datepicker/datepicker-input-icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/datepicker/datepicker-next-link-icon.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/datepicker/datepicker-next-link-icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/datepicker/datepicker-nipple.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/datepicker/datepicker-nipple.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/datepicker/datepicker-prev-link-icon.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/datepicker/datepicker-prev-link-icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/loading.gif" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/loading.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/nested_menu_arrow.gif" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/nested_menu_arrow.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/nested_menu_arrow_dark.gif" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/nested_menu_arrow_dark.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/active_admin/orderable.png" afterPath="$PROJECT_DIR$/app/assets/images/active_admin/orderable.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/logo.png" afterPath="$PROJECT_DIR$/app/assets/images/logo.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/minus.png" afterPath="$PROJECT_DIR$/app/assets/images/minus.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/plus.png" afterPath="$PROJECT_DIR$/app/assets/images/plus.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/plusminus.bak.png" afterPath="$PROJECT_DIR$/app/assets/images/plusminus.bak.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/images/plusminus.png" afterPath="$PROJECT_DIR$/app/assets/images/plusminus.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/javascripts/01.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/01.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/javascripts/active_admin.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/active_admin.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/javascripts/autocomplete-rails.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/autocomplete-rails.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/.gitkeep" afterPath="$PROJECT_DIR$/app/assets/stylesheets/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/active_admin.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/active_admin.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/blueprint/ie.css" afterPath="$PROJECT_DIR$/public/blueprint/ie.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/blueprint/print.css" afterPath="$PROJECT_DIR$/public/blueprint/print.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/blueprint/screen.css" afterPath="$PROJECT_DIR$/public/blueprint/screen.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/custom.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/custom_aa.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom_aa.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/formtastic_changes.css" afterPath="$PROJECT_DIR$/public/formtastic_changes.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_diagonals-thick_20_666666_40x40.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_diagonals-thick_20_666666_40x40.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_diagonals-thick_35_fbe3e4_40x40.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_diagonals-thick_35_fbe3e4_40x40.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_flat_10_000000_40x100.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_flat_10_000000_40x100.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_glass_100_e5f0e2_1x400.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_glass_100_e5f0e2_1x400.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_glass_100_f6f6f6_1x400.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_glass_100_f6f6f6_1x400.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_glass_65_f6f6f6_1x400.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_glass_65_f6f6f6_1x400.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_gloss-wave_35_5c91aa_500x100.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_gloss-wave_35_5c91aa_500x100.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-bg_highlight-soft_75_a9c3a2_1x100.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-bg_highlight-soft_75_a9c3a2_1x100.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-icons_222222_256x240.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-icons_222222_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-icons_548b48_256x240.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-icons_548b48_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-icons_5c91aa_256x240.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-icons_5c91aa_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-icons_8a1f11_256x240.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-icons_8a1f11_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/images/ui-icons_ffffff_256x240.png" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/images/ui-icons_ffffff_256x240.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/jqueryui/jquery-ui-1.8.11.custom.css" afterPath="$PROJECT_DIR$/app/assets/javascripts/jqueryui/jquery-ui-1.8.11.custom.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/print.css" afterPath="$PROJECT_DIR$/public/print.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/_bourbon.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/_bourbon.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/_bourbon.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/_bourbon.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/addons/_button.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/addons/_button.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/addons/_font-family.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/addons/_font-family.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/addons/_html5-input-types.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/addons/_html5-input-types.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/addons/_position.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/addons/_position.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/addons/_timing-functions.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/addons/_timing-functions.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_animation.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_animation.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_appearance.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_appearance.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_background-image.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_background-image.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_background-size.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_background-size.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_border-image.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_border-image.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_border-radius.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_border-radius.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_box-shadow.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_box-shadow.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_box-sizing.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_box-sizing.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_columns.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_columns.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_flex-box.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_flex-box.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_inline-block.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_inline-block.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_linear-gradient.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_linear-gradient.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_radial-gradient.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_radial-gradient.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_transform.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_transform.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/css3/_transition.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/css3/_transition.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/functions/_deprecated-webkit-gradient.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/functions/_deprecated-webkit-gradient.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/functions/_grid-width.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/functions/_grid-width.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/functions/_linear-gradient.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/functions/_linear-gradient.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/functions/_modular-scale.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/functions/_modular-scale.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/functions/_radial-gradient.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/functions/_radial-gradient.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/sass/bourbon/functions/_tint-shade.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/sass/bourbon/functions/_tint-shade.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/stylesheets/style.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/style.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/spoic3.iml" afterPath="$PROJECT_DIR$/.idea/spoic3.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn" afterPath="$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/material_item_delivereds.rb" afterPath="$PROJECT_DIR$/app/admin/material_item_delivereds.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/staff_reports_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/staff_reports_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/item.rb" afterPath="$PROJECT_DIR$/app/models/item.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/item_purchase.rb" afterPath="$PROJECT_DIR$/app/models/item_purchase.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/roster.rb" afterPath="$PROJECT_DIR$/app/models/roster.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/roster_item.rb" afterPath="$PROJECT_DIR$/app/models/roster_item.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/scheduled_group.rb" afterPath="$PROJECT_DIR$/app/models/scheduled_group.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/session.rb" afterPath="$PROJECT_DIR$/app/models/session.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/special_need.rb" afterPath="$PROJECT_DIR$/app/models/special_need.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/admin_layout.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/admin_layout.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/liaisons/show.html.erb" afterPath="$PROJECT_DIR$/app/views/liaisons/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/roster_item/new.html.erb" afterPath="$PROJECT_DIR$/app/views/roster_item/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/scheduled_groups/program_session.html.erb" afterPath="$PROJECT_DIR$/app/views/scheduled_groups/program_session.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/development.rb" afterPath="$PROJECT_DIR$/config/environments/development.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/test.rb" afterPath="$PROJECT_DIR$/config/environments/test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/devise.rb" afterPath="$PROJECT_DIR$/config/initializers/devise.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/locales/devise.en.yml" afterPath="$PROJECT_DIR$/config/locales/devise.en.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
     </list>
     <ignored path="spoic3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -164,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="35" selection-start="250" selection-end="250" vertical-scroll-proportion="-4.769231">
+            <state line="3" column="0" selection-start="43" selection-end="43" vertical-scroll-proportion="0.09933775">
               <folding />
             </state>
           </provider>
@@ -186,7 +67,9 @@
         <entry file="file://$PROJECT_DIR$/app/views/material_item_delivereds/_fields.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
+              <folding>
+                <marker date="1347159364000" expanded="true" signature="1334:1405" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -200,10 +83,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="material_item_delivereds.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="material_item_delivereds.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/admin/material_item_delivereds.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="25" selection-start="851" selection-end="851" vertical-scroll-proportion="0.738758">
+            <state line="23" column="25" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -285,9 +168,9 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/active_admin.css" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.css" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/admin/material_item_delivereds.rb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
@@ -1416,7 +1299,11 @@
       <created>1347160780085</created>
       <updated>1347160780085</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Merge corrections">
+      <created>1347336518958</created>
+      <updated>1347336518958</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1444,23 +1331,23 @@
     <editor active="true" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32848486" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.99601597" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33333334" sideWeight="0.99601597" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19153515" sideWeight="0.6666667" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19153515" sideWeight="0.6521212" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21494183" sideWeight="0.21516165" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19440459" sideWeight="0.6521212" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39910814" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43636364" sideWeight="0.17718795" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34787878" sideWeight="0.8177905" order="2" side_tool="false" content_ui="tabs" x="77" y="500" width="1633" height="304" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32565284" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21494183" sideWeight="0.21516165" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19440459" sideWeight="0.6666667" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34787878" sideWeight="0.8177905" order="2" side_tool="false" content_ui="tabs" x="77" y="500" width="1633" height="304" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21446079" sideWeight="0.57865167" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3277592" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -1615,13 +1502,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="35" selection-start="250" selection-end="250" vertical-scroll-proportion="-4.769231">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="67" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0">
@@ -1632,7 +1512,9 @@
     <entry file="file://$PROJECT_DIR$/app/views/material_item_delivereds/_fields.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <marker date="1347159364000" expanded="true" signature="1334:1405" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1652,7 +1534,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/admin/material_item_delivereds.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="25" selection-start="851" selection-end="851" vertical-scroll-proportion="0.738758">
+        <state line="23" column="25" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="43" selection-end="43" vertical-scroll-proportion="0.09933775">
           <folding />
         </state>
       </provider>
