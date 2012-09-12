@@ -19,7 +19,7 @@ module Spoic3
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = '1.1'
 
     #Devise literature suggest this may be necessary on Heroku for 3.1 and above
     #config.assets.initialize_on_precompile = false

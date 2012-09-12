@@ -14,13 +14,19 @@
           %tr
             %td= item.name
             -if @programs
+              - spending_total = 0
               -@programs.each do |p|
-                %td{:style => 'text-align:right'}= number_to_currency p.budget_item_spent_with_tax(item.id, start_date, end_date)
-            %td{:style => 'text-align:right'}= number_to_currency @report.spending_with_tax(item.id, start_date, end_date)
+                -program_total = p.budget_item_spent_with_tax(item.id, start_date, end_date)
+                -spending_total += program_total
+                %td{:style => 'text-align:right'}= number_to_currency program_total
+            %td{:style => 'text-align:right'}= number_to_currency spending_total
         %tfoot
           %tr
             %td Totals
             -if @programs
+              -spending_total = 0
               -@programs.each do |p|
-                %td{:style => 'text-align:right'}= number_to_currency p.spent_with_tax_total(start_date, end_date)
-            %td{:style => 'text-align:right'}= number_to_currency @report.spending_with_tax_total(start_date, end_date)
+                -program_total =  p.spent_with_tax_total(start_date, end_date)
+                -spending_total += program_total
+                %td{:style => 'text-align:right'}= number_to_currency program_total
+            %td{:style => 'text-align:right'}= number_to_currency spending_total

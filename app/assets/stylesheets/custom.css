@@ -45,22 +45,22 @@ th {font-weight:bold;}
 div.notes-area dt {
     color: #4D7194;
 }
-div.properties dl dt {
-  color: #4D7194;
-  clear: left;
-  float: left;
-  width: 120px;
-  background-color: #efefef;
-  text-align: right;
-  margin: 5px 0;
-  padding: 1px;
-  border-top-left-radius: 5px;
-  -moz-border-radius-top-left: 5px;
-  -webkit-border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  -moz-border-radius-bottom-left: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  border: solid 1px #d1e0e7; }
+/*div.properties dl dt {*/
+  /*color: #4D7194;*/
+  /*clear: left;*/
+  /*float: left;*/
+  /*width: 120px;*/
+  /*background-color: #efefef;*/
+  /*text-align: right;*/
+  /*margin: 5px 0;*/
+  /*padding: 1px;*/
+  /*border-top-left-radius: 5px;*/
+  /*-moz-border-radius-top-left: 5px;*/
+  /*-webkit-border-top-left-radius: 5px;*/
+  /*border-bottom-left-radius: 5px;*/
+  /*-moz-border-radius-bottom-left: 5px;*/
+  /*-webkit-border-bottom-left-radius: 5px;*/
+  /*border: solid 1px #d1e0e7; }*/
 
 div.properties dl dd {
   float: left;
@@ -87,15 +87,15 @@ div.properties dl dt {
     border: 1px solid #D1E0E7;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
+    /*border-bottom-right-radius: 5px;*/
+    /*border-top-right-radius: 5px;*/
     clear: left;
     color: #4D7194;
     float: left;
     margin: 5px 0;
     padding: 1px;
     text-align: center;
-    width: 220px;
+    width: 120px;
 }
 
 /* End of style */

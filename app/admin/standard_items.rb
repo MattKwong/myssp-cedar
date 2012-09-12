@@ -1,4 +1,5 @@
 ActiveAdmin.register StandardItem do
+  #TODO Active admin sorting is not working, arrows don't show up either.
   controller.authorize_resource
   menu :if => proc{ can?(:manage, StandardItem) },:parent => "Projects"
 
@@ -16,7 +17,7 @@ ActiveAdmin.register StandardItem do
         link_to item.item.name, item_path(item.item_id)
       end
       column "Comments", :comments
-      column :project_subtype
+      column :project_subtype, :sortable => :project_subtype_id
       default_actions
     end
 end
