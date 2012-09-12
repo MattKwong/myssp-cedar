@@ -23,6 +23,7 @@ gem 'newrelic_rpm'
 gem "rack-timeout"
 gem "taps"
 gem "heroku"
+gem "thin"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,7 +35,6 @@ group :assets do
 end
 
 group :production, :staging do
-  gem "thin"
   gem "pg"
 end
 
