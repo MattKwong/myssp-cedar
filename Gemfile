@@ -34,6 +34,7 @@ group :assets do
 end
 
 group :production, :staging do
+  gem "thin"
   gem "pg"
 end
 

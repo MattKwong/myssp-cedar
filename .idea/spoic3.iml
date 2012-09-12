@@ -40,6 +40,7 @@
     <orderEntry type="library" scope="PROVIDED" name="devise (v2.1.2, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.1.3, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="eventmachine-le (v1.1.3, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="excon (v0.16.2, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v1.4.0, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_girl (v4.0.0, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
@@ -57,6 +58,7 @@
     <orderEntry type="library" scope="PROVIDED" name="heroku (v2.31.2, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="heroku-api (v0.3.4, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.1, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="http_parser.rb (v0.5.3, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.1, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="inherited_resources (v1.3.1, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="journey (v1.0.4, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
@@ -80,6 +82,7 @@
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.3, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="prawn (v0.12.0, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="prawn_rails (v0.0.11, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="preforker (v0.1.1, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.4.1, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-cache (v1.2, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-ssl (v1.3.2, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
@@ -110,6 +113,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.1.3, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.6, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="taps (v0.3.24, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="thin (v2.0.0.pre, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.16.0, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.3.3, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timeliness (v0.3.6, RVM: ruby-1.9.2-p320 [global]) [gem]" level="application" />
