@@ -23,7 +23,7 @@ gem 'newrelic_rpm'
 gem "rack-timeout"
 gem "taps"
 gem "heroku"
-gem "thin"
+gem 'thin', '1.4.1'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,7 +1,7 @@
 class PasswordsController < Devise::PasswordsController
   #prepend_before_filter :require_no_authentication
   skip_before_filter :require_no_authentication
-  include Devise::Controllers::InternalHelpers
+  #include Devise::Controllers::InternalHelpers
   layout 'admin_layout'
 
 # GET /resource/password/new
