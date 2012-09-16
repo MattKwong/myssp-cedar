@@ -1,5 +1,8 @@
 /*
 *= require_self
+*= require active_admin_custom
+*= require active_admin
+*= require custom
 */
 
 /*From blueprint*/
