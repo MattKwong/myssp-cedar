@@ -37,17 +37,20 @@ end
 
 UserRole.create(:name => 'Staff', :description => 'Field staff, work limited to one site only')
 
-if Site.find_by_name("Test Site 1")
-  Site.find_by_name("Test Site 1").delete
-end
-Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Susanville", :state => "CA", :zip => "90000", :listing_priority => 10,
-             :active => true, :phone => "800-700-6000")
 
-if Site.find_by_name("Test Site 2")
-  Site.find_by_name("Test Site 2").delete
-end
+#if Site.find_by_name("Test Site 1")
+#  Site.find_by_name("Test Site 1").delete
+#end
+Site.delete_all
+Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Susanville", :state => "CA", :zip => "90000", :listing_priority => 10,
+             :active => true, :phone => "800-700-6000", :abbr=>'T1')
+
+#if Site.find_by_name("Test Site 2")
+#  Site.find_by_name("Test Site 2").delete
+#end
+
 Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city => "McDermitt", :state => "NV", :zip => "80000", :listing_priority => 20,
-            :active => true, :phone => "800-700-6000")
+            :active => true, :phone => "800-700-6000", :abbr=>'T2')
 
 ['Site Director', 'Food', 'Construction', 'SLC'].each do |name|
 
@@ -134,10 +137,7 @@ ProgramType.create(:name => 'Summer Domestic', :description => 'Standard summer 
   BudgetItemType.create(:name => item[0], :description => item[1], :seq_number => item[2])
 end
 
-Program.delete_all
-Program.create(:site_id => Site.find_by_name('Test Site 1').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
-               :start_date => Date.strptime("06/01/2012", "%m/%d/%Y"),
-               :end_date => Date.strptime("08/31/2012", "%m/%d/%Y"), :active => 't' )
+
 
 LiaisonType.delete_all
 LiaisonType.create(:name => "Both Junior and Senior High", :description => "Both junior and senior high groups")
@@ -168,8 +168,8 @@ Liaison.create(:address1 => "100 Elm Street", :city => "Sacramento", :state => "
 
 Program.delete_all
 Program.create(:site_id => Site.find_by_name('Test Site 1').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
-               :start_date => Date.strptime("06/01/2012", "%m/%d/%Y"),
-               :end_date => Date.strptime("08/31/2012", "%m/%d/%Y"), :active => 't' )
+               :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"), :name=> "Test Program 2013",
+               :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 't' )
 
 LiaisonType.delete_all
 LiaisonType.create(:name => "Both Junior and Senior High", :description => "Both junior and senior high groups")

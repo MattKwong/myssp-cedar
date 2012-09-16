@@ -24,8 +24,8 @@ end
 
 Given /^I see the Spending Report page$/ do
   @current_admin_user = FactoryGirl.create(:admin_user)
-  @current_admin_user.confirm!
-  @email = @current_admin_user.email
+  #@current_admin_user.confirm!
+  #@email = @current_admin_user.email
   @password = @current_admin_user.password
   visit root_path
   click_link 'Please sign in.'

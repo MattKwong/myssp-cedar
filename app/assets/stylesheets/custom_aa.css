@@ -292,7 +292,7 @@ table.index_table {
       text-decoration: none;
       display: block; }
     table.index_table th.sortable a {
-      background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+      background: url("active_admin/orderable.png") no-repeat 0 4px;
       padding-left: 13px; }
     table.index_table th.sorted-asc a {
       background-position: 0 -27px; }
@@ -635,14 +635,14 @@ body.logged_in .flash {
     top: 0px;
 }
 table.index_table th a.sortable {
-    background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+    background: url("active_admin/orderable.png") no-repeat 0 4px;
     padding-left: 13px; }
 table.index_table th a.sorted-asc {
-    background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+    background: url("active_admin/orderable.png") no-repeat 0 4px;
     background-position: 0 -27px;
     padding-left: 13px;}
 table.index_table th a.sorted-desc {
-    background: url("/images/active_admin/orderable.png") no-repeat 0 4px;
+    background: url("active_admin/orderable.png") no-repeat 0 4px;
     background-position: 0 -56px;
     padding-left: 13px;}
 table.index_table th.sorted-asc, table.index_table th.sorted-desc {

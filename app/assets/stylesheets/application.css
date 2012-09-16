@@ -408,12 +408,12 @@ h1.process_step {
     background: none;
 }
 .process-steps ol li.current {
-    background-image: url("/images/plus.png");
+    background-image: url("plus.png");
     color: #824C8B;
 }
 .process-steps ol li {
     float: left;
-    background: url("/images/plus.png") no-repeat left 6px;
+    background: url("plus.png") no-repeat left 6px;
     padding: 0 0.8em 0 20px;
     width: 29%;
 }

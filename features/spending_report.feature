@@ -3,7 +3,7 @@ Feature: spending report
   As a valid admin
   I want to be able to create a spending report with start and stop dates which I specify
   Scenario: Accessing the report page
-    Given a logged on admin
+    Given a logged on "Admin"
     When I click on the spending report item on the Reports Menu
     Then I see the Spending Report page with title 'Spending Summary Report'
     And start date equal to program start date
