@@ -17,7 +17,7 @@ module Spoic3
   class Application < Rails::Application
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.precompile += %w(active_admin.css active_admin_custom.css custom.css style.css)
+    config.assets.precompile += %w(active_admin_custom.css custom.css style.css active_admin.css)
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.1'
