@@ -45,7 +45,7 @@ th {font-weight:bold;}
 div.notes-area dt {
     color: #4D7194;
 }
-/*div.properties dl dt {*/
+/*div.properties dlt {*/
   /*color: #4D7194;*/
   /*clear: left;*/
   /*float: left;*/
@@ -82,20 +82,20 @@ form.material_item_estimated {
 div.properties dl dd.wide {
   width: 60%; }
 
-div.properties dl dt {
+div.properties dl dlt {
     background-color: #EFEFEF;
     border: 1px solid #D1E0E7;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    /*border-bottom-right-radius: 5px;*/
-    /*border-top-right-radius: 5px;*/
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
     clear: left;
     color: #4D7194;
     float: left;
     margin: 5px 0;
     padding: 1px;
     text-align: center;
-    width: 120px;
+    width: 220px;
 }
 
 /* End of style */
