@@ -4,8 +4,6 @@
     <title><%= title %></title>
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
-    <!--<%#= render 'layouts/stylesheets' %>-->
-    <!--<script src = https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js></script>-->
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
   </head>
@@ -16,10 +14,8 @@
 
       <div id="titlebar_left">
         <div id="logo" width=100px><%= link_to image_tag('logo.png', :alt => "Sierra Service Project", :width => 75, :height => 75),
-                    "http://www.sierraserviceproject.org", :title => "Go to SSP Website" %></div>
+                    "http://www.sierraserviceproject.org", :title => "Go to the SSP Website" %></div>
         <span class="breadcrumb">
-           <!--<a href="/">Home</a>-->
-           <!--<span class="breadcrumb_sep">/</span>-->
             <%= render_breadcrumbs %>
         </span>
         <h2 id="page_title"><%= @page_title %></h2>

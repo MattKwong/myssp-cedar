@@ -30,9 +30,5 @@ jqueryui/images/ui-icons_548b48_256x240.png: jqueryui/images/ui-icons_548b48_256
 jqueryui/images/ui-icons_5c91aa_256x240.png: jqueryui/images/ui-icons_5c91aa_256x240-5a2ae992872b9de629b2f4202814e3d4.png
 jqueryui/images/ui-icons_8a1f11_256x240.png: jqueryui/images/ui-icons_8a1f11_256x240-1bd512b3413a9e8d35d11d5b0ffcf561.png
 jqueryui/images/ui-icons_ffffff_256x240.png: jqueryui/images/ui-icons_ffffff_256x240-e40cd19ddddacd590819d60fceb52268.png
-active_admin.css: active_admin-58db385d865096df90aa955e003f661e.css
-active_admin_custom.css: active_admin_custom-ab567de4d6234fc5826c970e0ca8b982.css
-application.css: application-09b2bc5f21bb7385213d9d6190a8e432.css
-custom.css: custom-a35820cf72d7616a314a697d3d93db22.css
-style.css: style-5394e0f9e3a1d085b3bb44bdc811b846.css
+application.css: application-e20feaecb13834ce3d92ecc55482c747.css
 active_admin/application.js: active_admin/application-fc2444d7cd62181e5f61f011397bf7ce.js
