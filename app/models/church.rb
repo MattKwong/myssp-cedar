@@ -22,7 +22,7 @@
 
 class Church < ActiveRecord::Base
 
-  default_scope :order => 'name'
+  #default_scope :order => 'name'
   has_many :liaisons
   has_many :registrations
   has_many :scheduled_groups
