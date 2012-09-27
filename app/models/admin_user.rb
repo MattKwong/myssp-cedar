@@ -1,4 +1,4 @@
-# == Schema Information
+  # == Schema Information
 #
 # Table name: admin_users
 #
@@ -219,9 +219,8 @@ class AdminUser < ActiveRecord::Base
 
 # new function to provide access to protected method unless_confirmed
   def only_if_unconfirmed
-    unless_confirmed {yield}
+    pending_any_confirmation {yield}
   end
-
 
   def to_s
     name
@@ -236,5 +235,6 @@ class AdminUser < ActiveRecord::Base
   def create_name
     self.name = self.first_name + ' ' + self.last_name
   end
+
 
 end

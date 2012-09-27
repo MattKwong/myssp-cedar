@@ -24,7 +24,7 @@ Given /^a valid liaison logon$/ do
     click_button "Sign Out"
   end
   @current_admin_user = FactoryGirl.create(:liaison_user)
-  @current_admin_user.confirm!
+  #@current_admin_user.confirm!
   @email = @current_admin_user.email
   @password = @current_admin_user.password
 end

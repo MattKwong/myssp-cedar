@@ -66,7 +66,7 @@ class LiaisonsController < ApplicationController
     user.liaison_id = liaison.id
     user.name = liaison.name
 
-    user.user_role = "Liaison"
+    user.user_role_id = UserRole.find_by_name("Liaison").id
 #    user.reset_password_token = AdminUser.reset_password_token
 #    user.password = random_pronouncable_password(8)
 

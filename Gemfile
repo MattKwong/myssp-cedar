@@ -4,7 +4,7 @@ gem 'rails', '3.2.8'
 gem 'bundler', '1.2.0'
 gem 'rake'
 gem 'haml'
-gem "formtastic", "~> 2.0.2"
+gem "formtastic", "2.1.0"
 gem "activeadmin", "~> 0.4.3"
 gem 'meta_search', '>= 1.1.0.pre'
 #gem 'sass-rails'

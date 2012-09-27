@@ -34,19 +34,20 @@ When /^I visit "(.*?)" and click on "(.*?)" button$/ do |arg1, arg2|
 end
 When /^I visit "(.*?)"$/ do |arg1|
   visit send("admin_#{arg1.downcase}_path")
-  save_and_open_page
+  #save_and_open_page
 end
 
-Then /^I see an unauthorized message$/ do
-  find('div.flash').should have_content("Error: You are not authorized to perform this action")
-end
 Then /^the page has a flash$/ do
-  page.should have_selector('div.flash')
+  page.has_css?('div.flash')
+  end
+
+And /^I see an unauthorized message$/ do
+  page.has_content?("Error: You are not authorized to perform this action.")
 end
 
 When /^I visit a church other than my own$/ do
   church_id = Church.find_by_name("Stockton First UMC").id
   visit admin_church_path(church_id)
-  #save_and_open_page
-
+  save_and_open_page
 end
+

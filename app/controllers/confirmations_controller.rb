@@ -39,7 +39,7 @@ class ConfirmationsController < Devise::PasswordsController
     end
 
     if !@confirmable.errors.empty?
-      render_with_scope :new
+      render 'devise/confirmations/new'
     end
   end
 
@@ -54,7 +54,7 @@ class ConfirmationsController < Devise::PasswordsController
       end
     end
     if !@confirmable.errors.empty?
-      render_with_scope :new
+      render 'devise/confirmations/new'
     end
   end
 
@@ -72,7 +72,7 @@ class ConfirmationsController < Devise::PasswordsController
     @confirmation_token = params[:confirmation_token]
     @requires_password = true
     self.resource = @confirmable
-    render_with_scope :show
+    render 'devise/confirmations/new'
   end
 
   def do_confirm

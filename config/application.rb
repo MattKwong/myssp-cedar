@@ -8,9 +8,9 @@ require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  # Bundler.require *Rails.groups(:assets => %w(development test))
+   Bundler.require *Rails.groups(:assets => %w(development test))
   # If you want your assets lazily compiled in production, use this line
-   Bundler.require(:default, :assets, Rails.env)
+  # Bundler.require(:default, :assets, Rails.env)
 end
 
 module Spoic3
@@ -18,10 +18,10 @@ module Spoic3
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += %w(active_admin.css active_admin.js)
+    config.assets.precompile += ['*.js', 'custom.css', 'style.css', 'active_admin.css']
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.1'
+    config.assets.version = '1.2'
 
     #Devise literature suggest this may be necessary on Heroku for 3.1 and above
     #config.assets.initialize_on_precompile = false
