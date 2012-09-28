@@ -24,9 +24,13 @@ And /^end date equal to program end date$/ do
 end
 
 Given /^I see the Spending Report page$/ do
-  @current_admin_user = FactoryGirl.create(:admin_user)
+  if @current_admin_user
+    visit root_path
+    click_button "Sign Out"
+  end
+  @current_admin_user = FactoryGirl.create("admin_user")
   #@current_admin_user.confirm!
-  #@email = @current_admin_user.email
+  @email = @current_admin_user.email
   @password = @current_admin_user.password
   visit root_path
   click_link 'Please sign in.'
@@ -34,17 +38,19 @@ Given /^I see the Spending Report page$/ do
   fill_in "Password", :with => @password
   check 'Remember me'
   click_button 'Sign in'
-  #click_link "Sierra Service Project Manager"
-  save_and_open_page
-  click_link 'Reports'
-  click_link 'Spending Report'
+  click_link "Sierra Service Project Manager"
+  #click_link 'Reports'
+  #click_link 'Spending Report'
 
 end
 
 When /^I click on the Show Report button$/ do
-  find("#spending-link").find("h3").click
+  click_link 'Reports'
+  click_link 'Spending Report'
+  save_and_open_page
 end
 
 Then /^I see the Spending Report table on the page$/ do
+  save_and_open_page
   pending # express the regexp above with the code you wish you had
 end

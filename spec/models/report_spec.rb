@@ -7,7 +7,7 @@ describe Report do
     @program_attr = {:site_id => Site.find_by_name('Test Site 2').id, :start_date => @start_date,
                      :end_date => @end_date,
                      :program_type_id => ProgramType.find_by_name("Summer Domestic").id, :active => true,
-                     :name => "Test Program 2", :short_name  => "TP 2"}
+                     }
   end
 
   it "should return a list of all active programs" do
@@ -130,11 +130,11 @@ describe Report do
         @test_prog1.budget_item_spent_with_tax(BudgetItemType.find_by_name("Materials").id, @start_date, @end_date).should be_within(0.005).of(100.00)
       end
     end
+
     describe "purchases of taxable items with no program specified with multiple sites" do
       before :each do
         @test_prog1 = Program.create!(@program_attr)
-        @test_prog2 = Program.create!(@program_attr.merge(:site_id => Site.find_by_name('Test Site 2').id,
-                                                          :name => "Test Program 2", :short_name  => "TP 2"))
+        @test_prog2 = Program.create!(@program_attr.merge(:site_id => Site.find_by_name('Test Site 1').id))
         @item2 = Item.create!(:name => "Test material item", :base_unit => 'each', :default_taxed => true, :description => 'Test material item description',
                               :budget_item_type_id => BudgetItemType.find_by_name("Materials").id, :untracked => true, :item_type_id => 1, :item_category_id => 1)
         @vendor1 = Vendor.create!(:site_id => @test_prog1.site_id, :name => 'Test Vendor 1', :address => '1 First St.', :city => 'Los Angeles', :state => 'CA',
