@@ -122,9 +122,9 @@ describe AdminUser do
       end
       it "user of site director should respond to sd?" do
         sd_job = Job.find_by_name('Site Director')
-        prog = AdminUser.create!(@staff_attr)
-        ProgramUser.create!(:program_id => 1, :user_id => prog.id, :job_id => sd_job.id )
-        prog.should be_sd
+        admin = AdminUser.create!(@staff_attr)
+        prog = ProgramUser.create!(:program_id => 1, :user_id => admin.id, :job_id => sd_job.id )
+        admin.should be_sd
       end
       it "user of HRC should respond to construction?" do
         hrc_job = Job.find_by_name('Home Repair Coordinator')

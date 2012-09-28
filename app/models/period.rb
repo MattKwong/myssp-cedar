@@ -34,7 +34,7 @@ class Period < ActiveRecord::Base
      unless start_date.nil?
        if start_date < Date.today
  #  Temporary removal of this edit
- #       errors.add(:start_date, "Start date cannot be in the past")
+        errors.add(:start_date, "Start date cannot be in the past")
        end
     end
   end

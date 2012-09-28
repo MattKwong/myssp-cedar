@@ -54,7 +54,7 @@ Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city =>
 
 ['Site Director', 'Food', 'Construction', 'SLC'].each do |name|
 
-if JobType.find_by_name(name)
+  if JobType.find_by_name(name)
     JobType.find_by_name(name).delete
   end
   JobType.create(:name => name)
@@ -62,23 +62,23 @@ end
 
 
 if Job.find_by_name('Site Director')
-  Job.find_by_name('Site Director').delete
+  Job.find_all_by_name('Site Director').each {|a| a.delete}
 end
 Job.create(:name => 'Site Director', :job_type_id => JobType.find_by_name('Site Director').id)
 
 if Job.find_by_name('Spiritual Life Coordinator')
-  Job.find_by_name('Spiritual Life Coordinator').delete
+  Job.find_all_by_name('Spiritual Life Coordinator').each {|a| a.delete}
 end
 Job.create(:name => 'Spiritual Life Coordinator', :job_type_id => JobType.find_by_name('SLC').id)
 
 if Job.find_by_name('Cook')
-  Job.find_by_name('Cook').delete
+  Job.find_all_by_name('Cook').each {|a| a.delete}
 end
 Job.create(:name => 'Cook', :job_type_id => JobType.find_by_name('Food').id)
 
 ['Home Repair Coordinator', 'Construction Coordinator', 'Supply Coordinator'].each do |name|
   if Job.find_by_name(name)
-    Job.find_by_name(name).delete
+    Job.find_all_by_name(name).each {|a| a.delete}
   end
   Job.create(:name => name, :job_type_id => JobType.find_by_name('Construction').id)
 end

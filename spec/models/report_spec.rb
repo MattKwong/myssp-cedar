@@ -2,24 +2,25 @@ require 'spec_helper'
 
 describe Report do
   before :each do
-    @program_attr = {:site_id => Site.find_by_name('Test Site 1').id, :start_date => Date.strptime("06/01/2012", "%m/%d/%Y"),
-                     :end_date => Date.strptime("08/31/2012", "%m/%d/%Y"),
+    @start_date = Date.strptime("09/01/2012", "%m/%d/%Y")
+    @end_date = Date.strptime("10/31/2012", "%m/%d/%Y")
+    @program_attr = {:site_id => Site.find_by_name('Test Site 2').id, :start_date => @start_date,
+                     :end_date => @end_date,
                      :program_type_id => ProgramType.find_by_name("Summer Domestic").id, :active => true,
-                     :name => "Test Program 1", :short_name  => "TP 1"}
-    @start_date = Date.strptime("06/01/2012", "%m/%d/%Y")
-    @end_date = Date.strptime("08/31/2012", "%m/%d/%Y")
+                     :name => "Test Program 2", :short_name  => "TP 2"}
   end
 
   it "should return a list of all active programs" do
     report = Report.new
     test_prog1 = Program.create!(@program_attr)
-    report.all_programs.count.should == 1
+    #correct number is 2 because one is added via seeds
+    report.all_programs.count.should == 2
   end
 
   it "should return the correct program id" do
     report = Report.new
     test_prog1 = Program.create!(@program_attr)
-    report.all_programs.first.id == test_prog1.id
+    report.all_programs.last.id == test_prog1.id
   end
 
   describe "spending calculation tests" do
@@ -61,8 +62,8 @@ describe Report do
            :budget_item_type_id => BudgetItemType.find_by_name("Materials").id, :untracked => true, :item_type_id => 1, :item_category_id => 1)
         @vendor1 = Vendor.create!(:site_id => @test_prog1.site_id, :name => 'Test Vendor 1', :address => '1 First St.', :city => 'Los Angeles', :state => 'CA',
            :zip => '90037', :phone => '123-456-7890' )
-        @purchase2 = Purchase.create!(:date => Date.today, :program_id => @test_prog1.id, :purchaser_id => 1, :tax => 8.50, :total => 100.00,
-           :vendor_id => @vendor1.id, :purchase_type => 'Credit' )
+        @purchase2 = Purchase.create!(:date => @start_date + 1, :program_id => @test_prog1.id, :purchaser_id => 1, :tax => 8.50, :total => 100.00,
+           :vendor_id => @vendor1.id, :purchase_type => 'Credit')
       end
 
       it "given a budget item id, should return the amount spent without tax" do

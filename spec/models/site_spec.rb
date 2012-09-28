@@ -23,7 +23,7 @@ require 'spec_helper'
 describe Site do
   before (:each) do
     @attr = { :name => "Site Name", :address1 => "4410 S. Budlong Avenue", :city => "Los Angeles", :state => "CA",
-              :zip => "90037", :phone => "123-456-7890", :listing_priority => 1}
+              :zip => "90037", :phone => "123-456-7890", :listing_priority => 1, :abbr => "SN"}
   end
 
   it "should create an instance with valid attributes" do
