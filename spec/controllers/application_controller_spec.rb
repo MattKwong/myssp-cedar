@@ -1,10 +1,16 @@
 require 'spec_helper'
+require 'support/controller_macros'
 
 describe ApplicationController do
   include Devise::TestHelpers
   render_views
   describe "Admin Login" do
-    login_admin
+    before (:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:admin_user]
+      @current_admin_user = FactoryGirl.create(:admin_user)
+      sign_in @current_admin_user
+      @current_admin_user.confirm!
+    end
 
     it "should have a current user" do
       subject.current_admin_user.should_not be_nil
@@ -17,7 +23,12 @@ describe ApplicationController do
     end
 
   describe "Liaison Login" do
-    login_liaison
+    before (:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:liaison_user]
+      @current_admin_user = FactoryGirl.create(:liaison_user)
+      sign_in @current_admin_user
+      @current_admin_user.confirm!
+    end
 
     it "should have a current user" do
       subject.current_admin_user.should_not be_nil

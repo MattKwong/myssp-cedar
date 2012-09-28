@@ -8,7 +8,8 @@ When /^I click on the spending report item on the Reports Menu$/ do
 end
 
 Then /^I see the Spending Report page with title 'Spending Summary Report'$/ do
-  page.body.should have_selector("form #startDate[@value='2012-06-01']")
+  save_and_open_page
+  page.body.should have_selector("form #startDate[@value='2013-06-01']")
 end
 
 #These two conditions pass but I these should fail...
@@ -33,7 +34,8 @@ Given /^I see the Spending Report page$/ do
   fill_in "Password", :with => @password
   check 'Remember me'
   click_button 'Sign in'
-  click_link "Sierra Service Project Manager"
+  #click_link "Sierra Service Project Manager"
+  save_and_open_page
   click_link 'Reports'
   click_link 'Spending Report'
 

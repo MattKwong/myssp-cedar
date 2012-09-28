@@ -9,15 +9,20 @@ describe RegistrationController do
   end
 
   describe "Get 'Create a Registration'" do
-    login_admin
+    before (:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:admin_user]
+      @current_admin_user = FactoryGirl.create(:admin_user)
+      sign_in @current_admin_user
+      @current_admin_user.confirm!
+    end
     it "should be successful" do
       get 'register'
       response.should be_success
     end
 
     it "should have the right title" do
-      get 'register'
-      response.should have_selector("title", :content => @base_title + " | Register A Group")
+      visit 'register'
+      page.should have_selector("title", :content => @base_title + " | Register A Group")
     end
   end
 

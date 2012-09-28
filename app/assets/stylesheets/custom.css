@@ -99,6 +99,9 @@ div.properties dl dlt {
 }
 
 /* End of style */
+ title#title {
+     text-align: right;
+ }
 
 td.number {
     text-align: right;
