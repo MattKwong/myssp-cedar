@@ -11,21 +11,6 @@ FactoryGirl.define do
     confirmed_at Time.now
   end
 
-  #factory :liaison do
-  #  address "100 Elm Street"
-  #  city "Sacramento"
-  #  state "CA"
-  #  zip "95608"
-  #  first_name "Susan"
-  #  last_name "Liaison"
-  #  name "Susan Liaison"
-  #  title "Youth Director"
-  #  cell_phone "800-123-1234"
-  #  work_phone "800-123-5667"
-  #  liaison_type_id 1
-  #
-  #end
-
   factory :liaison_user, class: AdminUser do
     first_name 'Susan'
     last_name 'Liaison'
@@ -34,5 +19,18 @@ FactoryGirl.define do
     email 'liaison@test.com'
     password 'password'
     confirmed_at Time.now
+  end
+
+  factory :church do
+    active      true
+    address1    '100 Easy Street'
+    church_type_id ChurchType.find_by_name("Cal Nevada UM Church").id
+    city        'Carmichael'
+    email1      'church@church.com'
+    name        'Carmichael Test Church'
+    office_phone '916-123-1001'
+    registered  false
+    state       'CA'
+    zip         '95608'
   end
 end

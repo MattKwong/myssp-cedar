@@ -101,6 +101,11 @@ class AdminUser < ActiveRecord::Base
     (q ? where(["lower(name) LIKE ?", '%' + q.downcase + '%']) : {} )
   }
 
+  def liaison
+    if self.liaison?
+      Liaison.find(liaison_id)
+    end
+  end
     def format_phone_numbers
       unless self.phone.nil? || self.phone == ""
         self.phone = self.phone.insert 6, '-'

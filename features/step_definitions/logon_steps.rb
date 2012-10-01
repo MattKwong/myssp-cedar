@@ -33,9 +33,7 @@ When /^I log on$/ do
   logon
 end
 
-Then /^I see a personalized welcome message$/ do
-  find("#page_title").should have_content("MySSP Information Portal. Welcome, #{@current_admin_user.first_name}!")
-end
+
 
 def logon
   visit root_path

@@ -50,6 +50,10 @@ end
 When /^I visit a church other than my own$/ do
   church_id = Church.find_by_name("Stockton First UMC").id
   visit admin_church_path(church_id)
-  save_and_open_page
+  #save_and_open_page
 end
 
+Then /^I see a personalized welcome message$/ do
+  find("#page_title").should have_content("MySSP Information Portal. Welcome, #{@current_admin_user.first_name}!")
+  save_and_open_page
+end
