@@ -291,6 +291,7 @@ DEPENDENCIES
   sqlite3
   taps
   thin (= 1.4.1)
+  thor
   uglifier
   validates_timeliness
   webrick (= 1.3.1)

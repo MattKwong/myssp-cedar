@@ -18,7 +18,6 @@
                             </tr>
                         </thead>
                         <% total_youth = total_counselors = grand_total = 0 %>
-<!--<<<<<<< HEAD-->
                         <% if signed_in? && current_admin_user.admin? %>
                             <tbody>
                             <% @groups.each do |r| %>
@@ -50,33 +49,7 @@
                                         </tr>
                             <% end %>
                          <% end %>
-<!--=======-->
 
-                        <!--<tbody>-->
-                            <!--<% @groups.each do |r| %>-->
-                                <!--<tr>-->
-                                    <!--<td><%= r.name %></td>-->
-                                    <!--<td>-->
-                                      <!--<% if can? :edit, r.id %>-->
-                                        <!--<%= link_to Liaison.find(r.liaison_id).name, admin_liaison_path(r.liaison_id) %>-->
-                                      <!--<% else %>-->
-                                        <!--<%= link_to Liaison.find(r.liaison_id).name, liaison_path(r.liaison_id) %>-->
-                                      <!--<% end %>-->
-                                    <!--</td>-->
-                                    <!--<td><%= link_to Church.find(r.church_id).name, admin_church_path(r.church.id)%></td>-->
-                                    <!--<td><%= r.current_youth %></td>-->
-                                    <!--<td><%= r.current_counselors %></td>-->
-                                    <!--<td><%= r.current_total %></td>-->
-
-                                    <!--<% total_youth += r.current_youth %>-->
-                                    <!--<% total_counselors += r.current_counselors %>-->
-                                    <!--<% grand_total += r.current_total %>-->
-                                    <!--<% if signed_in? && current_admin_user.admin? %>-->
-                                      <!--<td><%= link_to "Move this group", admin_scheduled_group_path(:id => r.id) %></td>-->
-                                    <!--<% end %>-->
-                                <!--</tr>-->
-                            <!--<% end %>-->
-<!-->>>>>>> upstream/master-->
                         </tbody>
                         <tfoot>
                             <tr>

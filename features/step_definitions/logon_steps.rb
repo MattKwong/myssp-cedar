@@ -34,7 +34,11 @@ end
 Given /^a valid liaison logon with an inactive registered group$/ do
   liaison_logon
   create_registration
-  @registration.request1 = Session.find_by_name('Test Site 2 Week 1').id
+  @registration.request1 = Session.find_by_name('Test Site 1 Week 1').id
+  @registration.created_at = '2012-10-01 00:00:00'
+  @registration.save
+  puts @registration.name
+  puts @registration.created_at
 end
 
 Given /^a valid liaison logon with a scheduled group$/ do
@@ -48,6 +52,7 @@ Given /^a valid liaison logon with an inactive scheduled group$/ do
   create_registration
   create_scheduled_group
   @scheduled_group.session_id = Session.find_by_name('Test Site 2 Week 1').id
+  @scheduled_group.save
 end
 
 def create_registration
@@ -69,6 +74,8 @@ def create_scheduled_group
   @scheduled_group.session_id = @registration.request1
   @scheduled_group.name = @registration.name
   @scheduled_group.save
+  @registration.scheduled = true
+  @registration.save
 end
 
 def liaison_logon

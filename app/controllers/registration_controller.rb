@@ -235,7 +235,7 @@ class RegistrationController < ApplicationController
 
     end
 
-    ScheduledGroup.all.each do |r|
+    ScheduledGroup.active_program.each do |r|
         @session = Session.find(r.session_id)
         @site = Site.find(@session.site_id)
         @period = Period.find(@session.period_id)

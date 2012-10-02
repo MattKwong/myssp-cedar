@@ -26,7 +26,7 @@ class Program < ActiveRecord::Base
   validates :program_type_id, :presence => true
   validates :active, :inclusion => [true, false]
     validate :start_date_before_end_date
-  validate :start_date_not_in_past
+  #validate :start_date_not_in_past
 
   scope :active, where(:active => true)
   scope :current, where(:active => true)

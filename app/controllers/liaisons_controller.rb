@@ -30,8 +30,15 @@ class LiaisonsController < ApplicationController
     end
 
     church = Church.find(liaison.church_id)
-    registrations = Registration.find_all_by_liaison_id(liaison.id) || []
-    groups = ScheduledGroup.active_session.find_all_by_liaison_id(liaison.id)
+    groups = ScheduledGroup.active_program.find_all_by_liaison_id(liaison.id)
+    if groups.empty?
+      registrations = Registration.current.unscheduled.find_all_by_liaison_id(liaison.id)
+      logger.debug registrations.inspect
+    else
+      registrations = []
+      groups.each { |g| registrations << Registration.find(g.registration_id)}
+    end
+
 #   authorize! :read, groups
     rosters = assemble_rosters(groups)
     invoices = grab_invoice_balances(groups)

@@ -29,9 +29,7 @@ class Session < ActiveRecord::Base
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
-  #scope :active, lambda { joins(:program).where("active = ?", 't') }
-
-
+  #scope :active, lambda { joins(:program).where("programs.active = ?", 't') }
 
   def session_type_junior_high?
     if session_type.name == 'Summer Junior High'
