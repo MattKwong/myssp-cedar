@@ -31,7 +31,7 @@ class LiaisonsController < ApplicationController
 
     church = Church.find(liaison.church_id)
     registrations = Registration.find_all_by_liaison_id(liaison.id) || []
-    groups = ScheduledGroup.find_all_by_liaison_id(liaison.id)
+    groups = ScheduledGroup.active_session.find_all_by_liaison_id(liaison.id)
 #   authorize! :read, groups
     rosters = assemble_rosters(groups)
     invoices = grab_invoice_balances(groups)

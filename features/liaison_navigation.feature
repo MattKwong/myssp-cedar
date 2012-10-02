@@ -26,3 +26,13 @@ Feature: liaison navigation
     When I log on
     Then I see a personalized welcome message
     And I see the scheduled group name
+  Scenario: Not seeing a registration
+    Given a valid liaison logon with an inactive registered group
+    When I log on
+    Then I see a personalized welcome message
+    And I do not see the registration name
+  Scenario: Seeing a scheduled group
+    Given a valid liaison logon with an inactive scheduled group
+    When I log on
+    Then I see a personalized welcome message
+    And I do not see the scheduled group name

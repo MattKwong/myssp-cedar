@@ -29,12 +29,25 @@ end
 Given /^a valid liaison logon with a registered group$/ do
   liaison_logon
   create_registration
-  end
+end
+
+Given /^a valid liaison logon with an inactive registered group$/ do
+  liaison_logon
+  create_registration
+  @registration.request1 = Session.find_by_name('Test Site 2 Week 1').id
+end
 
 Given /^a valid liaison logon with a scheduled group$/ do
   liaison_logon
   create_registration
   create_scheduled_group
+end
+
+Given /^a valid liaison logon with an inactive scheduled group$/ do
+  liaison_logon
+  create_registration
+  create_scheduled_group
+  @scheduled_group.session_id = Session.find_by_name('Test Site 2 Week 1').id
 end
 
 def create_registration

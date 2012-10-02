@@ -31,6 +31,7 @@ class ScheduledGroup < ActiveRecord::Base
 
   default_scope :include => :church, :order => 'churches.name'
   scope :active, where('current_total > ?', 0)
+  scope :active_session, lambda { joins(:session).active }
   has_many :payments
   has_many :change_histories
   has_many :adjustments

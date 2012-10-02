@@ -45,9 +45,6 @@ Site.delete_all
 Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Susanville", :state => "CA", :zip => "90000", :listing_priority => 10,
              :active => true, :phone => "800-700-6000", :abbr=>'T1')
 
-#if Site.find_by_name("Test Site 2")
-#  Site.find_by_name("Test Site 2").delete
-#end
 
 Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city => "McDermitt", :state => "NV", :zip => "80000", :listing_priority => 20,
             :active => true, :phone => "800-700-6000", :abbr=>'T2')
@@ -163,6 +160,11 @@ Program.create(:site_id => Site.find_by_name('Test Site 1').id, :program_type_id
                :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"), :name=> "Test Program 2013",
                :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 't' )
 
+#Inactive program
+Program.create(:site_id => Site.find_by_name('Test Site 2').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
+               :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"),
+               :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 'f' )
+
 LiaisonType.delete_all
 LiaisonType.create(:name => "Both Junior and Senior High", :description => "Both junior and senior high groups")
 LiaisonType.create(:name => "Senior High Only", :description => "Senior high only liaisons")
@@ -215,10 +217,10 @@ Session.create(:name => 'Test Site 1 Week 1',
             :payment_schedule_id => PaymentSchedule.find_by_name('Standard Domestic Summer').id,
             :session_type_id => SessionType.find_by_name('Summer Senior High').id,
             :site_id => Site.find_by_name('Test Site 1').id)
-Session.create(:name => 'Test Site 1 Week 2',
-            :period_id => Period.find_by_name('Test Period 2').id,
-            :program_id => Program.find_by_name('Test Site 1 Summer Domestic 2013').id,
+Session.create(:name => 'Test Site 2 Week 1',
+            :period_id => Period.find_by_name('Test Period 1').id,
+            :program_id => Program.find_by_name('Test Site 2 Summer Domestic 2013').id,
             :payment_schedule_id => PaymentSchedule.find_by_name('Standard Domestic Summer').id,
             :session_type_id => SessionType.find_by_name('Summer Senior High').id,
-            :site_id => Site.find_by_name('Test Site 1').id)
+            :site_id => Site.find_by_name('Test Site 2').id)
 

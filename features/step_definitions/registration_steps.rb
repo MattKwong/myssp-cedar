@@ -22,3 +22,10 @@ end
 And /^I see the scheduled group name$/ do
   find("#scheduled_group_info").should have_content(ScheduledGroup.find_all_by_liaison_id(@liaison1.id).first.name)
 end
+And /^I do not see the registration name$/ do
+  find("#registration_info").should_not have_content(Registration.find_all_by_liaison_id(@liaison1.id).first.name)
+end
+
+And /^I do not see the scheduled group name$/ do
+  find("#scheduled_group_info").should_not have_content(ScheduledGroup.find_all_by_liaison_id(@liaison1.id).first.name)
+end
