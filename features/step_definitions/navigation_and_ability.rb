@@ -53,7 +53,3 @@ When /^I visit a church other than my own$/ do
   #save_and_open_page
 end
 
-Then /^I see a personalized welcome message$/ do
-  find("#page_title").should have_content("MySSP Information Portal. Welcome, #{@current_admin_user.first_name}!")
-  save_and_open_page
-end

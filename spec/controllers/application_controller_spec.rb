@@ -29,8 +29,12 @@ describe ApplicationController do
       sign_in @current_admin_user
       @current_admin_user.confirm!
 
-#need to create a liaison instance, linked to admin and linked to church
-      @church1 = FactoryGirl.create(:church, :active => true, :liaison_id => @current_admin_user.id )
+      @liaison1 = FactoryGirl.create(:liaison)
+      @church1 = FactoryGirl.create(:church, :active => true, :liaison_id => @liaison1.id)
+      @liaison1.church_id = @church1.id
+      @current_admin_user.liaison_id = @liaison1.id
+      @liaison1.save
+      @current_admin_user.save
       @church2 = FactoryGirl.create(:church, :name => 'Test Church 2', :email1 => 'church2@church.com')
     end
 
