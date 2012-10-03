@@ -13,10 +13,11 @@ Spoic3::Application.routes.draw do
   end
 
   devise_for :admin_users, :controllers => { :admin_users => "admin_users", :passwords => "passwords",
-            :confirmations => "confirmations", :sessions => "sessions" }
+            :confirmations => "confirmations", :sessions => "sessions", :registrations => "devise_registrations" }
 
   resources :admin_users
-
+  match 'admin/admin_users/:id/soft_delete', :to => 'admin_users#soft_delete', :as => 'soft_delete_admin_user'
+  match 'admin/admin_users/:id/reactivate', :to => 'admin_users#reactivate', :as => 'reactivate_admin_user'
 #  match "admin/confirmation/new", :to => 'active_admin/devise/confirmations#new', :as => 'new_admin_user_confirmation'
 
   resources :sites do

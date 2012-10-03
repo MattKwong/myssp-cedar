@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825225459) do
+ActiveRecord::Schema.define(:version => 20121003172443) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer   "resource_id",   :null => false
@@ -93,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20120825225459) do
     t.string    "username"
     t.string    "phone"
     t.boolean   "blocked"
+    t.datetime  "deleted_at"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -655,4 +655,5 @@ ActiveRecord::Schema.define(:version => 20120825225459) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
   end
+
 end

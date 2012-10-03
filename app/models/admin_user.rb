@@ -78,6 +78,9 @@ class AdminUser < ActiveRecord::Base
   before_save :create_name
   before_save :format_phone_numbers
 
+  scope :active, where('deleted_at' => nil)
+  scope :inactive, where('deleted_at < ?', Time.now)
+
   scope :admin, lambda {
     joins(:user_role).
     where("user_roles.name = ?", 'Admin')}
@@ -98,8 +101,11 @@ class AdminUser < ActiveRecord::Base
                                                      #  scope :not_current_staff, includes(:programs).where('programs.end_date < ? OR programs.end_date IS NULL', Time.now)
 
   scope :search_by_name, lambda { |q|
-    (q ? where(["lower(name) LIKE ?", '%' + q.downcase + '%']) : {} )
-  }
+    (q ? where(["lower(name) LIKE ?", '%' + q.downcase + '%']) : {} ) }
+
+  def active_for_authentication?
+    super && !deleted_at
+  end
 
   def liaison
     if self.liaison?
