@@ -19,6 +19,6 @@ ActiveAdmin.register Session do
       f.input :program, :include_blank => false, :as => :select, :collection => Program.active
       f.input :name
     end
-    f.actions
+    f.buttons
   end
 end
