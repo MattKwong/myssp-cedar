@@ -24,6 +24,7 @@ gem "rack-timeout"
 gem "taps"
 gem "heroku"
 gem 'thin', '1.4.1'
+gem "pg"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,9 +35,6 @@ group :assets do
   gem 'jquery-rails'
 end
 
-group :production, :staging do
-  gem "pg"
-end
 
 group :development do
   gem 'faker', '0.3.1'
