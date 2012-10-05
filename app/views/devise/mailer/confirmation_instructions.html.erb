@@ -1,8 +1,8 @@
 <p>Welcome <%= @resource.name %>!</p>
 
-<p>An account has been created for you at the SSP Information Center. This account will make it easier for you to
-  manage your interaction with SSP. This is meant for your convenience, but not as a replacement for picking up the
-  phone and calling us when you need to.</p>
+<p>An account has been created for you at the SSP Information Center. You will use this account to register you group
+  amd it will make it easier for you to manage your interaction with SSP. This is meant for your convenience, but not as
+  a replacement for picking up the phone and calling us when you need to.</p>
 
 <p>To use the account, you will log on using your email address (to which this email has been sent), as well as a password.
 When you activate your account by clicking on the link below, you'll be prompted to set a password. Please call the office if
@@ -12,14 +12,13 @@ you encounter any difficulty in getting logged in.</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
 
-<p>After activating your account, you will use this url to activate your MySSP page:
+<p>After activating your account, you will use this url to access your MySSP page:
   <a href ="http://myssp.sierraserviceproject.net">MySSP</a></p>
 
-<p>Finally, the system is experiencing an error at times when the web page is first launched. If you get an error when attempting
- to access the system that says "We are sorry, but something has gone wrong", please refresh your screen. If this
-doesn't solve the problem, please call our office at 916-488-6441.</p>
+<p>Thank you for your cooperation with this system. We have made many changes to it since last year, so
+  we please let us know if you encounter any problems or frustrations. </p>
 
-<p>Thank you for your cooperation as we launch this new system! Many blessings,</p>
+<p>Many blessings,</p>
 <p>Meghan Osborn, Business Manager<br/>Sierra Service Project<br/>PO Box 992<br/>Carmichael CA 95609<br/>916-488-6441
 <br/><a href ="http://sierraserviceproject.org/">www.sierraserviceproject.org</a></p>
 

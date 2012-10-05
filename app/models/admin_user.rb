@@ -56,7 +56,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   validates :email, :uniqueness => true
-  validates :username, :uniqueness => true, :allow_blank => true
+  validates :username, :uniqueness => true
   validates :first_name, :last_name, :presence => true
 
   validates_numericality_of :phone,
@@ -79,7 +79,7 @@ class AdminUser < ActiveRecord::Base
   before_save :format_phone_numbers
 
   scope :active, where('deleted_at' => nil)
-  scope :inactive, where('deleted_at < ?', Time.now)
+  scope :inactive, where('deleted_at <= ?', Time.now)
 
   scope :admin, lambda {
     joins(:user_role).
@@ -112,12 +112,20 @@ class AdminUser < ActiveRecord::Base
       Liaison.find(liaison_id)
     end
   end
-    def format_phone_numbers
-      unless self.phone.nil? || self.phone == ""
-        self.phone = self.phone.insert 6, '-'
-        self.phone = self.phone.insert 3, '-'
-      end
+
+  def format_phone_numbers
+    unless self.phone.nil? || self.phone == ""
+      self.phone = self.phone.insert 6, '-'
+      self.phone = self.phone.insert 3, '-'
     end
+  end
+
+  def active?
+    if deleted_at.nil?
+      true
+    end
+  end
+
     def admin?
       if user_role
         self.user_role.name == "Admin"

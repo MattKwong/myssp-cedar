@@ -30,10 +30,11 @@ ActiveAdmin.register AdminUser do
     column :last_sign_in_at
     column :sign_in_count
     column "Actions" do |admin_user|
-      link_to 'Inactivate', soft_delete_admin_user_path(admin_user)
-    end
-    column "Actions" do |admin_user|
+      if admin_user.active?
+        link_to 'Inactivate', soft_delete_admin_user_path(admin_user)
+      else
         link_to 'Reactivate', reactivate_admin_user_path(admin_user)
+      end
     end
     default_actions
   end
