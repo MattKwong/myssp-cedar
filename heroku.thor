@@ -26,6 +26,19 @@ module Heroku
         puts "(4/4) skipping cleaning..."
       end
     end
+    desc "push", "push the local myssp development db to a myssp-cedar"
+    def push
+      puts "Pushing the local dev db to production. This might take a few minutes\n"
+      puts "(1/4) capturing local database snapshot..."
+      puts `pg_dump -h localhost -U #{options[:user]}  -Fc #{options[:dbname]} > #{options[:dump]} `
+      puts "(2/4) uploading snapshot..."
+      unless options[:keep]
+        puts "(4/4) cleaning up..."
+        puts `rm #{options[:dump]}`
+      else
+        puts "(4/4) skipping cleaning..."
+      end
+    end
 
     no_tasks do
       def dbname
