@@ -79,7 +79,8 @@ class AdminUser < ActiveRecord::Base
   before_save :format_phone_numbers
 
   scope :active, where('deleted_at' => nil)
-  scope :inactive, where('deleted_at <= ?', Time.now)
+  #Below isn't the optimal logic, but accounts for the time zone difference and works
+  scope :inactive, where('deleted_at <= ?', Time.now+1)
 
   scope :admin, lambda {
     joins(:user_role).
