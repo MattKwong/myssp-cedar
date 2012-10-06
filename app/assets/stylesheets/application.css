@@ -2,5 +2,6 @@
 *= require style
 *= require custom
 *= require active_admin
+*= require registration
 */
 

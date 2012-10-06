@@ -1,0 +1,124 @@
+<div id='active_admin_content'>
+    <div id='register_header'>
+        <h4><%= link_to "Help with scheduling a group", "#" %></h4>
+        <p>This online system has been set up for your convenience. If you run into problems, don't hesitate to pick up the phone and call Meghan at 916-488-6441 during normal business hours. Alternatively, send her an email at meghan.osborn@sierraserviceproject.org.</p>
+        <div id='reg_container'>
+          <!--<form action="#" method="post">-->
+          <%=  form_for @registration do |r| %>
+            <div id="first_step">
+              <h5>Step 1: Confirm Church Information</h5>
+                <div class="form">
+                    <p>Below is the information on file for you and your church.
+                    If any of this needs to be updated, please cancel this registration process, update your liaison and church information, and then start registering again.</p>
+                    <table class='registration_table' id="liaison_info_table">
+                      <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                      <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                      <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                      <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                      <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                      <tr></tr>
+                      <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                      <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                      <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+
+                    </table>
+                </div>
+                <input class="submit" type="submit" name="submit_first" id="submit_first" value="" />
+                <input class="submit" type="submit" name="cancel_first" id="cancel_first" value="" />
+            </div>
+            <div class="clear"></div>
+
+            <div id="second_step">
+              <h5>Step 2: Select Group Type</h5>
+              <%= r.radio_button :group_type_id, SessionType.find_by_name('Senior High'), :checked => true %>
+              <%= r.label :group_type_id_senior_high, 'Senior High' %>
+              <%= r.radio_button :group_type_id, 'Junior High', :value => SessionType.find_by_name('Junior High')%>
+              <%= r.label :group_type_id_junior_high, 'Junior High' %>
+              <input class="submit" type="submit" name="submit_second" id="submit_second" value="" />
+              <input class="submit" type="submit" name="cancel_second" id="cancel_second" value="" />
+            </div>
+            <div class="clear"></div>
+
+            <div id="third_step">
+              <h5>Step 3: Enter Enrollment Numbers</h5>
+              <tr>
+                <td><%= r.label "Youth" %></td>
+                <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
+              </tr>              <tr>
+                <td><%= r.label "Counselors" %></td>
+                <td><%= r.number_field :requested_counselors, :min => 1, :size => 2, :max => 8 %></td>
+              </tr>
+              <input class="submit" type="submit" name="submit_third" id="submit_third" value="" />
+              <input class="submit" type="submit" name="back_third" id="back_third" value="" />
+              <input class="submit" type="submit" name="cancel_third" id="cancel_third" value="" />
+            </div>
+            <div class="clear"></div>
+
+            <div id="fourth_step">
+              <h5>Step 4: Select First Choice Site and Week</h5>
+              <tr>
+                <td><%= r.label "Site" %></td>
+                <td id="site_selection"><%= select 'site', 'site_id', Site.all.collect {|s| [s.name, s.id]}, {:include_blank => false} %></td>
+              </tr>
+              <tr>
+                <td><%= r.label "Session" %></td>
+                <!--<td id="session_selection"><%= select "Session", "session_id", Session.find_all_by_site_id_and_session_type_id(1, 1).collect {|s| [s.period.name, s.id]}, {:include_blank => false} %></td>-->
+                <td id="session_selection"><%= select "Session", "session_id", Session.where('site_id = ? AND session_type_id = ?', 5, 2).collect {|s| [s.period.name, s.id]}, {:include_blank => false} %></td>
+              </tr>
+              <input class="submit" type="submit" name="submit_fourth" id="submit_fourth" value="" />
+              <input class="submit" type="submit" name="back_fourth" id="back_fourth" value="" />
+              <input class="submit" type="submit" name="cancel_fourth" id="cancel_fourth" value="" />
+            </div>
+            <div class="clear"></div>
+
+            <div id="fifth_step">
+              <h5>Step 5: Select Additional Choices</h5>
+              <p>We strongly urge you to select at least two alternative site/session combinations. Although we do are absolute best to schedule
+              you at your first choice site and week, due to the popularity of certain times and locations, it is always possible. Please give us
+              at least two other choices!</p>
+              <tr>
+                <td><%= r.label "Site" %></td>
+                <td id="alt_site_selection"><%= select 'site', 'site_id', Site.all.collect {|s| [s.name, s.id]}, {:include_blank => false} %></td>
+              </tr>
+              <tr>
+                <td><%= r.label "Session" %></td>
+                <!--<td id="session_selection"><%= select "Session", "session_id", Session.find_all_by_site_id_and_session_type_id(1, 1).collect {|s| [s.period.name, s.id]}, {:include_blank => false} %></td>-->
+                <td id="alt_session_selection"><%= select "Session", "session_id", Session.where('site_id = ? AND session_type_id = ?', 5, 2).collect {|s| [s.period.name, s.id]}, {:include_blank => false} %></td>
+              </tr>
+              <input class="submit" type="submit" name="submit_fourth" id="submit_fifth" value="" />
+              <input class="submit" type="submit" name="back_fourth" id="back_fifth" value="" />
+              <input class="submit" type="submit" name="cancel_fourth" id="cancel_fifth" value="" />
+            </div>
+            <div class="clear"></div>
+
+            <div id="sixth_step">
+              <h5>Step 6: Confirm Registration</h5>
+              <p>Please review this information for accuracy. Use the 'back' button if you want to change anything before submitting.</p>
+              <table class= 'registration_table' id="registration_request_table">
+                <tr><td>Youth</td><td><%= @registration.requested_youth%></td></tr>
+                <tr><td>Adults</td><td><%= @registration.requested_counselors %></td></tr>
+                <tr><td>Total</td><td><%=  %></td></tr>
+                <tr><td>First Choice</td><td><%= "Site: #{} Week: #{}" %></td></tr>
+<!--Need to know the number of choices and iterate through each-->
+                <input class="submit" type="submit" name="submit_fourth" id="submit_sixth" value="" />
+                <input class="submit" type="submit" name="back_fourth" id="back_sixth" value="" />
+                <input class="submit" type="submit" name="cancel_fourth" id="cancel_sixth" value="" />
+              </table>
+            </div>
+            <div class="clear"></div>
+
+            <div id="seventh_step">
+              <h5>Step 7: Make Payment</h5>
+            </div>
+            <div id="eighth_step">
+              <h5>Step 8: Registration Complete!</h5>
+            </div>
+          <!--</form>-->
+          <% end %>
+        </div>
+        <div id="progress_bar">
+          <div id="progress"></div>
+          <div id="progress_text">0% Complete</div>
+        </div>
+    </div>
+</div>

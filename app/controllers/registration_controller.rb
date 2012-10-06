@@ -4,6 +4,12 @@ class RegistrationController < ApplicationController
 
   def new
     @page_title = "Register a New Group"
+    @liaison = Liaison.find(params[:id])
+    @registration = Registration.new
+    @site_selection = ''
+    @available_sites = Site.all
+    @period_selection = ''
+    @periods_available = Period.all
   end
 
   def index
