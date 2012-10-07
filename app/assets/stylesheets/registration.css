@@ -179,6 +179,3 @@ input[type="submit"]:focus, input[type="button"]:focus {
     #id_requested_total {
         padding-left: 12px;
     }
-    #session_select {
-        display: none;
-    }

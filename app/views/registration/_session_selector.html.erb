@@ -1,0 +1,1 @@
+<%= select 'session_selector', 'session_id', @list_of_sessions.collect {|s| ["#{s.name} | #{s.start_date.strftime("%b %d")} - #{s.end_date.strftime("%b %d")}", s.id]},  {:prompt => "Select one", :include_blank => false} %>

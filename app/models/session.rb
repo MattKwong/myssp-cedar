@@ -154,4 +154,11 @@ class Session < ActiveRecord::Base
     end
   end
 
+  def self.by_session_type_and_site(value, site)
+    list_of_sessions = Session.where('site_id = ? and session_type_id = ?', site, value)
+    logger.debug list_of_sessions.inspect
+    list_of_sessions
+
+  end
+
 end

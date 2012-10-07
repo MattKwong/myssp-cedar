@@ -1,0 +1,5 @@
+$('#registration_site_selection').empty();
+<% @list_of_sites.each do |site| %>
+    alert('<%= site.name %>');
+    $('#registration_site_selection').append($("<option></option>").attr("value", <%= site.id %>).text('<%= site.name %>'));
+<% end %>

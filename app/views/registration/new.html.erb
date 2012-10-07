@@ -3,9 +3,9 @@
         <h4><%= link_to "Help with scheduling a group", "#" %></h4>
         <p>This online system has been set up for your convenience. If you run into problems, don't hesitate to pick up the phone and call Meghan at 916-488-6441 during normal business hours. Alternatively, send her an email at meghan.osborn@sierraserviceproject.org.</p>
         <div id='reg_container'>
-          <form action="#" method="post">
+          <!--<form action="#" method="post">-->
           <%=  form_for @registration do |r| %>
-            <div id="first_step">
+              <div id="first_step">
               <h1>Step 1: Confirm Church Information</h1>
                 <div class="form">
                     <p>Below is the information on file for you and your church.
@@ -34,10 +34,10 @@
               <div class="form_elements">
               <div class="form">
                 <p>Select the type of group you are registering.</p>
-                <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
-                <%= label_tag(:group_senior, "Senior High") %>
-                <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Junior High').id) %>
-                <%= label_tag(:group_junior, "Junior High") %>
+                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
+                    <%= label_tag(:group_senior, "Senior High") %>
+                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Junior High').id) %>
+                    <%= label_tag(:group_junior, "Junior High") %>
               </div>
               </div>
               <div class="clear"></div>
@@ -83,11 +83,11 @@
 
               <tr>
                 <td><%= r.label "Site" %></td>
-                <td id="site_selection"><%= select 'site', 'site_id', Site.all.collect {|s| [s.name, s.id]},  {:prompt => "Select one", :include_blank => false} %></td>
+                <td id="site_selector"></td>
               </tr>
               <tr id="session_select"  >
                 <td><%= r.label "Session" %></td>
-                <td id="session_selection"><%= select "Session", "session_id", Session.where('site_id = ? AND session_type_id = ?', 5, 2).map {|s| [s.period.name, s.id]}, :include_blank => false %></td>
+                <td id="session_selector"></td>
               </tr>
               </table>
                 </div>
@@ -140,7 +140,7 @@
             <div id="eighth_step">
               <h1>Step 8: Registration Complete!</h1>
             </div>
-          </form>
+          <!--</form>-->
           <% end %>
         </div>
         <div id="progress_bar">

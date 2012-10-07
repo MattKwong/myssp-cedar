@@ -45,16 +45,22 @@ class Site < ActiveRecord::Base
 
   def self.sites_for_group_type(group_type)
     sites = Array.new
+    #TODO: Currently this picks  up inactive sites
     Site.active.each do |site|
       if site.sessions.each do |session|
-        if session.session_type_id == group_type
-          sites << [site.name, site.id]
+        if session.session_type_id == group_type.to_i
+          sites.push(site)
         end
       end
       end
     end
-  sites.uniq
+    sites.uniq
 
+  end
+
+  def self.sites_for_group_type_senior
+    group_type = SessionType.find_by_name("Summer Senior High").id
+    self.sites_for_group_type(group_type)
   end
 
 

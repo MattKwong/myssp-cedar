@@ -194,7 +194,7 @@ class RegistrationController < ApplicationController
 
   def get_limit_info
     #Let Summer senior high be the default in the event that an invalid value is passed
-    if params[:value] == SessionType.find_by_name("Summer junior high")
+    if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
       @limit_text = 'You may register up to 20 persons in total. We suggest a ratio of 1 counselor for every 3 to 4 youth.'
       @limit = 20
       @site_info = "Below is a dropdown list of the sites that are hosting junior high programs this summer. When you select a site, the available weeks will appear."
@@ -206,15 +206,25 @@ class RegistrationController < ApplicationController
     render :partial => "limit_info"
   end
 
-  def get_site_info
+  def get_sites_for_group_type
     #As above, let Summer senior high be the default in the event that an invalid value is passed
-    if params[:value] == SessionType.find_by_name("Summer junior high").id
-       Site.find_
+    if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
+       @list_of_sites = Site.sites_for_group_type(params[:value])
     else
-
+       @list_of_sites = Site.sites_for_group_type_senior
     end
-    render :partial => "limit_info"
+
+    render :partial => "site_selector"
   end
+
+  def get_sessions_for_type_and_site
+    @list_of_sessions = Array.new
+    sessions = Session.by_session_type_and_site(params[:value],params[:site] )
+    sessions.each { |s| @list_of_sessions << s.period}
+
+    render :partial => "session_selector"
+  end
+
 
   private
 

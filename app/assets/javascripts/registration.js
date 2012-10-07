@@ -43,13 +43,15 @@ $(document).ready(function() {
         $(this).addClass('hover');
     });
 });
-var mystuff = {site_text: "<%=escape_javascript(@site_info"}
+
 $(document).ready(function() {
     $('#submit_second img').click(function(){
-
+//        alert($("input[name=group_type]:checked").val())
         //ajax call to get group limits and appropriate text
-        $.get("get_limit_info?value="+ $("input[name=group_type]").val(),
-            function(data){ $("#limit_info").html(data);}
+        $.get("get_limit_info?value="+ $("input[name=group_type]:checked").val(),
+            function(data){ $("#limit_info").html(data)
+//                , alert(parseInt($("input[name=group_limit]").val()))
+            ;}
 
         );
         //update progress bar
@@ -61,12 +63,6 @@ $(document).ready(function() {
     });
 });
 
-//$(document).ready(function() {
-//    $("input[name='group_type']").change(function() {
-//        group_type = $("input[name='group_type']").val()
-//        alert(group_type)
-//    });
-//});
 
 $(document).ready(function() {
     $("#submit_third img").hover(function() {
@@ -78,8 +74,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#submit_third img').click(function(){
         //ajax call to get sites that are hosting group_type of groups
-        $.get("get_site_info?value="+ $("input[name=group_type]").val(),
-            function(data){ $("#site_info").html(data);} )
+        $.get("get_sites_for_group_type?value="+ $("input[name=group_type]:checked").val(),
+            function(data){ $("#site_selector").html(data);} )
 
         //update progress bar
         $('#progress_text').html('37.5% Complete');
@@ -105,7 +101,9 @@ $(document).ready(function() {
     );
 });
 $(document).ready(function() {
-    $("#site_site_id").change(function(){
-        $('#session_select ').css('display', "table-row");}
+    $("#site_selector").change(function(){
+            $.get("get_sessions_for_type_and_site?value="+ $("input[name=group_type]:checked").val() + "&site="+ $("#site_selector_site_id").val(),
+                function(data){ $("#session_selector").html(data);},
+        alert($("#site_selector_site_id").val()));}
     );
 });
