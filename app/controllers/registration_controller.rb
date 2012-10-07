@@ -12,35 +12,40 @@ class RegistrationController < ApplicationController
     @periods_available = Period.all
   end
 
+
+
+  def create
+    #@liaison = Liaison.find(params[:id])
+      render 'new'
+  end
+  #this is the old create method
+  #def create       #triggered by register view
+  #  @registration = Registration.new(params[:registration])
+  #  authorize! :create, @registration
+  #  if (@registration.valid?)
+  #    @registration.save!
+  #    flash[:notice] = "Successful completion of Step 1!"
+  #    redirect_to edit_registration_path(:id => @registration.id)
+  #  else
+  #    @liaisons = Liaison.all.map { |l| [l.name, l.id ] }
+  #    @group_types = SessionType.all.map { |s| [s.name, s.id ] }
+  #    @title = "Register A Group"
+  #    render "register"
+  #  end
+  #end
   def index
     @title = "Manage Groups"
   end
 
   def register                #prior to display of register view
-      @registration = Registration.new
-      authorize! :create, @registration
-      @liaisons = Liaison.all.map { |l| [l.name, l.id ]}
-      @group_types = SessionType.all.map { |s| [s.name, s.id ]}
-      @title = "Register A Group"
-      @page_title = "Register A Group"
-      render "register"
-  end
-
-  def create       #triggered by register view
-    @registration = Registration.new(params[:registration])
+    @registration = Registration.new
     authorize! :create, @registration
-    if (@registration.valid?)
-      @registration.save!
-      flash[:notice] = "Successful completion of Step 1!"
-      redirect_to edit_registration_path(:id => @registration.id)
-    else
-      @liaisons = Liaison.all.map { |l| [l.name, l.id ] }
-      @group_types = SessionType.all.map { |s| [s.name, s.id ] }
-      @title = "Register A Group"
-      render "register"
-    end
+    @liaisons = Liaison.all.map { |l| [l.name, l.id ]}
+    @group_types = SessionType.all.map { |s| [s.name, s.id ]}
+    @title = "Register A Group"
+    @page_title = "Register A Group"
+    render "register"
   end
-
   def edit              #prior to /:id/edit view
     @registration = Registration.find(params[:id])
     authorize! :edit, @registration
@@ -186,6 +191,31 @@ class RegistrationController < ApplicationController
     @session_site = Site.find(session.site_id).name
   end
 
+
+  def get_limit_info
+    #Let Summer senior high be the default in the event that an invalid value is passed
+    if params[:value] == SessionType.find_by_name("Summer junior high")
+      @limit_text = 'You may register up to 20 persons in total. We suggest a ratio of 1 counselor for every 3 to 4 youth.'
+      @limit = 20
+      @site_info = "Below is a dropdown list of the sites that are hosting junior high programs this summer. When you select a site, the available weeks will appear."
+    else
+      @limit_text = 'You may register up to 30 persons in total. We suggest a ratio of 1 counselor for every 4 to 5 youth.'
+      @site_info = "Below is a dropdown list of the sites that are hosting senior high programs this summer. When you select a site, the available weeks will appear."
+      @limit = 30
+    end
+    render :partial => "limit_info"
+  end
+
+  def get_site_info
+    #As above, let Summer senior high be the default in the event that an invalid value is passed
+    if params[:value] == SessionType.find_by_name("Summer junior high").id
+       Site.find_
+    else
+
+    end
+    render :partial => "limit_info"
+  end
+
   private
 
   def build_schedule(reg_or_sched, type)
@@ -293,5 +323,7 @@ class RegistrationController < ApplicationController
                   :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
                   :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type}
   end
+
+
  end
 

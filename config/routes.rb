@@ -60,6 +60,10 @@ Spoic3::Application.routes.draw do
   match 'programs/:id/get_sessions_info', :to => 'programs#get_sessions_items'
   match 'programs/:id/get_staff_info', :to => 'programs#get_staff_items'
 
+
+#Routes for registration jquery calls
+  match 'registration/get_limit_info', :to => 'registration#get_limit_info'
+
   match "items/new", :to => 'items#new', :as => 'add_item'
   resources :vendors #, :only => [:index]
   resources :purchases, :only => [:index]

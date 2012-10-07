@@ -43,4 +43,19 @@ class Site < ActiveRecord::Base
                       :message => 'Please enter phone numbers in the 123-456-7890 format.'
   validates :listing_priority, :numericality => true
 
+  def self.sites_for_group_type(group_type)
+    sites = Array.new
+    Site.active.each do |site|
+      if site.sessions.each do |session|
+        if session.session_type_id == group_type
+          sites << [site.name, site.id]
+        end
+      end
+      end
+    end
+  sites.uniq
+
+  end
+
+
 end
