@@ -125,7 +125,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
             bottom: -20px;
             /*left: 650px;*/
         }
-        img.next_button {
+        .next_button {
             float: right;
         }
         img.cancel_button {

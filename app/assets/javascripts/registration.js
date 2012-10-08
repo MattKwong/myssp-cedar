@@ -26,13 +26,13 @@ $('#progress_text').html('0% Complete');
 //$(document).ready('form').submit(function(){ return false; });
 
 $(document).ready(function() {
-    $("#submit_first img").hover(function() {
+    $("#submit_first").hover(function() {
         $(this).addClass('hover');
     });
 });
 
 $(document).ready(function() {
-    $('#submit_first img').click(function(){
+    $('#submit_first').click(function(){
 
         //update progress bar
         $('#progress_text').html('14% Complete');
@@ -42,21 +42,25 @@ $(document).ready(function() {
         $('#second_step').slideDown();
     });
 });
+
+// Second step routines
 $(document).ready(function() {
-    $("#submit_second img").hover(function() {
+    $("#submit_second").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#back_second").hover(function() {
         $(this).addClass('hover');
     });
 });
 
 $(document).ready(function() {
-    $('#submit_second img').click(function(){
+    $('#submit_second').click(function(){
 //        alert($("input[name=group_type]:checked").val())
         //ajax call to get group limits and appropriate text
         $.get("get_limit_info?value="+ $("input[name=group_type]:checked").val(),
             function(data){ $("#limit_info").html(data);} );
-
-
-
         //update progress bar
         $('#progress_text').html('28% Complete');
         $('#progress').css('width','100px');
@@ -65,17 +69,32 @@ $(document).ready(function() {
         $('#third_step').slideDown();
     });
 });
+$(document).ready(function() {
+    $('#back_second').click(function(){
+        //update progress bar
+        $('#progress_text').html('0% Complete');
+        $('#progress').css('width','0px');
+        //slide steps
+        $('#second_step').slideUp();
+        $('#first_step').slideDown();
+    });
+});
 
 
 $(document).ready(function() {
-    $("#submit_third img").hover(function() {
+    $("#submit_third").hover(function() {
         $(this).addClass('hover');
     });
-
 });
 
 $(document).ready(function() {
-    $('#submit_third img').click(function(){
+    $("#back_third").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $('#submit_third').click(function(){
         //ajax call to get sites that are hosting group_type of groups
         $.get("get_sites_for_group_type?value="+ $("input[name=group_type]:checked").val(),
             function(data){ $("#site_selector").html(data);} );
@@ -90,6 +109,16 @@ $(document).ready(function() {
         //slide steps
         $('#third_step').slideUp();
         $('#fourth_step').slideDown();
+    });
+});
+$(document).ready(function() {
+    $('#back_third').click(function(){
+        //update progress bar
+        $('#progress_text').html('14% Complete');
+        $('#progress').css('width','50px');
+        //slide steps
+        $('#third_step').slideUp();
+        $('#second_step').slideDown();
     });
 });
 
@@ -116,10 +145,8 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#submit_fourth img').click(function(){
+    $('#submit_fourth').click(function(){
 
-
-//This code actually belows in step 5
         //create the registration request table to append to the existing table
         site_choice = $("input[name=site_name]").val();
         week_choice = $("input[name=week_name]").val();
@@ -135,7 +162,28 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#submit_fifth img').click(function(){
+    $("#submit_fourth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#back_fourth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $('#back_fourth').click(function(){
+        //update progress bar
+        $('#progress_text').html('28% Complete');
+        $('#progress').css('width','100px');
+        //slide steps
+        $('#fourth_step').slideUp();
+        $('#third_step').slideDown();
+    });
+});
+
+$(document).ready(function() {
+    $('#submit_fifth').click(function(){
 
         table_html = '' ;
         table_html += "<tr><td>Group Type</td><td>";
@@ -168,8 +216,47 @@ $(document).ready(function() {
     });
 });
 
+
 $(document).ready(function() {
-    $('#submit_sixth img').click(function(){
+    $("#submit_fifth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $("#back_fifth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $('#back_fifth').click(function(){
+        //update progress bar
+        $('#progress_text').html('48% Complete');
+        $('#progress').css('width','250px');
+        //slide steps
+        $('#fifth_step').slideUp();
+        $('#fourth_step').slideDown();
+    });
+});
+$(document).ready(function() {
+    $("#back_sixth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $('#back_sixth').click(function(){
+        //update progress bar
+        $('#progress_text').html('60% Complete');
+        $('#progress').css('width','200px');
+        //slide steps
+        $('#sixth_step').slideUp();
+        $('#fifth_step').slideDown();
+    });
+});
+
+
+$(document).ready(function() {
+    $('#submit_sixth').click(function(){
 
         //update progress bar
         $('#progress_text').html('86% Complete');
@@ -182,7 +269,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $('#submit_seventh img').click(function(){
+    $('#submit_seventh').click(function(){
 
         table_html += "<tr><td>Amount paid</td><td>";
         table_html += amount_paid;
