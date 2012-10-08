@@ -36,7 +36,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
     #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step, #seventh_step, #eighth_step {
         display: none;
     }
-    #reg_container #second_step { display: block; }
+    #reg_container #first_step { display: block; }
 
     #reg_container .form { margin: 66px 72px 0 72px;}
 
@@ -106,7 +106,15 @@ input[type="submit"]:focus, input[type="button"]:focus {
         -moz-border-radius: 6px;
         -webkit-border-radius: 6px;
     }
+        .button_container {
+            width: 754px;
+            height: 50px;
+            margin: 20px auto;
+            padding: 50px 0;
+            overflow: hidden;
+            position: relative;
 
+        }
         .reg_buttons {
             background: url("button.png") no-repeat;
             border: none;
@@ -115,9 +123,19 @@ input[type="submit"]:focus, input[type="button"]:focus {
             height: 38px;
             position: relative;
             bottom: -20px;
-            left: 650px;
+            /*left: 650px;*/
         }
-            #reg_container input.submit.focus { border: none;}
+        img.next_button {
+            float: right;
+        }
+        img.cancel_button {
+
+        }
+        img.back_button {
+            float: left;
+        }
+
+        #reg_container input.submit.focus { border: none;}
 
         #reg_container input.send{ background: url("send.png");}
 
@@ -144,17 +162,17 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
     #progress_bar {
         background: url("progress_bar.png") no-repeat;
-        width: 399px;
+        width: 350px;
         height: 24px;
         margin: 0 auto;
         position: relative;
     }
 
     #progress {
-        background: url("progress.png") repeat-x;
+        /*background: url("progress.png") repeat-x;*/
         width: 0px;
         height: 23px;
-
+        background-color:green;
         border-radius: 20px;
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
@@ -165,8 +183,8 @@ input[type="submit"]:focus, input[type="button"]:focus {
         line-height: 21px;
         text-align: center;
         font-weight: bold;
-        color: green;
-        width: 339;
+        color: black;
+        width: 350;
         height: 24px;
         top: -20px;
         left: 0;

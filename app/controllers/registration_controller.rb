@@ -197,12 +197,15 @@ class RegistrationController < ApplicationController
     if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
       @limit_text = 'You may register up to 20 persons in total. We suggest a ratio of 1 counselor for every 3 to 4 youth.'
       @limit = 20
-      @site_info = "Below is a dropdown list of the sites that are hosting junior high programs this summer. When you select a site, the available weeks will appear."
+      @site_text = "Below is a dropdown list of the sites that are hosting junior high programs this summer. When you select a site, the available weeks will appear."
+      @group_type_name =  "Summer Junior High"
     else
       @limit_text = 'You may register up to 30 persons in total. We suggest a ratio of 1 counselor for every 4 to 5 youth.'
-      @site_info = "Below is a dropdown list of the sites that are hosting senior high programs this summer. When you select a site, the available weeks will appear."
+      @site_text = "Below is a dropdown list of the sites that are hosting senior high programs this summer. When you select a site, the available weeks will appear."
       @limit = 30
+      @group_type_name =  "Summer Junior High"
     end
+
     render :partial => "limit_info"
   end
 
@@ -221,7 +224,7 @@ class RegistrationController < ApplicationController
     @list_of_sessions = Array.new
     sessions = Session.by_session_type_and_site(params[:value],params[:site] )
     sessions.each { |s| @list_of_sessions << s.period}
-
+    @site_name = Site.find(params[:site]).name
     render :partial => "session_selector"
   end
 

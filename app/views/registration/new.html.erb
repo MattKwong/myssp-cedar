@@ -1,7 +1,9 @@
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "#" %></h4>
-        <p>This online system has been set up for your convenience. If you run into problems, don't hesitate to pick up the phone and call Meghan at 916-488-6441 during normal business hours. Alternatively, send her an email at meghan.osborn@sierraserviceproject.org.</p>
+        <h4>This online system has been set up for your convenience. If you run into problems, don't hesitate to pick up the phone and call Meghan at 916-488-6441 during normal business hours. Alternatively, send her an email at meghan.osborn@sierraserviceproject.org.</h4>
+        <h4>Throughout this process, don't use the back arrow on your browser! If you want to back up and change something
+        that you have already input, use the 'back' button below instead.</h4>
         <div id='reg_container'>
           <!--<form action="#" method="post">-->
           <%=  form_for @registration do |r| %>
@@ -23,8 +25,10 @@
                     </table>
                 </div>
               <div class="clear"></div>
-              <div class="reg_buttons" id="submit_first">
-                  <img width="85" height="38" src="/assets/button.png" alt="Next">
+              <div class="button_container">
+                  <img class="reg_button next_button" id="submit_first" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
+                  <img class="reg button cancel_button" id="cancel_first" width="85" height="38" src="/assets/button.png" alt="Next" title="Cancel and return to liaison page">
+                  <img class="reb_button back_button" id="back_first" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
               </div>
             </div>
 
@@ -100,52 +104,110 @@
 
             <div id="fifth_step">
               <h1>Step 5: Select Additional Choices</h1>
-              <p>We strongly urge you to select at least two alternative site/session combinations. Although we do are absolute best to schedule
-              you at your first choice site and week, due to the popularity of certain times and locations, it is always possible. Please give us
-              at least two other choices!</p>
-              <tr>
-                <td><%= r.label "Site" %></td>
-                <td id="alt_site_selection"><%= select 'site', 'site_id', Site.all.collect {|s| [s.name, s.id]}, {:include_blank => false} %></td>
-              </tr>
-              <tr>
-                <td><%= r.label "Session" %></td>
-                <!--<td id="session_selection"><%= select "Session", "session_id", Session.find_all_by_site_id_and_session_type_id(1, 1).collect {|s| [s.period.name, s.id]}, {:include_blank => false} %></td>-->
-                <td id="alt_session_selection"><%= select "Session", "session_id", Session.where('site_id = ? AND session_type_id = ?', 5, 2).collect {|s| [s.period.name, s.id]}, {:include_blank => false} %></td>
-              </tr>
-              <input class="submit" type="submit" name="submit_fourth" id="submit_fifth" value="" label='Submit'/>
-              <!--<input class="submit" type="submit" name="back_fourth" id="back_fifth" value="" abel/>-->
-              <!--<input class="submit" type="submit" name="cancel_fourth" id="cancel_fifth" value="" />-->
+              <div class="form">
+                  <p>We strongly urge you to select at least two alternative site/session combinations. Although we do are absolute best to schedule
+                  you at your first choice site and week, due to the popularity of certain times and locations, it is always possible. Please give us
+                  at least two other choices!</p>
+
+                <div id='alt_site_info'></div>
+                <table>
+
+                  <tr>
+                    <td><%= r.label "Site" %></td>
+                    <td id="alt_site_selector"></td>
+                  </tr>
+                  <tr id="alt_session_select"  >
+                    <td><%= r.label "Session" %></td>
+                    <td id="alt_session_selector"></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="clear"></div>
+              <div class="reg_buttons" id="submit_fifth">
+                <img width="85" height="38" src="/assets/button.png" alt="Next">
+              </div>
+            </div>
+              <div class="clear"></div>
+
+
+              <div id="sixth_step">
+              <h1>Step 6: Confirm Registration</h1>
+                <div class="form">
+                  <p>Please review this information for accuracy. Use the 'back' button if you want to change anything
+                    before submitting. Once you press the 'Send' button, your group will be registered.  You must proceed
+                  to the next page to make your deposit payment.</p>
+                  <table id="registration_request_table">
+                    <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                    <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                    <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                    <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                    <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                    <tr></tr>
+                    <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                    <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                    <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    <tr></tr>
+                  </table>
+                </div>
+              <div class="clear"></div>
+              <div class="reg_buttons" id="submit_sixth">
+                <img width="85" height="38" src="/assets/send.png" alt="Next">
+              </div>
             </div>
             <div class="clear"></div>
 
-            <div id="sixth_step">
-              <h1>Step 6: Confirm Registration</h1>
-              <p>Please review this information for accuracy. Use the 'back' button if you want to change anything before submitting.</p>
-              <table class= 'registration_table' id="registration_request_table">
-                <tr><td>Youth</td><td><%= @registration.requested_youth%></td></tr>
-                <tr><td>Adults</td><td><%= @registration.requested_counselors %></td></tr>
-                <tr><td>Total</td><td><%=  %></td></tr>
-                <tr><td>First Choice</td><td><%= "Site: #{} Week: #{}" %></td></tr>
-<!--Need to know the number of choices and iterate through each-->
-                <input class="submit" type="submit" name="submit_fourth" id="submit_sixth" value="" />
-                <!--<input class="submit" type="submit" name="back_fourth" id="back_sixth" value="" />-->
-                <!--<input class="submit" type="submit" name="cancel_fourth" id="cancel_sixth" value="" />-->
-              </table>
-            </div>
-            <div class="clear"></div>
 
             <div id="seventh_step">
               <h1>Step 7: Make Payment</h1>
+              <div class="form">
+                  <h4>You have two options for making your deposit payment.</h4>
+                  <h4>You may proceed to SSP's secure payment gateway and use a credit or debit
+                    card to complete your deposit payment.</h4>
+                <h4>Option two is to mail a check to the SSP office. Please include a copy of your confirming
+                  email with this check. Payment must be received promptly; otherwise, your registration may
+                  be cancelled.</h4>
+              </div>
+              <div class="clear"></div>
+              <div class="reg_buttons" id="submit_seventh">
+                <img width="85" height="38" src="/assets/button.png" alt="Next">
+              </div>
             </div>
+            <div class="clear"></div>
+
             <div id="eighth_step">
               <h1>Step 8: Registration Complete!</h1>
+              <div class="form">
+                <p>Congratulations. You have successfully completed your group's registration. Please print
+                  a copy of this screen for your records.  You will shortly receive an email confirmation. If
+                  you have any questions, don't hesitate to call Meghan Osborn at 916-488-6441.</p>
+                  <table id="final_registration_table">
+                    <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                    <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                    <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                    <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                    <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                    <tr></tr>
+                    <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                    <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                    <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    <tr></tr>
+                  </table>
+                <div class="clear"></div>
+              </div>
+                  <div class="reg_buttons" id="submit_eight">
+                    <img width="85" height="38" src="/assets/button.png" alt="Next">
+                  </div>
+
+            </div>
+            <div class="clear"></div>
+
             </div>
           <!--</form>-->
-          <% end %>
+        <% end %>
         </div>
         <div id="progress_bar">
           <div id="progress"></div>
           <div id="progress_text">0% Complete</div>
         </div>
-    </div>
 </div>
+
