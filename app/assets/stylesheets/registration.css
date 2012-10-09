@@ -33,7 +33,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
     position: relative;
 }
 
-    #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step, #seventh_step, #eighth_step {
+    #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step, #seventh_step, #eighth_step , #ninth_step {
         display: none;
     }
     #reg_container #first_step { display: block; }
@@ -144,6 +144,14 @@ input[type="submit"]:focus, input[type="button"]:focus {
         img.back_button {
             float: left;
             background: url("back.png") no-repeat;
+        }
+        img.add_choice_button {
+            float: right;
+            background: url("addchoice.png") no-repeat;
+        }
+        img.no_more_choices_button {
+            float: right;
+            background: url("nomorechoices.png") no-repeat;
         }
 
         #reg_container input.submit.focus { border: none;}

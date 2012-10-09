@@ -1,4 +1,4 @@
-
+var liaison_id
 var group_type;
 var group_type_name;
 var requested_youth = 0;
@@ -12,6 +12,7 @@ var number_of_choices;
 var amount_paid;
 var payment_tracking_number;
 var table_html;
+var comments;
 var info_table;
 var enrollment_html;
 var choice_html;
@@ -39,7 +40,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_first').click(function(){
-
+        liaison_id = $("td#liaison_id").text();
         //update progress bar
         $('#progress_text').html('14% Complete');
         $('#progress').css('width','50px');
@@ -74,7 +75,7 @@ $(document).ready(function() {
         info_table+= "<tr><td>Group Type</td><td>";
         info_table += group_type_name;
         info_table += "</td></tr>";
-        $("#info_table_third").html(info_table);
+//        $("#info_table_third").html(info_table);
 
         //update progress bar
 
@@ -116,11 +117,13 @@ $(document).ready(function() {
             function(data){ $("#site_selector").html(data);} );
 
         $('#site_info').html($('input[name=site_text]').val());
-        enrollment_html = '';
-        enrollment_html+= "<tr><td>Total Requested</td><td>";
-        enrollment_html += total_requested;
-        enrollment_html += "</td></tr>";
-        $("#info_table_fourth").html(info_table + enrollment_html);
+//        enrollment_html = '';
+//        enrollment_html+= "<tr><td>Total Requested</td><td>";
+//        enrollment_html += total_requested;
+//        enrollment_html += "</td></tr>";
+//        $("#info_table_fourth").html(info_table + enrollment_html);
+        group_type_name = $("input[name=group_type_name]").val();
+
         //update progress bar
         $('#progress_text').html('44% Complete');
         $('#progress').css('width','150px');
@@ -179,11 +182,11 @@ $(document).ready(function() {
             ,
             function(data){ $("#alt_site_selector").html(data);}
         );
-        choice_html = '';
-        choice_html+= "<tr><td>Choice 1:</td><td>";
-//        choice_html += $("input[name=session_choices_names]").val().split('/')[0];
-        choice_html += "</td></tr>";
-        $("#info_table_fifth").html(info_table + enrollment_html + choice_html);
+//        choice_html = '';
+//        choice_html+= "<tr><td>Choice 1:</td><td>";
+////        choice_html += $("input[name=session_choices_names]").val().split('/')[0];
+//        choice_html += "</td></tr>";
+//        $("#info_table_fifth").html(info_table + enrollment_html + choice_html);
         //update progress bar
         $('#progress_text').html('60% Complete');
         $('#progress').css('width','200px');
@@ -234,9 +237,6 @@ $(document).ready(function() {
 
         session_choices= $("input[name=session_choices]").val();
         session_choices_names = $("input[name=session_choices_names]").val();
-
-        // We need to see if there has been a selection made. If so, we won't slide to next screen
-        // Instead we will save the choice and re-show step 5
         number_of_choices++;
         site_choice = $("#alt_site_selector_site_id").val();
 //        alert(site_choice);
@@ -244,7 +244,7 @@ $(document).ready(function() {
 //        week_choice[0] = $("input[name=week_name]").val();
         week_choice = $("#alt_session_selector_session_id").val();
 
-        alert(number_of_choices)
+
         //get and show the remaining site choices
         //also returns selection array to hidden field
         $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
@@ -263,35 +263,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_fifth').click(function(){
-    //Pull session_choices_names from html
-        session_choices= $("input[name=session_choices]").val().split('/');
-        session_choices_names = $("input[name=session_choices_names]").val().split('/');
-        table_html = '' ;
-        table_html += "<tr><td>Group Type</td><td>";
-        table_html += group_type_name;
-        table_html += "</td></tr>";
-        table_html += "<tr><td>Youth</td><td>";
-        table_html += requested_youth;
-        table_html += "</td></tr>";
-        table_html += "<tr><td>Counselors</td><td>";
-        table_html += requested_adults;
-        table_html += "</td></tr>";
-        table_html += "<tr><td>Total</td><td>";
-        table_html += total_requested;
-        table_html += "</td></tr>";
-        table_html += "<tr><td>Choice 1</td><td>";
-        table_html += session_choices_names[0];
-        table_html += "</td></tr>";
-        table_html += "<tr><td>Choice 2</td><td>";
-        table_html += session_choices_names[1];
-        table_html += "</td></tr>";
-
-        $('#request_info_table').html(table_html)
-
-        //update progress bar
+    //update progress bar
         $('#progress_text').html('74% Complete');
         $('#progress').css('width','250px');
-//        slide steps
+    // slide steps
         $('#fifth_step').slideUp();
         $('#sixth_step').slideDown();
     });
@@ -300,6 +275,11 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $("#submit_fifth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#add_choice").hover(function() {
         $(this).addClass('hover');
     });
 });
@@ -324,8 +304,10 @@ $(document).ready(function() {
         $(this).addClass('hover');
     });
 });
+
 $(document).ready(function() {
     $('#back_sixth').click(function(){
+
         //update progress bar
         $('#progress_text').html('60% Complete');
         $('#progress').css('width','200px');
@@ -338,7 +320,33 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_sixth').click(function(){
-
+        comments = $("textarea#registration_comments").val()
+        session_choices= $("input[name=session_choices]").val().split('/');
+        session_choices_names = $("input[name=session_choices_names]").val().split('/');
+        table_html = '' ;
+        table_html += "<tr><td>Group Type</td><td>";
+        table_html += group_type_name;
+        table_html += "</td></tr>";
+        table_html += "<tr><td>Youth</td><td>";
+        table_html += requested_youth;
+        table_html += "</td></tr>";
+        table_html += "<tr><td>Counselors</td><td>";
+        table_html += requested_adults;
+        table_html += "</td></tr>";
+        table_html += "<tr><td>Total</td><td>";
+        table_html += total_requested;
+        table_html += "</td></tr>";
+        $.each(session_choices_names, function(index, value) {
+            table_html += "<tr><td>Choice "
+            table_html += index + 1;
+            table_html += "</td><td>"
+            table_html += value;
+            table_html += "</td></tr>";
+        });
+        table_html += "<tr><td>Special Comments</td><td>";
+        table_html += comments;
+        table_html += "</td></tr>";
+        $('#request_info_table').html(table_html)
         //update progress bar
         $('#progress_text').html('86% Complete');
         $('#progress').css('width','300px');
@@ -348,9 +356,45 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $("#back_seventh").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#submit_seventh").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $('#back_seventh').click(function(){
+        //update progress bar
+        $('#progress_text').html('60% Complete');
+        $('#progress').css('width','200px');
+        //slide steps
+        $('#seventh_step').slideUp();
+        $('#sixth_step').slideDown();
+    });
+});
+
 
 $(document).ready(function() {
     $('#submit_seventh').click(function(){
+        //Send the data to the server and create the new registration record
+        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
+            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
+            + requested_adults + "&liaison_id=" + liaison_id );
+        //update progress bar
+        $('#progress_text').html('86% Complete');
+        $('#progress').css('width','300px');
+        //slide steps
+        $('#seventh_step').slideUp();
+        $('#eighth_step').slideDown();
+    });
+});
+
+$(document).ready(function() {
+    $('#submit_eighth').click(function(){
 
         table_html += "<tr><td>Amount paid</td><td>";
         table_html += amount_paid;
@@ -366,7 +410,7 @@ $(document).ready(function() {
         $('#progress_text').html('100% Complete');
         $('#progress').css('width','350px');
         //slide steps
-        $('#seventh_step').slideUp();
-        $('#eighth_step').slideDown();
+        $('#eighth_step').slideUp();
+        $('#ninth_step').slideDown();
     });
 });

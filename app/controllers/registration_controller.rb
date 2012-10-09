@@ -15,8 +15,10 @@ class RegistrationController < ApplicationController
 
 
   def create
+    #@registration=Registration.new
+    #@registration.liaison_id = params[:id]
     #@liaison = Liaison.find(params[:id])
-      render 'new'
+    render 'new'
   end
   #this is the old create method
   #def create       #triggered by register view
@@ -273,6 +275,36 @@ class RegistrationController < ApplicationController
     sessions.each { |s| @list_of_sessions << s.period}
     @site_name = Site.find(params[:site]).name
     render :partial => "alt_session_selector"
+  end
+
+  def save_registration_data
+    @registration = Registration.new
+    session_choices = params[:session_choices].split(',')
+    liaison = Liaison.find(params[:liaison_id])
+    logger.debug liaison.inspect
+    logger.debug session_choices.inspect
+    @registration.church_id = liaison.church_id
+    @registration.comments = params[:comments]
+    @registration.comments = params[:comments]
+    @registration.group_type_id = params[:group_type]
+    @registration.liaison_id = liaison.id
+    @registration.name = "#{liaison.church.name} #{SessionType.find(params[:group_type]).name}"
+
+    @registration.request1 = session_choices[0]
+    @registration.requested_counselors = params[:requested_adults].to_i
+    @registration.requested_youth = params[:requested_youth].to_i
+    @registration.requested_total = params[:requested_youth].to_i + params[:requested_adults].to_i
+    @registration.scheduled = false
+    if @registration.save
+      @registration_saved = true
+      @message = "Save of registration request successful."
+      @registration_id = @registration.id
+    else
+      @registration_saved = false
+      @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."
+    end
+    render :partial => "save_registration_data"
+
   end
 
 

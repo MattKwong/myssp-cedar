@@ -66,6 +66,7 @@ Spoic3::Application.routes.draw do
   match 'registration/get_alt_sites_for_group_type', :to => 'registration#get_alt_sites_for_group_type'
   match 'registration/get_sessions_for_type_and_site', :to => 'registration#get_sessions_for_type_and_site'
   match 'registration/get_alt_sessions_for_type_site', :to => 'registration#get_alt_sessions_for_type_site'
+  match 'registration/save_registration_data', :to => 'registration#save_registration_data'
 
   match "items/new", :to => 'items#new', :as => 'add_item'
   resources :vendors #, :only => [:index]

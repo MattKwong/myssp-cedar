@@ -58,28 +58,28 @@ class Registration < ActiveRecord::Base
 
  #TODO: Test that the requested totals don't exceed the limit which is currently 30'
 
-  with_options :if => :step2? do |registration|
-    registration.validates_presence_of :request1
-    registration.validates_numericality_of :request1, :only_integer => true, :greater_than_or_equal_to  => 1, :message => "must be valid request"
-    registration.validate :request_sequence, :message => "All requests must be made in order."
-    registration.validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
-  end
-
-  with_options :if => :step3? do |registration|
-    registration.validates_presence_of :amount_paid, :payment_method
-    registration.validates_numericality_of :amount_paid, :greater_than_or_equal_to  => 1
-  end
-
-  private
-  def step1?
-    registration_step == 'Step 1'
-  end
-  def step2?
-    registration_step == 'Step 2'
-  end
-  def step3?
-    registration_step == 'Step 3'
-  end
+  #with_options :if => :step2? do |registration|
+  #  registration.validates_presence_of :request1
+  #  registration.validates_numericality_of :request1, :only_integer => true, :greater_than_or_equal_to  => 1, :message => "must be valid request"
+  #  registration.validate :request_sequence, :message => "All requests must be made in order."
+  #  registration.validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
+  #end
+  #
+  #with_options :if => :step3? do |registration|
+  #  registration.validates_presence_of :amount_paid, :payment_method
+  #  registration.validates_numericality_of :amount_paid, :greater_than_or_equal_to  => 1
+  #end
+  #
+  #private
+  #def step1?
+  #  registration_step == 'Step 1'
+  #end
+  #def step2?
+  #  registration_step == 'Step 2'
+  #end
+  #def step3?
+  #  registration_step == 'Step 3'
+  #end
   def request_sequence
   #This routine fails if there are any non-requests within the sequence of requests.
   a = [request1, request2, request3, request4, request5, request6, request7,
