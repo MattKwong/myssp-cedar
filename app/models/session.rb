@@ -29,7 +29,7 @@ class Session < ActiveRecord::Base
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
-  #scope :active, lambda { joins(:program).where("programs.active = ?", 't') }
+  scope :active, lambda { joins(:program).where("programs.active = ?", 't') }
 
   def session_type_junior_high?
     if session_type.name == 'Summer Junior High'
@@ -161,4 +161,34 @@ class Session < ActiveRecord::Base
 
   end
 
+  def self.sites_for_group_type(group_type)
+    sites = Array.new
+
+    sessions = Session.find_all_by_session_type_id(group_type)
+    sessions.each {|s| sites.push(s.site) }
+
+    #Remove already selected sites
+
+    #logger.debug sites.uniq
+    sites.uniq
+
+  end
+
+  def self.alt_sites_for_group_type(group_type, session_selections)
+    sites = Array.new
+
+    sessions = Session.find_all_by_session_type_id(group_type)
+    sessions.each {|s| sites.push(s.site) }
+    logger.debug session_selections.inspect
+    #Remove already selected sites
+
+    #logger.debug sites.uniq
+    sites.uniq
+
+  end
+
+  def self.sites_for_group_type_senior
+    group_type = SessionType.find_by_name("Summer Senior High").id
+    self.sites_for_group_type(group_type)
+  end
 end

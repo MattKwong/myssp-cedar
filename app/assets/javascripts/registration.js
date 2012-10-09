@@ -4,11 +4,17 @@ var group_type_name;
 var requested_youth = 0;
 var requested_adults = 0;
 var total_requested = 0;
-var site_choice;
-var week_choice;
+var site_choice=[];
+var week_choice=[];
+var session_choices=[0,0,0,0,0,0,0,0,0,0];
+var session_choices_names=['','','','','','','','','',''];
+var number_of_choices;
 var amount_paid;
 var payment_tracking_number;
 var table_html;
+var info_table;
+var enrollment_html;
+var choice_html;
 
 ////inputfocus
 //$('input#username').inputfocus({ value: field_values['group_type'] });
@@ -57,11 +63,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_second').click(function(){
-//        alert($("input[name=group_type]:checked").val())
+        //save the group type
+        group_type = $("input[name=group_type]:checked").val();
+
         //ajax call to get group limits and appropriate text
-        $.get("get_limit_info?value="+ $("input[name=group_type]:checked").val(),
+        $.get("get_limit_info?value="+ group_type,
             function(data){ $("#limit_info").html(data);} );
+        group_type_name = $("input[name=group_type_name]").val();
+        info_table = '' ;
+        info_table+= "<tr><td>Group Type</td><td>";
+        info_table += group_type_name;
+        info_table += "</td></tr>";
+        $("#info_table_third").html(info_table);
+
         //update progress bar
+
         $('#progress_text').html('28% Complete');
         $('#progress').css('width','100px');
         //slide steps
@@ -96,13 +112,15 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#submit_third').click(function(){
         //ajax call to get sites that are hosting group_type of groups
-        $.get("get_sites_for_group_type?value="+ $("input[name=group_type]:checked").val(),
+        $.get("get_sites_for_group_type?value="+ group_type,
             function(data){ $("#site_selector").html(data);} );
 
         $('#site_info').html($('input[name=site_text]').val());
-        //save the group type
-        group_type_name = $("input[name=group_type_name]").val();
-
+        enrollment_html = '';
+        enrollment_html+= "<tr><td>Total Requested</td><td>";
+        enrollment_html += total_requested;
+        enrollment_html += "</td></tr>";
+        $("#info_table_fourth").html(info_table + enrollment_html);
         //update progress bar
         $('#progress_text').html('44% Complete');
         $('#progress').css('width','150px');
@@ -138,7 +156,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $("#site_selector").change(function(){
-            $.get("get_sessions_for_type_and_site?value="+ $("input[name=group_type]:checked").val() + "&site="+ $("#site_selector_site_id").val(),
+            $.get("get_sessions_for_type_and_site?value="+ group_type + "&site="+ $("#site_selector_site_id").val(),
                 function(data){ $("#session_selector").html(data);})
         }
     );
@@ -147,11 +165,25 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#submit_fourth').click(function(){
 
-        //create the registration request table to append to the existing table
-        site_choice = $("input[name=site_name]").val();
-        week_choice = $("input[name=week_name]").val();
+        //save the choices
+        site_choice[0] = $("#site_selector_site_id").val();
+        week_choice[0] = $("#session_selector_session_id").val();
 
+        number_of_choices = 0
 
+        //get and show the remaining site choices
+        //also returns selection array to hidden field
+        $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
+            + "&session_choices_names=" + session_choices_names
+            + "&current_site=" + site_choice[0] + "&current_week=" + week_choice[0] + "&number_of_choices=" + number_of_choices
+            ,
+            function(data){ $("#alt_site_selector").html(data);}
+        );
+        choice_html = '';
+        choice_html+= "<tr><td>Choice 1:</td><td>";
+//        choice_html += $("input[name=session_choices_names]").val().split('/')[0];
+        choice_html += "</td></tr>";
+        $("#info_table_fifth").html(info_table + enrollment_html + choice_html);
         //update progress bar
         $('#progress_text').html('60% Complete');
         $('#progress').css('width','200px');
@@ -159,6 +191,21 @@ $(document).ready(function() {
         $('#fourth_step').slideUp();
         $('#fifth_step').slideDown();
     });
+});
+
+$(document).ready(function() {
+    $("#alt_site_selector").change(function(){
+            $.get("get_alt_sessions_for_type_site?value="+ group_type
+                + "&site="+ $("#site_selector_site_id").val()
+                + "&session_choices=" + session_choices
+                + "&session_choices_names=" + session_choices_names
+                + "&current_site=" + site_choice[0]
+                + "&current_week=" + week_choice[0]
+                + "&number_of_choices=" + number_of_choices
+                ,
+                function(data){ $("#alt_session_selector").html(data);})
+        }
+    );
 });
 
 $(document).ready(function() {
@@ -183,8 +230,42 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#submit_fifth').click(function(){
+    $('#add_choice').click(function(){
 
+        session_choices= $("input[name=session_choices]").val();
+        session_choices_names = $("input[name=session_choices_names]").val();
+
+        // We need to see if there has been a selection made. If so, we won't slide to next screen
+        // Instead we will save the choice and re-show step 5
+        number_of_choices++;
+        site_choice = $("#alt_site_selector_site_id").val();
+//        alert(site_choice);
+//        site_choice[0] = $("input[name=site_name]").val();
+//        week_choice[0] = $("input[name=week_name]").val();
+        week_choice = $("#alt_session_selector_session_id").val();
+
+        alert(number_of_choices)
+        //get and show the remaining site choices
+        //also returns selection array to hidden field
+        $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
+            + "&session_choices_names=" + session_choices_names
+            + "&current_site=" + site_choice + "&current_week=" + week_choice + "&number_of_choices=" + number_of_choices
+            ,
+            function(data){ $("#alt_site_selector").html(data);}
+        );
+        session_choices= $("input[name=session_choices]").val();
+        session_choices_names = $("input[name=session_choices_names]").val();
+        $('#fifth_step').slideUp();
+        $('#fifth_step').slideDown();
+    });
+});
+
+
+$(document).ready(function() {
+    $('#submit_fifth').click(function(){
+    //Pull session_choices_names from html
+        session_choices= $("input[name=session_choices]").val().split('/');
+        session_choices_names = $("input[name=session_choices_names]").val().split('/');
         table_html = '' ;
         table_html += "<tr><td>Group Type</td><td>";
         table_html += group_type_name;
@@ -198,19 +279,19 @@ $(document).ready(function() {
         table_html += "<tr><td>Total</td><td>";
         table_html += total_requested;
         table_html += "</td></tr>";
-        table_html += "<tr><td>Choice 1 Site</td><td>";
-        table_html += site_choice;
+        table_html += "<tr><td>Choice 1</td><td>";
+        table_html += session_choices_names[0];
         table_html += "</td></tr>";
-        table_html += "<tr><td>Choice 1 Week</td><td>";
-        table_html += week_choice;
+        table_html += "<tr><td>Choice 2</td><td>";
+        table_html += session_choices_names[1];
         table_html += "</td></tr>";
 
-        $('#registration_request_table').append(table_html)
+        $('#request_info_table').html(table_html)
 
         //update progress bar
         $('#progress_text').html('74% Complete');
         $('#progress').css('width','250px');
-        //slide steps
+//        slide steps
         $('#fifth_step').slideUp();
         $('#sixth_step').slideDown();
     });

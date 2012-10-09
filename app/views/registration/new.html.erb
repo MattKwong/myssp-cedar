@@ -26,8 +26,8 @@
                 </div>
               <div class="clear"></div>
               <div class="button_container">
-                  <img class="reg_button next_button" id="submit_first" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
-                  <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                  <img class="reg_button next_button" id="submit_first"  width="120" height="38" title="Go on to the next step">
+                  <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
               </div>
             </div>
 
@@ -46,9 +46,8 @@
               <div class="clear"></div>
 
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_second" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
-                <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_second" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
+                <img class="reg_button next_button" id="submit_second"  width="120" height="38" title="Go on to the next step">                <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                <img class="reg_button back_button" id="back_second" width="120" height="38" title="Go back to the previous step">
               </div>
             </div>
             <div class="clear"></div>
@@ -57,7 +56,8 @@
               <h1>Step 3: Enter Enrollment Numbers</h1>
                     <div class="form">
                         <div id='limit_info'></div>
-                   <table class='registration_table'>
+                    <table id="info_table_third" class="registration_table"></table>
+                    <table class='registration_table'>
                     <tr>
                         <td><%= r.label "Youth" %></td>
                         <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
@@ -74,10 +74,10 @@
 
               <div class="clear"></div>
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_third" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
+                <img class="reg_button next_button" id="submit_third" align="right" width="120" height="38" title="Go on to the next step">
                 </tr>
-                <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_third" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                <img class="reg_button back_button" id="back_third" width="120" height="38" title="Go back to the previous step">
               </div>
             </div>
             <div class="clear"></div>
@@ -86,13 +86,14 @@
               <h1>Step 4: Select First Choice Site and Week</h1>
               <div class="form">
                 <div id='site_info'></div>
+                <table id="info_table_fourth" class="registration_table"></table>
                 <table>
 
               <tr>
                 <td><%= r.label "Site" %></td>
                 <td id="site_selector"></td>
               </tr>
-              <tr id="session_select"  >
+              <tr >
                 <td><%= r.label "Session" %></td>
                 <td id="session_selector"></td>
               </tr>
@@ -100,9 +101,9 @@
                 </div>
                 <div class="clear"></div>
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_fourth" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
-                <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_fourth" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
+                <img class="reg_button next_button" id="submit_fourth" align="right" width="120" height="38" title="Go on to the next step">
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                <img class="reg_button back_button" id="back_fourth" width="120" height="38" title="Go back to the previous step">
               </div>
             </div>
                 <div class="clear"></div>
@@ -115,6 +116,7 @@
                   at least two other choices!</p>
 
                 <div id='alt_site_info'></div>
+                <table id="info_table_fifth" class="registration_table"></table>
                 <table>
 
                   <tr>
@@ -129,9 +131,10 @@
               </div>
               <div class="clear"></div>
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_fifth" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
-                <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_fifth" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
+                <img class="reg_button next_button" id="submit_fifth" align="right" width="120" height="38" title="Go on to the next step">
+                <img class="reg_button add_choice_button" id="add_choice" align="right" width="120" height="38" title="Add this choice">
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                <img class="reg_button back_button" id="back_fifth" width="120" height="38" title="Go back to the previous step">
               </div>
             </div>
               <div class="clear"></div>
@@ -155,12 +158,13 @@
                     <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
                     <tr></tr>
                   </table>
+                  <table id="request_info_table"></table>
                 </div>
               <div class="clear"></div>
                 <div class="button_container">
-                  <img class="reg_button next_button" id="submit_sixth" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
-                  <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
-                  <img class="reg_button back_button" id="back_sixth" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
+                  <img class="reg_button confirm_button" id="submit_sixth" align="right" width="120" height="38" title="Go on to the next step">
+                  <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                  <img class="reg_button back_button" id="back_sixth" width="120" height="38" title="Go back to the previous step">
                 </div>
               </div>
             <div class="clear"></div>
@@ -178,9 +182,9 @@
               </div>
               <div class="clear"></div>
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_seventh" align="right" width="85" height="38" src="/assets/button.png" alt="Next" title="Go on to the next step">
-                <%=  link_to image_tag("button.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_seventh" width="85" height="38" src="/assets/button.png" alt="Next" title="Go back to the previous step">
+                <img class="reg_button next_button" id="submit_seventh" align="right" width="120" height="38" title="Go on to the next step">
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
+                <img class="reg_button back_button" id="back_seventh" width="120" height="38" title="Go back to the previous step">
               </div>
             </div>
             <div class="clear"></div>
@@ -206,7 +210,7 @@
                 <div class="clear"></div>
               </div>
                   <div class="reg_buttons" id="submit_eight">
-                    <%=  link_to image_tag("button.png", :alt => "Liaison Page", :width => "85",  :height => "38"), :back, title => 'Return to liaison page' %>
+                    <%=  link_to image_tag("cancel.png", :alt => "Liaison Page", :width => "120",  :height => "38"), :back, title => 'Return to liaison page' %>
                   </div>
 
             </div>

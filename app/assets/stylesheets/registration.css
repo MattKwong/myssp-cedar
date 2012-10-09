@@ -100,7 +100,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         width: 300px;
         height: 30px;
         padding: 0 25px;
-        margin: 20px 0;
+        margin: 0px 0;
         float: left;
         border-radius: 6px;
         -moz-border-radius: 6px;
@@ -116,10 +116,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
         }
         .reg_buttons {
-            background: url("button.png") no-repeat;
+
             border: none;
             cursor: pointer;
-            width: 85px;
+            /*width: 85px;*/
             height: 38px;
             position: relative;
             bottom: -20px;
@@ -127,12 +127,23 @@ input[type="submit"]:focus, input[type="button"]:focus {
         }
         .next_button {
             float: right;
+            background: url("next.png") no-repeat;
         }
-        img.cancel_button {
-
+        .add_choice_button {
+            float: right;
+            background: url("next.png") no-repeat;
+        }
+        .confirm_button {
+            float: right;
+            background: url("confirm.png") no-repeat;
+        }
+        img.print_button {
+            float: right;
+            background: url("print.png") no-repeat;
         }
         img.back_button {
             float: left;
+            background: url("back.png") no-repeat;
         }
 
         #reg_container input.submit.focus { border: none;}
@@ -152,13 +163,22 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
     #reg_container label {
         color: #666;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: bold;
         line-height: 14px;
         float: left;
         margin: 23px -25px 10px 10px;
         width: 150px;
     }
+    /*#reg_container table label {*/
+        /*color: #666;*/
+        /*font-size: 13px;*/
+        /*font-weight: bold;*/
+        /*line-height: 14px;*/
+        /*float: left;*/
+        /*margin: 23px -25px 10px 10px;*/
+        /*width: 150px;*/
+    /*}*/
 
     #progress_bar {
         background: url("progress_bar.png") no-repeat;

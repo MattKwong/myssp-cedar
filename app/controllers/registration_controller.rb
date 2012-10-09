@@ -212,20 +212,59 @@ class RegistrationController < ApplicationController
   def get_sites_for_group_type
     #As above, let Summer senior high be the default in the event that an invalid value is passed
     if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
-       @list_of_sites = Site.sites_for_group_type(params[:value])
+       @list_of_sites = Session.sites_for_group_type(params[:value])
     else
-       @list_of_sites = Site.sites_for_group_type_senior
+       @list_of_sites = Session.sites_for_group_type_senior
     end
 
     render :partial => "site_selector"
   end
 
+  def get_alt_sites_for_group_type
+    #get the session id from current_site and current_week params
+
+    current_session = Session.find_by_site_id_and_period_id(params[:current_site], params[:current_week])
+    logger.debug current_session.inspect
+    @session_choices = params[:session_choices].split('/')
+    @session_choices[params[:number_of_choices].to_i] = current_session.id.to_s
+
+    @session_choices_names = params[:session_choices_names].split('/')
+    @session_choices_names[params[:number_of_choices].to_i] = current_session.name
+
+    #As above, let Summer senior high be the default in the event that an invalid value is passed
+    logger.debug @session_choices
+    logger.debug @session_choices_names.inspect
+
+    if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
+       @list_of_sites = Session.alt_sites_for_group_type(params[:value], params[:selections])
+    else
+       @list_of_sites = Session.sites_for_group_type_senior
+    end
+    logger.debug @list_of_sites.inspect
+
+    render :partial => "alt_site_selector"
+  end
+
   def get_sessions_for_type_and_site
     @list_of_sessions = Array.new
     sessions = Session.by_session_type_and_site(params[:value],params[:site] )
+
+    #Eliminate already selected sessions
+
     sessions.each { |s| @list_of_sessions << s.period}
     @site_name = Site.find(params[:site]).name
     render :partial => "session_selector"
+  end
+
+  def get_alt_sessions_for_type_site
+    @list_of_sessions = Array.new
+    sessions = Session.by_session_type_and_site(params[:value],params[:site] )
+
+    #Eliminate already selected sessions
+
+    sessions.each { |s| @list_of_sessions << s.period}
+    @site_name = Site.find(params[:site]).name
+    render :partial => "alt_session_selector"
   end
 
 
