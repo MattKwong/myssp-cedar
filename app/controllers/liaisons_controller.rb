@@ -22,7 +22,6 @@ class LiaisonsController < ApplicationController
   def show
     liaison = Liaison.find(params[:id])
 
-
     if can? :edit, liaison
       @page_title = "MySSP Information Portal. Welcome, #{liaison.first_name}!"
     else
