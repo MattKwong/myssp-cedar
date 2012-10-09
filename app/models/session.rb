@@ -30,6 +30,8 @@ class Session < ActiveRecord::Base
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
   scope :active, lambda { joins(:program).where("programs.active = ?", 't') }
+  scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
+  scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
 
   def session_type_junior_high?
     if session_type.name == 'Summer Junior High'
@@ -164,10 +166,13 @@ class Session < ActiveRecord::Base
   def self.sites_for_group_type(group_type)
     sites = Array.new
 
-    sessions = Session.find_all_by_session_type_id(group_type)
-    sessions.each {|s| sites.push(s.site) }
+    if SessionType.find(group_type).name == "Summer Junior High"
+      sessions = Session.junior_high.active
+    else
+      sessions = Session.senior_high.active
+    end
 
-    #Remove already selected sites
+    sessions.each {|s| sites.push(s.site) }
 
     #logger.debug sites.uniq
     sites.uniq
@@ -177,10 +182,23 @@ class Session < ActiveRecord::Base
   def self.alt_sites_for_group_type(group_type, session_selections)
     sites = Array.new
 
-    sessions = Session.find_all_by_session_type_id(group_type)
+    if SessionType.find(group_type).name == "Summer Junior High"
+      sessions = Session.junior_high.active
+    else
+      sessions = Session.senior_high.active
+    end
+
+    logger.debug sessions.inspect
+    logger.debug session_selections.inspect
+
+    if session_selections
+      sessions.delete_if {|s| session_selections.include?(s.id.to_s)}
+    end
+
+    logger.debug sessions.inspect
+
     sessions.each {|s| sites.push(s.site) }
     logger.debug session_selections.inspect
-    #Remove already selected sites
 
     #logger.debug sites.uniq
     sites.uniq

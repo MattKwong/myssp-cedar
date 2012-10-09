@@ -196,9 +196,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#alt_site_selector").change(function(){
             $.get("get_alt_sessions_for_type_site?value="+ group_type
-                + "&site="+ $("#site_selector_site_id").val()
-                + "&session_choices=" + session_choices
-                + "&session_choices_names=" + session_choices_names
+                + "&site="+ $("#alt_site_selector_site_id").val()
+                + "&session_choices=" + $("input[name=session_choices]").val().split('/')
+                + "&session_choices_names=" + $("input[name=session_choices_names]").val().split('/')
                 + "&current_site=" + site_choice[0]
                 + "&current_week=" + week_choice[0]
                 + "&number_of_choices=" + number_of_choices

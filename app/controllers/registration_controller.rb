@@ -236,7 +236,7 @@ class RegistrationController < ApplicationController
     logger.debug @session_choices_names.inspect
 
     if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
-       @list_of_sites = Session.alt_sites_for_group_type(params[:value], params[:selections])
+       @list_of_sites = Session.alt_sites_for_group_type(params[:value], @session_choices)
     else
        @list_of_sites = Session.sites_for_group_type_senior
     end
@@ -247,9 +247,11 @@ class RegistrationController < ApplicationController
 
   def get_sessions_for_type_and_site
     @list_of_sessions = Array.new
-    sessions = Session.by_session_type_and_site(params[:value],params[:site] )
-
-    #Eliminate already selected sessions
+    if SessionType.find(params[:value]).name == "Summer Junior High"
+      sessions = Session.junior_high.active.find_all_by_site_id(params[:site])
+    else
+      sessions = Session.senior_high.active.find_all_by_site_id(params[:site])
+    end
 
     sessions.each { |s| @list_of_sessions << s.period}
     @site_name = Site.find(params[:site]).name
@@ -259,9 +261,15 @@ class RegistrationController < ApplicationController
   def get_alt_sessions_for_type_site
     @list_of_sessions = Array.new
     sessions = Session.by_session_type_and_site(params[:value],params[:site] )
-
+    if SessionType.find(params[:value]).name == "Summer Junior High"
+      sessions = Session.junior_high.active.find_all_by_site_id(params[:site])
+    else
+      sessions = Session.senior_high.active.find_all_by_site_id(params[:site])
+    end
     #Eliminate already selected sessions
-
+    session_choices = params[:session_choices].split(',')
+    logger.debug session_choices
+    sessions.delete_if {|s| session_choices.include?(s.id.to_s)}
     sessions.each { |s| @list_of_sessions << s.period}
     @site_name = Site.find(params[:site]).name
     render :partial => "alt_session_selector"
