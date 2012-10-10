@@ -319,10 +319,8 @@ class RegistrationController < ApplicationController
     logger.debug params[:registration_id]
     registration = Registration.find(params[:registration_id])
     logger.debug registration.debug
-
+    render :partial =>  "final_confirmation"
   end
-
-
 
   private
 

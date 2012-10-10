@@ -483,3 +483,17 @@ $(document).ready(function() {
         $('#ninth_step').slideDown();
     });
 });
+
+$(document).ready(function() {
+    $('<div id="loading">Retrieving data...please be patient!</div>')
+        .insertBefore("#active_admin_content")
+        .ajaxStart(function() {
+            $(this).show()
+            $('body').css('cursor', 'progress');
+//            $(this).addClass('wait');
+
+        }).ajaxStop(function() {
+            $(this).hide();
+            $('body').css('cursor', 'default');
+        });
+});
