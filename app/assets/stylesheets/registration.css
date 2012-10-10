@@ -214,6 +214,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         background: url("progress_bar.png") no-repeat;
         width: 350px;
         height: 24px;
+        /*padding-top: 10px;*/
         margin: 0 auto;
         position: relative;
     }
@@ -224,6 +225,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         height: 23px;
         background-color:green;
         border-radius: 20px;
+        /*padding-top: 10px;*/
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
     }
@@ -234,6 +236,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         text-align: center;
         font-weight: bold;
         color: black;
+        /*padding-top: 10px;*/
         width: 350;
         height: 24px;
         top: -20px;
