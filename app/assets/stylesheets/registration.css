@@ -24,9 +24,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
 .clear { clear:both; }
 
 #reg_container {
-    background: url('container.png') no-repeat;
+    /*background: url('container.png') no-repeat;*/
     width: 754px;
-    /*height: 500px;*/
+    border: 5px;
+    height: 1000px;
     margin: 20px auto;
     padding: 50px 0;
     overflow: hidden;
@@ -38,7 +39,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
     }
     #reg_container #first_step { display: block; }
 
-    #reg_container .form { margin: 66px 72px 0 72px;}
+    #reg_container .form { margin: 10px 72px 0 72px;}
 
     #reg_container h1, #reg_container h2 {
         font-type: Cantarell, Verdana, san-serif;
@@ -61,7 +62,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
     }
 
     #reg_container table {
-        margin: 20px 40px;
+        /*margin: 10px;*/
         font-size: 14px;
         font-weight: bold;
     }
@@ -107,10 +108,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
         -webkit-border-radius: 6px;
     }
         .button_container {
-            width: 754px;
-            height: 50px;
-            margin: 20px auto;
-            padding: 50px 0;
+            width: 600px;
+            /*height: 50px;*/
+            margin: auto;
+            padding: 0px 10px 0px 0px;
             overflow: hidden;
             position: relative;
 
@@ -119,39 +120,69 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
             border: none;
             cursor: pointer;
-            /*width: 85px;*/
+            width: 85px;
             height: 38px;
             position: relative;
-            bottom: -20px;
+            /*bottom: -20px;*/
             /*left: 650px;*/
         }
         .next_button {
+            border: none;
             float: right;
+            width: 85px;
+            height: 38px;
+            padding-left: 10px;
             background: url("next.png") no-repeat;
         }
-        .add_choice_button {
-            float: right;
-            background: url("next.png") no-repeat;
+        img.cancel_button {
+            padding: 10px 10px 10px 10px;
         }
+
         .confirm_button {
             float: right;
+            border: none;
+            width: 85px;
+            height: 38px;
+            padding-left: 10px;
             background: url("confirm.png") no-repeat;
         }
-        img.print_button {
-            float: right;
+        .print_button {
+            margin-left: auto;
+            margin-right: auto;
+            border: none;
+            width: 150px;
+            height: 38px;
+            padding-bottom: 10px;
             background: url("print.png") no-repeat;
         }
         img.back_button {
             float: left;
+            border: none;
+            width: 85px;
+            height: 38px;
+            padding-right: 10px;
             background: url("back.png") no-repeat;
         }
-        img.add_choice_button {
+        .add_choice_button {
+            border: none;
+            width: 135px;
+            height: 38px;
             float: right;
             background: url("addchoice.png") no-repeat;
         }
         img.no_more_choices_button {
+            border: none;
+            width: 155px;
+            height: 38px;
             float: right;
+            padding-left: 10px;
             background: url("nomorechoices.png") no-repeat;
+        }
+        .center
+        {
+            margin-left:auto;
+            margin-right:auto;
+            width:50%;
         }
 
         #reg_container input.submit.focus { border: none;}
@@ -173,20 +204,11 @@ input[type="submit"]:focus, input[type="button"]:focus {
         color: #666;
         font-size: 13px;
         font-weight: bold;
-        line-height: 14px;
-        float: left;
-        margin: 23px -25px 10px 10px;
-        width: 150px;
-    }
-    /*#reg_container table label {*/
-        /*color: #666;*/
-        /*font-size: 13px;*/
-        /*font-weight: bold;*/
         /*line-height: 14px;*/
-        /*float: left;*/
+        float: left;
         /*margin: 23px -25px 10px 10px;*/
-        /*width: 150px;*/
-    /*}*/
+        width: 200px;
+    }
 
     #progress_bar {
         background: url("progress_bar.png") no-repeat;
@@ -219,7 +241,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
     }
 
     .form_elements {
-        margin-left: 220px;
+        margin-left: 200px;
         margin-top: 40px;
     }
     #id_requested_total {
