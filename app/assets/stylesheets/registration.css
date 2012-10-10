@@ -39,7 +39,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
     }
     #reg_container #first_step { display: block; }
 
-    #reg_container .form { margin: 10px 72px 0 72px;}
+    #reg_container .form { margin: 10px 50px 0 72px;}
 
     #reg_container h1, #reg_container h2 {
         font-type: Cantarell, Verdana, san-serif;
@@ -206,8 +206,8 @@ input[type="submit"]:focus, input[type="button"]:focus {
         font-weight: bold;
         /*line-height: 14px;*/
         float: left;
-        /*margin: 23px -25px 10px 10px;*/
-        width: 200px;
+        margin: 20px;
+        /*width: 200px;*/
     }
 
     #progress_bar {
@@ -245,7 +245,8 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
     .form_elements {
         margin-left: 200px;
-        margin-top: 40px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     #id_requested_total {
         padding-left: 12px;
