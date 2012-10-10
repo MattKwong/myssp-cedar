@@ -64,9 +64,19 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_second').click(function(){
+        //remove classes
+        $('#second_step').removeClass('error').removeClass('valid');
+        var error = 0;
         //save the group type
         group_type = $("input[name=group_type]:checked").val();
+        if( group_type == undefined) {
+            $('#error_text_group').html('Error: You must select a group type.');
+            error++
+        } else {
+            $("#second_step").addClass('valid');
+        }
 
+    if(!error){
         //ajax call to get group limits and appropriate text
         $.get("get_limit_info?value="+ group_type,
             function(data){ $("#limit_info").html(data);} );
@@ -84,6 +94,9 @@ $(document).ready(function() {
         //slide steps
         $('#second_step').slideUp();
         $('#third_step').slideDown();
+    } else {
+        return false;
+    }
     });
 });
 $(document).ready(function() {
@@ -112,6 +125,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_third').click(function(){
+        //remove classes
+        $('#third_step').removeClass('error').removeClass('valid');
+        var error = 0;
+        var group_limit = $("input[name=group_limit]").val();
+        if( total_requested > parseInt(group_limit) ) {
+            $('#error_text_numbers').html('Error: You may not request more than ' + group_limit + ' total spots.');
+            error++
+        }
+        if( !error && requested_youth < 1 || requested_adults < 1 ) {
+            $('#error_text_numbers').html('Error: You must request at least 1 counselor and 1 youth spots.');
+            error++
+        }
+
+        if(!error) {
+            $("#third_step").addClass('valid');
         //ajax call to get sites that are hosting group_type of groups
         $.get("get_sites_for_group_type?value="+ group_type,
             function(data){ $("#site_selector").html(data);} );
@@ -130,6 +158,9 @@ $(document).ready(function() {
         //slide steps
         $('#third_step').slideUp();
         $('#fourth_step').slideDown();
+        } else {
+            return false
+        }
     });
 });
 $(document).ready(function() {
@@ -145,16 +176,26 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $("#registration_requested_youth").change(function(){
-        requested_youth = parseInt($("#registration_requested_youth").val());
-        total_requested = requested_youth + requested_adults;
-        $('#requested_total').html(total_requested);}
+        if (isNaN($("#registration_requested_youth").val())) {
+            requested_youth = 0;
+            alert("You must only input valid numbers here.")
+        } else {
+            requested_youth = parseInt($("#registration_requested_youth").val());
+            total_requested = requested_youth + requested_adults;
+            $('#requested_total').html(total_requested);}
+        }
     );
 });
 $(document).ready(function() {
     $("#registration_requested_counselors").change(function(){
-        requested_adults = parseInt($("#registration_requested_counselors").val());
-        total_requested = requested_youth + requested_adults;
-        $('#requested_total').html(total_requested);}
+        if (isNaN($("#registration_requested_counselors").val())) {
+            requested_adults = 0;
+            alert("You must only input valid numbers here.")
+        } else {
+            requested_adults = parseInt($("#registration_requested_counselors").val());
+            total_requested = requested_youth + requested_adults;
+            $('#requested_total').html(total_requested);}
+        }
     );
 });
 $(document).ready(function() {
@@ -171,28 +212,37 @@ $(document).ready(function() {
         //save the choices
         site_choice[0] = $("#site_selector_site_id").val();
         week_choice[0] = $("#session_selector_session_id").val();
-
         number_of_choices = 0
 
-        //get and show the remaining site choices
-        //also returns selection array to hidden field
-        $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
-            + "&session_choices_names=" + session_choices_names
-            + "&current_site=" + site_choice[0] + "&current_week=" + week_choice[0] + "&number_of_choices=" + number_of_choices
-            ,
-            function(data){ $("#alt_site_selector").html(data);}
-        );
-//        choice_html = '';
-//        choice_html+= "<tr><td>Choice 1:</td><td>";
-////        choice_html += $("input[name=session_choices_names]").val().split('/')[0];
-//        choice_html += "</td></tr>";
-//        $("#info_table_fifth").html(info_table + enrollment_html + choice_html);
-        //update progress bar
-        $('#progress_text').html('60% Complete');
-        $('#progress').css('width','200px');
-        //slide steps
-        $('#fourth_step').slideUp();
-        $('#fifth_step').slideDown();
+        var error = 0;
+        if( site_choice[0] == '' || week_choice[0] == '') {
+            $('#error_text_selections').html('Error: You must select a valid site and a week.');
+            error++
+        }
+
+        if( !error) {
+            //get and show the remaining site choices
+            //also returns selection array to hidden field
+            $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
+                + "&session_choices_names=" + session_choices_names
+                + "&current_site=" + site_choice[0] + "&current_week=" + week_choice[0] + "&number_of_choices=" + number_of_choices
+                ,
+                function(data){ $("#alt_site_selector").html(data);}
+            );
+    //        choice_html = '';
+    //        choice_html+= "<tr><td>Choice 1:</td><td>";
+    ////        choice_html += $("input[name=session_choices_names]").val().split('/')[0];
+    //        choice_html += "</td></tr>";
+    //        $("#info_table_fifth").html(info_table + enrollment_html + choice_html);
+            //update progress bar
+            $('#progress_text').html('60% Complete');
+            $('#progress').css('width','200px');
+            //slide steps
+            $('#fourth_step').slideUp();
+            $('#fifth_step').slideDown();
+        } else {
+            return false
+        }
     });
 });
 
@@ -202,8 +252,8 @@ $(document).ready(function() {
                 + "&site="+ $("#alt_site_selector_site_id").val()
                 + "&session_choices=" + $("input[name=session_choices]").val().split('/')
                 + "&session_choices_names=" + $("input[name=session_choices_names]").val().split('/')
-                + "&current_site=" + site_choice[0]
-                + "&current_week=" + week_choice[0]
+//                + "&current_site=" + site_choice[0]
+//                + "&current_week=" + week_choice[0]
                 + "&number_of_choices=" + number_of_choices
                 ,
                 function(data){ $("#alt_session_selector").html(data);})
@@ -237,26 +287,35 @@ $(document).ready(function() {
 
         session_choices= $("input[name=session_choices]").val();
         session_choices_names = $("input[name=session_choices_names]").val();
-        number_of_choices++;
+
         site_choice = $("#alt_site_selector_site_id").val();
-//        alert(site_choice);
-//        site_choice[0] = $("input[name=site_name]").val();
-//        week_choice[0] = $("input[name=week_name]").val();
         week_choice = $("#alt_session_selector_session_id").val();
 
+        var error = 0;
+        if( site_choice == '' || week_choice == '') {
+            $('#error_text_alt_selections').html('Error: You must select a valid site and a week.');
+            error++
+        }
 
-        //get and show the remaining site choices
-        //also returns selection array to hidden field
-        $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
-            + "&session_choices_names=" + session_choices_names
-            + "&current_site=" + site_choice + "&current_week=" + week_choice + "&number_of_choices=" + number_of_choices
-            ,
-            function(data){ $("#alt_site_selector").html(data);}
-        );
-        session_choices= $("input[name=session_choices]").val();
-        session_choices_names = $("input[name=session_choices_names]").val();
-        $('#fifth_step').slideUp();
-        $('#fifth_step').slideDown();
+        if(!error) {
+            //get and show the remaining site choices
+            //also returns selection array to hidden field
+            number_of_choices++;
+            $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
+                + "&session_choices_names=" + session_choices_names
+                + "&current_site=" + site_choice + "&current_week=" + week_choice + "&number_of_choices=" + number_of_choices
+                ,
+                function(data){ $("#alt_site_selector").html(data);}
+            );
+            session_choices= $("input[name=session_choices]").val();
+            session_choices_names = $("input[name=session_choices_names]").val();
+            $('#error_text_alt_selections').html('');
+            $('#fifth_step').slideUp();
+            $('#fifth_step').slideDown();
+        } else {
+            return false
+        }
+
     });
 });
 
@@ -395,6 +454,16 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_eighth').click(function(){
+        //Stub data from payment gateway
+        amount_paid = 100.00;
+        payment_tracking_number = "1234567X";
+        //Send the confirming email and update the payment information
+        //retrieve the registration id
+        var registration_id = $("input[name=registration_id]").val()
+        $.get("final_confirmation?reg_id?" + registration_id
+            + "&amount_paid=" + amount_paid + "&payment_tracking_number="
+            + payment_tracking_number);
+
 
         table_html += "<tr><td>Amount paid</td><td>";
         table_html += amount_paid;

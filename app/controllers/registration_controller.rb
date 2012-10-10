@@ -300,6 +300,7 @@ class RegistrationController < ApplicationController
       @message = "Save of registration request successful."
       @registration_id = @registration.id
       set_registered_flag
+      logger.debug @registration_id
     else
       @registration_saved = false
       @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."
@@ -312,6 +313,12 @@ class RegistrationController < ApplicationController
     liaison = Liaison.find(@registration.liaison_id)
     liaison.registered = true
     liaison.save
+  end
+
+  def final_confirmation
+    logger.debug params[:registration_id]
+    registration = Registration.find(params[:registration_id])
+    logger.debug registration.debug
 
   end
 

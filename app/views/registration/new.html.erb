@@ -36,7 +36,7 @@
             <div id="second_step">
               <h1>Step 2: Select Group Type</h1>
               <div class="form_elements">
-              <div class="form">
+              <div class="form" id align="group_type_buttons">
                 <p>Select the type of group you are registering.</p>
                     <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
                     <%= label_tag(:group_senior, "Senior High") %>
@@ -45,7 +45,7 @@
               </div>
               </div>
               <div class="clear"></div>
-
+              <div class = "errors" id="error_text_group"></div>
               <div class="button_container">
                 <img class="reg_button next_button" id="submit_second"  width="120" height="38" title="Go on to the next step">                <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "85",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
                 <img class="reg_button back_button" id="back_second" width="120" height="38" title="Go back to the previous step">
@@ -72,8 +72,8 @@
                         <td id="requested_total"></td>
                   </table>
               </div>
-
               <div class="clear"></div>
+              <div class = "errors" id="error_text_numbers"></div>
               <div class="button_container">
                 <img class="reg_button next_button" id="submit_third" align="right" width="120" height="38" title="Go on to the next step">
                 </tr>
@@ -101,6 +101,7 @@
               </table>
                 </div>
                 <div class="clear"></div>
+              <div class = "errors" id="error_text_selections"></div>
               <div class="button_container">
                 <img class="reg_button next_button" id="submit_fourth" align="right" width="120" height="38" title="Go on to the next step">
                 <%=  link_to image_tag("cancel.png", :alt => "Cancel", :width => "120",  :height => "38"), :back, title => 'Cancel and return to liaison page' %>
@@ -131,6 +132,7 @@
                 </table>
               </div>
               <div class="clear"></div>
+              <div class = "errors" id="error_text_alt_selections"></div>
               <div class="button_container">
                 <img class="reg_button no_more_choices_button" id="submit_fifth" align="right" width="120" height="38" title="Go on to the next step">
                 <img class="reg_button add_choice_button" id="add_choice" align="right" width="120" height="38" title="Add this choice">

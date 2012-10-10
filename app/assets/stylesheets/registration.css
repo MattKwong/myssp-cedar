@@ -80,7 +80,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         font-family: Cantarell, Verdana, sans-serif;
         font-weight: normal;
         font-size: 14px;
-        width: 20px;
+        width: 50px;
         height: 15px;
         padding: 100 25px;
         margin: 20px 0;
@@ -224,4 +224,11 @@ input[type="submit"]:focus, input[type="button"]:focus {
     }
     #id_requested_total {
         padding-left: 12px;
+    }
+
+    .errors {
+        text-align: center;
+        color: red;
+        font: bold;
+        font-size: 14px;
     }
