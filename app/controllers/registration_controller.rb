@@ -333,9 +333,11 @@ class RegistrationController < ApplicationController
     @registration.save
     #Create the confirmation email
     UserMailer.registration_confirmation(@registration).deliver
-
     render :partial => "final_confirmation"
 
+  end
+  def finish_up
+    redirect_to myssp_path(current_admin_user.liaison_id)
   end
 
   private

@@ -495,6 +495,8 @@ $(document).ready(function() {
     $('#submit_ninth').click(function(){
         //Print the page and redirect to myssp path
         window.print();
+        $.get("finish_up?reg_id=" + registration_id );
+
 
 //        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
 //            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
