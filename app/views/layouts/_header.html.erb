@@ -79,7 +79,7 @@
         <% end %>
         <% if signed_in? && current_admin_user.liaison? %>
             <li><%= link_to "MySSP", myssp_path(current_admin_user.liaison_id) %></li>
-            <li><%= link_to "Register a Group", register_group_path(current_admin_user.liaison_id) %></li>
+            <li><%= link_to "Register a Group", new_registration_path(:id => params[:id]) %></li>
         <% end %>
       <li><%= link_to "Help", help_path %></li>
     </ul>

@@ -150,8 +150,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
             margin-left: auto;
             margin-right: auto;
             border: none;
-            width: 150px;
+            width: 350px;
             height: 38px;
+            display: block;
             padding-bottom: 10px;
             background: url("print.png") no-repeat;
         }
@@ -255,6 +256,12 @@ input[type="submit"]:focus, input[type="button"]:focus {
     .errors {
         text-align: center;
         color: red;
+        font: bold;
+        font-size: 14px;
+    }
+    #save_message {
+        text-align: center;
+        color: green;
         font: bold;
         font-size: 14px;
     }

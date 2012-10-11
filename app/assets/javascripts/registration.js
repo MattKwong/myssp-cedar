@@ -9,6 +9,7 @@ var week_choice=[];
 var session_choices=[0,0,0,0,0,0,0,0,0,0];
 var session_choices_names=['','','','','','','','','',''];
 var number_of_choices;
+var registration_id;
 var amount_paid;
 var payment_tracking_number;
 var table_html;
@@ -81,11 +82,8 @@ $(document).ready(function() {
         $.get("get_limit_info?value="+ group_type,
             function(data){ $("#limit_info").html(data);} );
         group_type_name = $("input[name=group_type_name]").val();
-        info_table = '' ;
-        info_table+= "<tr><td>Group Type</td><td>";
-        info_table += group_type_name;
-        info_table += "</td></tr>";
-//        $("#info_table_third").html(info_table);
+        $("#registration_requested_youth").val=0;
+
 
         //update progress bar
 
@@ -442,7 +440,10 @@ $(document).ready(function() {
         //Send the data to the server and create the new registration record
         $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
             + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
-            + requested_adults + "&liaison_id=" + liaison_id );
+            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
+
+            $("#step_seven_data").html(data);
+        } );
         //update progress bar
         $('#progress_text').html('86% Complete');
         $('#progress').css('width','300px');
@@ -459,8 +460,8 @@ $(document).ready(function() {
         payment_tracking_number = "1234567X";
         //Send the confirming email and update the payment information
         //retrieve the registration id
-        var registration_id = $("input[name=registration_id]").val()
-        $.get("final_confirmation?reg_id?" + registration_id
+        registration_id = $("input[name=registration_id]").val();
+        $.get("final_confirmation?reg_id=" + registration_id
             + "&amount_paid=" + amount_paid + "&payment_tracking_number="
             + payment_tracking_number);
 
@@ -481,6 +482,27 @@ $(document).ready(function() {
         //slide steps
         $('#eighth_step').slideUp();
         $('#ninth_step').slideDown();
+    });
+});
+
+$(document).ready(function() {
+    $("#submit_ninth").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $('#submit_ninth').click(function(){
+        //Print the page and redirect to myssp path
+        window.print();
+
+//        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
+//            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
+//            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
+//
+//            $("#step_seven_data").html(data);
+//        } );
+
     });
 });
 

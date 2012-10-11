@@ -1,9 +1,11 @@
+<link rel="stylesheets" href="print.css" type="text/css" media="print" />
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "#" %></h4>
         <h4>This online system has been set up for your convenience. If you run into problems, don't hesitate to pick up the phone and call Meghan at 916-488-6441 during normal business hours. Alternatively, send her an email at meghan.osborn@sierraserviceproject.org.</h4>
         <h4>Throughout this process, don't use the back arrow on your browser! If you want to back up and change something
         that you have already input, use the 'back' button below instead.</h4>
+    </div>
         <div id='reg_container'>
           <!--<form action="#" method="post">-->
           <%=  form_for @registration do |r| %>
@@ -199,7 +201,7 @@
 
             <div id="eighth_step">
               <h1>Step 8: Make Payment</h1>
-              <div id="save_message"></div>
+              <div class="hidden" id="step_seven_data"></div>
               <div class="form">
                   <h4>You have two options for making your deposit payment.</h4>
                   <h4>You may proceed to SSP's secure payment gateway and use a credit or debit
@@ -239,8 +241,8 @@
                 <div class="clear"></div>
               </div>
               <div class="button_container">
-                  <div class="reg_buttons print_button center" id="submit_ninth">
-                    <%=  link_to image_tag("print.png"), :back %>
+                  <div class="reg_buttons center">
+                    <img class="print_button" id="submit_ninth" >
                   </div>
               </div>
             </div>
@@ -252,8 +254,6 @@
             </div>
           <!--</form>-->
         <% end %>
-
-        </div>
-
+        <!--</div>-->
 </div>
 

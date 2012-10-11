@@ -1,6 +1,7 @@
 class RegistrationController < ApplicationController
   load_and_authorize_resource
   layout 'admin_layout'
+  require 'erb'
 
   def new
     @page_title = "Register a New Group"
@@ -291,6 +292,15 @@ class RegistrationController < ApplicationController
     @registration.name = "#{liaison.church.name} #{SessionType.find(params[:group_type]).name}"
 
     @registration.request1 = session_choices[0]
+    @registration.request2 = session_choices[1]
+    @registration.request3 = session_choices[2]
+    @registration.request4 = session_choices[3]
+    @registration.request5 = session_choices[4]
+    @registration.request6 = session_choices[5]
+    @registration.request7 = session_choices[6]
+    @registration.request8 = session_choices[7]
+    @registration.request9 = session_choices[8]
+    @registration.request10 = session_choices[9]
     @registration.requested_counselors = params[:requested_adults].to_i
     @registration.requested_youth = params[:requested_youth].to_i
     @registration.requested_total = params[:requested_youth].to_i + params[:requested_adults].to_i
@@ -300,12 +310,12 @@ class RegistrationController < ApplicationController
       @message = "Save of registration request successful."
       @registration_id = @registration.id
       set_registered_flag
-      logger.debug @registration_id
     else
       @registration_saved = false
       @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."
     end
-    render :partial => "save_registration_data"
+
+    render :partial => 'save_registration_data'
 
   end
 
@@ -316,10 +326,16 @@ class RegistrationController < ApplicationController
   end
 
   def final_confirmation
-    logger.debug params[:registration_id]
-    registration = Registration.find(params[:registration_id])
-    logger.debug registration.debug
-    render :partial =>  "final_confirmation"
+    #Needs to find and save the registration instance with the payment information
+    @registration = Registration.find(params[:reg_id])
+    @registration.amount_paid = params[:amount_paid]
+    @registration.payment_notes = params[:tracking_number]
+    @registration.save
+    #Create the confirmation email
+    UserMailer.registration_confirmation(@registration).deliver
+
+    render :partial => "final_confirmation"
+
   end
 
   private
