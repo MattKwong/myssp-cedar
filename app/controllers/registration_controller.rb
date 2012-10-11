@@ -337,7 +337,7 @@ class RegistrationController < ApplicationController
 
   end
   def finish_up
-    redirect_to myssp_path(current_admin_user.liaison_id)
+    render myssp_path(current_admin_user.liaison_id)
   end
 
   private

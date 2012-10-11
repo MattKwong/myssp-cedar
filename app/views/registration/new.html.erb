@@ -241,8 +241,10 @@
                 <div class="clear"></div>
               </div>
               <div class="button_container">
-                  <div class="reg_buttons center">
-                    <img class="print_button" id="submit_ninth" >
+                  <div class="reg_button center ">
+                    <img class="print_button" id="print_ninth" >
+                    <%=  link_to image_tag("return.png", :alt => ":return"), :back, :html => {:class=>"return_button",
+                                                                                             :title => 'Return to liaison page'} %>
                   </div>
               </div>
             </div>

@@ -486,25 +486,15 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $("#submit_ninth").hover(function() {
+    $("#print_ninth").hover(function() {
         $(this).addClass('hover');
     });
 });
 
 $(document).ready(function() {
-    $('#submit_ninth').click(function(){
-        //Print the page and redirect to myssp path
+    $('#print_ninth').click(function(){
+        //Print the page
         window.print();
-        $.get("finish_up?reg_id=" + registration_id );
-
-
-//        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
-//            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
-//            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
-//
-//            $("#step_seven_data").html(data);
-//        } );
-
     });
 });
 
