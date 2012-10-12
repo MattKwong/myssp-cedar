@@ -1,3 +1,4 @@
 <%= select 'alt_site_selector', 'site_id', @list_of_sites.collect {|s| [s.name, s.id]},  {:prompt => "Select one", :include_blank => false} %>
 <input type = "hidden" name="session_choices" value="<%= @session_choices.join('/') %>" />
 <input type = "hidden" name="session_choices_names" value="<%= @session_choices_names.join('/') %>" />
+<input type = "hidden" name="session_count" value="<%= @session_count %>" />

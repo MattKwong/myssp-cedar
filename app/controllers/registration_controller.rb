@@ -198,13 +198,13 @@ class RegistrationController < ApplicationController
   def get_limit_info
     #Let Summer senior high be the default in the event that an invalid value is passed
     if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
-      @limit_text = 'You may register up to 20 persons in total. We suggest a ratio of 1 counselor for every 3 to 4 youth.'
+      @limit_text = 'You may register up to 20 persons in total. We suggest a ratio of 1 counselor for every 4 youth.'
       @limit = 20
-      @site_text = "Below is a dropdown list of the sites that are hosting junior high programs this summer. When you select a site, the available weeks will appear."
+      @site_text = "Below is a list of the sites that are hosting junior high programs this summer. When you select a site, the available sessions will appear."
       @group_type_name =  "Summer Junior High"
     else
-      @limit_text = 'You may register up to 30 persons in total. We suggest a ratio of 1 counselor for every 4 to 5 youth.'
-      @site_text = "Below is a dropdown list of the sites that are hosting senior high programs this summer. When you select a site, the available weeks will appear."
+      @limit_text = 'You may register up to 30 persons in total. We suggest a ratio of 1 counselor for every 5 youth.'
+      @site_text = "Below is a list of the sites that are hosting senior high programs this summer. When you select a site, the available sessions will appear."
       @limit = 30
       @group_type_name =  "Summer Junior High"
     end
@@ -233,17 +233,17 @@ class RegistrationController < ApplicationController
 
     @session_choices_names = params[:session_choices_names].split('/')
     @session_choices_names[params[:number_of_choices].to_i] = current_session.name
-
+    @session_count = (params[:number_of_choices].to_i) + 1
     #As above, let Summer senior high be the default in the event that an invalid value is passed
-    logger.debug @session_choices
-    logger.debug @session_choices_names.inspect
+    #logger.debug @session_choices
+    #logger.debug @session_choices_names.inspect
 
     if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
        @list_of_sites = Session.alt_sites_for_group_type(params[:value], @session_choices)
     else
        @list_of_sites = Session.sites_for_group_type_senior
     end
-    logger.debug @list_of_sites.inspect
+    #logger.debug @list_of_sites.inspect
 
     render :partial => "alt_site_selector"
   end

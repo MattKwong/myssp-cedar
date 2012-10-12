@@ -78,6 +78,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
             width: 150px;
             text-align: left;
         }
+        #reg_container table input.card-expiry-month {
+            width: 25px;
+            text-align: left;
+        }
 
     #reg_container input {
         background: url("input.png");
@@ -154,28 +158,39 @@ input[type="submit"]:focus, input[type="button"]:focus {
             background: url("confirm.png") no-repeat;
         }
         .print_button {
-            /*margin-left: auto;*/
-            /*margin-right: auto;*/
-            float: left;
+            margin-left: auto;
+            margin-right: auto;
+            /*float: left;*/
             border: none;
-            width: 350px;
+            width: 100px;
             height: 38px;
             display: block;
             padding-bottom: 10px;
             background: url("print.png") no-repeat;
         }
         .return_button {
-            /*margin-left: auto;*/
-            /*margin-right: auto;*/
-            float: left;
+            margin-left: auto;
+            margin-right: auto;
+            /*float: left;*/
             border: none;
-            width: 350px;
+            width: 210px;
             height: 38px;
             display: block;
             padding-bottom: 10px;
-            background: url("print.png") no-repeat;
+            /*background: url("print.png") no-repeat;*/
         }
         .gateway_button {
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
+            /*float: left;*/
+            border: none;
+            width: 200px;
+            height: 38px;
+            display: block;
+            padding-bottom: 10px;
+            background: url("creditcard.png") no-repeat;
+        }
+        .check_button {
             /*margin-left: auto;*/
             /*margin-right: auto;*/
             /*float: left;*/
@@ -184,7 +199,18 @@ input[type="submit"]:focus, input[type="button"]:focus {
             height: 38px;
             display: block;
             padding-bottom: 10px;
-            background: url("print.png") no-repeat;
+            background: url("check.png") no-repeat;
+        }
+        .pay_now_button {
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
+            float: right;
+            border: none;
+            width: 150px;
+            height: 38px;
+            display: block;
+            padding-bottom: 10px;
+            background: url("now.png") no-repeat;
         }
         img.back_button {
             float: left;
@@ -194,11 +220,12 @@ input[type="submit"]:focus, input[type="button"]:focus {
             padding-right: 10px;
             background: url("back.png") no-repeat;
         }
-        .add_choice_button {
+        img.add_choice_button {
             border: none;
             width: 135px;
             height: 38px;
             float: right;
+            padding-right: 10px;
             background: url("addchoice.png") no-repeat;
         }
         img.no_more_choices_button {
@@ -300,4 +327,8 @@ input[type="submit"]:focus, input[type="button"]:focus {
     .money {
          text-align: right;
         vertical-align: middle;
+    }
+
+    #registration_comments {
+        width: 100%;
     }

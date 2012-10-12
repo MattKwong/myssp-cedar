@@ -226,19 +226,25 @@ $(document).ready(function() {
                 + "&session_choices_names=" + session_choices_names
                 + "&current_site=" + site_choice[0] + "&current_week=" + week_choice[0] + "&number_of_choices=" + number_of_choices
                 ,
-                function(data){ $("#alt_site_selector").html(data);}
-            );
-    //        choice_html = '';
-    //        choice_html+= "<tr><td>Choice 1:</td><td>";
-    ////        choice_html += $("input[name=session_choices_names]").val().split('/')[0];
-    //        choice_html += "</td></tr>";
-    //        $("#info_table_fifth").html(info_table + enrollment_html + choice_html);
-            //update progress bar
+                function(data){ $("#alt_site_selector").html(data);
+//                }
+//            );
+            session_choices = $("input[name=session_choices_names]").val().split('/')
+            session_count = $("input[name=session_count]").val();
+            choice_html = '';
+            choice_html += "<tr><td>Current Choices</td></tr>";
+            choice_html += "<tr><td>Choice" + parseInt(session_count) + ": </td><td>";
+            choice_html += session_choices[0];
+            choice_html += "</td></tr>";
+            $("#prev_choices_table").html(choice_html);
+//            update progress bar
             $('#progress_text').html('60% Complete');
             $('#progress').css('width','200px');
             //slide steps
             $('#fourth_step').slideUp();
             $('#fifth_step').slideDown();
+                }
+            );
         } else {
             return false
         }
@@ -304,13 +310,24 @@ $(document).ready(function() {
                 + "&session_choices_names=" + session_choices_names
                 + "&current_site=" + site_choice + "&current_week=" + week_choice + "&number_of_choices=" + number_of_choices
                 ,
-                function(data){ $("#alt_site_selector").html(data);}
-            );
-            session_choices= $("input[name=session_choices]").val();
-            session_choices_names = $("input[name=session_choices_names]").val();
+                function(data){ $("#alt_site_selector").html(data);
+
+            session_choices = $("input[name=session_choices_names]").val().split('/');
+            session_count = $("input[name=session_count]").val();
+            alert(session_choices);
+            alert(session_count);
+            choice_html = '';
+            choice_html += "<tr><td>Current Choices</td></tr>";
+            $.each(session_choices, function(index, value) {
+                choice_html += "<tr><td>Choice" + (index + 1) + ": </td><td>";
+                choice_html += value;
+                choice_html += "</td></tr>";
+            });
+            $("#prev_choices_table").html(choice_html);
             $('#error_text_alt_selections').html('');
             $('#fifth_step').slideUp();
             $('#fifth_step').slideDown();
+                });
         } else {
             return false
         }
