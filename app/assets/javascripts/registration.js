@@ -14,8 +14,9 @@ var amount_paid;
 var payment_tracking_number;
 var table_html;
 var comments;
-var info_table;
-var enrollment_html;
+var deposit_amount;
+var processing_charge;
+var to_be_charged;
 var choice_html;
 
 ////inputfocus
@@ -441,9 +442,10 @@ $(document).ready(function() {
         $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
             + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
             + requested_adults + "&liaison_id=" + liaison_id, function(data) {
-
             $("#step_seven_data").html(data);
         } );
+
+
         //update progress bar
         $('#progress_text').html('86% Complete');
         $('#progress').css('width','300px');
@@ -455,9 +457,9 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_eighth').click(function(){
-        //Stub data from payment gateway
-        amount_paid = 100.00;
-        payment_tracking_number = "1234567X";
+        //Finalize without using payment gateway.
+        amount_paid = 0;
+        payment_tracking_number = "None";
         //Send the confirming email and update the payment information
         //retrieve the registration id
         registration_id = $("input[name=registration_id]").val();
@@ -495,6 +497,103 @@ $(document).ready(function() {
     $('#print_ninth').click(function(){
         //Print the page
         window.print();
+    });
+});
+$(document).ready(function() {
+    $("#gateway").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#submit_payment").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#back_gateway").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $('#gateway').click(function(){
+        //Pull the deposit_amount and processing_charge
+
+        deposit_amount = $("input[name=deposit_amount]").val();
+        processing_charge = $("input[name=processing_charge]").val();
+        to_be_charged = (parseFloat(deposit_amount) + parseFloat(processing_charge));
+
+        $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
+        $("td#processing_charge").html("$" + parseFloat(processing_charge).toFixed(2));
+        $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
+
+        $('#eighth_step').slideUp();
+        $('#gateway_step').slideDown();
+
+    });
+});
+
+$(document).ready(function() {
+    $('#back_gateway').click(function(){
+
+        $('#gateway_step').slideUp();
+        $('#eighth_step').slideDown();
+
+    });
+});
+
+$(document).ready(function() {
+    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+});
+
+function stripeResponseHandler(status, response) {
+    if (response.error) {
+        // re-enable the submit button
+        $('.submit-button').removeAttr("disabled");
+        // show the errors on the form
+        $("#payment_errors").html(response.error.message);
+    } else {
+        var form$ = $("#payment-form");
+        // token contains id, last4, and card type
+        var token = response['id'];
+        // and submit
+        registration_id = $("input[name=registration_id]").val();
+        $.get("final_confirmation?reg_id=" + registration_id
+            + "&amount_paid=" + to_be_charged + "&payment_tracking_number="
+              + token);
+
+        table_html += "<tr><td>Amount paid</td><td>";
+        table_html += "$" + to_be_charged.toFixed(2);
+        table_html += "</td></tr>";
+        table_html += "<tr><td>Receipt id</td><td>";
+        table_html += token;
+        table_html += "</td></tr>";
+
+
+        $('#final_registration_table').append(table_html)
+
+        //update progress bar
+        $('#progress_text').html('100% Complete');
+        $('#progress').css('width','350px');
+        //slide steps
+        $('#gateway_step').slideUp();
+        $('#ninth_step').slideDown();
+//        form$.get(0).submit();
+    }
+}
+
+$(document).ready(function() {
+    $("#submit_payment").click(function(event) {
+        // disable the submit button to prevent repeated clicks
+        $('.submit-button').attr("disabled", "disabled");
+        // createToken returns immediately - the supplied callback submits the form if there are no errors
+
+        Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+        }, stripeResponseHandler);
+        return false; // submit from callback
     });
 });
 

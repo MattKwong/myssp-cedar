@@ -1,4 +1,3 @@
-<link rel="stylesheets" href="../../../old_assets/print.css" type="text/css" media="print" />
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "#" %></h4>
@@ -206,6 +205,10 @@
                   <h4>You have two options for making your deposit payment.</h4>
                   <h4>You may proceed to SSP's secure payment gateway and use a credit or debit
                     card to complete your deposit payment.</h4>
+                <div class="clear"></div>
+                <div class="button_container">
+                  <img class="reg_button gateway_button" id="gateway" align="right" >
+                </div>
                 <h4>Option two is to mail a check to the SSP office. Please include a copy of your confirming
                   email with this check. Payment must be received promptly; otherwise, your registration may
                   be cancelled.</h4>
@@ -213,9 +216,6 @@
               <div class="clear"></div>
               <div class="button_container">
                 <img class="reg_button next_button" id="submit_eighth" align="right" >
-                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
-                     :title => 'Cancel and return to liaison page'} %>
-                <img class="reg_button back_button" id="back_eighth" >
               </div>
             </div>
             <div class="clear"></div>
@@ -248,6 +248,52 @@
                   </div>
               </div>
             </div>
+            <div id="gateway_step">
+              <h1>Payment Gateway</h1>
+              <!-- to display errors returned by createToken -->
+
+              <form action="" method="POST" id="payment-form">
+                <table>
+                <tr>
+                  <td><label>Deposit Amount</label></td>
+                  <td class = "money" id="disp_deposit_amount" ></td>
+                </tr>
+                  <tr>
+                  <td><label>Optional Processing Charge</label></td>
+                  <td class = "money" id="processing_charge" ></td>
+                </tr>
+                  <tr>
+                  <td><label>Amount To Be Charged</label></td>
+                  <td class = "money" id="to_be_charged" ></td>
+                </tr>
+                <tr>
+                  <td><label>Card Number</label></td>
+                  <td><input type="text" size="20" autocomplete="off" class="card-number" /></td>
+                </tr>
+                <tr>
+                  <td><label>CVC</label></td>
+                  <td><input type="text" size="4" autocomplete="off" class="card-cvc" /></td>
+                </tr>
+                <tr>
+                  <td><label>Expiration (MM/YYYY)</label></td>
+                  <td><span><input type="text" size="2" class="card-expiry-month"/> / <input type="text" size="4" class="card-expiry-year"/></span></td>
+                  <!--<span> / </span>-->
+                  <!--<td><input type="text" size="4" class="card-expiry-year"/></td>-->
+                </tr>
+                </table>
+                <!--<button type="submit" class="submit-button">Submit Payment</button>-->
+                <div class = "errors" id="payment_errors"></div>
+              <div class="clear"></div>
+              <div class="button_container">
+                <img class="reg_button next_button" id="submit_payment" >
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                                                                                         :title => 'Cancel and return to liaison page'} %>
+                <img class="reg_button back_button" id="back_gateway" >
+              </div>
+              </form>
+            </div>
+            </div>
+
             <div class="clear"></div>
             <div id="progress_bar">
               <div id="progress"></div>

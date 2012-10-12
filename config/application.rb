@@ -19,6 +19,7 @@ module Spoic3
     config.assets.enabled = true
     config.assets.initialize_on_precompile = false
     config.assets.precompile += ['*.js', 'custom.css', 'style.css', 'active_admin.css']
+    #config.force_ssl = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.2'

@@ -34,7 +34,8 @@ input[type="submit"]:focus, input[type="button"]:focus {
     position: relative;
 }
 
-    #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step, #seventh_step, #eighth_step , #ninth_step {
+    #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step,
+    #seventh_step, #eighth_step , #ninth_step, #gateway_step {
         display: none;
     }
     #reg_container #first_step { display: block; }
@@ -73,6 +74,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
             #reg_container table td:nth-child(2) {
                 color: #a90329;
             }
+        #reg_container table input.card-number {
+            width: 150px;
+            text-align: left;
+        }
 
     #reg_container input {
         background: url("input.png");
@@ -91,6 +96,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
         -moz-border-radius: 6px;
         -webkit-border-radius: 6px;
     }
+
+
+}
     #reg_container select {
         background: url("input.png");
         color: #888;
@@ -107,6 +115,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         -moz-border-radius: 6px;
         -webkit-border-radius: 6px;
     }
+
         .button_container {
             width: 600px;
             /*height: 50px;*/
@@ -163,6 +172,17 @@ input[type="submit"]:focus, input[type="button"]:focus {
             float: left;
             border: none;
             width: 350px;
+            height: 38px;
+            display: block;
+            padding-bottom: 10px;
+            background: url("print.png") no-repeat;
+        }
+        .gateway_button {
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
+            /*float: left;*/
+            border: none;
+            width: 150px;
             height: 38px;
             display: block;
             padding-bottom: 10px;
@@ -271,9 +291,15 @@ input[type="submit"]:focus, input[type="button"]:focus {
         font: bold;
         font-size: 14px;
     }
+
     #save_message {
         text-align: center;
         color: green;
         font: bold;
         font-size: 14px;
+    }
+
+    .money {
+         text-align: right;
+        vertical-align: middle;
     }

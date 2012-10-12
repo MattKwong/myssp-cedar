@@ -309,6 +309,9 @@ class RegistrationController < ApplicationController
       @registration_saved = true
       @message = "Save of registration request successful."
       @registration_id = @registration.id
+      @deposit_amount = @registration.requested_total * 50
+      @processing_charge = (@deposit_amount * 0.029)
+      @to_be_charged = @deposit_amount + @processing_charge
       set_registered_flag
     else
       @registration_saved = false
@@ -329,8 +332,24 @@ class RegistrationController < ApplicationController
     #Needs to find and save the registration instance with the payment information
     @registration = Registration.find(params[:reg_id])
     @registration.amount_paid = params[:amount_paid]
-    @registration.payment_notes = params[:tracking_number]
+    @registration.payment_notes = params[:payment_tracking_number]
     @registration.save
+    token = params[:payment_tracking_number]
+    #Stripe.api_key = "sk_test_kYEikouk0OW7wf97pYd8Th9w"
+    logger.debug params[:amount_paid]
+    unless token == "None"
+      to_be_charged = (100 * params[:amount_paid].to_f).to_i
+      logger.debug to_be_charged
+      logger.debug token
+      charge = Stripe::Charge.create [
+          :amount=> to_be_charged,
+        :currency=>"usd",
+        :card => token,
+        :description => @registration.name ]
+    end
+    logger.debug charge
+
+
     #Create the confirmation email
     UserMailer.registration_confirmation(@registration).deliver
     render :partial => "final_confirmation"
