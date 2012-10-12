@@ -97,8 +97,6 @@ input[type="submit"]:focus, input[type="button"]:focus {
         -webkit-border-radius: 6px;
     }
 
-
-}
     #reg_container select {
         background: url("input.png");
         color: #888;
