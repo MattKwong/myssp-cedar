@@ -355,6 +355,7 @@ class RegistrationController < ApplicationController
       @registration.amount_paid = params[:amount_paid]
       @registration.payment_notes = params[:payment_tracking_number]
       @registration.save
+      @deposit_amount = @registration.requested_total * 50
       #Create the confirmation email
       UserMailer.registration_confirmation(@registration).deliver
       render :partial => "final_confirmation"
