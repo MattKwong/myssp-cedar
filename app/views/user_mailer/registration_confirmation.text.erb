@@ -1,40 +1,76 @@
-<%= Date.today %>
+<%= Date.today.strftime("%B %d, %Y") %>
 
+Dear <%= @registration.liaison.first_name %>,
 
+Thank you for registering your group with Sierra Service Project.  This email confirms that your group is registered to
+participate in our summer 2013 program.
 
-@choices = Array.new
-@choices << registration.request1 << registration.request2 << registration.request3 << registration.request4 <<
-registration.request5 << registration.request6 << registration.request7 << registration.request8 <<
-registration.request9 << registration.request9
-logger.debug @choices.inspect
+The following is the registration information that you provided to us:
 
-Dear <%= @registration.liaison.first_name %>
-
-Greetings from Sierra Service Project!  This email confirms your group's registration with SSP.
-
-The following is the information that you provided us with your registration:
-
-<%= @choices %>
-
-The following is the information we have in our records about your group:
 
 Group name:                 <%=	@registration.name %>
-Church:                     <%=	@registration.church.name %>
+Church:                     <%= @registration.church.name %>
 Liaison:                    <%= @registration.liaison.name %>
 Number of youth:            <%= @registration.requested_youth %>
 Number of counselors:       <%= @registration.requested_counselors %>
 Total:                      <%= @registration.requested_total %>
+Deposit Amount Due;         <%= number_to_currency(@deposit_amount) %>
+Amount Paid:                <%= number_to_currency(@registration.amount_paid) %>
+<% if @registration.payment_notes == "None" %>
+<%= "Payment Notes:              Mail in check" %>
+<% else %>
+<%= "Payment Notes:              Paid by credit card. Receipt id: #{@registration.payment_notes}" %>
+<% end %>
 
-The following are your requests:
+The following are your site and week requests:
 
 Choice #1: <%= Session.find(@registration.request1).name %>
- <%  unless @registration.request2 == nil  %>
-    Choice #2: <%= Session.find(@registration.request2).name %>
-    <% end %>
+
+<% if @registration.request2 != nil  %>
+Choice #2: <%= Session.find(@registration.request2).name %>
+
+<% if @registration.request3 != nil%>
+Choice #3: <%= Session.find(@registration.request3).name %>
+
+<% if @registration.request4 != nil%>
+Choice #4: <%= Session.find(@registration.request4).name %>
+
+<% if @registration.request5 != nil%>
+Choice #5: <%= Session.find(@registration.request5).name %>
+
+<% if @registration.request6 != nil%>
+Choice #6: <%= Session.find(@registration.request6).name %>
+
+<% if @registration.request7 != nil%>
+Choice #7: <%= Session.find(@registration.request7).name %>
+
+<% if @registration.request8 != nil%>
+Choice #8: <%= Session.find(@registration.request8).name %>
+
+<% if @registration.request9 != nil%>
+Choice #9: <%= Session.find(@registration.request9).name %>
+
+<% if @registration.request10 != nil%>
+Choice #10: <%= Session.find(@registration.request10).name %>
+
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
 
 
-I am looking forward to working with you to make this a fantastic experience for your group. Please
-give me a call at 916-488-6441 if you have any questions or concerns.
+We will notify you of your group's placement by the end of November.  In the past, we have been able to place 90% of all
+groups in their 1st or 2nd choice. We hope to be able to do that again this year. If you need to make any changes to this
+registration, please call me.
+
+I am excited that your group will be participating in 2013 and I am looking forward to working with you to make SSP a
+fantastic experience for your group. If you have any questions or concerns, please give me a call at 916-488-6441. Email
+will be my primary way of communicating with you, so please notify me if you change your email address.
 
 Blessings,
 

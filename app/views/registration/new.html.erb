@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "print", :media => "print" %>
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "#" %></h4>
@@ -214,12 +215,17 @@
               <h1>Step 8: Make Payment</h1>
               <div class="hidden" id="step_seven_data"></div>
               <div class="form">
-                  <h4>You have two options to make your deposit payment.</h4>
-                  <h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit
-                    card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
+                  <!--<h4>You have two options to make your deposit payment.</h4>-->
+                  <!--<h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit-->
+                    <!--card to complete your deposit payment. SSP does not record or save your credit card information.</h4>-->
+                  <h3 color= "red" >The payment gateway is not working.</h3>
+                  <h4 color="red" >Unfortunately, we have run into an unexpected problem with the payment gateway.
+                  If you would like to pay by credit card, go ahead and select the 'pay by check' option here. Call the office
+                  and we will process your payment over the phone.  We apologize for the inconvenience.</h4>
                 <div class="clear"></div>
                 <div class="button_container">
-                  <img class="reg_button gateway_button" id="gateway" align="right" >
+                  <img class="reg_button gateway_button" id="gateway" align="right"  >
+
                 </div>
                 <h4>Option Two: You may mail a check to the SSP office. Please include a copy of your confirmation
                   email or printed copy of the confirmation screen (this is the next screen you will see).

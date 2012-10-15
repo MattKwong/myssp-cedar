@@ -493,8 +493,10 @@ $(document).ready(function() {
             + payment_tracking_number);
 
 
+        table_html += "<tr><td>Deposit amount due</td><td>";
+        table_html += "$" + parseInt($("input[name=deposit_amount]").val());
         table_html += "<tr><td>Amount paid</td><td>";
-        table_html += amount_paid;
+        table_html += "$" + amount_paid;
         table_html += "</td></tr>";
         table_html += "<tr><td>Receipt id</td><td>";
         table_html += payment_tracking_number;
@@ -524,11 +526,11 @@ $(document).ready(function() {
         window.print();
     });
 });
-$(document).ready(function() {
-    $("#gateway").hover(function() {
-        $(this).addClass('hover');
-    });
-});
+//$(document).ready(function() {
+//    $("#gateway").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
 $(document).ready(function() {
     $("#submit_payment").hover(function() {
         $(this).addClass('hover');
@@ -539,25 +541,25 @@ $(document).ready(function() {
         $(this).addClass('hover');
     });
 });
-$(document).ready(function() {
-    $('#gateway').click(function(){
-        //Pull the deposit_amount and processing_charge
-
-        deposit_amount = $("input[name=deposit_amount]").val();
-        processing_charge = $("input[name=processing_charge]").val();
-        to_be_charged = (parseFloat(deposit_amount));
-        $("#processing_label").html("Include the 2.9% Credit Card Charge that SSP Pays ($" + parseInt($("input[name=processing_charge]").val()).toFixed(2) + ")");
-        $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
-        $("td#processing_charge").html('');
-        $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
-        //update progress bar
-        $('#progress_text').html('87.5% Complete');
-        $('#progress').css('width','308px');
-        $('#eighth_step').slideUp();
-        $('#gateway_step').slideDown();
-
-    });
-});
+//$(document).ready(function() {
+//    $('#gateway').click(function(){
+//        //Pull the deposit_amount and processing_charge
+//
+//        deposit_amount = $("input[name=deposit_amount]").val();
+//        processing_charge = $("input[name=processing_charge]").val();
+//        to_be_charged = (parseFloat(deposit_amount));
+//        $("#processing_label").html("Include the 2.9% Credit Card Charge that SSP Pays ($" + parseFloat($("input[name=processing_charge]").val()).toFixed(2) + ")");
+//        $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
+//        $("td#processing_charge").html('');
+//        $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
+//        //update progress bar
+//        $('#progress_text').html('87.5% Complete');
+//        $('#progress').css('width','308px');
+//        $('#eighth_step').slideUp();
+//        $('#gateway_step').slideDown();
+//
+//    });
+//});
 
 $(document).ready(function() {
     $('input[name=include_charge]').click(function(){
@@ -567,8 +569,6 @@ $(document).ready(function() {
             } else {
                 processing_charge = 0; }
 
-//
-//        alert(processing_charge);
 
         to_be_charged = (parseFloat(deposit_amount) + parseFloat(processing_charge));
 
@@ -610,13 +610,14 @@ function stripeResponseHandler(status, response) {
         registration_id = $("input[name=registration_id]").val();
         $.get("final_confirmation?reg_id=" + registration_id
             + "&amount_paid=" + to_be_charged + "&payment_tracking_number="
-              + token, function() {
+              + token,  function() {
+            alert("back from final confirmation");
             var error_message = $("input[name=gateway_error]").val();
+            alert(error_message);
             if (error_message) {
                 alert("Yes");
                 $("#payment_errors").html(error_message);
             } else {
-                alert("No error");
                 table_html += "<tr><td>Amount paid</td><td>";
                 table_html += "$" + to_be_charged.toFixed(2);
                 table_html += "</td></tr>";
