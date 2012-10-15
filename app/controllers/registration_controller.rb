@@ -346,10 +346,10 @@ class RegistrationController < ApplicationController
       end
     end
 
-    if Stripe::InvalidRequestError
-      logger.debug Stripe::InvalidRequestError.inspect
-      render :partial => 'payment_gateway'
-    else
+    #if Stripe::InvalidRequestError
+    #  logger.debug Stripe::InvalidRequestError.inspect
+    #  render :partial => 'payment_gateway'
+    #else
       #Needs to find and save the registration instance with the payment information
       @registration = Registration.find(params[:reg_id])
       @registration.amount_paid = params[:amount_paid]
@@ -358,7 +358,7 @@ class RegistrationController < ApplicationController
       #Create the confirmation email
       UserMailer.registration_confirmation(@registration).deliver
       render :partial => "final_confirmation"
-    end
+    #end
 
   end
   def finish_up
