@@ -1,12 +1,12 @@
-var liaison_id
+var liaison_id;
 var group_type;
 var group_type_name;
 var requested_youth = 0;
 var requested_adults = 0;
 var total_requested = 0;
-var site_choice=[];
-var week_choice=[];
-var session_choices=[0,0,0,0,0,0,0,0,0,0];
+var site_choice;
+var week_choice;
+var session_choices = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var session_choices_names=['','','','','','','','','',''];
 var number_of_choices;
 var registration_id;
@@ -44,8 +44,8 @@ $(document).ready(function() {
     $('#submit_first').click(function(){
         liaison_id = $("td#liaison_id").text();
         //update progress bar
-        $('#progress_text').html('14% Complete');
-        $('#progress').css('width','50px');
+        $('#progress_text').html('12.5% Complete');
+        $('#progress').css('width','42.5px');
         //slide steps
         $('#first_step').slideUp();
         $('#second_step').slideDown();
@@ -88,8 +88,8 @@ $(document).ready(function() {
 
         //update progress bar
 
-        $('#progress_text').html('28% Complete');
-        $('#progress').css('width','100px');
+        $('#progress_text').html('25% Complete');
+        $('#progress').css('width','85px');
         //slide steps
         $('#second_step').slideUp();
         $('#third_step').slideDown();
@@ -152,8 +152,8 @@ $(document).ready(function() {
         group_type_name = $("input[name=group_type_name]").val();
 
         //update progress bar
-        $('#progress_text').html('44% Complete');
-        $('#progress').css('width','150px');
+        $('#progress_text').html('37.5% Complete');
+        $('#progress').css('width','132px');
         //slide steps
         $('#third_step').slideUp();
         $('#fourth_step').slideDown();
@@ -165,8 +165,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#back_third').click(function(){
         //update progress bar
-        $('#progress_text').html('14% Complete');
-        $('#progress').css('width','50px');
+        $('#progress_text').html('12.5% Complete');
+        $('#progress').css('width','42.5px');
         //slide steps
         $('#third_step').slideUp();
         $('#second_step').slideDown();
@@ -209,12 +209,22 @@ $(document).ready(function() {
     $('#submit_fourth').click(function(){
 
         //save the choices
-        site_choice[0] = $("#site_selector_site_id").val();
-        week_choice[0] = $("#session_selector_session_id").val();
-        number_of_choices = 0
+        if ($("#site_selector_site_id").val() == undefined) {
+            site_choice = ''
+        } else {
+            site_choice = $("#site_selector_site_id").val();
+        }
+
+        if ($("#session_selector_session_id").val() == '') {
+            week_choice = ''
+        } else {
+            week_choice = $("#session_selector_session_id").val();
+        }
+
+        number_of_choices = 0;
 
         var error = 0;
-        if( site_choice[0] == '' || week_choice[0] == '') {
+        if( site_choice == '' || week_choice == '') {
             $('#error_text_selections').html('Error: You must select a valid site and a week.');
             error++
         }
@@ -224,7 +234,7 @@ $(document).ready(function() {
             //also returns selection array to hidden field
             $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
                 + "&session_choices_names=" + session_choices_names
-                + "&current_site=" + site_choice[0] + "&current_week=" + week_choice[0] + "&number_of_choices=" + number_of_choices
+                + "&current_site=" + site_choice + "&current_week=" + week_choice + "&number_of_choices=" + number_of_choices
                 ,
                 function(data){ $("#alt_site_selector").html(data);
 //                }
@@ -236,10 +246,10 @@ $(document).ready(function() {
             choice_html += "<tr><td>Choice" + parseInt(session_count) + ": </td><td>";
             choice_html += session_choices[0];
             choice_html += "</td></tr>";
-            $("#prev_choices_table").html(choice_html);
+            $("#prev_choices_table5").html(choice_html);
 //            update progress bar
-            $('#progress_text').html('60% Complete');
-            $('#progress').css('width','200px');
+            $('#progress_text').html('50% Complete');
+            $('#progress').css('width','170px');
             //slide steps
             $('#fourth_step').slideUp();
             $('#fifth_step').slideDown();
@@ -257,8 +267,6 @@ $(document).ready(function() {
                 + "&site="+ $("#alt_site_selector_site_id").val()
                 + "&session_choices=" + $("input[name=session_choices]").val().split('/')
                 + "&session_choices_names=" + $("input[name=session_choices_names]").val().split('/')
-//                + "&current_site=" + site_choice[0]
-//                + "&current_week=" + week_choice[0]
                 + "&number_of_choices=" + number_of_choices
                 ,
                 function(data){ $("#alt_session_selector").html(data);})
@@ -279,8 +287,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#back_fourth').click(function(){
         //update progress bar
-        $('#progress_text').html('28% Complete');
-        $('#progress').css('width','100px');
+        $('#progress_text').html('25% Complete');
+        $('#progress').css('width','85px');
         //slide steps
         $('#fourth_step').slideUp();
         $('#third_step').slideDown();
@@ -314,8 +322,6 @@ $(document).ready(function() {
 
             session_choices = $("input[name=session_choices_names]").val().split('/');
             session_count = $("input[name=session_count]").val();
-            alert(session_choices);
-            alert(session_count);
             choice_html = '';
             choice_html += "<tr><td>Current Choices</td></tr>";
             $.each(session_choices, function(index, value) {
@@ -323,7 +329,7 @@ $(document).ready(function() {
                 choice_html += value;
                 choice_html += "</td></tr>";
             });
-            $("#prev_choices_table").html(choice_html);
+            $("#prev_choices_table5").html(choice_html);
             $('#error_text_alt_selections').html('');
             $('#fifth_step').slideUp();
             $('#fifth_step').slideDown();
@@ -338,9 +344,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_fifth').click(function(){
+        $("#prev_choices_table6").html(choice_html);
     //update progress bar
-        $('#progress_text').html('74% Complete');
-        $('#progress').css('width','250px');
+        $('#progress_text').html('62.5% Complete');
+        $('#progress').css('width','212px');
     // slide steps
         $('#fifth_step').slideUp();
         $('#sixth_step').slideDown();
@@ -367,8 +374,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#back_fifth').click(function(){
         //update progress bar
-        $('#progress_text').html('48% Complete');
-        $('#progress').css('width','250px');
+        $('#error_text_selections').html('');
+        $('#progress_text').html('37.5% Complete');
+        $('#progress').css('width','228px');
         //slide steps
         $('#fifth_step').slideUp();
         $('#fourth_step').slideDown();
@@ -384,8 +392,8 @@ $(document).ready(function() {
     $('#back_sixth').click(function(){
 
         //update progress bar
-        $('#progress_text').html('60% Complete');
-        $('#progress').css('width','200px');
+        $('#progress_text').html('50% Complete');
+        $('#progress').css('width','170px');
         //slide steps
         $('#sixth_step').slideUp();
         $('#fifth_step').slideDown();
@@ -423,8 +431,8 @@ $(document).ready(function() {
         table_html += "</td></tr>";
         $('#request_info_table').html(table_html)
         //update progress bar
-        $('#progress_text').html('86% Complete');
-        $('#progress').css('width','300px');
+        $('#progress_text').html('75% Complete');
+        $('#progress').css('width','265px');
         //slide steps
         $('#sixth_step').slideUp();
         $('#seventh_step').slideDown();
@@ -444,8 +452,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#back_seventh').click(function(){
         //update progress bar
-        $('#progress_text').html('60% Complete');
-        $('#progress').css('width','200px');
+        $('#progress_text').html('62.5% Complete');
+        $('#progress').css('width','212px');
         //slide steps
         $('#seventh_step').slideUp();
         $('#sixth_step').slideDown();
@@ -464,8 +472,8 @@ $(document).ready(function() {
 
 
         //update progress bar
-        $('#progress_text').html('86% Complete');
-        $('#progress').css('width','300px');
+        $('#progress_text').html('75% Complete');
+        $('#progress').css('width','265px');
         //slide steps
         $('#seventh_step').slideUp();
         $('#eighth_step').slideDown();
@@ -497,7 +505,7 @@ $(document).ready(function() {
 
         //update progress bar
         $('#progress_text').html('100% Complete');
-        $('#progress').css('width','350px');
+        $('#progress').css('width','340px');
         //slide steps
         $('#eighth_step').slideUp();
         $('#ninth_step').slideDown();
@@ -537,12 +545,39 @@ $(document).ready(function() {
 
         deposit_amount = $("input[name=deposit_amount]").val();
         processing_charge = $("input[name=processing_charge]").val();
+        to_be_charged = (parseFloat(deposit_amount));
+        $("#processing_label").html("Include the 2.9% Credit Card Charge that SSP Pays ($" + parseInt($("input[name=processing_charge]").val()).toFixed(2) + ")");
+        $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
+        $("td#processing_charge").html('');
+        $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
+        //update progress bar
+        $('#progress_text').html('87.5% Complete');
+        $('#progress').css('width','308px');
+        $('#eighth_step').slideUp();
+        $('#gateway_step').slideDown();
+
+    });
+});
+
+$(document).ready(function() {
+    $('input[name=include_charge]').click(function(){
+        //Pull the deposit_amount and processing_charge
+            if ($(this).is(':checked')) {
+                processing_charge = $("input[name=processing_charge]").val();
+            } else {
+                processing_charge = 0; }
+
+//
+//        alert(processing_charge);
+
         to_be_charged = (parseFloat(deposit_amount) + parseFloat(processing_charge));
 
         $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
         $("td#processing_charge").html("$" + parseFloat(processing_charge).toFixed(2));
         $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
-
+        //update progress bar
+        $('#progress_text').html('87.5% Complete');
+        $('#progress').css('width','308px');
         $('#eighth_step').slideUp();
         $('#gateway_step').slideDown();
 
@@ -565,43 +600,48 @@ $(document).ready(function() {
 function stripeResponseHandler(status, response) {
     if (response.error) {
         // re-enable the submit button
-        $('.submit-button').removeAttr("disabled");
+        $('#submit_payment').removeAttr("disabled");
         // show the errors on the form
         $("#payment_errors").html(response.error.message);
     } else {
-        var form$ = $("#payment-form");
         // token contains id, last4, and card type
         var token = response['id'];
         // and submit
         registration_id = $("input[name=registration_id]").val();
         $.get("final_confirmation?reg_id=" + registration_id
             + "&amount_paid=" + to_be_charged + "&payment_tracking_number="
-              + token);
+              + token, function() {
+            var error_message = $("input[name=gateway_error]").val();
+            if (error_message) {
+                alert("Yes");
+                $("#payment_errors").html(error_message);
+            } else {
+                alert("No error");
+                table_html += "<tr><td>Amount paid</td><td>";
+                table_html += "$" + to_be_charged.toFixed(2);
+                table_html += "</td></tr>";
+                table_html += "<tr><td>Receipt id</td><td>";
+                table_html += token;
+                table_html += "</td></tr>";
+                $('#final_registration_table').append(table_html);
 
-        table_html += "<tr><td>Amount paid</td><td>";
-        table_html += "$" + to_be_charged.toFixed(2);
-        table_html += "</td></tr>";
-        table_html += "<tr><td>Receipt id</td><td>";
-        table_html += token;
-        table_html += "</td></tr>";
+                //update progress bar
+                $('#progress_text').html('100% Complete');
+                $('#progress').css('width','340px');
+                //slide steps
+                $('#gateway_step').slideUp();
+                $('#ninth_step').slideDown();
+            };
 
+        });
 
-        $('#final_registration_table').append(table_html)
-
-        //update progress bar
-        $('#progress_text').html('100% Complete');
-        $('#progress').css('width','350px');
-        //slide steps
-        $('#gateway_step').slideUp();
-        $('#ninth_step').slideDown();
-//        form$.get(0).submit();
-    }
+    };
 }
 
 $(document).ready(function() {
     $("#submit_payment").click(function(event) {
         // disable the submit button to prevent repeated clicks
-        $('.submit-button').attr("disabled", "disabled");
+        $('#submit_payment').attr("disabled", "disabled");
         // createToken returns immediately - the supplied callback submits the form if there are no errors
 
         Stripe.createToken({
@@ -612,18 +652,4 @@ $(document).ready(function() {
         }, stripeResponseHandler);
         return false; // submit from callback
     });
-});
-
-$(document).ready(function() {
-    $('<div id="loading">Retrieving data...please be patient!</div>')
-        .insertBefore("#active_admin_content")
-        .ajaxStart(function() {
-            $(this).show()
-            $('body').css('cursor', 'progress');
-//            $(this).addClass('wait');
-
-        }).ajaxStop(function() {
-            $(this).hide();
-            $('body').css('cursor', 'default');
-        });
 });

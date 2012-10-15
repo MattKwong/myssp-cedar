@@ -338,21 +338,29 @@ class RegistrationController < ApplicationController
     #Stripe.api_key = "sk_test_kYEikouk0OW7wf97pYd8Th9w"
     logger.debug params[:amount_paid]
     unless token == "None"
-      to_be_charged = (100 * params[:amount_paid].to_f).to_i
-      logger.debug to_be_charged
-      logger.debug token
-      charge = Stripe::Charge.create [
-          :amount=> to_be_charged,
-        :currency=>"usd",
-        :card => token,
-        :description => @registration.name ]
+      begin
+        to_be_charged = (100 * params[:amount_paid].to_f).to_i
+        logger.debug to_be_charged
+        logger.debug token
+        charge = Stripe::Charge.create [
+            :amount=> to_be_charged,
+          :currency=>"usd",
+          :card => token,
+          :description => @registration.name ]
+      rescue Stripe::InvalidRequestError => e
+        @error_message = "Stripe error while creating customer: #{e.message}"
+
+      end
     end
-    logger.debug charge
 
-
-    #Create the confirmation email
-    UserMailer.registration_confirmation(@registration).deliver
-    render :partial => "final_confirmation"
+    if e
+      logger.error @error_message
+      render :partial => 'final_confirmation'
+    else
+      #Create the confirmation email
+      UserMailer.registration_confirmation(@registration).deliver
+      render :partial => "final_confirmation"
+    end
 
   end
   def finish_up

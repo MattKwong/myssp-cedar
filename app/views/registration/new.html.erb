@@ -127,7 +127,7 @@
 
                 <div id='alt_site_info'></div>
 
-                <table id="prev_choices_table"></table>
+                <table id="prev_choices_table5"></table>
                 <h4>Add Your Next Choice</h4>
                 <table id="choices_table">
                   <tr>
@@ -140,6 +140,8 @@
                   </tr>
                 </table>
                 <p>Once you have selected an alternative choice, click "Record Choice" to save the selection.</p>
+                <br>
+                <p>To redo your choices, use the "Back" button.</p>
                 <br>
               </div>
               <div class="clear"></div>
@@ -158,23 +160,25 @@
 
               <div id="sixth_step">
               <h1>Step 6: Add Comments and Special Notes</h1>
+                <table id="prev_choices_table6"></table>
                 <div class="form">
                   <p>Do you have any special requirements or requests that we should know about? Do
                   you want to be scheduled together with another group?</p>
                   <p>Please let us know if there is a scholarship need for the entire group or for just a specific
                     number of youth. Scholarships will be applied to the second and final payments.</p>
                   <%=  r.text_area("comments", :size => "80x4") %>
+                <p>To add additional choices, use the "Back" button to return to the previous page.</p>
+                <br>
                 </div>
-              <div class="clear"></div>
+                <div class="clear"></div>
                 <div class="button_container">
                   <img class="reg_button next_button" id="submit_sixth" align="right" >
                   <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
                        :title => 'Cancel and return to liaison page'} %>
                   <img class="reg_button back_button" id="back_sixth" >
                 </div>
+                <div class="clear"></div>
               </div>
-            <div class="clear"></div>
-
             <div id="seventh_step">
               <h1>Step 7: Confirm Registration</h1>
                 <div class="form">
@@ -267,7 +271,10 @@
                   <td class = "money" id="disp_deposit_amount" ></td>
                 </tr>
                   <tr>
-                  <td><label>Optional Processing Charge</label></td>
+                  <td>
+                    <label id="processing_label"></label>
+                    <%= check_box_tag("include_charge", "accepted", false) %>
+                  </td>
                   <td class = "money" id="processing_charge" ></td>
                 </tr>
                   <tr>
@@ -284,7 +291,7 @@
                 </tr>
                 <tr>
                   <td><label>Expiration (MM/YYYY)</label></td>
-                  <td><span><input type="text" size="2" class="card-expiry-month"/> / <input type="text" size="4" class="card-expiry-year"/></span></td>
+                  <td><span><input type="text" size="2" class="card-expiry-month"/><input type="text" size="4" class="card-expiry-year"/></span></td>
                   <!--<span> / </span>-->
                   <!--<td><input type="text" size="4" class="card-expiry-year"/></td>-->
                 </tr>
