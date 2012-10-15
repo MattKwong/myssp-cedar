@@ -1,3 +1,7 @@
+/*
+*= require_self
+*/
+
 /* Remove unwanted elements */
 #header, #title_bar, #footer, #progress_bar, #progress_text, #gateway_step, .noprint, .button_container, #register_header
 {
