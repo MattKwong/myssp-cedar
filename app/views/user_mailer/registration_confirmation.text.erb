@@ -9,13 +9,21 @@ The following is the registration information that you provided to us:
 
 
 Group name:                 <%=	@registration.name %>
+
 Church:                     <%= @registration.church.name %>
+
 Liaison:                    <%= @registration.liaison.name %>
+
 Number of youth:            <%= @registration.requested_youth %>
+
 Number of counselors:       <%= @registration.requested_counselors %>
+
 Total:                      <%= @registration.requested_total %>
-Deposit Amount Due;         <%= number_to_currency(@deposit_amount) %>
+
+Deposit Amount Due:         <%= number_to_currency(@deposit_amount) %>
+
 Amount Paid:                <%= number_to_currency(@registration.amount_paid) %>
+
 <% if @registration.payment_notes == "None" %>
 <%= "Payment Notes:              Mail in check" %>
 <% else %>
