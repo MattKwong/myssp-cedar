@@ -29,7 +29,10 @@ ActiveAdmin.register Liaison do
 
     panel "Original Request Information" do
       table_for liaison.registrations do
-        column "Group Name", :name
+        column "Group Name" do |group|
+        link_to group.name, admin_registration_path(group.id),
+                :title => 'Click to see details of this request.'
+          end
         column "Youth", :requested_youth
         column "Counselors", :requested_counselors
         column "Total", :requested_total

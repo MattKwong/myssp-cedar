@@ -28,7 +28,6 @@
       </div>
    <% end %>
 </div>
-<!--&lt;!&ndash;Original Request Section &ndash;&gt;-->
             <div class="panel">
                 <h3>Original Request Information</h3>
                 <div class="panel_contents">
@@ -44,7 +43,8 @@
                         </thead>
                         <tbody><% @screen_info[:registration_info].each do |g| %>
                             <tr>
-                                <td><%= g.name %></td>
+                                <td><%= link_to g.name, admin_registration_path(g.id),
+                                                :title => 'Click to view details of this request'%>/td>
                                 <td><%= g.requested_youth %></td>
                                 <td><%= g.requested_counselors %></td>
                                 <td><%= g.requested_total %></td>
