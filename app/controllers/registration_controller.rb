@@ -400,14 +400,17 @@ class RegistrationController < ApplicationController
     @scheduled_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
     @session_id_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
 
-#    Registration.find_all_by_request1_and_scheduled(not nil, false).each do |r|
     Registration.all(:conditions => "(request1 IS NOT NULL) AND (scheduled = 'f')").each do |r|
         @session = Session.find(r.request1)
         @site = Site.find(@session.site_id)
+
         @period = Period.find(@session.period_id)
         @row_position = @site_ordinal.index(@site.name)
         @column_position = @period_ordinal.index(@period.name)
         @session_id_matrix[@row_position][@column_position] = @session.id
+        if @site.name == "Coarsegold"
+           logger.debug @session_id_matrix
+        end
         @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
           unless (@column_position.nil? || @row_position.nil?)
           end
@@ -430,26 +433,39 @@ class RegistrationController < ApplicationController
     @sched_total = 0
     for i in 0..@site_names.size - 1 do
       for j in 0..@period_names.size - 1 do
-        @reg_total = @reg_total + @registration_matrix[i][j]
-        @sched_total = @sched_total + @scheduled_matrix[i][j]
+        @reg_total += @registration_matrix[i][j]
+        @sched_total += @scheduled_matrix[i][j]
       end
       @registration_matrix[i][@period_names.size] = @reg_total
       @scheduled_matrix[i][@period_names.size] = @sched_total
       @reg_total = @sched_total = 0
     end
 
-    @reg_total = 0
-    @sched_total = 0
-    for j in 0..@period_names.size - 1 do
+    #@reg_total = 0
+    #@sched_total = 0
+    #for i in 0..@period_names.size - 1 do
+    #  for j in 0..@site_names.size - 1 do
+    #    @reg_total = @reg_total + @registration_matrix[i][j]
+    #    logger.debug @reg_total
+    #    @sched_total = @sched_total + @scheduled_matrix[i][j]
+    #  end
+    #  @registration_matrix[i][j] = @reg_total
+    #  @scheduled_matrix[j][i] = @sched_total
+    #  logger.debug i
+    #  logger.debug j
+    #  logger.debug @reg_total
+    #  @reg_total = @sched_total = 0
+    #end
+    for j in 0 ..@period_names.size do
       for i in 0..@site_names.size - 1 do
         @reg_total = @reg_total + @registration_matrix[i][j]
+        logger.debug @reg_total
         @sched_total = @sched_total + @scheduled_matrix[i][j]
       end
-      @registration_matrix[@period_names.size - 1][j] = @reg_total
-      @scheduled_matrix[@period_names.size - 1][j] = @sched_total
+      @registration_matrix[@site_names.size][j] = @reg_total
+      @scheduled_matrix[@site_names.size][i] = @sched_total
       @reg_total = @sched_total = 0
     end
-
     #Grand total
     @reg_total = @sched_total = 0
     for i in 0..@site_names.size - 1 do
@@ -461,6 +477,7 @@ class RegistrationController < ApplicationController
 
     @period_names << "Total"
     @site_names << "Total"
+    logger.debug @registration_matrix
     @schedule = { :site_count => @site_names.size - 1, :period_count => @period_names.size - 1,
                   :site_names => @site_names, :period_names => @period_names,
                   :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
