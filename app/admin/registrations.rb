@@ -6,16 +6,16 @@ ActiveAdmin.register Registration do
 #  scope :unscheduled, :default => true #, :label => "All Unscheduled"
 
  index :title => "Registration Requests" do
-    #column :name do |r|
-    #  link_to r.name, schedule_request_path(:id => r.id),
-    #    :title => "Click to schedule this group"
-    #end
+    column :name do |r|
+      link_to r.name, schedule_request_path(:id => r.id),
+        :title => "Click to schedule this group"
+    end
     column :liaison_id
     column :liaison_id do |liaison|
       link_to liaison.liaison.name, admin_liaison_path(liaison.liaison_id)
     end
-    column :church_id do |church|
-      link_to church.church.name, admin_church_path(church.church_id)
+    column :church_id do |reg|
+      link_to reg.liaison.church.name, admin_church_path(reg.liaison.church.church_id)
     end
 
     column :requested_youth, :label => "Youth"
