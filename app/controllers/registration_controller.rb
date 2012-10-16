@@ -199,7 +199,7 @@ class RegistrationController < ApplicationController
       @limit_text = 'You may register up to 30 persons in total. We suggest a ratio of 1 counselor for every 5 youth.'
       @site_text = "Below is a list of the sites that are hosting senior high programs this summer. When you select a site, the available sessions will appear."
       @limit = 30
-      @group_type_name =  "Summer Junior High"
+      @group_type_name =  "Summer Senior High"
     end
 
     render :partial => "limit_info"
