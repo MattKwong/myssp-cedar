@@ -18,7 +18,7 @@ class ConfirmationsController < Devise::PasswordsController
       respond_with({}, :location => after_resending_confirmation_instructions_path_for(resource_name))
     else
       @page_title = "Request Confirmation Instructions"
-      respond_with_navigational(resource){ render_with_scope :new }
+      respond_with_navigational(resource){ render :new }
     end
   end
 
