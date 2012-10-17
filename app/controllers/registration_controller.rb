@@ -326,30 +326,33 @@ class RegistrationController < ApplicationController
     @registration.amount_paid = params[:amount_paid]
     @registration.payment_notes = params[:payment_tracking_number]
     @registration.save
-    @deposit_amount = @registration.requested_total * 50
     #Create the confirmation email
-    UserMailer.registration_confirmation(@registration).deliver
+    UserMailer.registration_confirmation(@registration, params).deliver
     render :partial => "final_confirmation"
   end
 
   def process_cc_payment
     token = params[:payment_tracking_number]
+    @registration = Registration.find(params[:reg_id])
+    begin
+      to_be_charged = (100 * params[:amount_paid].to_f).to_i
+      logger.debug to_be_charged
+      logger.debug token
+      charge = Stripe::Charge.create(
+        :amount=> to_be_charged,
+        :currency=>"usd",
+        :card => token,
+        :description => @registration.name)
+    rescue Stripe::InvalidRequestError => e
+      @payment_error_message = "There has been a problem processing your credit card."
+      logger.debug e.message
+    rescue Stripe::CardError => e
+      @payment_error_message = e.message
+      logger.debug e.message
+    end
 
-      begin
-        to_be_charged = (100 * params[:amount_paid].to_f).to_i
-        logger.debug to_be_charged
-        logger.debug token
-        charge = Stripe::Charge.create(
-          :amount=> to_be_charged,
-          :currency=>"usd",
-          :card => token,
-          :description => @registration.name)
-      rescue
-        @payment_error_message = "There has been a problem processing your credit card."
-      end
-
-    if Stripe::InvalidRequestError
-      logger.debug Stripe::InvalidRequestError
+    if e
+      logger.debug e.inspect
       render :partial => 'payment_gateway'
     else
       #Needs to find and save the registration instance with the payment information
@@ -359,7 +362,7 @@ class RegistrationController < ApplicationController
       @registration.save
       @deposit_amount = @registration.requested_total * 50
       #Create the confirmation email
-      UserMailer.registration_confirmation(@registration).deliver
+      UserMailer.registration_confirmation(@registration, params).deliver
       render :partial => "final_confirmation"
     end
 

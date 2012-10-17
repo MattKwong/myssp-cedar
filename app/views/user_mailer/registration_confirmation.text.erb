@@ -20,14 +20,22 @@ Number of counselors:       <%= @registration.requested_counselors %>
 
 Total:                      <%= @registration.requested_total %>
 
-Deposit Amount Due:         <%= number_to_currency(@deposit_amount) %>
-
-Amount Paid:                <%= number_to_currency(@registration.amount_paid) %>
+Deposit Amount Due:         <%= number_to_currency(@params[:deposit_amount]) %>
 
 <% if @registration.payment_notes == "None" %>
-<%= "Payment Notes:              Mail in check" %>
+<%=
+"Payment Notes:              Mail in check payable to Sierra Service Project"
+%>
 <% else %>
-<%= "Payment Notes:              Paid by credit card. Receipt id: #{@registration.payment_notes}" %>
+<%=
+"Deposit Paid:               #{number_to_currency(@params[:deposit_amount])}
+
+Processing Charge Paid:     #{number_to_currency(@params[:processing_charge])}
+
+Total Charged:              #{number_to_currency(@params[:amount_paid])}
+
+Payment Notes:              Paid by credit card. Receipt id: #{@registration.payment_notes}"
+%>
 <% end %>
 
 The following are your site and week requests:
@@ -87,3 +95,7 @@ Business Manager
 meghan.osborn@sierraserviceproject.org
 www.sierraserviceproject.org
 916-488-6441
+
+Sierra Service Project
+PO Box 992
+Carmichael CA 95609

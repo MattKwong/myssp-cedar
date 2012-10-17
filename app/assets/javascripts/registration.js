@@ -15,7 +15,7 @@ var payment_tracking_number;
 var table_html;
 var comments;
 var deposit_amount;
-var processing_charge;
+var processing_charge = 0;
 var to_be_charged;
 var choice_html;
 
@@ -471,6 +471,7 @@ $(document).ready(function() {
             + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
             + requested_adults + "&liaison_id=" + liaison_id, function(data) {
             $("#step_seven_data").html(data);
+            deposit_amount = parseInt($("input[name=deposit_amount]").val());
         } );
 
 
@@ -488,16 +489,17 @@ $(document).ready(function() {
         //Finalize without using payment gateway.
         amount_paid = 0;
         payment_tracking_number = "None";
+
         //Send the confirming email and update the payment information
         //retrieve the registration id
         registration_id = $("input[name=registration_id]").val();
-        $.get("final_confirmation?reg_id=" + registration_id
-            + "&amount_paid=" + amount_paid + "&payment_tracking_number="
+        $.get("pay_by_check?reg_id=" + registration_id
+            + "&amount_paid=" + amount_paid + "&deposit_amount=" + deposit_amount + "&payment_tracking_number="
             + payment_tracking_number);
 
-        table_html += "<tr><td>Deposit amount due</td><td>";
-        table_html += "$" + parseInt($("input[name=deposit_amount]").val());
-        table_html += "<tr><td>Amount paid</td><td>";
+        table_html += "<tr><td>Deposit Amount Due</td><td>";
+        table_html += "$" + deposit_amount;
+        table_html += "<tr><td>Amount Paid</td><td>";
         table_html += "$" + amount_paid;
         table_html += "</td></tr>";
         table_html += "<tr><td>Receipt id</td><td>";
@@ -576,7 +578,7 @@ $(document).ready(function() {
             } else {
                 processing_charge = 0; }
 
-
+//        alert(processing_charge);
         to_be_charged = (parseFloat(deposit_amount) + parseFloat(processing_charge));
 
         $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
@@ -614,20 +616,23 @@ function stripeResponseHandler(status, response) {
         // token contains id, last4, and card type
         var token = response['id'];
         // and submit
+//        alert(processing_charge);
         registration_id = $("input[name=registration_id]").val();
-        $.get("process_cc_payment?reg_id=" + registration_id
-            + "&amount_paid=" + to_be_charged + "&payment_tracking_number="
+        $.get("process_cc_payment?reg_id=" + registration_id  + "&deposit_amount=" + deposit_amount
+            + "&amount_paid=" + to_be_charged + "&processing_charge=" + processing_charge + "&payment_tracking_number="
             + token,  function(data) {
 
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
-            alert(error_message);
             if (error_message) {
-                alert("Yes");
                 $("#payment_errors").html(error_message);
             } else {
+                table_html += "<tr><td>Deposit Amount</td><td>";
+                table_html += "$" + parseFloat(deposit_amount).toFixed(2);
+                table_html += "<tr><td>Processing Charge</td><td>";
+                table_html += "$" + parseFloat(processing_charge).toFixed(2);
                 table_html += "<tr><td>Amount paid</td><td>";
-                table_html += "$" + to_be_charged.toFixed(2);
+                table_html += "$" + parseFloat(to_be_charged).toFixed(2);
                 table_html += "</td></tr>";
                 table_html += "<tr><td>Receipt id</td><td>";
                 table_html += token;
