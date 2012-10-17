@@ -79,11 +79,19 @@ class Program < ActiveRecord::Base
   end
 
   def adults
-    (self.scheduled_groups.map &:current_counselors).sum
+    total = 0
+    self.sessions.each do |s|
+      total += s.scheduled_adults
+    end
+    total
   end
 
   def youth
-    (self.scheduled_groups.map &:current_youth).sum
+    total = 0
+    self.sessions.each do |s|
+      total += s.scheduled_adults
+    end
+    total
   end
 
   def total

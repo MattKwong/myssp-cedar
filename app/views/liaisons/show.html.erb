@@ -44,7 +44,7 @@
                         <tbody><% @screen_info[:registration_info].each do |g| %>
                             <tr>
                                 <td><%= link_to g.name, admin_registration_path(g.id),
-                                                :title => 'Click to view details of this request'%>/td>
+                                                :title => 'Click to view details of this request' %></td>
                                 <td><%= g.requested_youth %></td>
                                 <td><%= g.requested_counselors %></td>
                                 <td><%= g.requested_total %></td>

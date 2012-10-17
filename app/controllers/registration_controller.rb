@@ -226,7 +226,7 @@ class RegistrationController < ApplicationController
 
     @session_choices_names = params[:session_choices_names].split('/')
     @session_choices_names[params[:number_of_choices].to_i] = current_session.name
-    @session_count = (params[:number_of_choices].to_i) + 1
+    @session_count = (params[:number_of_choices].to_i)
     #As above, let Summer senior high be the default in the event that an invalid value is passed
     #logger.debug @session_choices
     #logger.debug @session_choices_names.inspect
@@ -321,10 +321,20 @@ class RegistrationController < ApplicationController
     liaison.save
   end
 
-  def final_confirmation
+  def pay_by_check
+    @registration = Registration.find(params[:reg_id])
+    @registration.amount_paid = params[:amount_paid]
+    @registration.payment_notes = params[:payment_tracking_number]
+    @registration.save
+    @deposit_amount = @registration.requested_total * 50
+    #Create the confirmation email
+    UserMailer.registration_confirmation(@registration).deliver
+    render :partial => "final_confirmation"
+  end
 
+  def process_cc_payment
     token = params[:payment_tracking_number]
-    unless token == "None"
+
       begin
         to_be_charged = (100 * params[:amount_paid].to_f).to_i
         logger.debug to_be_charged
@@ -337,12 +347,11 @@ class RegistrationController < ApplicationController
       rescue
         @payment_error_message = "There has been a problem processing your credit card."
       end
-    end
 
-    #if Stripe::InvalidRequestError
-    #  logger.debug Stripe::InvalidRequestError.inspect
-    #  render :partial => 'payment_gateway'
-    #else
+    if Stripe::InvalidRequestError
+      logger.debug Stripe::InvalidRequestError
+      render :partial => 'payment_gateway'
+    else
       #Needs to find and save the registration instance with the payment information
       @registration = Registration.find(params[:reg_id])
       @registration.amount_paid = params[:amount_paid]
@@ -352,7 +361,7 @@ class RegistrationController < ApplicationController
       #Create the confirmation email
       UserMailer.registration_confirmation(@registration).deliver
       render :partial => "final_confirmation"
-    #end
+    end
 
   end
   def finish_up

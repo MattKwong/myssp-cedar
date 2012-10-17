@@ -243,7 +243,7 @@ $(document).ready(function() {
             session_count = $("input[name=session_count]").val();
             choice_html = '';
             choice_html += "<tr><td>Current Choices</td></tr>";
-            choice_html += "<tr><td>Choice" + parseInt(session_count) + ": </td><td>";
+            choice_html += "<tr><td>Choice " + parseInt(session_count + 1) + ": </td><td>";
             choice_html += session_choices[0];
             choice_html += "</td></tr>";
             $("#prev_choices_table5").html(choice_html);
@@ -269,7 +269,9 @@ $(document).ready(function() {
                 + "&session_choices_names=" + $("input[name=session_choices_names]").val().split('/')
                 + "&number_of_choices=" + number_of_choices
                 ,
-                function(data){ $("#alt_session_selector").html(data);})
+                function(data){ $("#alt_session_selector").html(data);
+//                alert(data);
+                })
         }
     );
 });
@@ -303,7 +305,8 @@ $(document).ready(function() {
 
         site_choice = $("#alt_site_selector_site_id").val();
         week_choice = $("#alt_session_selector_session_id").val();
-
+//        alert('site_choice is ' + site_choice)
+//        alert('week_choice is ' + week_choice)
         var error = 0;
         if( site_choice == '' || week_choice == '') {
             $('#error_text_alt_selections').html('Error: You must select a valid site and a week.');
@@ -311,8 +314,7 @@ $(document).ready(function() {
         }
 
         if(!error) {
-            //get and show the remaining site choices
-            //also returns selection array to hidden field
+//            alert('number of choices is ' + number_of_choices);
             number_of_choices++;
             $.get("get_alt_sites_for_group_type?value="+ group_type + "&session_choices=" + session_choices
                 + "&session_choices_names=" + session_choices_names
@@ -322,10 +324,11 @@ $(document).ready(function() {
 
             session_choices = $("input[name=session_choices_names]").val().split('/');
             session_count = $("input[name=session_count]").val();
+//            alert('session_count returned is ' + session_count);
             choice_html = '';
             choice_html += "<tr><td>Current Choices</td></tr>";
             $.each(session_choices, function(index, value) {
-                choice_html += "<tr><td>Choice" + (index + 1) + ": </td><td>";
+                choice_html += "<tr><td>Choice " + (index + 1) + ": </td><td>";
                 choice_html += value;
                 choice_html += "</td></tr>";
             });
@@ -481,7 +484,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#submit_eighth').click(function(){
+    $('#pay_by_check').click(function(){
         //Finalize without using payment gateway.
         amount_paid = 0;
         payment_tracking_number = "None";
@@ -491,7 +494,6 @@ $(document).ready(function() {
         $.get("final_confirmation?reg_id=" + registration_id
             + "&amount_paid=" + amount_paid + "&payment_tracking_number="
             + payment_tracking_number);
-
 
         table_html += "<tr><td>Deposit amount due</td><td>";
         table_html += "$" + parseInt($("input[name=deposit_amount]").val());
@@ -526,13 +528,18 @@ $(document).ready(function() {
         window.print();
     });
 });
-//$(document).ready(function() {
-//    $("#gateway").hover(function() {
-//        $(this).addClass('hover');
-//    });
-//});
 $(document).ready(function() {
-    $("#submit_payment").hover(function() {
+    $("#pay_by_cc").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#pay_by_check").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+$(document).ready(function() {
+    $("#pay_now").hover(function() {
         $(this).addClass('hover');
     });
 });
@@ -541,25 +548,25 @@ $(document).ready(function() {
         $(this).addClass('hover');
     });
 });
-//$(document).ready(function() {
-//    $('#gateway').click(function(){
-//        //Pull the deposit_amount and processing_charge
-//
-//        deposit_amount = $("input[name=deposit_amount]").val();
-//        processing_charge = $("input[name=processing_charge]").val();
-//        to_be_charged = (parseFloat(deposit_amount));
-//        $("#processing_label").html("Include the 2.9% Credit Card Charge that SSP Pays ($" + parseFloat($("input[name=processing_charge]").val()).toFixed(2) + ")");
-//        $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
-//        $("td#processing_charge").html('');
-//        $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
-//        //update progress bar
-//        $('#progress_text').html('87.5% Complete');
-//        $('#progress').css('width','308px');
-//        $('#eighth_step').slideUp();
-//        $('#gateway_step').slideDown();
-//
-//    });
-//});
+$(document).ready(function() {
+    $('#pay_by_cc').click(function(){
+        //Pull the deposit_amount and processing_charge
+
+        deposit_amount = $("input[name=deposit_amount]").val();
+        processing_charge = $("input[name=processing_charge]").val();
+        to_be_charged = (parseFloat(deposit_amount));
+        $("#processing_label").html("Include the 2.9% Credit Card Charge that SSP Pays ($" + parseFloat($("input[name=processing_charge]").val()).toFixed(2) + ")");
+        $("td#disp_deposit_amount").html("$" + parseFloat(deposit_amount).toFixed(2));
+        $("td#processing_charge").html('');
+        $("td#to_be_charged").html("$" + to_be_charged.toFixed(2));
+        //update progress bar
+        $('#progress_text').html('87.5% Complete');
+        $('#progress').css('width','308px');
+        $('#eighth_step').slideUp();
+        $('#gateway_step').slideDown();
+
+    });
+});
 
 $(document).ready(function() {
     $('input[name=include_charge]').click(function(){
@@ -600,7 +607,7 @@ $(document).ready(function() {
 function stripeResponseHandler(status, response) {
     if (response.error) {
         // re-enable the submit button
-        $('#submit_payment').removeAttr("disabled");
+        $('#pay_now').removeAttr("disabled");
         // show the errors on the form
         $("#payment_errors").html(response.error.message);
     } else {
@@ -608,10 +615,11 @@ function stripeResponseHandler(status, response) {
         var token = response['id'];
         // and submit
         registration_id = $("input[name=registration_id]").val();
-        $.get("final_confirmation?reg_id=" + registration_id
+        $.get("process_cc_payment?reg_id=" + registration_id
             + "&amount_paid=" + to_be_charged + "&payment_tracking_number="
-              + token,  function() {
-            alert("back from final confirmation");
+            + token,  function(data) {
+
+            $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
             alert(error_message);
             if (error_message) {
@@ -640,9 +648,9 @@ function stripeResponseHandler(status, response) {
 }
 
 $(document).ready(function() {
-    $("#submit_payment").click(function(event) {
+    $("#pay_now").click(function(event) {
         // disable the submit button to prevent repeated clicks
-        $('#submit_payment').attr("disabled", "disabled");
+        $('#pay_now').attr("disabled", "disabled");
         // createToken returns immediately - the supplied callback submits the form if there are no errors
 
         Stripe.createToken({

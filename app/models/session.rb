@@ -23,8 +23,7 @@ class Session < ActiveRecord::Base
   has_many :scheduled_groups
   accepts_nested_attributes_for :scheduled_groups
 
-  #TODO: this caused a failure in 3.2
-  #default_scope :include => :period, :order => 'periods.start_date'
+  default_scope includes(:period).order('periods.start_date ASC')
 
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
