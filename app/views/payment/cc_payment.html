@@ -1,0 +1,46 @@
+<%= stylesheet_link_tag "print", :media => "print" %>
+<div id='active_admin_content'>
+    <div id="reg_container">
+        <h4>You are entering SSP's secure payment gateway. You may use a credit or debit
+            card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
+        <div class="hidden" id="gateway_data"></div>
+        <form action="" method="POST" id="payment-form">
+            <table>
+                <tr>
+                    <td><label>Payment Amount</label></td>
+                    <td class = "money" id="disp_deposit_amount" ></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="processing_label"></label>
+                        <%= check_box_tag("include_charge", "accepted", false) %>
+                    </td>
+                    <td class = "money" id="processing_charge" ></td>
+                </tr>
+                <tr>
+                    <td><label>Total To Be Charged</label></td>
+                    <td class = "money" id="to_be_charged" ></td>
+                </tr>
+                <tr>
+                    <td><label>Card Number</label></td>
+                    <td><input type="text" size="20" autocomplete="off" class="card-number" /></td>
+                </tr>
+                <tr>
+                    <td><label>CVC</label></td>
+                    <td><input type="text" size="4" autocomplete="off" class="card-cvc" /></td>
+                </tr>
+                <tr>
+                    <td><label>Expiration (MM/YYYY)</label></td>
+                    <td><span><input type="text" size="2" class="card-expiry-month"/><input type="text" size="4" class="card-expiry-year"/></span></td>
+                </tr>
+            </table>
+            <!--<button type="submit" class="submit-button">Submit Payment</button>-->
+            <div class = "errors" id="payment_errors"></div>
+            <div class="clear"></div>
+            <div class="button_container">
+                <img class="reg_button pay_now_button" id="pay_now" >
+                <img class="reg_button back_button" id="back_gateway" >
+            </div>
+        </form>
+    </div>
+</div>

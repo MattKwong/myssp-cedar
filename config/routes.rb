@@ -72,6 +72,7 @@ Spoic3::Application.routes.draw do
   match 'registration/process_cc_payment', :to => 'registration#process_cc_payment'
   match 'registration/pay_by_check', :to => 'registration#pay_by_check'
 
+  match 'payment/:id/cc_payment', :to => 'payment#cc_payment', :as => 'cc_payment'
 
   match "items/new", :to => 'items#new', :as => 'add_item'
   resources :vendors #, :only => [:index]

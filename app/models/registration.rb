@@ -80,6 +80,18 @@ class Registration < ActiveRecord::Base
   #def step3?
   #  registration_step == 'Step 3'
   #end
+
+  def deposits_paid
+    ##returns the value of deposit payments for this registration
+    Payment.deposits_paid(self.id)
+  end
+
+  def deposits_due
+    ##returns the value of deposit amount to be charged for this registration
+    deposit_per_person = Session.find(self.request1).payment_schedule.deposit
+    deposit_per_person * requested_total
+  end
+
   def request_sequence
   #This routine fails if there are any non-requests within the sequence of requests.
   a = [request1, request2, request3, request4, request5, request6, request7,

@@ -39,6 +39,9 @@
                                 <th>Counselors</th>
                                 <th>Total</th>
                                 <th>Date submitted</th>
+                                <th>Deposit Paid</th>
+                                <th>Amount Due</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody><% @screen_info[:registration_info].each do |g| %>
@@ -49,6 +52,15 @@
                                 <td><%= g.requested_counselors %></td>
                                 <td><%= g.requested_total %></td>
                                 <td><%= g.created_at.strftime("%m/%d/%y") %></td>
+                                <td><%= number_to_currency(g.deposits_paid) %></td>
+                                <td><%= number_to_currency(g.deposits_due - g.deposits_paid) %></td>
+                                <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id),
+                                                :title => "Click to make credit card payment." %></td>
+                                <% if can? :create, Payment %>
+                                    <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id),
+                                              :title => "Click to record payment." %></td>
+                                <% end %>
+
                             </tr>
                         <% end %>
                         </tbody>

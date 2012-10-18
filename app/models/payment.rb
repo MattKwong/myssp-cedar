@@ -25,6 +25,10 @@ class Payment < ActiveRecord::Base
   validates_numericality_of :payment_amount
   validates_inclusion_of :payment_type, :in => ['Initial', 'Deposit', 'Second', 'Final', 'Other', 'Processing Charge'], :message => "Invalid payment type"
 
+  def self.deposits_paid(reg_id)
+    Payment.find_all_by_registration_id_and_payment_type(reg_id, 'Deposit').sum(&:payment_amount)
+  end
+
   def self.record_deposit(reg_id, deposit_amount, processing_charge, type, notes)
     p = Payment.create(:payment_date => Date.today, :registration_id => reg_id, :payment_amount => deposit_amount,
           :payment_method => type, :payment_type => 'Deposit', :payment_notes => notes)

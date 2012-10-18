@@ -25,6 +25,11 @@ class PaymentController < ApplicationController
     @page_title = "Record payment for: #{scheduled_group.name}"
   end
 
+  def cc_payment
+    @registration = Registration.find(params[:id])
+    @page_title = "Make Credit Card Payment for #{@registration.name}"
+    render 'cc_payment'
+  end
   def create
     payment = Payment.new(params[:payment])
     scheduled_group = ScheduledGroup.find(payment.scheduled_group_id)
