@@ -1,25 +1,27 @@
 <%= stylesheet_link_tag "print", :media => "print" %>
 <div id='active_admin_content'>
     <div id="reg_container">
+        <div id="cc_payment_step">
+
         <h4>You are entering SSP's secure payment gateway. You may use a credit or debit
             card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
         <div class="hidden" id="gateway_data"></div>
-        <form action="" method="POST" id="payment-form">
+        <form action="" method="POST" id="cc-payment-form">
             <table>
                 <tr>
-                    <td><label>Payment Amount</label></td>
-                    <td class = "money" id="disp_deposit_amount" ></td>
+                    <td><label>Payment Amount (please omit $)</label></td>
+                    <td><input type="text" size="20" autocomplete="off" name="cc_payment_amount" id="cc_payment_amount" /></td>
                 </tr>
                 <tr>
                     <td>
-                        <label id="processing_label"></label>
-                        <%= check_box_tag("include_charge", "accepted", false) %>
+                        <label id="processing_label">Include 2.9% processing fee that SSP pays</label>
+                        <%= check_box_tag("include_cc_charge", "accepted", false) %>
                     </td>
-                    <td class = "money" id="processing_charge" ></td>
+                    <td class = "input_money" id="cc_processing_charge" ></td>
                 </tr>
                 <tr>
                     <td><label>Total To Be Charged</label></td>
-                    <td class = "money" id="to_be_charged" ></td>
+                    <td class = "input_money" id="cc_to_be_charged" ></td>
                 </tr>
                 <tr>
                     <td><label>Card Number</label></td>
@@ -33,14 +35,46 @@
                     <td><label>Expiration (MM/YYYY)</label></td>
                     <td><span><input type="text" size="2" class="card-expiry-month"/><input type="text" size="4" class="card-expiry-year"/></span></td>
                 </tr>
+                <tr>
+                    <td><label>Payment Comments</label></td>
+                    <td><%=  text_area :payment, :comments, :cols => 30, :rows => 4 %></td>
+                </tr>
             </table>
             <!--<button type="submit" class="submit-button">Submit Payment</button>-->
-            <div class = "errors" id="payment_errors"></div>
+            <div class = "errors" id="cc_payment_errors"></div>
             <div class="clear"></div>
             <div class="button_container">
-                <img class="reg_button pay_now_button" id="pay_now" >
-                <img class="reg_button back_button" id="back_gateway" >
+            <img class="reg_button pay_now_button" id="pay_cc_now" >
+             <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                :title => 'Cancel and return to liaison page'} %>
             </div>
         </form>
+    </div>
+        <div id="confirmation_step">
+            <h1>Payment Successfully Processed</h1>
+            <div class="form">
+                <p>Your payment has been successfully processed. Please print a copy of this page for your records. If
+                    you have any questions, don't hesitate to call Meghan Osborn at 916-488-6441.</p>
+                <table id="final_confirmation_table">
+                    <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                    <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                    <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                    <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                    <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                    <tr></tr>
+                    <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                    <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                    <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    <tr></tr>
+                </table>
+                <div class="clear"></div>
+            </div>
+            <div class="button_container">
+                <div class="reg_button center ">
+                    <img class="print_button" id="print_ninth" >
+                    <%=  link_to image_tag("return.png", :alt => ":return"), :back, :class=>"return_button",
+                    :title => 'Return to liaison page' %>
+                </div>
+            </div>
     </div>
 </div>

@@ -25,7 +25,7 @@ class Ability
       if registrations then
         can [:manage], Registration, :liaison_id => user.liaison_id
         registrations.each do |reg|
-          can :cc_payment, Payment, :registration_id => reg.id
+          can [:cc_payment, :process_cc_payment], Payment, :registration_id => reg.id
         end
       end
   #move is defined as being able to move a scheduled group and to increase their numbers

@@ -611,12 +611,12 @@ function stripeResponseHandler(status, response) {
         // re-enable the submit button
         $('#pay_now').removeAttr("disabled");
         // show the errors on the form
-        $("#payment_errors").html(response.error.message);
+            $("#payment_errors").html(response.error.message);
     } else {
         // token contains id, last4, and card type
         var token = response['id'];
         // and submit
-//        alert(processing_charge);
+        alert(processing_charge);
         registration_id = $("input[name=registration_id]").val();
         $.get("process_cc_payment?reg_id=" + registration_id  + "&deposit_amount=" + deposit_amount
             + "&amount_paid=" + to_be_charged + "&processing_charge=" + processing_charge + "&payment_tracking_number="

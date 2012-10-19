@@ -23,6 +23,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
 .clear { clear:both; }
 
+#cc-payment-form .input_money {
+    /*float: left;*/
+    vertical-align: middle;
+}
 #reg_container {
     /*background: url('container.png') no-repeat;*/
     width: 754px;

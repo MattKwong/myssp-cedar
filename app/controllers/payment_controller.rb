@@ -27,9 +27,46 @@ class PaymentController < ApplicationController
 
   def cc_payment
     @registration = Registration.find(params[:id])
+    @liaison = Registration.find(params[:id]).liaison
     @page_title = "Make Credit Card Payment for #{@registration.name}"
     render 'cc_payment'
   end
+
+  def process_cc_payment
+    token = params[:payment_tracking_number]
+    @registration = Registration.find(params[:id])
+    @payment_error_message = ''
+    begin
+      to_be_charged = (100 * params[:amount_paid].to_f).to_i
+      logger.debug to_be_charged
+      logger.debug token
+      charge = Stripe::Charge.create(
+          :amount=> to_be_charged,
+          :currency=>"usd",
+          :card => token,
+          :description => @registration.name)
+    rescue Stripe::InvalidRequestError => e
+      @payment_error_message = "There has been a problem processing your credit card."
+      logger.debug e.message
+    rescue Stripe::CardError => e
+      @payment_error_message = e.message
+      logger.debug e.message
+    end
+
+    if e
+      render :partial => 'process_cc_payment'
+    else
+      #Needs to find and save the registration instance with the payment information
+      p = Payment.create(:payment_date => Date.today, :registration_id => @registration.id, :payment_amount => (to_be_charged / 100),
+                         :payment_method => "cc", :payment_type => 'Deposit', :payment_notes => params[:payment_comments])
+      unless p
+        @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
+      end
+    end
+    render :partial => 'process_cc_payment'
+  end
+
+
   def create
     payment = Payment.new(params[:payment])
     scheduled_group = ScheduledGroup.find(payment.scheduled_group_id)
