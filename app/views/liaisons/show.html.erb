@@ -42,6 +42,7 @@
                                 <th>Deposit Paid</th>
                                 <th>Amount Due</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody><% @screen_info[:registration_info].each do |g| %>
@@ -57,7 +58,7 @@
                                 <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id),
                                                 :title => "Click to make credit card payment." %></td>
                                 <% if can? :create, Payment %>
-                                    <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id),
+                                    <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
                                               :title => "Click to record payment." %></td>
                                 <% end %>
 

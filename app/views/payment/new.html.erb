@@ -32,7 +32,8 @@
                            <td><%= r.label "Amount Received (please omit dollar sign)" %></td>
                            <td><%= r.number_field :payment_amount, :as => :number %></td>
                         </tr>
-                        <input type = "hidden" name="payment[scheduled_group_id]" value= <%= @screen_info[:scheduled_group].id %> />
+                        <input type = "hidden" name="group_id" value= <%= @screen_info[:scheduled_group].id %> />
+                        <input type = "hidden" name="group_status" value= <%= @screen_info[:group_status] %> />
                     </table>
                     <div class="actions">
                         <%= r.submit "Submit" %>
