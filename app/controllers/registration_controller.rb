@@ -372,6 +372,10 @@ class RegistrationController < ApplicationController
     render myssp_path(current_admin_user.liaison_id)
   end
 
+  def request_matrix
+    @matrix = build_schedule("requested", "summer_domestic")
+    render :partial => 'request_matrix'
+  end
   private
 
   def build_schedule(reg_or_sched, type)
@@ -421,9 +425,6 @@ class RegistrationController < ApplicationController
         @row_position = @site_ordinal.index(@site.name)
         @column_position = @period_ordinal.index(@period.name)
         @session_id_matrix[@row_position][@column_position] = @session.id
-        if @site.name == "Coarsegold"
-           logger.debug @session_id_matrix
-        end
         @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
           unless (@column_position.nil? || @row_position.nil?)
           end
@@ -472,7 +473,6 @@ class RegistrationController < ApplicationController
     for j in 0 ..@period_names.size do
       for i in 0..@site_names.size - 1 do
         @reg_total = @reg_total + @registration_matrix[i][j]
-        logger.debug @reg_total
         @sched_total = @sched_total + @scheduled_matrix[i][j]
       end
       @registration_matrix[@site_names.size][j] = @reg_total
@@ -490,7 +490,7 @@ class RegistrationController < ApplicationController
 
     @period_names << "Total"
     @site_names << "Total"
-    logger.debug @registration_matrix
+
     @schedule = { :site_count => @site_names.size - 1, :period_count => @period_names.size - 1,
                   :site_names => @site_names, :period_names => @period_names,
                   :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,

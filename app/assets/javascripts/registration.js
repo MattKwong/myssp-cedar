@@ -667,3 +667,19 @@ $(document).ready(function() {
         return false; // submit from callback
     });
 });
+
+$(document).ready(function() {
+    $("#request_link").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $("#request_link").click(function() {
+        $.get("request_matrix",  function(data) {
+            $('#request_data').html(data);
+            $('#request_data').modal();
+        });
+    });
+});
+
