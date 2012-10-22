@@ -1,6 +1,6 @@
 class PaymentController < ApplicationController
   authorize_resource
-  before_filter :check_for_cancel, :only => [:create]
+  #before_filter :check_for_cancel, :only => [:create]
   layout 'admin_layout'
 #  def show
 #    redirect_to admin_payment_path(params[:id])
@@ -107,6 +107,7 @@ class PaymentController < ApplicationController
       flash[:notice] = "Successful entry of new payment."
       redirect_to myssp_path(:id => group.liaison_id)
     else
+      flash[:error] = "A problem occurred in creating this payment."
       payment = Payment.new()
       payment_methods = 'Check', 'Credit Card', 'Cash'
       if (params[:group_status] == 'registration')
@@ -152,11 +153,11 @@ private
     end
   end
 
-  def check_for_cancel
-  unless params[:cancel].blank?
-    liaison_id = ScheduledGroup.find(params[:payment][:scheduled_group_id]).liaison_id
-    redirect_to myssp_path(liaison_id)
-    end
-  end
+  #def check_for_cancel
+  #unless params[:cancel].blank?
+  #  liaison_id = ScheduledGroup.find(params[:payment][:scheduled_group_id]).liaison_id
+  #  redirect_to myssp_path(liaison_id)
+  #  end
+  #end
 
 end

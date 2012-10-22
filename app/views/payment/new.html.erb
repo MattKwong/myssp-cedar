@@ -9,7 +9,6 @@
               <div class="panel_contents">
                  <div class="attributes_table liaison" id="attributes_table_liaison_3">
                    <%= render 'layouts/myssp_group_data' %>
-                    <% if current_admin_user.admin?  %>
                     <table border="0" cellspacing="0" cellpadding="0" >
                         <h3>Enter the payment details below.</h3>
                         <tr>
@@ -37,14 +36,9 @@
                     </table>
                     <div class="actions">
                         <%= r.submit "Submit" %>
-                        <%= submit_tag 'Cancel', :name => 'cancel' %>
+                        <%= link_to "Cancel", admin_liaison_path(@screen_info[:scheduled_group].liaison_id)%>
                     </div>
-                    <% else %>
-                        <h3 align="center">Our Payment Gateway Is Coming Soon!</h3>
-                        <p align= "center">Sierra Service Project is working to create a credit card payment gateway which will allow you
-                        to make payments directly online. However, as of today, you will have to call our office (916-488-6441)
-                        to make a credit card payment. We are sorry for the inconvenience and look forward to talking with you.</p>
-                   <% end %>
+
                  </div>
               </div>
            </div>

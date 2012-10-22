@@ -38,7 +38,22 @@ ActiveAdmin.register Liaison do
         column "Total", :requested_total
         column "Date submitted", :created_at do |reg|
            reg.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%b %d, %Y %l:%M %p")
-           end
+        end
+        column "Deposit Paid" do |g|
+          number_to_currency(g.deposits_paid)
+        end
+        column "Amount Due" do |g|
+          number_to_currency(g.deposits_due - g.deposits_paid)
+        end
+        column "" do |g|
+          link_to "Pay by CC", cc_payment_path(:id => g.id),
+                  :title => "Click to make credit card payment."
+        end
+        column "" do |g|
+          link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
+                :title => "Click to record payment."
+        end
+
       end
     end
 

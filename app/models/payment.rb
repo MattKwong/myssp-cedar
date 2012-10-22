@@ -22,8 +22,9 @@ class Payment < ActiveRecord::Base
   belongs_to :scheduled_group
 
   validates :payment_date, :payment_amount, :payment_method, :presence => true
-  validates_numericality_of :payment_amount
+  validates_numericality_of :payment_amount, :message => "Payment amount must be a number."
   validates_inclusion_of :payment_type, :in => ['Initial', 'Deposit', 'Second', 'Final', 'Other', 'Processing Charge'], :message => "Invalid payment type"
+  validates_exclusion_of :payment_amount, :in => [0], :message => "Payment amount cannot be zero."
 
   def self.deposits_paid(reg_id)
     Payment.find_all_by_registration_id_and_payment_type(reg_id, 'Deposit').sum(&:payment_amount)
