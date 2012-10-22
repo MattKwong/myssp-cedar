@@ -240,6 +240,14 @@ input[type="submit"]:focus, input[type="button"]:focus {
             padding-left: 10px;
             background: url("nomorechoices.png") no-repeat;
         }
+        img.popular_button {
+            border: none;
+            width: 175px;
+            height: 38px;
+            float: left;
+            padding-left: 10px;
+            background: url("popular.png") no-repeat;
+        }
         .center
         {
             margin-left:auto;
