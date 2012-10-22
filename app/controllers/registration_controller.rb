@@ -373,8 +373,9 @@ class RegistrationController < ApplicationController
   end
 
   def request_matrix
-    @matrix = build_schedule("requested", "summer_domestic")
-    render :partial => 'request_matrix'
+    @matrix = build_schedule("registered", "summer_domestic")
+    @senior_high_limit = 60
+    render :partial => 'request_matrix', :reg_or_sched => "registered"
   end
   private
 

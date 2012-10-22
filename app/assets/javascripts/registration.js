@@ -679,6 +679,7 @@ $(document).ready(function() {
         $.get("request_matrix",  function(data) {
             $('#request_data').html(data);
             $('#request_data').modal();
+            $('#request_data').addClass("hidden")
         });
     });
 });

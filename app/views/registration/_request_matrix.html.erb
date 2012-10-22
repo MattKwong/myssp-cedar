@@ -1,4 +1,4 @@
-<h2>Current Requests by Site and Week</h2>
+<h2 class="modal_heading">Current Requests by Site and Week</h2>
 <p>Below is current snapshot of all of the first-choice requests for our summer program.  How should you use this information?</p>
 <p>If your first choice is one of those sessions which is very popular (more than 60 requests) there is a good possibility that we will not be
 able to schedule you. Sierra Service Project is a community of churches, and our goal is to make this experience available to the maximum number
@@ -6,3 +6,38 @@ of you people possible. This means that we ask you to be flexible about your sum
 <p>If your first choice is one of the popular session, please select two less popular sessions as your second or third choice. We will still try to
 put you in your first choice, but we are unable to, by selecting a less popular option as your second or third choices, we should be able to schedule
 you for one of these choices.</p>
+<%=  %>
+<table border="0" cellspacing="0" cellpadding="0">
+  <thead>
+  <tr>
+    <td></td>
+    <% for i in 0..@schedule[:period_count] do %>
+        <td><%= @schedule[:period_names][i]%></td>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% s_count = @schedule[:site_count].to_s.to_i %>
+  <% for i in 0..s_count - 1 do %>
+      <tr>
+        <td><%= @schedule[:site_names][i] %></td>
+        <% count = @schedule[:period_count].to_s.to_i %>
+        <% for j in 0..count - 1 do %>
+          <% if @schedule[:registration_matrix][i][j] > @senior_high_limit %>
+            <td class = "high"><%= @schedule[:registration_matrix][i][j].to_s %></td>
+          <% else %>
+            <td><%= @schedule[:registration_matrix][i][j].to_s %></td>
+          <% end %>
+        <% end %>
+        <td><%= (@schedule[:registration_matrix][i][count]).to_s %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <% count = @schedule[:period_count].to_s.to_i %>
+    <td><%= @schedule[:site_names][s_count] %></td>
+    <% for j in 0..count do %>
+        <td><%= (@schedule[:registration_matrix][@schedule[:site_count]][j]).to_s %></td>
+    <% end %>
+  </tr>
+  </tbody>
+</table>
