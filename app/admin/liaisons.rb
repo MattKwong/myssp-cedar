@@ -28,7 +28,7 @@ ActiveAdmin.register Liaison do
     end
 
     panel "Original Request Information" do
-      table_for liaison.registrations do
+      table_for liaison.registrations.current.unscheduled do
         column "Group Name" do |group|
           link_to group.name, admin_registration_path(group.id),
                 :title => 'Click to see details of this request.'
