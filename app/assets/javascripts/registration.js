@@ -447,11 +447,8 @@ $(document).ready(function() {
         $(this).addClass('hover');
     });
 });
-$(document).ready(function() {
-    $("#submit_seventh").hover(function() {
-        $(this).addClass('hover');
-    });
-});
+
+
 $(document).ready(function() {
     $('#back_seventh').click(function(){
         //update progress bar
@@ -464,24 +461,29 @@ $(document).ready(function() {
 });
 
 
+//$(document).ready(function() {
+//    $('#submit_seventh').click(function(){
+//        //Send the data to the server and create the new registration record
+//        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
+//            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
+//            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
+//            $("#step_seven_data").html(data);
+//            deposit_amount = parseInt($("input[name=deposit_amount]").val());
+//        } );
+//
+//
+//        //update progress bar
+//        $('#progress_text').html('75% Complete');
+//        $('#progress').css('width','265px');
+//        //slide steps
+//        $('#seventh_step').slideUp();
+//        $('#eighth_step').slideDown();
+//    });
+//});
+
 $(document).ready(function() {
-    $('#submit_seventh').click(function(){
-        //Send the data to the server and create the new registration record
-        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
-            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
-            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
-            $("#step_seven_data").html(data);
-            deposit_amount = parseInt($("input[name=deposit_amount]").val());
-        } );
-
-
-        //update progress bar
-        $('#progress_text').html('75% Complete');
-        $('#progress').css('width','265px');
-        //slide steps
-        $('#seventh_step').slideUp();
-        $('#eighth_step').slideDown();
-    });
+    $("#submit_seventh").addClass('disabled');
+//    $("#submit_seventh").removeAttr('onclick');
 });
 
 $(document).ready(function() {
@@ -683,4 +685,47 @@ $(document).ready(function() {
         });
     });
 });
+
+function submitSeventh() {
+        alert("submitSeventh was clicked");
+            //Send the data to the server and create the new registration record
+        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
+            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
+            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
+            $("#step_seven_data").html(data);
+            deposit_amount = parseInt($("input[name=deposit_amount]").val());
+        } );
+
+
+        //update progress bar
+        $('#progress_text').html('75% Complete');
+        $('#progress').css('width','265px');
+        //slide steps
+        $('#seventh_step').slideUp();
+        $('#eighth_step').slideDown();
+
+}
+
+$(document).ready(function() {
+    $('input[name=accept_terms]').click(function(){
+        //Enable the confirm button if checked
+        if ($(this).is(':checked')) {
+            $("#submit_seventh").removeClass('disabled');
+            $("#submit_seventh").bind('click', submitSeventh);
+            $("#submit_seventh").hover(function() {
+                $(this).addClass('hover');
+           });
+
+        } else {
+            $("#submit_seventh").addClass('disabled');
+            $("#submit_seventh").unbind('click', submitSeventh);
+            $("#submit_seventh").hover(function() {
+                $(this).removeClass('hover');
+            });
+        }
+    });
+});
+
+
+
 
