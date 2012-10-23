@@ -56,7 +56,8 @@ class Registration < ActiveRecord::Base
    validates :name, :requested_youth, :requested_counselors, :presence => true
    validates_numericality_of :requested_youth, :requested_counselors,
                              :only_integer => true, :greater_than_or_equal_to  => 1
-
+   validate :request_sequence, :message => "All requests must be made in order."
+   validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
 
  #TODO: Test that the requested totals don't exceed the limit which is currently 30'
 

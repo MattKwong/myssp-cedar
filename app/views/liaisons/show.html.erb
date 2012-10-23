@@ -2,6 +2,7 @@
   <div id="main_content_wrapper">
     <div id="main_content">
     <p><%= link_to 'Register A Group', new_registration_path(:id => params[:id])%></p>
+      <p>Note: To make changes to a registration (increasing or decreasing your numbers, changing your choices, etc., please call Meghan at 916-488-6441.</p>
     <div class="panel">
    <%= form_for(@screen_info[:liaison]) do |r| %>
       <h3>Church Details</h3>
@@ -35,8 +36,9 @@
                         <thead>
                             <tr>
                                 <th>Group Name</th>
+                                <th>1st Choice Session</th>
                                 <th>Youth</th>
-                                <th>Counselors</th>
+                                <th>Couns</th>
                                 <th>Total</th>
                                 <th>Date submitted</th>
                                 <th>Deposit Paid</th>
@@ -47,8 +49,13 @@
                         </thead>
                         <tbody><% @screen_info[:registration_info].each do |g| %>
                             <tr>
-                                <td><%= link_to g.name, admin_registration_path(g.id),
+                                <% if @current_admin_user.admin? %>
+                                    <td><%= link_to g.name, admin_registration_path(g.id),
                                                 :title => 'Click to view details of this request' %></td>
+                                <% else %>
+                                    <td><%= g.name %></td>
+                                <% end %>
+                                <td><%= Session.find(g.request1).name %></td>
                                 <td><%= g.requested_youth %></td>
                                 <td><%= g.requested_counselors %></td>
                                 <td><%= g.requested_total %></td>

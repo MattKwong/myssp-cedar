@@ -15,9 +15,10 @@ test: &test
   host: localhost
   adapter: postgresql
   encoding: unicode
-  database: mssp_test
+  database: myssp_test
   pool: 5
   timeout: 5000
+  username: rickeaton
 
 production:
   host: localhost
