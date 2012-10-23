@@ -4,252 +4,13 @@
     <list id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="" />
     <list id="6515e16b-01b0-44f6-bd49-9d9ce8271564" name="Failed commit: Default" comment="Added update of second payment fields in ScheduledGroup to payment controller code." />
     <list default="true" id="c348ecdd-aae3-4f28-9dd6-ff71435a4076" name="Postponed" comment="Updated to latest version of Rick's Repo">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/Check.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/Now.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/addchoice.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/confirm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/container.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/creditcard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/gateway.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/input.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/nomorechoices.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/popular.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/print.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/progress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/progress_bar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/progress_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/progress_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/recordchoice.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/return.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/send.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old_assets/active_admin.css.scss-delete" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/active_admin-d9e93f4a0b6f71257e58fc4810280e8d.css.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/active_admin/application-c056cff192dc8648ab39c0a3b313b532.js.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/addchoice-2237d51a147d875cb556f4942f94fdaa.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/addchoice.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-c31a6f6e0c422c9329feded0c25a510c.css.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-ebda9bdc3d928fddffb83a13222cd8d6.js.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/back-d44add5746dd2c832906cd3b7ba6adad.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/button-7aff6e06d4279858e21821a3ec1cab93.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/cancel-1e0a4e82d5156ccc089c936b4309d2d3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/check-1bda5702ad3387b184e1c2e91a6296ee.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/check.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/confirm-e6e18922ac96c0583ee90ef2664a9b70.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/confirm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/container-de702f1c0d3cc6adb274c02397a08798.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/container.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/creditcard-2ef1736de80f30a4198e00af20c551be.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/creditcard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/gateway-da71f98a2900a10c94e341b9c4a679e5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/gateway.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/input-3f0a7b15a8acbb17f57cf69c0c35d488.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/input.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/next-e0d12f5429ddf2e23c4a3a023cce9859.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/next.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/nomorechoices-eb5b0fd22e2b15773aaa8665a5e57757.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/nomorechoices.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/now-abcefcee2273f04579fe6e1b4c1baf42.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/now.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/popular-8ecb0f248f683f1577b6d3e362bb519a.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/popular.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/print-069267fc8cdcb6abbad4a1fd478ecd0d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/print-2d0cd4b301603bbdd3abaec559a3e9d8.css.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/print.css.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/print.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress-7bd74185101c7f85e78c484d9c517d68.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress_bar-ed22b28323e48a3abd05f2dec580ee0d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress_bar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress_left-66be1301abca486e94942f5b44c04f5c.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress_right-ef0e1f6ea4ad865f272b8eeb71d98354.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/progress_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/recordchoice-2237d51a147d875cb556f4942f94fdaa.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/recordchoice.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/return-5393a243aff5907e09b00d71338747dc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/return.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/send-1d668de0e3d698423ef1b8a0bc88e2e1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/send.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/x-a4a17fa78be57984796f3505567b2d1c.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/jquery.inputfocus-0.9.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/jquery.simplemodal-1.4.3.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/payment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/registration.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/modal.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/payment.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/print.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/registration.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/session_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/mailers/user_mailer.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/payment/_process_cc_payment.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/payment/cc_payment.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_alt_session_selector.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_alt_site_selector.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_final_confirmation.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_finish_up.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_limit_info.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_payment_gateway.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_request_matrix.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_save_registration_data.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_session_selector.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/_site_selector.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/get_sites_for_group_type_bak.js.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/new.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/registration/payment.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/user_mailer/registration_confirmation.text.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/initializers/stripe.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20121003172443_add_deleted_at_to_admin_user.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/heroku.thor" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old_assets/print.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/active_admin-d9e93f4a0b6f71257e58fc4810280e8d.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-c31a6f6e0c422c9329feded0c25a510c.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/application-ebda9bdc3d928fddffb83a13222cd8d6.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/print-2d0cd4b301603bbdd3abaec559a3e9d8.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/print.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/factories.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.thor" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/registration/new.html.haml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/active_admin-58db385d865096df90aa955e003f661e.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/active_admin-58db385d865096df90aa955e003f661e.css.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/active_admin-fc2444d7cd62181e5f61f011397bf7ce.js.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/active_admin/application-fc2444d7cd62181e5f61f011397bf7ce.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/active_admin/application-fc2444d7cd62181e5f61f011397bf7ce.js.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/application-e0ce28e53bf29af9218cf5e0eb2a461e.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/application-e0ce28e53bf29af9218cf5e0eb2a461e.css.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/blueprint/ie.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/blueprint/print.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/blueprint/screen.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/factories_back.rb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/custom_aa.css" afterPath="$PROJECT_DIR$/old_assets/active_admin_custom.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/registration/program_session.html.erb" afterPath="$PROJECT_DIR$/app/views/session/program_session.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin-fc2444d7cd62181e5f61f011397bf7ce.js" afterPath="$PROJECT_DIR$/public/assets/active_admin/application-c056cff192dc8648ab39c0a3b313b532.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/admin_notes_icon-e2ef46357f76c29cb7d42603b9559f0b.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/admin_notes_icon-ab2bb946ea725bc09053877e23188327.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-header-bg-da4080d31525687a2f53f8bf0f19b917.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-header-bg-677ddd424c3aa4ea542c806e12665e7c.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-input-icon-ba8e166d7e3b23ee7c72fa021b1cdfc4.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-input-icon-f2b3ba1cd41f191387ddebf5ccbfd5bd.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-next-link-icon-492128053d011923357d5b012aa1ed69.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-next-link-icon-42a527c54dec725abc13edb5881edade.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-nipple-8a141058c9204bed91410cae33a71765.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-nipple-d31544384d75c0b0648b6c0d5025594b.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-prev-link-icon-cd131ca1efce24d74da7aec621a036c3.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/datepicker/datepicker-prev-link-icon-3b0c1a8615e6fcbb18c438af98650043.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/loading-dd68e989b64602c5c3a9e4df486faa74.gif" afterPath="$PROJECT_DIR$/public/assets/active_admin/loading-08874dccca12285805d1acc7244b3eb5.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/nested_menu_arrow-44f41a4566c9421705433c0748eb392c.gif" afterPath="$PROJECT_DIR$/public/assets/active_admin/nested_menu_arrow-cb8648573e6332cfc05c32ad5647d6f7.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/nested_menu_arrow_dark-a8e4a6766b6b25a318e5cd329f0516dd.gif" afterPath="$PROJECT_DIR$/public/assets/active_admin/nested_menu_arrow_dark-a9fb352e808673e16cd0e0593c521136.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/active_admin/orderable-026ce39ffc0d77643c50dfaa62d25020.png" afterPath="$PROJECT_DIR$/public/assets/active_admin/orderable-e24c6c1d0dedbe1552965a24764fceb4.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/application-62969c2ea8ab6ddc1af5ef6755489c68.js" afterPath="$PROJECT_DIR$/public/assets/active_admin.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/application-62969c2ea8ab6ddc1af5ef6755489c68.js.gz" afterPath="$PROJECT_DIR$/public/assets/active_admin-df5ce2fad73e01aca6968b98fe482e9f.js.gz" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/application.js" afterPath="$PROJECT_DIR$/public/assets/active_admin-df5ce2fad73e01aca6968b98fe482e9f.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/application.js.gz" afterPath="$PROJECT_DIR$/public/assets/active_admin.js.gz" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_diagonals-thick_20_666666_40x40-6b887cceea8deabd921b391f8735a806.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_diagonals-thick_20_666666_40x40-a3d25f34007e3c615403bcfdc208c64e.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_diagonals-thick_35_fbe3e4_40x40-aa05eef5b8d7e61d63ef3be0d0fc11d1.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_diagonals-thick_35_fbe3e4_40x40-de082980848a04c9aa19a8c14dc6f438.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_flat_10_000000_40x100-ac233896cb2b98e90e519c04f4ebb012.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_flat_10_000000_40x100-2a2b5ab528c7ca5c8537d7957570520d.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_glass_100_e5f0e2_1x400-5036cf3607489f637d9f23263cb09c0a.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_glass_100_e5f0e2_1x400-1ffcffa5660e4c35852bbc9e9e7e9709.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_glass_100_f6f6f6_1x400-39ccabe017943369da214fe3a36397bb.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_glass_100_f6f6f6_1x400-089e66426141e3ee5d739bfe7e2c6b06.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_glass_65_f6f6f6_1x400-d1e1a0d22e43854fa397a3d7d7e626e4.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_glass_65_f6f6f6_1x400-8b1c3e98747c1c29fc925ea56952c60f.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_gloss-wave_35_5c91aa_500x100-251a6477bcdb8f2b22ea63b5b38b407c.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_gloss-wave_35_5c91aa_500x100-7ff07ef2640881021985d5bcf0d583fe.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_highlight-soft_100_eeeeee_1x100-3265a4b59056335d59234d49abe47764.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_highlight-soft_100_eeeeee_1x100-f5a0f7aa773d2dbd739eaa5eeea1d142.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_highlight-soft_75_a9c3a2_1x100-e65a2e2c4860930ac039830240c3a68c.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-bg_highlight-soft_75_a9c3a2_1x100-a561a34eabff801b237e6fb933bf3a0f.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_222222_256x240-31554e1b388ce0031509cca6d4f0d540.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_222222_256x240-0754b58062ebce43a7d61ee33e9cd51f.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_548b48_256x240-bdb06a6467ace515ece5343a15e9a904.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_548b48_256x240-f54579d72a0fc8731eb57ba123222dc8.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_5c91aa_256x240-5a2ae992872b9de629b2f4202814e3d4.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_5c91aa_256x240-8674c8e7f5033fd9d9d15b5c8743ec06.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_8a1f11_256x240-1bd512b3413a9e8d35d11d5b0ffcf561.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_8a1f11_256x240-8be8ba707831e45a6453161657babfba.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_ffffff_256x240-e40cd19ddddacd590819d60fceb52268.png" afterPath="$PROJECT_DIR$/public/assets/jqueryui/images/ui-icons_ffffff_256x240-d96278c2391b569417ff693e1ee90f5c.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/logo-ce54d053ee81f1b6626a83f2ab947465.png" afterPath="$PROJECT_DIR$/public/assets/logo-86ea93f18bbe549e4217ed1c6a07f8d8.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/minus-ad323c10a1555374c262b801c3cb723f.png" afterPath="$PROJECT_DIR$/public/assets/minus-ef7b06313d527138e3b2fc755b46c184.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/plus-fad5e41fd450289754927ccba0ebfbee.png" afterPath="$PROJECT_DIR$/public/assets/plus-986d70daa26ca4da4595ee2284892cf1.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/plusminus-deae7904e2dacae1f0c402f0172d681c.png" afterPath="$PROJECT_DIR$/public/assets/plusminus-7e70d06c55be4c103377580aa0478949.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/assets/plusminus.bak-afe252fe5fb938ec6445d7fc42b70ad5.png" afterPath="$PROJECT_DIR$/public/assets/plusminus.bak-e572675aa7ed6cd13ccc78582fd84822.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/formtastic_changes.css" afterPath="$PROJECT_DIR$/old_assets/formtastic_changes.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/style.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/style.scss" afterPath="$PROJECT_DIR$/old_assets/style.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/spoic3.iml" afterPath="$PROJECT_DIR$/.idea/spoic3.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/active_admin.css.gz" afterPath="$PROJECT_DIR$/public/assets/active_admin.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/active_admin/application.js.gz" afterPath="$PROJECT_DIR$/public/assets/active_admin/application.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/application.css.gz" afterPath="$PROJECT_DIR$/public/assets/application.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/admin_users.rb" afterPath="$PROJECT_DIR$/app/admin/admin_users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/churches.rb" afterPath="$PROJECT_DIR$/app/admin/churches.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/liaisons.rb" afterPath="$PROJECT_DIR$/app/admin/liaisons.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/periods.rb" afterPath="$PROJECT_DIR$/app/admin/periods.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/registrations.rb" afterPath="$PROJECT_DIR$/app/admin/registrations.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/sessions.rb" afterPath="$PROJECT_DIR$/app/admin/sessions.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/active_admin.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/active_admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/active_admin_custom.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/active_admin_custom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/active_admin.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/active_admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/custom.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/admin_users_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/admin_users_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/confirmations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/confirmations_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/liaisons_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/liaisons_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/passwords_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/passwords_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/payment_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/payment_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/registration_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/registration_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/scheduled_groups_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/scheduled_groups_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ability.rb" afterPath="$PROJECT_DIR$/app/models/ability.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/admin_user.rb" afterPath="$PROJECT_DIR$/app/models/admin_user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/church.rb" afterPath="$PROJECT_DIR$/app/models/church.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/payment.rb" afterPath="$PROJECT_DIR$/app/models/payment.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/period.rb" afterPath="$PROJECT_DIR$/app/models/period.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/program.rb" afterPath="$PROJECT_DIR$/app/models/program.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/registration.rb" afterPath="$PROJECT_DIR$/app/models/registration.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/report.rb" afterPath="$PROJECT_DIR$/app/models/report.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/scheduled_group.rb" afterPath="$PROJECT_DIR$/app/models/scheduled_group.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/session.rb" afterPath="$PROJECT_DIR$/app/models/session.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/site.rb" afterPath="$PROJECT_DIR$/app/models/site.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/mailer/confirmation_instructions.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/labor_items/_labor_item.html.erb" afterPath="$PROJECT_DIR$/app/views/labor_items/_labor_item.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_myssp_group_data.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_myssp_group_data.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_stylesheets.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_stylesheets.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/admin_layout.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/admin_layout.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/admin_layout_alt.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/admin_layout_alt.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/liaisons/show.html.erb" afterPath="$PROJECT_DIR$/app/views/liaisons/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/material_item_estimateds/_material_item_estimated.html.erb" afterPath="$PROJECT_DIR$/app/views/material_item_estimateds/_material_item_estimated.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payment/new.html.erb" afterPath="$PROJECT_DIR$/app/views/payment/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/registration/show_schedule.html.erb" afterPath="$PROJECT_DIR$/app/views/registration/show_schedule.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/registration/steps_fragment.html.erb" afterPath="$PROJECT_DIR$/app/views/registration/steps_fragment.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/scheduled_groups/program_session.html.erb" afterPath="$PROJECT_DIR$/app/views/scheduled_groups/program_session.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/test.rb" afterPath="$PROJECT_DIR$/config/environments/test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/active_admin.rb" afterPath="$PROJECT_DIR$/config/initializers/active_admin.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/devise.rb" afterPath="$PROJECT_DIR$/config/initializers/devise.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/admin_liaisons_navigation.feature" afterPath="$PROJECT_DIR$/features/admin_liaisons_navigation.feature" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/liaison_navigation.feature" afterPath="$PROJECT_DIR$/features/liaison_navigation.feature" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/step_definitions/logon_steps.rb" afterPath="$PROJECT_DIR$/features/step_definitions/logon_steps.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/step_definitions/navigation_and_ability.rb" afterPath="$PROJECT_DIR$/features/step_definitions/navigation_and_ability.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/step_definitions/registration_steps.rb" afterPath="$PROJECT_DIR$/features/step_definitions/registration_steps.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/step_definitions/spending_report_steps.rb" afterPath="$PROJECT_DIR$/features/step_definitions/spending_report_steps.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/active_admin.css" afterPath="$PROJECT_DIR$/public/assets/active_admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/application.css" afterPath="$PROJECT_DIR$/public/assets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/manifest.yml" afterPath="$PROJECT_DIR$/public/assets/manifest.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/application_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/application_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/pages_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/pages_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/registration_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/registration_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/admin_user_spec.rb" afterPath="$PROJECT_DIR$/spec/models/admin_user_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/program_type_spec.rb" afterPath="$PROJECT_DIR$/spec/models/program_type_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/registration_spec.rb" afterPath="$PROJECT_DIR$/spec/models/registration_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/report_spec.rb" afterPath="$PROJECT_DIR$/spec/models/report_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/site_spec.rb" afterPath="$PROJECT_DIR$/spec/models/site_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/heroku.thor" afterPath="$PROJECT_DIR$/heroku.thor" />
     </list>
     <ignored path="spoic3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -275,19 +36,73 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="active_admin.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="active_admin.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="4" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.25925925">
+            <state line="104" column="4" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prototype.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/data/prototype.js">
+      <file leaf-file-name="database.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/database.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="7" selection-start="3057" selection-end="3057" vertical-scroll-proportion="0.0">
+            <state line="30" column="2" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="factories.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/factories.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="0" selection-start="116" selection-end="116" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="seeds.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="6" selection-start="1333" selection-end="1333" vertical-scroll-proportion="1.0714285">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schema.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/schema.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="609" column="50" selection-start="16880" selection-end="16880" vertical-scroll-proportion="-12.193548">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="development.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="21" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="heroku.thor" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heroku.thor">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="67" selection-start="326" selection-end="326" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -320,22 +135,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/models/item.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/active_admin.css" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.css" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/admin/material_item_delivereds.rb" />
         <option value="$PROJECT_DIR$/Procfile" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/spec/models/site_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/program_type_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/period_spec.rb" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/active_admin.js" />
         <option value="$PROJECT_DIR$/config/initializers/active_admin.rb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/heroku.thor" />
+        <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/db/seeds.rb" />
       </list>
     </option>
   </component>
@@ -461,7 +276,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -475,25 +290,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spoic3" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myssp-cedar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="migrate" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -510,8 +311,22 @@
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="initializers" />
+              <option name="myItemId" value="spoic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myssp-cedar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environments" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -526,24 +341,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spoic3" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myssp-cedar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -600,7 +397,7 @@
       <recent name="C:\Users\Rick\railsprojects\myssp\db\migrate" />
     </key>
   </component>
-  <component name="RunManager" selected="Rails.Development: spoic3">
+  <component name="RunManager" selected="Rake.db:seed">
     <configuration default="false" name="db:schema:load" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
       <module name="spoic3" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -620,7 +417,7 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:schema:load" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="true" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
       <RunnerSettings RunnerId="RubyRunner" />
@@ -644,9 +441,9 @@
         </COVERAGE_PATTERN>
       </EXTENSION>
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:setup" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="all" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="true" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
       <RunnerSettings RunnerId="RubyRunner" />
@@ -661,7 +458,7 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
       <envs>
-        <env name="RAILS_ENV" value="test" />
+        <env name="RAILS_ENV" value="development" />
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
@@ -670,35 +467,11 @@
         </COVERAGE_PATTERN>
       </EXTENSION>
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:create" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="all" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="true" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Cucumber: Spork DRb server" type="SporkRunConfigurationType" factoryName="Spork DRb" temporary="true">
-      <module name="spoic3" />
-      <SPORK_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <SPORK_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <SPORK_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-      <SPORK_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-      <SPORK_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <SPORK_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$USER_HOME$/.rvm/gems/ruby-1.9.3-p194@rails328/bin/spork" />
-      <SPORK_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-      <SPORK_RUN_CONFIG NAME="TEST_FRAMEWORK_ARGS" VALUE="CUCUMBER" />
-      <SPORK_RUN_CONFIG NAME="SPORK_RUN_CONFIG" VALUE="CUCUMBER" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
@@ -720,91 +493,11 @@
         </COVERAGE_PATTERN>
       </EXTENSION>
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:drop" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="all" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="true" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="db:test:clone_structure" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
-      <module name="spoic3" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:test:clone_structure" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Rails console: spoic3" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
-      <module name="spoic3" />
-      <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <IRB_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <IRB_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-      <IRB_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-      <IRB_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-      <envs />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <IRB_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/script/rails" />
-      <IRB_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="console" />
-      <IRB_RUN_CONFIG NAME="IS_RAILS_CONSOLE" VALUE="true" />
-      <RunnerSettings RunnerId="RubyCover" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyCover" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="site_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="spoic3" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/site_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
@@ -871,6 +564,109 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="heroku" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="spoic3" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/heroku.thor" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="db:test:load" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="spoic3" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:test:load" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="true" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="site_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="spoic3" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/site_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="db:seed" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="spoic3" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:seed" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="true" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
@@ -1258,26 +1054,26 @@
       <item index="7" class="java.lang.String" itemvalue="Rake.db:schema:load" />
       <item index="8" class="java.lang.String" itemvalue="Rake.db:setup" />
       <item index="9" class="java.lang.String" itemvalue="Rake.db:create" />
-      <item index="10" class="java.lang.String" itemvalue="Spork DRb.Cucumber: Spork DRb server" />
-      <item index="11" class="java.lang.String" itemvalue="Rake.db:drop" />
-      <item index="12" class="java.lang.String" itemvalue="Rake.db:test:clone_structure" />
-      <item index="13" class="java.lang.String" itemvalue="IRB console.Rails console: spoic3" />
-      <item index="14" class="java.lang.String" itemvalue="RSpec.site_spec" />
-      <item index="15" class="java.lang.String" itemvalue="RSpec.program_type_spec" />
-      <item index="16" class="java.lang.String" itemvalue="RSpec.period_spec" />
+      <item index="10" class="java.lang.String" itemvalue="Rake.db:drop" />
+      <item index="11" class="java.lang.String" itemvalue="RSpec.program_type_spec" />
+      <item index="12" class="java.lang.String" itemvalue="RSpec.period_spec" />
+      <item index="13" class="java.lang.String" itemvalue="Ruby.heroku" />
+      <item index="14" class="java.lang.String" itemvalue="Rake.db:test:load" />
+      <item index="15" class="java.lang.String" itemvalue="RSpec.site_spec" />
+      <item index="16" class="java.lang.String" itemvalue="Rake.db:seed" />
     </list>
     <recent_temporary>
       <list size="10">
-        <item index="0" class="java.lang.String" itemvalue="RSpec.period_spec" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec.program_type_spec" />
-        <item index="2" class="java.lang.String" itemvalue="RSpec.site_spec" />
-        <item index="3" class="java.lang.String" itemvalue="IRB console.Rails console: spoic3" />
-        <item index="4" class="java.lang.String" itemvalue="Rake.db:test:clone_structure" />
-        <item index="5" class="java.lang.String" itemvalue="Rake.db:drop" />
-        <item index="6" class="java.lang.String" itemvalue="Rake.db:create" />
-        <item index="7" class="java.lang.String" itemvalue="Rake.db:schema:load" />
-        <item index="8" class="java.lang.String" itemvalue="Rake.db:setup" />
-        <item index="9" class="java.lang.String" itemvalue="Spork DRb.Cucumber: Spork DRb server" />
+        <item index="0" class="java.lang.String" itemvalue="Rake.db:seed" />
+        <item index="1" class="java.lang.String" itemvalue="RSpec.site_spec" />
+        <item index="2" class="java.lang.String" itemvalue="Rake.db:test:load" />
+        <item index="3" class="java.lang.String" itemvalue="Rake.db:schema:load" />
+        <item index="4" class="java.lang.String" itemvalue="RSpec.site_spec" />
+        <item index="5" class="java.lang.String" itemvalue="Ruby.heroku" />
+        <item index="6" class="java.lang.String" itemvalue="Rake.db:setup" />
+        <item index="7" class="java.lang.String" itemvalue="Rake.db:create" />
+        <item index="8" class="java.lang.String" itemvalue="Rake.db:drop" />
+        <item index="9" class="java.lang.String" itemvalue="RSpec.period_spec" />
       </list>
     </recent_temporary>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda">
@@ -1543,7 +1339,11 @@
       <created>1351015439123</created>
       <updated>1351015439123</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Updated to latest version of Rick's Repo">
+      <created>1351016084985</created>
+      <updated>1351016084985</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1568,19 +1368,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-4" width="1303" height="773" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32398754" sideWeight="0.4940048" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32398754" sideWeight="0.4940048" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.99601597" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19264588" sideWeight="0.67601246" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19264588" sideWeight="0.62616825" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21494183" sideWeight="0.21516165" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21982414" sideWeight="0.67601246" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18944845" sideWeight="0.62616825" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39910814" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32398754" sideWeight="0.5003997" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34579438" sideWeight="0.81294966" order="2" side_tool="false" content_ui="tabs" x="77" y="500" width="1633" height="304" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554516" sideWeight="0.49720225" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554516" sideWeight="0.5003997" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37383178" sideWeight="0.81294966" order="2" side_tool="false" content_ui="tabs" x="77" y="500" width="1633" height="304" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554516" sideWeight="0.4940048" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32848486" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21446079" sideWeight="0.57865167" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1672,38 +1472,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/spec/models/church_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/payment_schedule_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/liaison_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/site.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.98309857" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/01.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/period_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="43" selection-start="1597" selection-end="1597" vertical-scroll-proportion="1.6716868" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/program_type_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="50" selection-start="693" selection-end="693" vertical-scroll-proportion="0.045180723" />
@@ -1749,14 +1517,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="4" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.25925925">
+        <state line="104" column="4" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.3-p194/gems/json-1.7.5/data/prototype.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="7" selection-start="3057" selection-end="3057" vertical-scroll-proportion="0.0">
+        <state line="103" column="7" selection-start="3057" selection-end="3057" vertical-scroll-proportion="1.0726644">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="609" column="50" selection-start="16880" selection-end="16880" vertical-scroll-proportion="-12.193548">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="21" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heroku.thor">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="67" selection-start="326" selection-end="326" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="2" selection-start="652" selection-end="652" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/factories.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="116" selection-end="116" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="6" selection-start="1333" selection-end="1333" vertical-scroll-proportion="1.0714285">
           <folding />
         </state>
       </provider>
