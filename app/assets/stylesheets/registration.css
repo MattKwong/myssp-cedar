@@ -161,6 +161,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
             padding-left: 10px;
             background: url("confirm.png") no-repeat;
         }
+        .disabled {
+            opacity: 0.4;
+        }
         .print_button {
             margin-left: auto;
             margin-right: auto;
