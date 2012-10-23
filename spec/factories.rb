@@ -5,7 +5,7 @@ FactoryGirl.define do
   factory :admin_user do
     first_name 'Test'
     last_name 'Admin'
-    user_role_id UserRole.find_by_name("Admin").id
+    #user_role_id UserRole.find_by_name("Admin").id
     email 'adminuser@factory.com'
     password 'password'
     confirmed_at Time.now
@@ -14,8 +14,8 @@ FactoryGirl.define do
   factory :liaison_user, class: AdminUser do
     first_name 'Susan'
     last_name 'Liaison'
-    user_role_id UserRole.find_by_name("Liaison").id
-    liaison_id Liaison.first.id
+    #user_role_id UserRole.find_by_name("Liaison").id
+    #liaison_id Liaison.first.id
     email 'adminuserliaison@factory.com'
     password 'password'
     confirmed_at Time.now
@@ -24,7 +24,7 @@ FactoryGirl.define do
   factory :church do
     active      true
     address1    '100 Easy Street'
-    church_type_id ChurchType.find_by_name("Cal Nevada UM Church").id
+    #church_type_id ChurchType.find_by_name("Cal Nevada UM Church").id
     city        'Carmichael'
     email1      'church1@factory.com'
     name        'Carmichael Test Church'
@@ -45,7 +45,7 @@ FactoryGirl.define do
     email1          'liaison1@factory.com'
     first_name      'Test'
     last_name       'FactoryLiaison'
-    liaison_type_id LiaisonType.find_by_name("Both Junior and Senior High").id
+    #liaison_type_id LiaisonType.find_by_name("Both Junior and Senior High").id
     registered      false
     scheduled       false
     state           'CA'
@@ -54,14 +54,14 @@ FactoryGirl.define do
   end
 
   factory :registration do
-    group_type_id     SessionType.find_by_name('Summer Senior High').id
-    liaison_id        Liaison.last.id
-    church_id         Liaison.last.church_id
+    #group_type_id     SessionType.find_by_name('Summer Senior High').id
+    #liaison_id        Liaison.last.id
+    #church_id         Liaison.last.church_id
     amount_due        '1000.00'
     amount_paid       '200.0'
     name              'Carmichael Test Senior High'
     payment_method    'Check'
-    request1          Session.find_by_name('Test Site 1 Week 1').id
+    #request1          Session.find_by_name('Test Site 1 Week 1').id
     requested_counselors  2
     requested_youth       12
     requested_total       14
