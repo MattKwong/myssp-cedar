@@ -1,24 +1,35 @@
 require 'spec_helper'
 
+
 describe PagesController do
   include Devise::TestHelpers
   render_views
-  login_admin
+
+    before (:each) do
+      @base_title = "SSP Online Information Center | "
+      @request.env["devise.mapping"] = Devise.mappings[:admin_user]
+      @current_admin_user = FactoryGirl.create(:admin_user)
+      sign_in @current_admin_user
+      @current_admin_user.confirm!
+    end
+
+    #login_admin
 
   it "should have a current user" do
     subject.current_admin_user.should_not be_nil
   end
 
   describe "GET 'home'" do
-    @base_title = "SSP Information Center"
     it "should be successful" do
-      get 'home'
+      visit 'home'
       response.should be_success
+      #save_and_open_page
     end
 
     it "should have the right title" do
-      get 'home'
-      response.should have_selector("title", :content => "Welcome")
+      visit 'home'
+      page.should have_selector('title', :content => (@base_title + "Welcome"))
+      #save_and_open_page
     end
   end
 
@@ -30,20 +41,20 @@ describe PagesController do
     end
 
     it "should have the right title" do
-      get 'contact'
-      response.should have_selector("title", :content => "Contact")
+      visit 'contact'
+      page.should have_selector("title", :content => (@base_title + "Contact"))
     end
   end
   describe "GET 'about'" do
     @base_title = "SSP Information Center"
     it "should be successful" do
-      get 'about'
+      visit 'about'
       response.should be_success
     end
 
     it "should have the right title" do
-      get 'about'
-      response.should have_selector("title", :content => "About")
+      visit 'about'
+      page.should have_selector("title", :content => (@base_title + "About"))
     end
   end
 
@@ -55,8 +66,8 @@ describe PagesController do
     end
 
     it "should have the right title" do
-      get 'help'
-      response.should have_selector("title", :content => "Help ")
+      visit 'help'
+      page.should have_selector("title", :content => (@base_title + "Help "))
     end
   end
 

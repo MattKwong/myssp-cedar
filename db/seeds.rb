@@ -45,16 +45,13 @@ Site.delete_all
 Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Susanville", :state => "CA", :zip => "90000", :listing_priority => 10,
              :active => true, :phone => "800-700-6000", :abbr=>'T1')
 
-#if Site.find_by_name("Test Site 2")
-#  Site.find_by_name("Test Site 2").delete
-#end
 
 Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city => "McDermitt", :state => "NV", :zip => "80000", :listing_priority => 20,
             :active => true, :phone => "800-700-6000", :abbr=>'T2')
 
 ['Site Director', 'Food', 'Construction', 'SLC'].each do |name|
 
-if JobType.find_by_name(name)
+  if JobType.find_by_name(name)
     JobType.find_by_name(name).delete
   end
   JobType.create(:name => name)
@@ -62,23 +59,23 @@ end
 
 
 if Job.find_by_name('Site Director')
-  Job.find_by_name('Site Director').delete
+  Job.find_all_by_name('Site Director').each {|a| a.delete}
 end
 Job.create(:name => 'Site Director', :job_type_id => JobType.find_by_name('Site Director').id)
 
 if Job.find_by_name('Spiritual Life Coordinator')
-  Job.find_by_name('Spiritual Life Coordinator').delete
+  Job.find_all_by_name('Spiritual Life Coordinator').each {|a| a.delete}
 end
 Job.create(:name => 'Spiritual Life Coordinator', :job_type_id => JobType.find_by_name('SLC').id)
 
 if Job.find_by_name('Cook')
-  Job.find_by_name('Cook').delete
+  Job.find_all_by_name('Cook').each {|a| a.delete}
 end
 Job.create(:name => 'Cook', :job_type_id => JobType.find_by_name('Food').id)
 
 ['Home Repair Coordinator', 'Construction Coordinator', 'Supply Coordinator'].each do |name|
   if Job.find_by_name(name)
-    Job.find_by_name(name).delete
+    Job.find_all_by_name(name).each {|a| a.delete}
   end
   Job.create(:name => name, :job_type_id => JobType.find_by_name('Construction').id)
 end
@@ -158,18 +155,15 @@ Church.create(:active => 't', :address1 => "100 Highway 99", :city => "Stockton"
               :name => 'Stockton First UMC', :office_phone => "799-234-1888", :registered => 'n',
               :zip => "98750")
 
-Liaison.delete_all
-Liaison.create(:address1 => "100 Elm Street", :city => "Sacramento", :state => "CA",
-               :zip => "95608", :first_name => "Susan", :last_name => "Liaison", :name => "Susan Liaison",
-               :title => "Youth Director", :cell_phone => "800-123-1234", :work_phone => "800-123-5667",
-               :home_phone => "800-123-1234", :fax => "800-123-1234", :church_id => Church.first.id,
-               :liaison_type_id => LiaisonType.find_by_name('Both Junior and Senior High').id,
-               :email1 => "liaison@church.com")
-
 Program.delete_all
 Program.create(:site_id => Site.find_by_name('Test Site 1').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
                :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"), :name=> "Test Program 2013",
                :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 't' )
+
+#Inactive program
+Program.create(:site_id => Site.find_by_name('Test Site 2').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
+               :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"),
+               :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 'f' )
 
 LiaisonType.delete_all
 LiaisonType.create(:name => "Both Junior and Senior High", :description => "Both junior and senior high groups")
@@ -197,4 +191,36 @@ Liaison.create(:address1 => "100 Elm Street", :city => "Sacramento", :state => "
     :home_phone => "800-123-1234", :fax => "800-123-1234", :church_id => Church.first.id,
     :liaison_type_id => LiaisonType.find_by_name('Both Junior and Senior High').id,
     :email1 => "liaison@church.com")
+
+Period.delete_all
+Period.create(:active => true, :name => 'Test Period 1',
+              :start_date => '2013-06-01'.to_time,:end_date => '2013-06-07'.to_time, :summer_domestic => true )
+
+Period.create(:active => true, :name => 'Test Period 2',
+              :start_date => '2013-06-08'.to_time, :end_date => '2013-06-14'.to_time, :summer_domestic => true )
+
+PaymentSchedule.delete_all
+PaymentSchedule.create(:name => 'Standard Domestic Summer', :deposit => 60.0, :final_payment => 100.0,
+              :final_payment_date => '2013-06-01'.to_date, :final_payment_late_date => '2013-06-10'.to_date,
+              :second_payment => 200.0, :second_payment_date => '2013-03-01'.to_date,
+              :second_payment_late_date => '2013-03-10'.to_date, :total_payment => 360.0)
+
+
+SessionType.delete_all
+SessionType.create(:name => 'Summer Senior High', :description => 'Traditional senior high')
+SessionType.create(:name => 'Summer Junior High', :description => 'Junior high program')
+
+Session.delete_all
+Session.create(:name => 'Test Site 1 Week 1',
+            :period_id => Period.find_by_name('Test Period 1').id,
+            :program_id => Program.find_by_name('Test Site 1 Summer Domestic 2013').id,
+            :payment_schedule_id => PaymentSchedule.find_by_name('Standard Domestic Summer').id,
+            :session_type_id => SessionType.find_by_name('Summer Senior High').id,
+            :site_id => Site.find_by_name('Test Site 1').id)
+Session.create(:name => 'Test Site 2 Week 1',
+            :period_id => Period.find_by_name('Test Period 1').id,
+            :program_id => Program.find_by_name('Test Site 2 Summer Domestic 2013').id,
+            :payment_schedule_id => PaymentSchedule.find_by_name('Standard Domestic Summer').id,
+            :session_type_id => SessionType.find_by_name('Summer Senior High').id,
+            :site_id => Site.find_by_name('Test Site 2').id)
 

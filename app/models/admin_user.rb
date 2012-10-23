@@ -1,4 +1,4 @@
-# == Schema Information
+  # == Schema Information
 #
 # Table name: admin_users
 #
@@ -56,7 +56,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   validates :email, :uniqueness => true
-  validates :username, :uniqueness => true, :allow_blank => true
+  validates :username, :uniqueness => true
   validates :first_name, :last_name, :presence => true
 
   validates_numericality_of :phone,
@@ -78,6 +78,10 @@ class AdminUser < ActiveRecord::Base
   before_save :create_name
   before_save :format_phone_numbers
 
+  scope :active, where('deleted_at' => nil)
+  #Below isn't the optimal logic, but accounts for the time zone difference and works
+  scope :inactive, where('deleted_at <= ?', Time.now+1)
+
   scope :admin, lambda {
     joins(:user_role).
     where("user_roles.name = ?", 'Admin')}
@@ -98,15 +102,31 @@ class AdminUser < ActiveRecord::Base
                                                      #  scope :not_current_staff, includes(:programs).where('programs.end_date < ? OR programs.end_date IS NULL', Time.now)
 
   scope :search_by_name, lambda { |q|
-    (q ? where(["lower(name) LIKE ?", '%' + q.downcase + '%']) : {} )
-  }
+    (q ? where(["lower(name) LIKE ?", '%' + q.downcase + '%']) : {} ) }
 
-    def format_phone_numbers
-      unless self.phone.nil? || self.phone == ""
-        self.phone = self.phone.insert 6, '-'
-        self.phone = self.phone.insert 3, '-'
-      end
+  def active_for_authentication?
+    super && !deleted_at
+  end
+
+  def liaison
+    if self.liaison?
+      Liaison.find(liaison_id)
     end
+  end
+
+  def format_phone_numbers
+    unless self.phone.nil? || self.phone == ""
+      self.phone = self.phone.insert 6, '-'
+      self.phone = self.phone.insert 3, '-'
+    end
+  end
+
+  def active?
+    if deleted_at.nil?
+      true
+    end
+  end
+
     def admin?
       if user_role
         self.user_role.name == "Admin"
@@ -219,9 +239,8 @@ class AdminUser < ActiveRecord::Base
 
 # new function to provide access to protected method unless_confirmed
   def only_if_unconfirmed
-    unless_confirmed {yield}
+    pending_any_confirmation {yield}
   end
-
 
   def to_s
     name
@@ -236,5 +255,6 @@ class AdminUser < ActiveRecord::Base
   def create_name
     self.name = self.first_name + ' ' + self.last_name
   end
+
 
 end

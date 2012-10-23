@@ -13,10 +13,11 @@ Spoic3::Application.routes.draw do
   end
 
   devise_for :admin_users, :controllers => { :admin_users => "admin_users", :passwords => "passwords",
-            :confirmations => "confirmations", :sessions => "sessions" }
+            :confirmations => "confirmations", :sessions => "sessions", :registrations => "devise_registrations" }
 
   resources :admin_users
-
+  match 'admin/admin_users/:id/soft_delete', :to => 'admin_users#soft_delete', :as => 'soft_delete_admin_user'
+  match 'admin/admin_users/:id/reactivate', :to => 'admin_users#reactivate', :as => 'reactivate_admin_user'
 #  match "admin/confirmation/new", :to => 'active_admin/devise/confirmations#new', :as => 'new_admin_user_confirmation'
 
   resources :sites do
@@ -59,6 +60,22 @@ Spoic3::Application.routes.draw do
   match 'programs/:id/get_sessions_info', :to => 'programs#get_sessions_items'
   match 'programs/:id/get_staff_info', :to => 'programs#get_staff_items'
 
+#Routes for registration jquery calls
+  match 'registration/get_limit_info', :to => 'registration#get_limit_info'
+  match 'registration/get_sites_for_group_type', :to => 'registration#get_sites_for_group_type'
+  match 'registration/get_alt_sites_for_group_type', :to => 'registration#get_alt_sites_for_group_type'
+  match 'registration/get_sessions_for_type_and_site', :to => 'registration#get_sessions_for_type_and_site'
+  match 'registration/get_alt_sessions_for_type_site', :to => 'registration#get_alt_sessions_for_type_site'
+  match 'registration/save_registration_data', :to => 'registration#save_registration_data'
+  match 'registration/payment_gateway', :to => 'registration#process_cc_payment'
+  match 'registration/final_confirmation', :to => 'registration#final_confirmation'
+  match 'registration/process_cc_payment', :to => 'registration#process_cc_payment'
+  match 'registration/pay_by_check', :to => 'registration#pay_by_check'
+  match 'registration/request_matrix', :to => 'registration#request_matrix'
+
+  match 'payment/:id/cc_payment', :to => 'payment#cc_payment', :as => 'cc_payment'
+  match 'payment/:id/process_cc_payment', :to => 'payment#process_cc_payment', :as => 'process_cc_payment'
+
   match "items/new", :to => 'items#new', :as => 'add_item'
   resources :vendors #, :only => [:index]
   resources :purchases, :only => [:index]
@@ -93,8 +110,6 @@ Spoic3::Application.routes.draw do
   match "labor_items/add/:id", :to => 'labor_items#new', :as =>'labor_project'
 
   #match "food_inventory_food_item/:id/new", :to => 'food_inventory_food_items#new', :as => 'add_food_inventory_food_item'
-#New registration routes
-  match "registration/:id/register", :to => 'registration#new', :as => 'register_group'
 
 # Old registration routes
   match "move_stage/:id" => 'projects#move_stage', :as =>'project_review'
@@ -106,7 +121,7 @@ Spoic3::Application.routes.draw do
   match "registration/show_schedule" => 'registration#show_schedule'
 
   match "registration/:id/schedule" => 'registration#schedule', :as => 'schedule_request'
-  match "registration/:id/program_session" => 'registration#program_session', :as => 'reg_program_session'
+  match "registration/:id/program_session" => 'session#program_session', :as => 'reg_program_session'
   match "registration/alt_schedule" => 'registration#alt_schedule', :as => 'alt_schedule_group'
   match "scheduled_groups/:id/program_session" => 'scheduled_groups#program_session', :as => 'sched_program_session'
 

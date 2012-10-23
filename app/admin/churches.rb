@@ -1,4 +1,5 @@
 ActiveAdmin.register Church do
+  config.sort_order = "name_asc"
   controller.authorize_resource
   menu :if => proc{ can?(:index, Church) }, :priority => 5
 

@@ -40,9 +40,11 @@ class Registration < ActiveRecord::Base
 
   scope :scheduled, where(:scheduled => 't')
   scope :unscheduled, where(:scheduled => 'f')
+  scope :current_unscheduled, where(:scheduled => 'f').where('created_at > ?', '2012-09-01'.to_datetime)
   scope :high_school_unscheduled, where((:group_type_id == 2) && (:scheduled == 'f'))
   scope :junior_high_unscheduled, where(:group_type_id => 3)
   scope :other_unscheduled, where((:group_type_id == 1) || (:group_type_id == 4))
+  scope :current, where('created_at > ?', '2012-09-01'.to_datetime)
 
   attr_accessible :name,:comments, :liaison_id, :request1, :request2, :request3,
                   :request4, :request5, :request6,:request7, :request8, :request9,
@@ -58,28 +60,40 @@ class Registration < ActiveRecord::Base
 
  #TODO: Test that the requested totals don't exceed the limit which is currently 30'
 
-  with_options :if => :step2? do |registration|
-    registration.validates_presence_of :request1
-    registration.validates_numericality_of :request1, :only_integer => true, :greater_than_or_equal_to  => 1, :message => "must be valid request"
-    registration.validate :request_sequence, :message => "All requests must be made in order."
-    registration.validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
+  #with_options :if => :step2? do |registration|
+  #  registration.validates_presence_of :request1
+  #  registration.validates_numericality_of :request1, :only_integer => true, :greater_than_or_equal_to  => 1, :message => "must be valid request"
+  #  registration.validate :request_sequence, :message => "All requests must be made in order."
+  #  registration.validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
+  #end
+  #
+  #with_options :if => :step3? do |registration|
+  #  registration.validates_presence_of :amount_paid, :payment_method
+  #  registration.validates_numericality_of :amount_paid, :greater_than_or_equal_to  => 1
+  #end
+  #
+  #private
+  #def step1?
+  #  registration_step == 'Step 1'
+  #end
+  #def step2?
+  #  registration_step == 'Step 2'
+  #end
+  #def step3?
+  #  registration_step == 'Step 3'
+  #end
+
+  def deposits_paid
+    ##returns the value of deposit payments for this registration
+    Payment.deposits_paid(self.id)
   end
 
-  with_options :if => :step3? do |registration|
-    registration.validates_presence_of :amount_paid, :payment_method
-    registration.validates_numericality_of :amount_paid, :greater_than_or_equal_to  => 1
+  def deposits_due
+    ##returns the value of deposit amount to be charged for this registration
+    deposit_per_person = Session.find(self.request1).payment_schedule.deposit
+    deposit_per_person * requested_total
   end
 
-  private
-  def step1?
-    registration_step == 'Step 1'
-  end
-  def step2?
-    registration_step == 'Step 2'
-  end
-  def step3?
-    registration_step == 'Step 3'
-  end
   def request_sequence
   #This routine fails if there are any non-requests within the sequence of requests.
   a = [request1, request2, request3, request4, request5, request6, request7,
@@ -167,5 +181,16 @@ class Registration < ActiveRecord::Base
           errors.add(:request10, dup_request_message )
       end
     end
+  end
+
+  #These are added to enable DRYing of code used by ScheduledGroup and Registration
+  def current_youth
+    requested_youth
+  end
+  def current_counselors
+    requested_counselors
+  end
+  def current_total
+    requested_total
   end
 end

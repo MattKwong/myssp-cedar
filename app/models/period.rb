@@ -17,10 +17,11 @@ class Period < ActiveRecord::Base
   default_scope :order => 'start_date'
   has_many :sessions
   accepts_nested_attributes_for :sessions
+  scope :active, where(:active => true)
 
   validates :name, :start_date, :end_date, :presence => true
   validate :start_date_before_end_date
-  validate :start_date_not_in_past
+  #validate :start_date_not_in_past
 
   def start_date_before_end_date
     unless start_date.nil? or end_date.nil?
@@ -34,7 +35,7 @@ class Period < ActiveRecord::Base
      unless start_date.nil?
        if start_date < Date.today
  #  Temporary removal of this edit
- #       errors.add(:start_date, "Start date cannot be in the past")
+        errors.add(:start_date, "Start date cannot be in the past")
        end
     end
   end

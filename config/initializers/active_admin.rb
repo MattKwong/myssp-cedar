@@ -27,7 +27,7 @@ ActiveAdmin.setup do |config|
   #   config.default_namespace = false
   #
   # Default:
-  # config.default_namespace = :admin
+   config.default_namespace = :admin
 
   # == User Authentication
   #
@@ -97,10 +97,10 @@ ActiveAdmin.setup do |config|
   # and feel.
   #
   # To load a stylesheet:
-    config.clear_stylesheets!
-    config.register_stylesheet 'active_admin.css'
-    config.register_stylesheet 'custom_aa.css'
-  #
+  #  config.clear_stylesheets!
+  #  config.register_stylesheet 'active_admin.css'
+  #  config.register_stylesheet 'active_admin_custom.css'
+  ##
   # To load a javascript file:
     config.register_javascript 'application.js'
 end

@@ -28,19 +28,37 @@ ActiveAdmin.register Liaison do
     end
 
     panel "Original Request Information" do
-      table_for liaison.registrations do
-        column "Group Name", :name
+      table_for liaison.registrations.current.unscheduled do
+        column "Group Name" do |group|
+          link_to group.name, admin_registration_path(group.id),
+                :title => 'Click to see details of this request.'
+          end
         column "Youth", :requested_youth
         column "Counselors", :requested_counselors
         column "Total", :requested_total
         column "Date submitted", :created_at do |reg|
            reg.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%b %d, %Y %l:%M %p")
-           end
+        end
+        column "Deposit Paid" do |g|
+          number_to_currency(g.deposits_paid)
+        end
+        column "Amount Due" do |g|
+          number_to_currency(g.deposits_due - g.deposits_paid)
+        end
+        column "" do |g|
+          link_to "Pay by CC", cc_payment_path(:id => g.id),
+                  :title => "Click to make credit card payment."
+        end
+        column "" do |g|
+          link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
+                :title => "Click to record payment."
+        end
+
       end
     end
 
     panel "Current Schedule Group Information" do
-      table_for liaison.scheduled_groups do
+      table_for liaison.scheduled_groups.active_program do
         column "Group Name" do |group|
           link_to group.name, myssp_path(group.liaison_id),
           :title => 'Click to go to MySSP page for this liaison.'

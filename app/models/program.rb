@@ -26,7 +26,7 @@ class Program < ActiveRecord::Base
   validates :program_type_id, :presence => true
   validates :active, :inclusion => [true, false]
     validate :start_date_before_end_date
-  validate :start_date_not_in_past
+  #validate :start_date_not_in_past
 
   scope :active, where(:active => true)
   scope :current, where(:active => true)
@@ -79,11 +79,19 @@ class Program < ActiveRecord::Base
   end
 
   def adults
-    (self.scheduled_groups.map &:current_counselors).sum
+    total = 0
+    self.sessions.each do |s|
+      total += s.scheduled_adults
+    end
+    total
   end
 
   def youth
-    (self.scheduled_groups.map &:current_youth).sum
+    total = 0
+    self.sessions.each do |s|
+      total += s.scheduled_adults
+    end
+    total
   end
 
   def total

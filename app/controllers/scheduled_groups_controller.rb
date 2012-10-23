@@ -9,7 +9,7 @@ class ScheduledGroupsController < ApplicationController
 
   def program_session
     session = Session.find(params[:session])
-    @groups = ScheduledGroup.find_all_by_session_id(session.id)
+    @groups = ScheduledGroup.active_program.find_all_by_session_id(session.id)
     @session_week = Period.find(session.period.id).name
     @session_site = Site.find(session.site_id).name
     @page_title = "Groups Scheduled for #{@session_week} #{@session_site}"

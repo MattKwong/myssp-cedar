@@ -66,22 +66,23 @@ describe "Registration" do
     end
 
     describe "request priority logic tests" do
+
       it "should require a request1" do
-        item = Registration.new(@attr.merge(:request1 => nil, :registration_step => :step2 ))
+        item = Registration.new(@attr.merge(:request1 => nil, :registration_step => 'Step 2' ))
         item.should_not be_valid
       end
 
       it "should require that requests be in sequence" do
-        item = Registration.new(@attr.merge(:request5 => 2))
+        item = Registration.new(@attr.merge(:request5 => 2, :registration_step => 'Step 2'))
         item.should_not be_valid
       end
 
       it "should require that there be no duplicate requests" do
-        item = Registration.new(@attr.merge(:request4 => 7))
+        item = Registration.new(@attr.merge(:request4 => 7, :registration_step => 'Step 2'))
         item.should_not be_valid
       end
       it "should treat 0 the same as nil" do
-        item = Registration.new(@attr.merge(:request9 => 0, :request10 => 0))
+        item = Registration.new(@attr.merge(:request9 => 0, :request10 => 0, :registration_step => 'Step 2'))
         item.should be_valid
       end
     end

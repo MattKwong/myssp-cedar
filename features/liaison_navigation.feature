@@ -16,3 +16,23 @@ Feature: liaison navigation
     When I visit a church other than my own
     Then the page has a flash
     And I see an unauthorized message
+  Scenario: Seeing a registration
+    Given a valid liaison logon with a registered group
+    When I log on
+    Then I see a personalized welcome message
+    And I see the registration name
+  Scenario: Seeing a scheduled group
+    Given a valid liaison logon with a scheduled group
+    When I log on
+    Then I see a personalized welcome message
+    And I see the scheduled group name
+  Scenario: Not seeing a registration
+    Given a valid liaison logon with an inactive registered group
+    When I log on
+    Then I see a personalized welcome message
+    And I do not see the registration name
+  Scenario: Seeing a scheduled group
+    Given a valid liaison logon with an inactive scheduled group
+    When I log on
+    Then I see a personalized welcome message
+    And I do not see the scheduled group name

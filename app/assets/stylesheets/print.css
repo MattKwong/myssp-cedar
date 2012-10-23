@@ -1,0 +1,21 @@
+/*
+*= require_self
+*/
+
+/* Remove unwanted elements */
+#header, #title_bar, #footer, #progress_bar, #progress_text, #gateway_step, .noprint, .button_container, #register_header
+{
+    display: none;
+}
+
+/* Ensure the content spans the full width */
+#container, #container2, #content
+{
+    width: 100%; margin: 0; float: none;
+}
+
+/* Change text colour to black (useful for light text on a dark background) */
+.lighttext
+{
+    color: #000
+}

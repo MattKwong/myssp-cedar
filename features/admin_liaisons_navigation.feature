@@ -3,7 +3,7 @@ Feature: liaison navigation
   As an admin user
   I want to be able to navigate to liaison pages
   Scenario: Liaisons
-    Given a logged on "Liaison"
+    Given a logged on "Admin"
     When I do nothing
     Then I see a "Liaisons" menu item
     When I click on "Liaisons"

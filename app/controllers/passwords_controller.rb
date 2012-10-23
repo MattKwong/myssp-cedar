@@ -8,7 +8,7 @@ class PasswordsController < Devise::PasswordsController
   def new
     @page_title = "Reset your password"
     build_resource({})
-    render_with_scope :new
+    render :new
   end
 
   # POST /resource/password
@@ -34,7 +34,7 @@ class PasswordsController < Devise::PasswordsController
     @page_title = "Reset Your Password"
     self.resource = resource_class.new
     resource.reset_password_token = params[:reset_password_token]
-    render_with_scope :edit
+    render :edit
   end
 
   # PUT /resource/password
@@ -49,7 +49,7 @@ class PasswordsController < Devise::PasswordsController
       respond_with resource, :location => after_sign_in_path_for(resource)
     else
       @page_title = "Reset Your Password"
-      respond_with_navigational(resource){ render_with_scope :edit }
+      respond_with_navigational(resource){ render :edit }
     end
   end
 

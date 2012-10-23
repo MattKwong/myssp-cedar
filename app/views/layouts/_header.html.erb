@@ -1,5 +1,8 @@
 <div id= "header">
+  <noscript>In order to use this system, JavaScript must be enable on your browser.</noscript>
+
     <ul class="header_item" id="tabs">
+
         <% if signed_in? && current_admin_user.admin? %>
           <h1 id="site_title">SSP Manager</h1>
             <%= link_to "Home", root_path %>
@@ -76,7 +79,7 @@
         <% end %>
         <% if signed_in? && current_admin_user.liaison? %>
             <li><%= link_to "MySSP", myssp_path(current_admin_user.liaison_id) %></li>
-            <li><%= link_to "Register a Group", register_group_path(current_admin_user.liaison_id) %></li>
+            <li><%= link_to "Register a Group", new_registration_path(:id => params[:id]) %></li>
         <% end %>
       <li><%= link_to "Help", help_path %></li>
     </ul>

@@ -1,3 +1,4 @@
+
 /* Active Admin JS */
 $(function(){
   $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});

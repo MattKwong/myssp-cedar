@@ -23,7 +23,7 @@ Spoic3::Application.configure do
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
 
-#  config.assets.precompile += ['active_admin_custom.js', 'active_admin.css']
+  config.assets.precompile += ['active_admin.js', 'active_admin.css']
 
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'

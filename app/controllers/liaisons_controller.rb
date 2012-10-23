@@ -22,7 +22,6 @@ class LiaisonsController < ApplicationController
   def show
     liaison = Liaison.find(params[:id])
 
-
     if can? :edit, liaison
       @page_title = "MySSP Information Portal. Welcome, #{liaison.first_name}!"
     else
@@ -30,8 +29,15 @@ class LiaisonsController < ApplicationController
     end
 
     church = Church.find(liaison.church_id)
-    registrations = Registration.find_all_by_liaison_id(liaison.id) || []
-    groups = ScheduledGroup.find_all_by_liaison_id(liaison.id)
+    groups = ScheduledGroup.active_program.find_all_by_liaison_id(liaison.id)
+    if groups.empty?
+      registrations = Registration.current.unscheduled.find_all_by_liaison_id(liaison.id)
+      logger.debug registrations.inspect
+    else
+      registrations = []
+      groups.each { |g| registrations << Registration.find(g.registration_id)}
+    end
+
 #   authorize! :read, groups
     rosters = assemble_rosters(groups)
     invoices = grab_invoice_balances(groups)
@@ -66,7 +72,7 @@ class LiaisonsController < ApplicationController
     user.liaison_id = liaison.id
     user.name = liaison.name
 
-    user.user_role = "Liaison"
+    user.user_role_id = UserRole.find_by_name("Liaison").id
 #    user.reset_password_token = AdminUser.reset_password_token
 #    user.password = random_pronouncable_password(8)
 

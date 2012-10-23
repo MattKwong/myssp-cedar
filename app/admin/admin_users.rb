@@ -3,6 +3,19 @@ ActiveAdmin.register AdminUser do
    menu :if => proc{ can?(:read, AdminUser) },:parent => "Users and Logs"
     show :title => :name
 #    after_create { |admin| admin.send_reset_password_instructions }
+  member_action :soft_delete do
+    admin_user = AdminUser.find(params[:id])
+    admin_user.update_attribute(:deleted_at, Time.current)
+    redirect_to :action => :index, :notice => 'User de-activated'
+  end
+  member_action :reactivate do
+    admin_user = AdminUser.find(params[:id])
+    admin_user.update_attribute(:deleted_at, nil)
+    redirect_to :action => :index, :notice => 'User reactivated'
+  end
+
+  scope :active , :default => true
+  scope :inactive
 
   index do
     column :email
@@ -16,6 +29,13 @@ ActiveAdmin.register AdminUser do
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
+    column "Actions" do |admin_user|
+      if admin_user.active?
+        link_to 'Inactivate', soft_delete_admin_user_path(admin_user)
+      else
+        link_to 'Reactivate', reactivate_admin_user_path(admin_user)
+      end
+    end
     default_actions
   end
 

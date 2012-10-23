@@ -7,7 +7,7 @@ class ConfirmationsController < Devise::PasswordsController
   def new
     @page_title = "Request Confirmation Instructions"
     build_resource({})
-    render_with_scope :new
+    render :new
   end
 
   # POST /resource/confirmation
@@ -17,8 +17,8 @@ class ConfirmationsController < Devise::PasswordsController
     if successfully_sent?(resource)
       respond_with({}, :location => after_resending_confirmation_instructions_path_for(resource_name))
     else
-    @page_title = "Request Confirmation Instructions"
-    respond_with_navigational(resource){ render_with_scope :new }
+      @page_title = "Request Confirmation Instructions"
+      respond_with_navigational(resource){ render :new }
     end
   end
 
@@ -39,7 +39,8 @@ class ConfirmationsController < Devise::PasswordsController
     end
 
     if !@confirmable.errors.empty?
-      render_with_scope :new
+      #render 'devise/confirmations/new'
+      render :new
     end
   end
 
@@ -54,7 +55,8 @@ class ConfirmationsController < Devise::PasswordsController
       end
     end
     if !@confirmable.errors.empty?
-      render_with_scope :new
+      #render 'devise/confirmations/new'
+      render :new
     end
   end
 
@@ -72,7 +74,8 @@ class ConfirmationsController < Devise::PasswordsController
     @confirmation_token = params[:confirmation_token]
     @requires_password = true
     self.resource = @confirmable
-    render_with_scope :show
+    #render 'devise/confirmations/new'
+    render :show
   end
 
   def do_confirm

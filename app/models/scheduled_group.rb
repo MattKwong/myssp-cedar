@@ -31,6 +31,7 @@ class ScheduledGroup < ActiveRecord::Base
 
   default_scope :include => :church, :order => 'churches.name'
   scope :active, where('current_total > ?', 0)
+  scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
   has_many :payments
   has_many :change_histories
   has_many :adjustments
@@ -39,6 +40,7 @@ class ScheduledGroup < ActiveRecord::Base
   belongs_to :session
   belongs_to :session_type, :foreign_key => :group_type_id
   has_one :roster
+  has_one :registration
 
   validates :name, :liaison_id, :session_id, :church_id, :registration_id, :group_type_id, :presence => true
   validates_numericality_of :liaison_id, :session_id, :church_id, :registration_id, :group_type_id,

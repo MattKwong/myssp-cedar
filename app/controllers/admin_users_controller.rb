@@ -9,8 +9,9 @@ class AdminUsersController < Admin::AdminUsersController
     super
   end
 
-  def destroy
-    super
+  def soft_delete
+    logger.debug 'In AdminUsersController'
+  #
   end
 
   def create

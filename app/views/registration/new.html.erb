@@ -1,0 +1,328 @@
+<%= stylesheet_link_tag "print", :media => "print" %>
+<div id='active_admin_content'>
+    <div id='register_header'>
+        <h4><%= link_to "Help with scheduling a group", "http://www.sierraserviceproject.org/2013/MySSP Registration User Guide.pdf" %></h4>
+        <img id="request_link" class="reg_buttons popular_button">
+        <div class="clear"></div>
+        <div class="hidden" id="request_data"></div>
+        <h3>This online system has been set up for your convenience. If you run into problems, refer to the user guide
+          accessible through the 'Help' link above. Also, don't hesitate to pick up the phone and call Meghan at 916-488-6441 
+          during normal business hours. Alternatively, send her an email at <%= mail_to "meghan.osborn@sierraserviceproject.org",
+          "meghan.osborn@sierraserviceproject.org", :subject => "Help with Registration" %>.</h3>
+        <h3>Throughout this process, don't use the back arrow on your browser! If you want to back up and change something
+        that you have already input, use the 'Back' button which will appear at the bottom of the form.</h3>
+    </div>
+        <div id='reg_container'>
+          <!--<form action="#" method="post">-->
+          <%=  form_for @registration do |r| %>
+              <div id="first_step">
+              <h1>Step 1: Confirm Church Information</h1>
+                <div class="form">
+                    <p>Below is the information on file for you and your church.
+                    If any of this needs to be updated, please cancel this registration process, update your liaison
+                      and church information, and then return here to register your group.</p>
+                    <p>If you have more than one group to register, you will need to complete this process for each group.</p>
+                    <table class='registration_table' id="liaison_info_table">
+                      <tr><td>ID</td><td id="liaison_id" ><%= @liaison.id %></td></tr>
+                      <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                      <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                      <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                      <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                      <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                      <tr></tr>
+                      <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                      <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                      <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    </table>
+                </div>
+              <div class="clear"></div>
+              <div class="button_container">
+                  <img class="reg_button next_button" id="submit_first"  >
+                  <div class="cancel_button"><%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back %></div>
+              </div>
+            </div>
+
+
+            <div id="second_step">
+              <h1>Step 2: Select Group Type</h1>
+              <div class="form_elements">
+              <div class="form" id align="group_type_buttons">
+                <p>Select the type of group you are registering.</p>
+                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
+                    <%= label_tag(:group_senior, "Senior High") %>
+                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Junior High').id) %>
+                    <%= label_tag(:group_junior, "Junior High") %>
+              </div>
+              </div>
+              <div class="clear"></div>
+              <div class = "errors" id="error_text_group"></div>
+              <div class="button_container">
+                <img class="reg_button next_button" id="submit_second" >
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, title => 'Cancel and return to liaison page' %>
+                <img class="reg_button back_button" id="back_second" :alt align="Back" >
+              </div>
+            </div>
+            <div class="clear"></div>
+
+            <div id="third_step">
+              <h1>Step 3: Enter Enrollment Numbers</h1>
+                    <div class="form">
+                        <div id='limit_info'></div>
+                    <table id="info_table_third" class="registration_table"></table>
+                    <table class='registration_table'>
+                    <tr>
+                        <td><%= r.label "Youth" %></td>
+                        <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
+                    </tr>
+                    <tr>
+                        <td><%= r.label "Counselors" %></td>
+                        <td><%= r.number_field :requested_counselors, :min => 1, :size => 2, :max => 8 %></td>
+                    </tr>
+                     <tr>
+                        <td>Total Requested</td>
+                        <td id="requested_total"></td>
+                  </table>
+              </div>
+              <div class="clear"></div>
+              <div class = "errors" id="error_text_numbers"></div>
+              <div class="button_container">
+                <img class="reg_button next_button" id="submit_third" align="right">
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                    :title => 'Cancel and return to liaison page'} %>
+                <img class="reg_button back_button" id="back_third" >
+              </div>
+            </div>
+            <div class="clear"></div>
+
+            <div id="fourth_step">
+              <h1>Step 4: Select First Choice Site and Session</h1>
+              <div class="form">
+                <div id='site_info'></div>
+                <table id="info_table_fourth" class="registration_table"></table>
+                <table>
+
+              <tr>
+                <td><%= r.label "Site" %></td>
+                <td id="site_selector"></td>
+              </tr>
+              <tr >
+                <td><%= r.label "Session" %></td>
+                <td id="session_selector"></td>
+              </tr>
+              </table>
+                </div>
+                <div class="clear"></div>
+              <div class = "errors" id="error_text_selections"></div>
+              <div class="button_container">
+                <img class="reg_button next_button" id="submit_fourth" align="right" >
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                     :title => 'Cancel and return to liaison page'} %>
+                <img class="reg_button back_button" id="back_fourth" >
+              </div>
+            </div>
+                <div class="clear"></div>
+
+            <div id="fifth_step">
+              <h1>Step 5: Select Additional Choices</h1>
+              <div class="form">
+                  <p>We strongly urge you to select at least two alternative site/session combinations. Although we do
+                    our absolute best to schedule you at your first choice site and week, due to the popularity of
+                    certain times and locations, it is not always possible. Please give us at least two other choices!</p>
+
+                <div id='alt_site_info'></div>
+
+                <table id="prev_choices_table5"></table>
+                <h4>Add Your Next Choice</h4>
+                <table id="choices_table">
+                  <tr>
+                    <td><%= r.label "Site" %></td>
+                    <td id="alt_site_selector"></td>
+                  </tr>
+                  <tr id="alt_session_select"  >
+                    <td><%= r.label "Session" %></td>
+                    <td id="alt_session_selector"></td>
+                  </tr>
+                </table>
+                <p>Once you have selected an alternative choice, click "Record Choice" to save the selection.</p>
+                <br>
+                <p>To redo your choices, use the "Back" button.</p>
+                <br>
+              </div>
+              <div class="clear"></div>
+              <div class = "errors" id="error_text_alt_selections"></div>
+
+              <div class="button_container">
+                <img class="reg_button no_more_choices_button" id="submit_fifth" align="right" >
+                <img class="reg_button add_choice_button" id="add_choice" align="right" >
+                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                     :title => 'Cancel and return to liaison page'} %>
+                <img class="reg_button back_button" id="back_fifth" >
+              </div>
+            </div>
+              <div class="clear"></div>
+
+
+              <div id="sixth_step">
+              <h1>Step 6: Add Comments and Special Notes</h1>
+                <table id="prev_choices_table6"></table>
+                <div class="form">
+                  <p>Do you have any special requirements or requests that we should know about? Do
+                  you want to be scheduled together with another group?</p>
+                  <p>Please let us know if there is a scholarship need for the entire group or for just a specific
+                    number of youth. Scholarships will be applied to the second and final payments.</p>
+                  <%=  r.text_area("comments", :size => "80x4") %>
+                <p>To add additional choices, use the "Back" button to return to the previous page.</p>
+                <br>
+                </div>
+                <div class="clear"></div>
+                <div class="button_container">
+                  <img class="reg_button next_button" id="submit_sixth" align="right" >
+                  <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                       :title => 'Cancel and return to liaison page'} %>
+                  <img class="reg_button back_button" id="back_sixth" >
+                </div>
+                <div class="clear"></div>
+              </div>
+            <div id="seventh_step">
+              <h1>Step 7: Confirm Registration</h1>
+                <div class="form">
+                  <p>Please review this information for accuracy. Use the Back button below if you want to change anything
+                    before submitting. Once you press the 'Confirm' button, your application will be recorded in our database.
+                    You must proceed to the next page for payment instructions and options.</p>
+                  <table id="registration_request_table">
+                    <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                    <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                    <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                    <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                    <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                    <tr></tr>
+                    <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                    <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                    <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    <tr></tr>
+                  </table>
+                  <table id="request_info_table"></table>
+                </div>
+              <div class="clear"></div>
+                <div class="button_container">
+                  <img class="reg_button confirm_button" id="submit_seventh" align="right" >
+                  <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                       :title => 'Cancel and return to liaison page'} %>
+                  <img class="reg_button back_button" id="back_seventh" >
+                </div>
+              </div>
+            <div class="clear"></div>
+
+
+            <div id="eighth_step">
+              <h1>Step 8: Make Payment</h1>
+              <div class="hidden" id="step_seven_data"></div>
+              <div class="form">
+                  <h4>You have two options to make your deposit payment.</h4>
+                  <h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit
+                    card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
+                  <!--<h3>The payment gateway is not working.</h3>-->
+                  <!--<h4>Unfortunately, we have run into an unexpected problem with the payment gateway.-->
+                  <!--If you would like to pay by credit card, go ahead and select the 'pay by check' option here. Call the office-->
+                  <!--and we will process your payment over the phone.  We apologize for the inconvenience.</h4>-->
+                <div class="clear"></div>
+                <div class="button_container">
+                  <img class="reg_button gateway_button" id="pay_by_cc" align="right"  >
+
+                </div>
+                <h4>Option Two: You may mail a check to the SSP office. Please include a copy of your confirmation
+                  email or printed copy of the confirmation screen (this is the next screen you will see).
+                  Payment must be received promptly; otherwise, your registration may be cancelled. Checks
+                  should be made payable to Sierra Service Project.</h4>
+              </div>
+              <div class="clear"></div>
+              <div class="button_container">
+                <img class="reg_button check_button" id="pay_by_check" align="right" >
+              </div>
+            </div>
+            <div class="clear"></div>
+
+            <div id="ninth_step">
+              <h1>Step 9: Registration Complete!</h1>
+              <div class="form">
+                <p>Congratulations! You have successfully completed your group's registration. Please print
+                  a copy of this screen for your records.  You will receive an email confirmation shortly. If
+                  you have any questions, don't hesitate to call Meghan Osborn at 916-488-6441.</p>
+                  <table id="final_registration_table">
+                    <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
+                    <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
+                    <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
+                    <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
+                    <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                    <tr></tr>
+                    <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
+                    <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
+                    <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    <tr></tr>
+                  </table>
+                <div class="clear"></div>
+              </div>
+              <div class="button_container">
+                  <div class="reg_button center ">
+                    <img class="print_button" id="print_ninth" >
+                    <%=  link_to image_tag("return.png", :alt => ":return"), :back, :class=>"return_button",
+                                                                                             :title => 'Return to liaison page' %>
+                  </div>
+              </div>
+            </div>
+            <div id="gateway_step">
+              <h1>Payment Gateway</h1>
+              <!-- to display errors returned by createToken -->
+              <div class="hidden" id="gateway_data"></div>
+              <form action="" method="POST" id="payment-form">
+                <table>
+                <tr>
+                  <td><label>Deposit Amount</label></td>
+                  <td class = "money" id="disp_deposit_amount" ></td>
+                </tr>
+                  <tr>
+                  <td>
+                    <label id="processing_label"></label>
+                    <%= check_box_tag("include_charge", "accepted", false) %>
+                  </td>
+                  <td class = "money" id="processing_charge" ></td>
+                </tr>
+                  <tr>
+                  <td><label>Amount To Be Charged</label></td>
+                  <td class = "money" id="to_be_charged" ></td>
+                </tr>
+                <tr>
+                  <td><label>Card Number</label></td>
+                  <td><input type="text" size="20" autocomplete="off" class="card-number" /></td>
+                </tr>
+                <tr>
+                  <td><label>CVC</label></td>
+                  <td><input type="text" size="4" autocomplete="off" class="card-cvc" /></td>
+                </tr>
+                <tr>
+                  <td><label>Expiration (MM/YYYY)</label></td>
+                  <td><span><input type="text" size="2" class="card-expiry-month"/><input type="text" size="4" class="card-expiry-year"/></span></td>
+                </tr>
+                </table>
+                <!--<button type="submit" class="submit-button">Submit Payment</button>-->
+                <div class = "errors" id="payment_errors"></div>
+              <div class="clear"></div>
+              <div class="button_container">
+                <img class="reg_button pay_now_button" id="pay_now" >
+                <img class="reg_button back_button" id="back_gateway" >
+              </div>
+              </form>
+            </div>
+            </div>
+
+            <div class="clear"></div>
+            <div id="progress_bar">
+              <div id="progress"></div>
+              <div id="progress_text">0% Complete</div>
+            </div>
+            </div>
+          <!--</form>-->
+        <% end %>
+        <!--</div>-->
+</div>
+
