@@ -12,8 +12,6 @@
 
 require 'spec_helper'
 
-require 'spec_helper'
-
 describe ProgramType do
   before (:each) do
     @attr = { :name => "Program Type", :description => "PT Description", :position => 10}

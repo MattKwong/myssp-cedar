@@ -102,7 +102,7 @@ ActiveAdmin.setup do |config|
     config.register_stylesheet 'custom_aa.css'
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+    config.register_javascript 'application.js'
 end
 
 # Below the ActiveAdmin.setup block, I've opened up the ActiveAdmin::ResourceController
