@@ -172,7 +172,7 @@ class RegistrationController < ApplicationController
     @requests.slice!(@requests_size, @requests.size - @requests_size)
     @sessions = Session.all
     @selection = 0
-    @alt_sessions = Session.find_all_by_session_type_id(@registration.group_type_id).map  { |s| [s.name, s.id]}
+    @alt_sessions = Session.active.by_type(@registration.group_type_id).map  { |s| [s.name, s.id]}
     @requests.each { |i| @alt_sessions.delete_if { |j| j[1] == i }}
   end
 

@@ -209,4 +209,8 @@ class Session < ActiveRecord::Base
     group_type = SessionType.find_by_name("Summer Senior High").id
     self.sites_for_group_type(group_type)
   end
+
+  def short_name
+    site.abbr + " " + period.name.first + period.name.last
+  end
 end

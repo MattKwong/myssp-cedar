@@ -19,12 +19,26 @@ ActiveAdmin.register Registration do
     column :church_id do |reg|
       link_to reg.liaison.church.name, admin_church_path(reg.liaison.church_id)
     end
-
+    column :group_type_id, :sortable => :group_type_id do |group_type|
+      group_type.session_type.name
+    end
     column :requested_youth, :label => "Youth"
     column :requested_counselors, :label => "Counselors"
     column :requested_total, :label => "Total"
-    column :group_type_id, :sortable => :group_type_id do |group_type|
-      group_type.session_type.name
+    column :request1, :sortable => :request1 do |reg|
+      if reg.request1
+        Session.find(reg.request1).short_name
+      end
+    end
+    column :request2, :sortable => :request2 do |reg|
+      if reg.request2
+        Session.find(reg.request2).short_name
+      end
+    end
+    column :request3, :sortable => :request3 do |reg|
+      if reg.request3
+        Session.find(reg.request3).short_name
+      end
     end
     default_actions
  end
