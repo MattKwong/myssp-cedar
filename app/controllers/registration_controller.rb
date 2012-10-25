@@ -334,6 +334,7 @@ class RegistrationController < ApplicationController
   def process_cc_payment
     token = params[:payment_tracking_number]
     @registration = Registration.find(params[:reg_id])
+
     begin
       to_be_charged = (100 * params[:amount_paid].to_f).to_i
       logger.debug to_be_charged
