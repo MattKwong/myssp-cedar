@@ -618,7 +618,7 @@ function stripeResponseHandler(status, response) {
         // token contains id, last4, and card type
         var token = response['id'];
         // and submit
-        alert(processing_charge);
+//        alert(processing_charge);
         registration_id = $("input[name=registration_id]").val();
         $.get("process_cc_payment?reg_id=" + registration_id  + "&deposit_amount=" + deposit_amount
             + "&amount_paid=" + to_be_charged + "&processing_charge=" + processing_charge + "&payment_tracking_number="
@@ -687,7 +687,7 @@ $(document).ready(function() {
 });
 
 function submitSeventh() {
-        alert("submitSeventh was clicked");
+//        alert("submitSeventh was clicked");
             //Send the data to the server and create the new registration record
         $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
             + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
