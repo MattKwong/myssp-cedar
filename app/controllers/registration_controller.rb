@@ -49,26 +49,10 @@ class RegistrationController < ApplicationController
     @page_title = "Register A Group"
     render "register"
   end
+
   def edit              #prior to /:id/edit view
     @registration = Registration.find(params[:id])
-    authorize! :edit, @registration
-    @liaison = Liaison.find(@registration.liaison_id)
-    @church = Church.find(@liaison.church_id)
-    @group_type = SessionType.find(@registration.group_type_id)
-    @temp = Array.new()
-    @temp << "None" << 0
-    @sessions = Session.find_all_by_session_type_id(@registration.group_type_id).map { |s| [s.name, s.id ]}
-    @sessions.insert(0, @temp)
-    @title = "Registration Step 2"
-    @page_title = "Register A Group: Step 2"
-  end
-
-  def step2?
-    @registration.registration_step == 'Step 2'
-  end
-
-  def step3?
-    @registration.registration_step == 'Step 3'
+    @page_title = "Edit Your Registration"
   end
 
   def update          #follows posting of edit and process_payment forms

@@ -7,22 +7,22 @@
                   <div class="panel_contents">
                     <div class="attributes_table liaison" id="attributes_table_liaison_3">
                         <table border="0" cellspacing="0" cellpadding="0" >
-                            <h4>Step 2: Make Your Requests</h4>
+                            <h4>Change Your Registration</h4>
                             <tr>
                                 <td>Group Name</td>
                                 <td><%= @registration.name %></td>
                             </tr>
                             <tr>
                                 <td>Church Name</td>
-                                <td><%= @church.name %></td>
+                                <td><%= @registration.church.name %></td>
                             </tr>
                             <tr>
                                 <td>Liaison Name</td>
-                                <td><%= @liaison.name %></td>
+                                <td><%= @registration.liaison.name %></td>
                             </tr>
                             <tr>
                                 <td>Group Type</td>
-                                <td><%= @group_type.name %></td>
+                                <td><%= @registration.session_type.name %></td>
                             </tr>
                             <tr>
                                 <td>Youth</td>
@@ -38,28 +38,27 @@
                             </tr>
                             <tr>
                                 <td><%= r.label "Choice #1" %></td>
-                                <td><%= r.select :request1, @sessions %></td>
+                                <td><%= r.select :request1, Session.active.by_type(@registration.group_type_id).name %></td>
                             </tr>
                            <tr>
                                 <td><%= r.label "Choice #2" %></td>
-                                <td><%= r.select :request2, @sessions %></td>
+                                <td><%= r.select :request2, Session.active.by_type(@registration.group_type_id).name %></td>
                             </tr>
                            <tr>
                                 <td><%= r.label "Choice #3" %></td>
-                                <td><%= r.select :request3, @sessions %></td>
+                                <td><%= r.select :request3, Session.active.by_type(@registration.group_type_id).name %></td>
                             </tr>
                            <tr>
                                 <td><%= r.label "Choice #4" %></td>
-                                <td><%= r.select :request4, @sessions %></td>
+                                <td><%= r.select :request4, Session.active.by_type(@registration.group_type_id).name %></td>
                             </tr>
                            <tr>
                                 <td><%= r.label "Choice #5" %></td>
-                                <td><%= r.select :request5, @sessions %></td>
+                                <td><%= r.select :request5, Session.active.by_type(@registration.group_type_id).collect {|s| [s.name, s.id]} %></td>
                             </tr>
-                             <input type = "hidden" name="registration[registration_step]" value='Step 2'>
                             </table>
                             <div class="actions">
-                                <%= r.submit "Continue" %>
+                                <%= r.submit %>
                                 <%= cancel_link %>
                             </div>
                     </div>
