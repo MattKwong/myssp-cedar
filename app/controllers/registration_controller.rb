@@ -55,7 +55,38 @@ class RegistrationController < ApplicationController
     @page_title = "Edit Your Registration"
   end
 
-  def update          #follows posting of edit and process_payment forms
+  def update
+
+    new_requested_total = (params[:registration][:requested_youth]).to_i + (params[:registration][:requested_counselors]).to_i
+    increase = new_requested_total - @registration.requested_total
+    if new_requested_total > @registration.limit
+      flash[:error] = "Your registration total exceeds the maximum of #{@registration.limit}."
+      @page_title = "Edit Your Registration"
+      render "edit"
+    else
+      if @registration.update_attributes(params[:registration])
+        flash[:notice] = "Your registration has been successfully changed."
+        redirect_to show_registration_path(@registration, :increase => increase)
+      else
+        @page_title = "Edit Your Registration"
+        render "edit"
+      end
+    end
+  end
+
+  def show
+    @registration = Registration.find(params[:id])
+    @page_title = "Successful Registration Update"
+    @increase_message = ''
+    if params[:increase].to_i > 0
+      @increase_message = "Note: Since you have increased your numbers, you may need to pay additional deposits to SSP. When you return to your Main Page,
+check amount listed in the Amount Due column. This can be paid either by check or by credit card."
+    end
+    render "show"
+
+  end
+
+  def update_old          #follows posting of edit and process_payment forms
     @registration = Registration.find(params[:id])
     authorize! :update, @registration
     @liaison = Liaison.find(@registration.liaison_id)

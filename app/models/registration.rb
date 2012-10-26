@@ -58,6 +58,25 @@ class Registration < ActiveRecord::Base
                              :only_integer => true, :greater_than_or_equal_to  => 1
    validate :request_sequence, :message => "All requests must be made in order."
    validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
+   before_validation do
+     self.requested_total = self.requested_youth + self.requested_counselors
+   end
+
+  def limit
+    session_type.limit
+  end
+
+  def junior_high?
+    session_type.junior_high?
+  end
+
+  def senior_high?
+    session_type.senior_high?
+  end
+
+  def registration_limit
+    junior_high? ? 20 : 30
+  end
 
   def deposits_paid
     ##returns the value of deposit payments for this registration
