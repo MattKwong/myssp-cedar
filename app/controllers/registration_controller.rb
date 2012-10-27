@@ -65,6 +65,8 @@ class RegistrationController < ApplicationController
       render "edit"
     else
       if @registration.update_attributes(params[:registration])
+        log_activity(DateTime.today, "Registration Update", "#{@registration.name}: Total changed by: #{increase}", @registration.liaison_id, @registration.liaison.name, "Liaison")
+        UserMailer.registration_change_confirmation(@registration, params).deliver
         flash[:notice] = "Your registration has been successfully changed."
         redirect_to show_registration_path(@registration, :increase => increase)
       else
@@ -321,6 +323,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @processing_charge = (@deposit_amount * 0.029)
       @to_be_charged = @deposit_amount + @processing_charge
       set_registered_flag
+      log_activity(DateTime.today, "Registration Created", "Group Type: #{@registration.type } Total requested: #{@registration.requested_total}", @registration.liaison_id, @registration.liaison.name, "Liaison")
     else
       @registration_saved = false
       @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."

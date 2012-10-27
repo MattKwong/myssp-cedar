@@ -66,6 +66,9 @@ class Registration < ActiveRecord::Base
     session_type.limit
   end
 
+  def type
+    self.junior_high? ? "Junior High" : "Senior High"
+  end
   def junior_high?
     session_type.junior_high?
   end

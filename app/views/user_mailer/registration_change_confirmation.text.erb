@@ -2,11 +2,9 @@
 
 Dear <%= @registration.liaison.first_name %>,
 
-Thank you for registering your group with Sierra Service Project.  This email confirms that your group is registered to
-participate in our summer 2013 program.
-
-The following is the registration information that you provided to us:
-
+This email is a confirmation of the changes that were made to your registration today. Below is the current registration
+information that is in our database.  Please contact Meghan at 916-488-6441 if you think any of this information is
+incorrect.
 
 Group name:                 <%=	@registration.name %>
 
@@ -19,26 +17,6 @@ Number of youth:            <%= @registration.requested_youth %>
 Number of counselors:       <%= @registration.requested_counselors %>
 
 Total:                      <%= @registration.requested_total %>
-
-Deposit Amount Due:         <%= number_to_currency(@params[:deposit_amount]) %>
-
-<% if @registration.payment_notes == "None" %>
-<%=
-"Payment Notes:              Mail in check payable to Sierra Service Project"
-%>
-<% else %>
-<%=
-"Deposit Paid:               #{number_to_currency(@params[:deposit_amount])}
-
-Processing Charge Paid:     #{number_to_currency(@params[:processing_charge])}
-
-Total Charged:              #{number_to_currency(@params[:amount_paid])}
-
-Payment Notes:              Paid by credit card. Receipt id: #{@registration.payment_notes}"
-%>
-<% end %>
-
-The following are your site and week requests:
 
 Choice #1: <%= Session.find(@registration.request1).name %>
 
@@ -80,13 +58,6 @@ Choice #10: <%= Session.find(@registration.request10).name %>
 <% end %>
 No additional choices.
 
-We will notify you of your group's placement by the end of November.  In the past, we have been able to place 90% of all
-groups in their 1st or 2nd choice. We hope to be able to do that again this year. If you need to make any changes to this
-registration, please call me.
-
-I am excited that your group will be participating in 2013 and I am looking forward to working with you to make SSP a
-fantastic experience for your group. If you have any questions or concerns, please give me a call at 916-488-6441. Email
-will be my primary way of communicating with you, so please notify me if you change your email address.
 
 Blessings,
 
