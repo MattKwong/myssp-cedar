@@ -49,29 +49,46 @@ class RegistrationController < ApplicationController
     @page_title = "Register A Group"
     render "register"
   end
+
   def edit              #prior to /:id/edit view
     @registration = Registration.find(params[:id])
-    authorize! :edit, @registration
-    @liaison = Liaison.find(@registration.liaison_id)
-    @church = Church.find(@liaison.church_id)
-    @group_type = SessionType.find(@registration.group_type_id)
-    @temp = Array.new()
-    @temp << "None" << 0
-    @sessions = Session.find_all_by_session_type_id(@registration.group_type_id).map { |s| [s.name, s.id ]}
-    @sessions.insert(0, @temp)
-    @title = "Registration Step 2"
-    @page_title = "Register A Group: Step 2"
+    @page_title = "Edit Your Registration"
   end
 
-  def step2?
-    @registration.registration_step == 'Step 2'
+  def update
+
+    new_requested_total = (params[:registration][:requested_youth]).to_i + (params[:registration][:requested_counselors]).to_i
+    increase = new_requested_total - @registration.requested_total
+    if new_requested_total > @registration.limit
+      flash[:error] = "Your registration total exceeds the maximum of #{@registration.limit}."
+      @page_title = "Edit Your Registration"
+      render "edit"
+    else
+      if @registration.update_attributes(params[:registration])
+        log_activity(DateTime.today, "Registration Update", "#{@registration.name}: Total changed by: #{increase}", @registration.liaison_id, @registration.liaison.name, "Liaison")
+        UserMailer.registration_change_confirmation(@registration, params).deliver
+        flash[:notice] = "Your registration has been successfully changed."
+        redirect_to show_registration_path(@registration, :increase => increase)
+      else
+        @page_title = "Edit Your Registration"
+        render "edit"
+      end
+    end
   end
 
-  def step3?
-    @registration.registration_step == 'Step 3'
+  def show
+    @registration = Registration.find(params[:id])
+    @page_title = "Successful Registration Update"
+    @increase_message = ''
+    if params[:increase].to_i > 0
+      @increase_message = "Note: Since you have increased your numbers, you may need to pay additional deposits to SSP. When you return to your Main Page,
+check amount listed in the Amount Due column. This can be paid either by check or by credit card."
+    end
+    render "show"
+
   end
 
-  def update          #follows posting of edit and process_payment forms
+  def update_old          #follows posting of edit and process_payment forms
     @registration = Registration.find(params[:id])
     authorize! :update, @registration
     @liaison = Liaison.find(@registration.liaison_id)
@@ -172,7 +189,7 @@ class RegistrationController < ApplicationController
     @requests.slice!(@requests_size, @requests.size - @requests_size)
     @sessions = Session.all
     @selection = 0
-    @alt_sessions = Session.find_all_by_session_type_id(@registration.group_type_id).map  { |s| [s.name, s.id]}
+    @alt_sessions = Session.active.by_type(@registration.group_type_id).map  { |s| [s.name, s.id]}
     @requests.each { |i| @alt_sessions.delete_if { |j| j[1] == i }}
   end
 
@@ -306,6 +323,7 @@ class RegistrationController < ApplicationController
       @processing_charge = (@deposit_amount * 0.029)
       @to_be_charged = @deposit_amount + @processing_charge
       set_registered_flag
+      log_activity(DateTime.today, "Registration Created", "Group Type: #{@registration.type } Total requested: #{@registration.requested_total}", @registration.liaison_id, @registration.liaison.name, "Liaison")
     else
       @registration_saved = false
       @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."

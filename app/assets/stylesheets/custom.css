@@ -380,7 +380,7 @@ td.inventory-table {
     display: none;
 }
 
-div#loading {
+#loading {
     width: 100%;
     border-top-left-radius: 3px;
     text-align: center;

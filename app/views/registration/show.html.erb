@@ -1,0 +1,58 @@
+<%= stylesheet_link_tag "print", :media => "print" %>
+<%= form_for(@registration) do |r| %>
+    <div id="active_admin_content" class="without_sidebar">
+      <div id="main_content_wrapper">
+        <div id="main_content">
+          <div class="panel">
+            <div class="panel_contents">
+              <div class="attributes_table" >
+                <h2>Current Registration Details</h2>
+                <p>Congratulations! You have successfully changed your group's registration. Please print
+                  a copy of this screen for your records.  You will receive an email confirmation shortly. If
+                  you have any questions, don't hesitate to call Meghan Osborn at 916-488-6441.</p>
+                <table id="final_registration_table">
+                  <tr><td>Your Name</td><td><%= @registration.liaison.name %></td></tr>
+                  <tr><td>Your Email</td><td><%= @registration.liaison.email1 %></td></tr>
+                  <tr><td>Your Cell Phone</td><td><%= @registration.liaison.cell_phone %></td></tr>
+                  <tr><td>Your Home Phone</td><td><%= @registration.liaison.home_phone %></td></tr>
+                  <tr><td>Your Work Phone</td><td><%= @registration.liaison.work_phone %></td></tr>
+                  <tr></tr>
+                  <tr><td>Your Church</td><td><%= @registration.liaison.church.name %></td></tr>
+                  <tr><td>City</td><td><%= @registration.liaison.church.city %></td></tr>
+                  <tr><td>State</td><td><%= @registration.liaison.church.state %></td></tr>
+                  <tr></tr>
+                  <tr><td>Youth</td><td><%= @registration.requested_youth %></td></tr>
+                  <tr><td>Counselors</td><td><%= @registration.requested_counselors %></td></tr>
+                  <tr><td>Total</td><td><%= @registration.requested_total %></td></tr>
+                  <tr></tr>
+                  <tr><td>Choice #1</td><td><%= Session.find(@registration.request1).name %></td></tr>
+                  <tr><td>Choice #2</td><td><%= @registration.request2.nil? ? "None" : Session.find(@registration.request2).name %></td></tr>
+                  <tr><td>Choice #3</td><td><%= @registration.request3.nil? ? "None" : Session.find(@registration.request3).name %></td></tr>
+                  <tr><td>Choice #4</td><td><%= @registration.request4.nil? ? "None" : Session.find(@registration.request4).name %></td></tr>
+                  <tr><td>Choice #5</td><td><%= @registration.request5.nil? ? "None" : Session.find(@registration.request5).name %></td></tr>
+                  <tr><td>Choice #6</td><td><%= @registration.request6.nil? ? "None" : Session.find(@registration.request6).name %></td></tr>
+                  <tr><td>Choice #7</td><td><%= @registration.request7.nil? ? "None" : Session.find(@registration.request7).name %></td></tr>
+                  <tr><td>Choice #8</td><td><%= @registration.request8.nil? ? "None" : Session.find(@registration.request8).name %></td></tr>
+                  <tr><td>Choice #9</td><td><%= @registration.request9.nil? ? "None" : Session.find(@registration.request9).name %></td></tr>
+                  <tr><td>Choice #10</td><td><%= @registration.request10.nil? ? "None" : Session.find(@registration.request10).name %></td></tr>
+                  <tr></tr>
+                </table>
+                <% if @increase_message  %>
+                    <div></div><p><%= @increase_message %></p></div>
+                <% end %>
+                <div class="clear"></div>
+              </div>
+              <div class="button_container">
+                <div class="reg_button center ">
+                  <img class="print_button" id="print_ninth" >
+                  <%=  link_to image_tag("return.png", :alt => ":return"), myssp_path(@registration.liaison), :class=>"return_button",
+                               :title => 'Return to liaison page' %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
