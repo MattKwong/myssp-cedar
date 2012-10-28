@@ -131,7 +131,7 @@ Spoic3::Application.routes.draw do
   match "registration/alt_schedule" => 'registration#alt_schedule', :as => 'alt_schedule_group'
   match "scheduled_groups/:id/program_session" => 'scheduled_groups#program_session', :as => 'sched_program_session'
 
-  match "scheduled_groups/:id/schedule" => 'scheduled_groups#confirmation', :as => "scheduled_groups_schedule"
+  match "scheduled_groups/:id/new" => 'scheduled_groups#new', :as => "new_scheduled_group"
   match "scheduled_groups/:id/success" => 'scheduled_groups#success', :as => "scheduled_group_confirmation"
   match "scheduled_groups/:id/change_success" => 'scheduled_groups#change_success', :as => "change_confirmation"
   match "liaisons/:id/create_user" => 'liaisons#create_user', :as => 'create_user'

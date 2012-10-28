@@ -15,6 +15,28 @@ class ScheduledGroupsController < ApplicationController
     @page_title = "Groups Scheduled for #{@session_week} #{@session_site}"
   end
 
+  def new
+    @registration = Registration.find(params[:reg])
+    @scheduled_group = ScheduledGroup.new(:church_id => @registration.church_id,
+                                          :name => @registration.name, :registration_id => @registration.id,
+                                          :current_youth => @registration.requested_youth,
+                                          :current_counselors => @registration.requested_counselors,
+                                          :current_total => @registration.requested_total,
+                                          :liaison_id => @registration.liaison_id, :session_id => params[:id],
+                                          :group_type_id => @registration.group_type_id,
+                                          :scheduled_priority => params[:priority],
+                                          :second_payment_total => 0)
+    if @scheduled_group.valid?
+      @scheduled_group.save!
+      roster = Roster.create!(:group_id => @scheduled_group.id,
+                              :group_type => SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).id)
+      @scheduled_group.update_attribute('roster_id', roster.id)
+      flash[:notice] = "Group has been successfully scheduled."
+    else
+      flash[:error] = @scheduled_group.errors
+    end
+  end
+#TODO delete this
   def confirmation       # before the confirmation screen
     @title = @page_title = "Group Confirmation"
     @registration = Registration.find(params[:reg])
