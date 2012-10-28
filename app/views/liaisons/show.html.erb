@@ -62,7 +62,7 @@
                                 <td><%= g.created_at.strftime("%m/%d/%y") %></td>
                                 <td><%= number_to_currency(g.deposits_paid) %></td>
                                 <td><%= number_to_currency(g.deposits_due - g.deposits_paid) %></td>
-                                <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id),
+                                <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration' ),
                                                 :title => "Click to make credit card payment." %></td>
                                 <% if can? :create, Payment %>
                                     <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),

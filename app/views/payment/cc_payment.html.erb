@@ -39,9 +39,11 @@
                     <td><label>Payment Comments</label></td>
                     <td><%=  text_area :payment, :comments, :cols => 30, :rows => 4 %></td>
                 </tr>
+                <input type = "hidden" name="group_status" value= <%= @group_status %> />
             </table>
             <!--<button type="submit" class="submit-button">Submit Payment</button>-->
             <div class = "errors" id="cc_payment_errors"></div>
+
             <div class="clear"></div>
             <div class="button_container">
             <img class="reg_button pay_now_button" id="pay_cc_now" >
@@ -76,5 +78,6 @@
                     :title => 'Return to liaison page' %>
                 </div>
             </div>
+        </div>
     </div>
 </div>

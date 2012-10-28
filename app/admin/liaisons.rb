@@ -46,7 +46,7 @@ ActiveAdmin.register Liaison do
           number_to_currency(g.deposits_due - g.deposits_paid)
         end
         column "" do |g|
-          link_to "Pay by CC", cc_payment_path(:id => g.id),
+          link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration'),
                   :title => "Click to make credit card payment."
         end
         column "" do |g|

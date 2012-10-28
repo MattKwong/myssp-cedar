@@ -77,7 +77,7 @@ Spoic3::Application.routes.draw do
 
   match 'payment/:id/cc_payment', :to => 'payment#cc_payment', :as => 'cc_payment'
   match 'payment/:id/process_cc_payment', :to => 'payment#process_cc_payment', :as => 'process_cc_payment'
-
+  match "payment/:group_id/new" => 'payment#new', :as => "record_payment"
 
   match "registration/:id/edit" => 'registration#edit', :as => "edit_registration"
   match "registration/:id/show" => 'registration#show', :as => "show_registration"
@@ -136,7 +136,7 @@ Spoic3::Application.routes.draw do
   match "scheduled_groups/:id/change_success" => 'scheduled_groups#change_success', :as => "change_confirmation"
   match "liaisons/:id/create_user" => 'liaisons#create_user', :as => 'create_user'
 #  match "liaisons/:id/update" => 'liaisons#update', :as => 'update_liaison'
-  match "payment/:group_id/new" => 'payment#new', :as => "record_payment"
+
   match "payments" => 'payment#create', :as => 'payments'
   match "payment/:id" => 'payment#show', :as => 'show_payment'
   match "adjustment/:group_id/new" => 'adjustment#new', :as => "make_adjustment"
