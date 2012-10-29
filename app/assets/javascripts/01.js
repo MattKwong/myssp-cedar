@@ -342,7 +342,13 @@ $(document).ready(function() {
 //                function(data){ $("#spending-table").html(data);} )
         $.get("get_spending_info" , { startDate: $("#startDate").val(), endDate: $("#endDate").val() },
                 function(data){ $("#spending-table").html(data);} )
+    });
+});
 
-
+//General print function
+$(document).ready(function() {
+    $('.print').click(function(){
+        //Print the page
+        window.print();
     });
 });

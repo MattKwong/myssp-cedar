@@ -51,9 +51,12 @@
                                 <% if @current_admin_user.admin? %>
                                     <td><%= link_to g.name, admin_registration_path(g.id),
                                                 :title => 'Click to view details of this request' %></td>
-                                <% else %>
+                                <% else if !g.scheduled%>
                                   <td><%= link_to g.name, edit_registration_path(g.id),
                                                   :title => 'Make changes to your request' %></td>
+                                    <% else %>
+                                        <td><%=  g.name %></td>
+                                    <% end %>
                                 <% end %>
                                 <td><%= Session.find(g.request1).name %></td>
                                 <td><%= g.requested_youth %></td>
@@ -62,13 +65,14 @@
                                 <td><%= g.created_at.strftime("%m/%d/%y") %></td>
                                 <td><%= number_to_currency(g.deposits_paid) %></td>
                                 <td><%= number_to_currency(g.deposits_due - g.deposits_paid) %></td>
-                                <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration' ),
-                                                :title => "Click to make credit card payment." %></td>
-                                <% if can? :create, Payment %>
-                                    <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
-                                              :title => "Click to record payment." %></td>
+                                <%  if !g.scheduled? %>
+                                    <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration' ),
+                                                    :title => "Click to make credit card payment." %></td>
+                                    <% if can? :create, Payment %>
+                                        <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
+                                                  :title => "Click to record payment." %></td>
+                                    <% end %>
                                 <% end %>
-
                             </tr>
                         <% end %>
                         </tbody>

@@ -37,4 +37,10 @@ class UserMailer < ActionMailer::Base
     @payment = p
     mail(:to => group.liaison.email1, :subject => "Credit Card Payment Confirmation")
   end
+
+  def schedule_confirmation(group, params)
+    @group = group
+    @params = params
+    mail(:to => @group.liaison.email1, :subject => "Schedule Confirmation")
+  end
 end

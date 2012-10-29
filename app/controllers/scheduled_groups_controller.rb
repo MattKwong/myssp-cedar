@@ -31,6 +31,11 @@ class ScheduledGroupsController < ApplicationController
       roster = Roster.create!(:group_id => @scheduled_group.id,
                               :group_type => SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).id)
       @scheduled_group.update_attribute('roster_id', roster.id)
+      @registration.update_attribute('scheduled', true)
+      payments = Payment.find_all_by_registration_id(@registration.id)
+      payments.each do |p|
+        p.update_attribute('scheduled_group_id', @scheduled_group.id)
+      end
       flash[:notice] = "Group has been successfully scheduled."
     else
       flash[:error] = @scheduled_group.errors
@@ -69,22 +74,15 @@ class ScheduledGroupsController < ApplicationController
   end
 
   def update
-    ## The final scheduling step is to set the scheduled flag on the registered record
-    ## and to update the scheduled id in the payment records
-    current_reg = Registration.find(ScheduledGroup.find(params[:id]).registration_id)
-    current_reg.scheduled = true
-    current_liaison = Liaison.find(current_reg.liaison_id)
-    current_liaison.scheduled = current_liaison.registered = true
-    if current_reg.update_attributes(current_reg) && current_liaison.update_attributes(current_liaison)
-      redirect_to scheduled_group_confirmation_path(params[:id])
-    else
-      flash[:error] = "Update of registration/scheduled group record failed for unknown reason."
-    end
+    @scheduled_group = ScheduledGroup.find(params[:id])
+    case params[:commit]
+      when 'Print This Page'
 
-    payments = Payment.find_all_by_registration_id(current_reg.id)
-    payments.each do |p|
-      p.update_attribute('scheduled_group_id', params[:id])
+      when 'Send Confirmation Email'
+        UserMailer.schedule_confirmation(@scheduled_group, params).deliver
+        flash[:notice] = "Confirmation email has been sent for group #{@scheduled_group.name}."
     end
+    redirect_to admin_registrations_path
   end
 
   def success
