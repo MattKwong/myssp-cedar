@@ -17,14 +17,14 @@
       </tr>
       </thead><% i = 0 %>
       <tbody>
-      <% @liaison.scheduled_groups.active_program.each do |g| %>
+      <% liaison.scheduled_groups.active_program.each do |g| %>
           <tr>
             <td><%= link_to g.name, edit_scheduled_group_path(g.id),
                             :title => 'Click to make changes to this group'%></td>
             <td><%= g.current_youth %></td>
             <td><%= g.current_counselors %></td>
             <td><%= g.current_total %></td>
-            <td><%= link_to g.session.name, sched_program_session_path(:id => @liaison.id,
+            <td><%= link_to g.session.name, sched_program_session_path(:id => liaison.id,
                                                                        :session => g.session_id),:title => "Starts on #{g.session.period.start_date.strftime("%m/%d/%y")
             } and ends on #{g.session.period.end_date.strftime("%m/%d/%y")}. Click to see what other groups are joining you at this session." %></td>
             <td><%= link_to "Update Roster", show_roster_path(g.roster_id),
@@ -32,7 +32,7 @@
             <td><%= link_to number_to_currency(g.current_balance),
                             invoice_path(g.id), :title => "Click to review and print your current invoice." %></td>
             <td><%= link_to "Make Payment", record_payment_path(:group_id => g.id),
-                            :title => "Click to record payment. Eventually to be replaced by payment gateway." %></td>
+                            :title => "Click to make a payment." %></td>
             <% if can? :create, Adjustment %>
                 <td><%= link_to "Adjustment", make_adjustment_path(g.id),
                                 :title => "Click to make an adjustment (new church discount, scholarship, etc)." %></td>

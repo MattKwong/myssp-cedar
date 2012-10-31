@@ -28,7 +28,7 @@ ActiveAdmin.register Liaison do
     end
 
     panel "Original Request Information" do
-      table_for liaison.registrations.current.unscheduled do
+      table_for liaison.registrations.current do
         column "Group Name" do |group|
           link_to group.name, admin_registration_path(group.id),
                 :title => 'Click to see details of this request.'
@@ -46,18 +46,22 @@ ActiveAdmin.register Liaison do
           number_to_currency(g.deposits_due - g.deposits_paid)
         end
         column "" do |g|
-          link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration'),
+          if !g.scheduled?
+            link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration'),
                   :title => "Click to make credit card payment."
+          end
         end
         column "" do |g|
-          link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
+          if !g.scheduled?
+            link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
                 :title => "Click to record payment."
+          end
         end
 
       end
     end
 
-    render :partial => 'liaisons/schedule_info'
+    render :partial => 'liaisons/schedule_info'#, :locals => {:liaison => @liaison}
 
     panel "Current Schedule Group Information" do
       table_for liaison.scheduled_groups.active_program do

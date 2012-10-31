@@ -120,7 +120,7 @@ class ScheduledGroupsController < ApplicationController
   def edit
     @scheduled_group = ScheduledGroup.find(params[:id])
     @session = Session.find(@scheduled_group.session_id)
-    @sessions = Session.find_all_by_session_type_id(@scheduled_group.group_type_id).map { |s| [s.name, s.id ]}
+    @sessions = Session.find_all_by_session_type_id(@scheduled_group.group_type_id).sort_by{|e| e.name}.map { |s| [s.name, s.id ]}
     @liaison = Liaison.find(@scheduled_group.liaison_id)
     @title = @page_title = "Change Schedule"
     @notes = String.new
@@ -511,12 +511,21 @@ private
           render "edit"
        end
 
+      activity_description = ''
+      if count_change
+        activity_description += "Count was changed from #{@group.current_total} to #{new_total}. "
+      end
+      if site_change || week_change
+        activity_description += "Session was changed from #{@group.session.name} to #{Session.find(new_values[:session_id]).name}."
+      end
+
 #Update ScheduledGroup
       if count_change then
         @group.current_counselors = new_values[:current_counselors]
         @group.current_youth = new_values[:current_youth]
-        @group.current_total = new_values[:current_counselors].to_i + new_values[:current_youth].to_i
+        @group.current_total = new_total
       end
+
 
       if site_change || week_change then
         @group.session_id = new_values[:session_id]
@@ -526,8 +535,9 @@ private
         @group.second_payment_total= 0
       end
 
-      if @group.update_attributes(@group) then
-        log_activity("Group Update", "Count change: #{count_change} Session change: #{site_change || week_change}")
+      if @group.save then
+
+        log_activity("Group Update", activity_description)
         redirect_to change_confirmation_path(@group_id, :change_id => change_record.id)
       else
           flash[:error] = "Update of scheduled group record failed for unknown reason (1)."
@@ -602,123 +612,123 @@ private
 
 #TODO Refactor this out -duplicates code in liaisons controller
 
-  def calculate_invoice_data(group)
-    original_reg = Registration.find(group.registration_id)
-    payment_schedule = PaymentSchedule.find(Session.find(group.session_id).payment_schedule_id)
-#<<<<<<< HEAD
-#    payments = Payment.find_all_by_scheduled_group_id(group_id, :order => :payment_date)
-#=======
-    payments = Payment.where(:scheduled_group_id => group.id).order(:payment_date)
-#>>>>>>> upstream/master
-    adjustments = Adjustment.find_all_by_group_id(group.id)
-    adjustment_total = Adjustment.sum(:amount, :conditions => ['group_id = ?', group.id])
-    changes = ChangeHistory.find_all_by_group_id(group.id)
-    late_payment_penalty = 0.1
-
-#Find the overall high-water total.
-    totals = changes.map { |i| i.new_total }
-    totals << original_reg.requested_total << group.second_payment_total << group.current_total
-    overall_high_water = second_half_high_water = totals.compact.max
-
-#Find the high-water total since the 2nd payment
-    unless group.second_payment_date.nil?
-      totals = changes.map { |i| if i.created_at > group.second_payment_date
-        i.new_total end }
-      totals << group.second_payment_total << group.current_total
-      second_half_high_water = totals.compact.max
-    end
-
-# Find the number of deposits owed:
-    deposit_amount = overall_high_water * payment_schedule.deposit
-
-#Find the number of second payments owed:
-    second_pay_amount = second_half_high_water * payment_schedule.second_payment
-    if (group.second_payment_date.nil? && Date.today > payment_schedule.second_payment_late_date) ||
-        (!group.second_payment_date.nil? && group.second_payment_date > payment_schedule.second_payment_late_date)
-      second_payment_late_due = true
-      second_payment_late_amount = late_payment_penalty * second_pay_amount
-    end
-
-#Find the number of final payments owed:
-     final_pay_amount = group.current_total * payment_schedule.final_payment
-     if Date.today > payment_schedule.final_payment_late_date
-       final_late_payment_due = true
-       final_late_payment_amount = late_payment_penalty  * final_pay_amount
-     end
-
-     total_due = deposit_amount + second_pay_amount + final_pay_amount - adjustment_total
-    amount_paid = Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', group.id])
-     current_balance = total_due - amount_paid
-
-#Assemble event list
-    event_list = Array.new
-
-    adjustments.each do |a|
-#<<<<<<< HEAD
-#      event = [a.created_at.to_date, "Adjustment: #{AdjustmentCode.find(a.reason_code).short_name}. Notes: #{a.note}",
-#=======
-      event = [a.created_at.to_date, "Adjustment: #{AdjustmentCode.find(a.reason_code).short_name}", "Notes: #{a.note}",
-#>>>>>>> upstream/master
-          number_to_currency(-a.amount), ""]
-      event_list << event
-    end
-
-    payments.each do |p|
-#<<<<<<< HEAD
-#      event = [p.payment_date.to_date, "Payment Received: #{shorten(p.payment_notes)}", "", number_to_currency(p.payment_amount)]
-#=======
-      event = [p.payment_date.to_date, "Payment Received", shorten(p.payment_notes), "", number_to_currency(p.payment_amount)]
-#>>>>>>> upstream/master
-      event_list << event
-    end
-
-    changes.each do |c|
-      if c.count_change?
-        count_change = c.new_total - c.old_total
-        amount_due = 0
-        if count_change > 0
-          if group.second_payment_date.nil?
-            amount_due = count_change * payment_schedule.deposit
-          else
-            amount_due = count_change * (payment_schedule.deposit + payment_schedule.second_payment)
-          end
-        end
-        event = [c.updated_at.to_date, "Enrollment change: #{c.new_total - c.old_total}", "", "#{number_to_currency(amount_due)}", ""]
-        event_list << event
-      end
-    end
-
-    event = [original_reg.created_at.to_date, "Original registration. Deposit of #{number_to_currency(payment_schedule.deposit)} for #{original_reg.requested_total} persons",
-              "", "#{number_to_currency(payment_schedule.deposit * original_reg.requested_total)}", ""]
-    event_list << event
-
-    if group.second_payment_date.nil?
-      second_payment_due = true
-      event = [payment_schedule.second_payment_date,"2nd payment of #{number_to_currency(payment_schedule.second_payment)} each for #{group.current_total} persons",
-            "", "#{number_to_currency(payment_schedule.second_payment * group.current_total)}", ""]
-    else
-      event = [group.second_payment_date, "2nd payment of #{number_to_currency(payment_schedule.second_payment)} per person for #{group.second_payment_total} persons",
-            "", "#{number_to_currency(payment_schedule.second_payment * group.second_payment_total)}", ""]
-    end
-    event_list << event
-
-    event = [payment_schedule.final_payment_date, "Final payment of #{number_to_currency(payment_schedule.final_payment)} each for #{group.current_total} persons",
-          "", "#{number_to_currency(payment_schedule.final_payment * group.current_total)}", ""]
-    event_list << event
-
-    event_list = event_list.sort_by { |item| item[0] }
-
-    invoice = {:group_id => group.id,:current_balance => current_balance, :payments => payments,
-      :adjustments => adjustments, :adjustment_total => adjustment_total, :changes => changes,
-      :event_list => event_list, :total_due => total_due, :current_balance => current_balance,
-      :amount_paid => amount_paid, :payment_schedule => payment_schedule, :second_payment_due => second_payment_due,
-      :deposits_due_count => overall_high_water, :deposit_amount => deposit_amount,
-      :second_payment_due_date => payment_schedule.second_payment_date,
-      :second_payments_due_count => second_half_high_water, :second_payment_amount => second_pay_amount,
-      :final_payment_amount => final_pay_amount, :second_late_payment_required => second_payment_late_due,
-      :second_payment_late_amount => second_payment_late_amount, :final_late_payment_required => final_late_payment_due,
-      :final_late_amount => final_late_payment_amount }
-  end
+#  def calculate_invoice_data(group)
+#    original_reg = Registration.find(group.registration_id)
+#    payment_schedule = PaymentSchedule.find(Session.find(group.session_id).payment_schedule_id)
+##<<<<<<< HEAD
+##    payments = Payment.find_all_by_scheduled_group_id(group_id, :order => :payment_date)
+##=======
+#    payments = Payment.where(:scheduled_group_id => group.id).order(:payment_date)
+##>>>>>>> upstream/master
+#    adjustments = Adjustment.find_all_by_group_id(group.id)
+#    adjustment_total = Adjustment.sum(:amount, :conditions => ['group_id = ?', group.id])
+#    changes = ChangeHistory.find_all_by_group_id(group.id)
+#    late_payment_penalty = 0.1
+#
+##Find the overall high-water total.
+#    totals = changes.map { |i| i.new_total }
+#    totals << original_reg.requested_total << group.second_payment_total << group.current_total
+#    overall_high_water = second_half_high_water = totals.compact.max
+#
+##Find the high-water total since the 2nd payment
+#    unless group.second_payment_date.nil?
+#      totals = changes.map { |i| if i.created_at > group.second_payment_date
+#        i.new_total end }
+#      totals << group.second_payment_total << group.current_total
+#      second_half_high_water = totals.compact.max
+#    end
+#
+## Find the number of deposits owed:
+#    deposit_amount = overall_high_water * payment_schedule.deposit
+#
+##Find the number of second payments owed:
+#    second_pay_amount = second_half_high_water * payment_schedule.second_payment
+#    if (group.second_payment_date.nil? && Date.today > payment_schedule.second_payment_late_date) ||
+#        (!group.second_payment_date.nil? && group.second_payment_date > payment_schedule.second_payment_late_date)
+#      second_payment_late_due = true
+#      second_payment_late_amount = late_payment_penalty * second_pay_amount
+#    end
+#
+##Find the number of final payments owed:
+#     final_pay_amount = group.current_total * payment_schedule.final_payment
+#     if Date.today > payment_schedule.final_payment_late_date
+#       final_late_payment_due = true
+#       final_late_payment_amount = late_payment_penalty  * final_pay_amount
+#     end
+#
+#     total_due = deposit_amount + second_pay_amount + final_pay_amount - adjustment_total
+#    amount_paid = Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', group.id])
+#     current_balance = total_due - amount_paid
+#
+##Assemble event list
+#    event_list = Array.new
+#
+#    adjustments.each do |a|
+##<<<<<<< HEAD
+##      event = [a.created_at.to_date, "Adjustment: #{AdjustmentCode.find(a.reason_code).short_name}. Notes: #{a.note}",
+##=======
+#      event = [a.created_at.to_date, "Adjustment: #{AdjustmentCode.find(a.reason_code).short_name}", "Notes: #{a.note}",
+##>>>>>>> upstream/master
+#          number_to_currency(-a.amount), ""]
+#      event_list << event
+#    end
+#
+#    payments.each do |p|
+##<<<<<<< HEAD
+##      event = [p.payment_date.to_date, "Payment Received: #{shorten(p.payment_notes)}", "", number_to_currency(p.payment_amount)]
+##=======
+#      event = [p.payment_date.to_date, "Payment Received", shorten(p.payment_notes), "", number_to_currency(p.payment_amount)]
+##>>>>>>> upstream/master
+#      event_list << event
+#    end
+#
+#    changes.each do |c|
+#      if c.count_change?
+#        count_change = c.new_total - c.old_total
+#        amount_due = 0
+#        if count_change > 0
+#          if group.second_payment_date.nil?
+#            amount_due = count_change * payment_schedule.deposit
+#          else
+#            amount_due = count_change * (payment_schedule.deposit + payment_schedule.second_payment)
+#          end
+#        end
+#        event = [c.updated_at.to_date, "Enrollment change: #{c.new_total - c.old_total}", "", "#{number_to_currency(amount_due)}", ""]
+#        event_list << event
+#      end
+#    end
+#
+#    event = [original_reg.created_at.to_date, "Original registration. Deposit of #{number_to_currency(payment_schedule.deposit)} for #{original_reg.requested_total} persons",
+#              "", "#{number_to_currency(payment_schedule.deposit * original_reg.requested_total)}", ""]
+#    event_list << event
+#
+#    if group.second_payment_date.nil?
+#      second_payment_due = true
+#      event = [payment_schedule.second_payment_date,"2nd payment of #{number_to_currency(payment_schedule.second_payment)} each for #{group.current_total} persons",
+#            "", "#{number_to_currency(payment_schedule.second_payment * group.current_total)}", ""]
+#    else
+#      event = [group.second_payment_date, "2nd payment of #{number_to_currency(payment_schedule.second_payment)} per person for #{group.second_payment_total} persons",
+#            "", "#{number_to_currency(payment_schedule.second_payment * group.second_payment_total)}", ""]
+#    end
+#    event_list << event
+#
+#    event = [payment_schedule.final_payment_date, "Final payment of #{number_to_currency(payment_schedule.final_payment)} each for #{group.current_total} persons",
+#          "", "#{number_to_currency(payment_schedule.final_payment * group.current_total)}", ""]
+#    event_list << event
+#
+#    event_list = event_list.sort_by { |item| item[0] }
+#
+#    invoice = {:group_id => group.id,:current_balance => current_balance, :payments => payments,
+#      :adjustments => adjustments, :adjustment_total => adjustment_total, :changes => changes,
+#      :event_list => event_list, :total_due => total_due, :current_balance => current_balance,
+#      :amount_paid => amount_paid, :payment_schedule => payment_schedule, :second_payment_due => second_payment_due,
+#      :deposits_due_count => overall_high_water, :deposit_amount => deposit_amount,
+#      :second_payment_due_date => payment_schedule.second_payment_date,
+#      :second_payments_due_count => second_half_high_water, :second_payment_amount => second_pay_amount,
+#      :final_payment_amount => final_pay_amount, :second_late_payment_required => second_payment_late_due,
+#      :second_payment_late_amount => second_payment_late_amount, :final_late_payment_required => final_late_payment_due,
+#      :final_late_amount => final_late_payment_amount }
+#  end
 
   def number_to_currency(number)
     "$" + sprintf('%.2f', number)

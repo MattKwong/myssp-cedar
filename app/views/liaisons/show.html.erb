@@ -83,9 +83,8 @@
                     </table>
                 </div>
             </div>
-<!--=======-->
-      <% @liaison = @screen_info[:liaison] %>
-      <%=  render :partial => 'schedule_info' %>
+
+      <%=      render :partial => 'liaisons/schedule_info', :locals => {:liaison => @screen_info[:liaison]} %>
                         <!--<% if cannot? :edit, @screen_info[:liaison] %>-->
         <!--<div class="panel">-->
           <!--<%= form_for(@screen_info[:liaison]) do |r| %>-->
