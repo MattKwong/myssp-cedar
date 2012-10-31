@@ -17,13 +17,20 @@ Group name:                 <%=	@group.name %>
 Church:                     <%= @group.church.name %>
 
 Liaison:                    <%= @group.liaison.name %>
+<% if @params[:group_status] == "registration" %>
 
 Number of youth:            <%= @group.requested_youth %>
 
 Number of counselors:       <%= @group.requested_counselors %>
 
 Total:                      <%= @group.requested_total %>
+<% else %>
 
+Number of youth:            <%= @group.current_youth %>
+
+Number of counselors:       <%= @group.current_counselors %>
+
+Total:                      <%= @group.current_total %><% end %>
 <% if @params[:group_status] == "registration" %>
 
 Choice #1:                  <%= Session.find(@group.request1).name %>

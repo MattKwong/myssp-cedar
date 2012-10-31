@@ -61,4 +61,8 @@ class ScheduledGroup < ActiveRecord::Base
      session_type.name.include?("Junior High")
   end
 
+  def current_balance
+    100
+  end
+
 end

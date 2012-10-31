@@ -65,7 +65,7 @@ class RegistrationController < ApplicationController
       render "edit"
     else
       if @registration.update_attributes(params[:registration])
-        log_activity(DateTime.today, "Registration Update", "#{@registration.name}: Total changed by: #{increase}", @registration.liaison_id, @registration.liaison.name, "Liaison")
+        log_activity(DateTime.now, "Registration Update", "#{@registration.name}: Total changed by: #{increase}", @registration.liaison_id, @registration.liaison.name, "Liaison")
         UserMailer.registration_change_confirmation(@registration, params).deliver
         flash[:notice] = "Your registration has been successfully changed."
         redirect_to show_registration_path(@registration, :increase => increase)

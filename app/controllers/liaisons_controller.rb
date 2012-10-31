@@ -30,13 +30,12 @@ class LiaisonsController < ApplicationController
 
     church = Church.find(liaison.church_id)
     groups = ScheduledGroup.active_program.find_all_by_liaison_id(liaison.id)
-    if groups.empty?
-      registrations = Registration.current.unscheduled.find_all_by_liaison_id(liaison.id)
-      logger.debug registrations.inspect
-    else
-      registrations = []
-      groups.each { |g| registrations << Registration.find(g.registration_id)}
-    end
+    #if groups.empty?
+      registrations = Registration.current.find_all_by_liaison_id(liaison.id)
+    #else
+    #  registrations = []
+    #  groups.each { |g| registrations << Registration.find(g.registration_id)}
+    #end
 
 #   authorize! :read, groups
     rosters = assemble_rosters(groups)

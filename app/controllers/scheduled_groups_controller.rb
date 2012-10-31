@@ -25,7 +25,8 @@ class ScheduledGroupsController < ApplicationController
                                           :liaison_id => @registration.liaison_id, :session_id => params[:id],
                                           :group_type_id => @registration.group_type_id,
                                           :scheduled_priority => params[:priority],
-                                          :second_payment_total => 0)
+                                          :second_payment_total => 0,
+                                          :comments => @registration.comments)
     if @scheduled_group.valid?
       @scheduled_group.save!
       roster = Roster.create!(:group_id => @scheduled_group.id,
@@ -42,36 +43,36 @@ class ScheduledGroupsController < ApplicationController
     end
   end
 #TODO delete this
-  def confirmation       # before the confirmation screen
-    @title = @page_title = "Group Confirmation"
-    @registration = Registration.find(params[:reg])
-    church_name = Church.find(@registration.church_id).name
-    if ScheduledGroup.find_all_by_registration_id(params[:reg]).count == 0
-      @scheduled_group = ScheduledGroup.new(:church_id => @registration.church_id,
-                        :name => @registration.name, :registration_id => @registration.id,
-                        :current_youth => @registration.requested_youth,
-                        :current_counselors => @registration.requested_counselors,
-                        :current_total => @registration.requested_total,
-                        :liaison_id => @registration.liaison_id, :session_id => params[:id],
-                        :group_type_id => @registration.group_type_id,
-                        :scheduled_priority => params[:priority],
-                        :second_payment_total => 0)
-    else if ScheduledGroup.find_all_by_registration_id(params[:reg]).count == 1
-      @scheduled_group = ScheduledGroup.find_by_registration_id(params[:reg])
-      if @scheduled_group.second_payment_total.nil?
-        @scheduled_group.second_payment_total= 0
-      end
-         else
-          flash[:error] = "Duplicate schedules exist for this registration. Contact support."
-         end
-    end
-
-    @scheduled_group.save!
-    roster = Roster.create!(:group_id => @scheduled_group.id,
-      :group_type => SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).id)
-    @scheduled_group.update_attribute('roster_id', roster.id)
-    @session = Session.find(params[:id])
-  end
+#  def confirmation       # before the confirmation screen
+#    @title = @page_title = "Group Confirmation"
+#    @registration = Registration.find(params[:reg])
+#    church_name = Church.find(@registration.church_id).name
+#    if ScheduledGroup.find_all_by_registration_id(params[:reg]).count == 0
+#      @scheduled_group = ScheduledGroup.new(:church_id => @registration.church_id,
+#                        :name => @registration.name, :registration_id => @registration.id,
+#                        :current_youth => @registration.requested_youth,
+#                        :current_counselors => @registration.requested_counselors,
+#                        :current_total => @registration.requested_total,
+#                        :liaison_id => @registration.liaison_id, :session_id => params[:id],
+#                        :group_type_id => @registration.group_type_id,
+#                        :scheduled_priority => params[:priority],
+#                        :second_payment_total => 0)
+#    else if ScheduledGroup.find_all_by_registration_id(params[:reg]).count == 1
+#      @scheduled_group = ScheduledGroup.find_by_registration_id(params[:reg])
+#      if @scheduled_group.second_payment_total.nil?
+#        @scheduled_group.second_payment_total= 0
+#      end
+#         else
+#          flash[:error] = "Duplicate schedules exist for this registration. Contact support."
+#         end
+#    end
+#
+#    @scheduled_group.save!
+#    roster = Roster.create!(:group_id => @scheduled_group.id,
+#      :group_type => SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).id)
+#    @scheduled_group.update_attribute('roster_id', roster.id)
+#    @session = Session.find(params[:id])
+#  end
 
   def update
     @scheduled_group = ScheduledGroup.find(params[:id])
@@ -196,23 +197,22 @@ class ScheduledGroupsController < ApplicationController
   end
 
   def invoice
-    @scheduled_group = ScheduledGroup.find(params[:id])
-    liaison_name = Liaison.find(@scheduled_group.liaison_id).name
-    site_name = Site.find(Session.find(@scheduled_group.session_id).site_id).name
-    period_name = Period.find(Session.find(@scheduled_group.session_id).period_id).name
-    start_date = Period.find(Session.find(@scheduled_group.session_id).period_id).start_date
-    end_date = Period.find(Session.find(@scheduled_group.session_id).period_id).end_date
-    session_type = SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).name
-    invoice = calculate_invoice_data(params[:id])
-    church = Church.find(@scheduled_group.church_id)
+    @group= ScheduledGroup.find(params[:id])
+    liaison_name = Liaison.find(@group.liaison_id).name
+    site_name = Site.find(Session.find(@group.session_id).site_id).name
+    period_name = Period.find(Session.find(@group.session_id).period_id).name
+    start_date = Period.find(Session.find(@group.session_id).period_id).start_date
+    end_date = Period.find(Session.find(@group.session_id).period_id).end_date
+    session_type = SessionType.find(Session.find(@group.session_id).session_type_id).name
+    invoice = calculate_invoice_data(@group)
+    church = Church.find(@group.church_id)
     invoice_items = create_invoice_items(invoice)
 
-    logger.debug invoice.inspect
     @screen_info = {:scheduled_group => @scheduled_group, :invoice_items => invoice_items,
       :site_name => site_name, :period_name => period_name, :start_date => start_date,
       :end_date => end_date,  :session_type => session_type, :invoice_data => invoice,
       :liaison_name => liaison_name, :church_info => church}
-    @title = "Invoice for: #{@scheduled_group.name}"
+    @title = "Invoice for: #{@group.name}"
   end
 
   def statement
@@ -441,8 +441,8 @@ private
     invoice_items << item
 
 #Only include the final payments if the second payment has been made
-    unless @scheduled_group.second_payment_date.nil?
-      item = ["Final Payments", @scheduled_group.current_total,
+    unless @group.second_payment_date.nil?
+      item = ["Final Payments", @group.current_total,
         number_to_currency(invoice[:payment_schedule].final_payment),
         number_to_currency(invoice[:final_payment_amount])]
       invoice_items << item
@@ -600,18 +600,17 @@ private
     end
   end
 #TODO Refactor this out -duplicates code in liaisons controller
-  def calculate_invoice_data(group_id)
-    group = ScheduledGroup.find(group_id)
+  def calculate_invoice_data(group)
     original_reg = Registration.find(group.registration_id)
     payment_schedule = PaymentSchedule.find(Session.find(group.session_id).payment_schedule_id)
 #<<<<<<< HEAD
 #    payments = Payment.find_all_by_scheduled_group_id(group_id, :order => :payment_date)
 #=======
-    payments = Payment.where(:scheduled_group_id => group_id).order(:payment_date)
+    payments = Payment.where(:scheduled_group_id => group.id).order(:payment_date)
 #>>>>>>> upstream/master
     adjustments = Adjustment.find_all_by_group_id(group.id)
     adjustment_total = Adjustment.sum(:amount, :conditions => ['group_id = ?', group.id])
-    changes = ChangeHistory.find_all_by_group_id(group_id)
+    changes = ChangeHistory.find_all_by_group_id(group.id)
     late_payment_penalty = 0.1
 
 #Find the overall high-water total.
@@ -646,7 +645,7 @@ private
      end
 
      total_due = deposit_amount + second_pay_amount + final_pay_amount - adjustment_total
-    amount_paid = Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', group_id])
+    amount_paid = Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', group.id])
      current_balance = total_due - amount_paid
 
 #Assemble event list
@@ -707,7 +706,7 @@ private
 
     event_list = event_list.sort_by { |item| item[0] }
 
-    invoice = {:group_id => group_id,:current_balance => current_balance, :payments => payments,
+    invoice = {:group_id => group.id,:current_balance => current_balance, :payments => payments,
       :adjustments => adjustments, :adjustment_total => adjustment_total, :changes => changes,
       :event_list => event_list, :total_due => total_due, :current_balance => current_balance,
       :amount_paid => amount_paid, :payment_schedule => payment_schedule, :second_payment_due => second_payment_due,

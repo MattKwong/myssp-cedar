@@ -68,10 +68,14 @@
                                 <%  if !g.scheduled? %>
                                     <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration' ),
                                                     :title => "Click to make credit card payment." %></td>
-                                    <% if can? :create, Payment %>
+                                <% else %>
+                                    <td></td>
+                                <% end %>
+                                <% if @current_admin_user.admin?  && !g.scheduled? %>
                                         <td><%= link_to "Record Payment", record_payment_path(:group_id => g.id, :group_status => 'registration'),
                                                   :title => "Click to record payment." %></td>
-                                    <% end %>
+                                <% else %>
+                                    <td></td>
                                 <% end %>
                             </tr>
                         <% end %>
@@ -79,54 +83,9 @@
                     </table>
                 </div>
             </div>
-<!--Current Schedule Section -->
-            <div class="panel">
-                <h3>Current Scheduled Group Information</h3>
-                <div class="panel_contents">
-                    <table id="scheduled_group_info" border="0" cellspacing="0" cellpadding="0">
-                        <thead>
-                            <tr>
-                                <th>Group Name</th>
-                                <th>Youth</th>
-                                <th>Couns</th>
-                                <th>Total</th>
-                                <th>Site</th>
-                                <th>Week</th>
-                                <th>Participant Info</th>
-                                <th>Balance</th>
-                                <th>Payment</th>
-                                <% if can? :create, Adjustment %><th>Adjust</th><% end %>
-                            </tr>
-                        </thead><% i = 0 %>
-                        <tbody><% @screen_info[:group_info].each do |g| %>
-                            <tr>
-                                <td><%= link_to g.name, edit_scheduled_group_path(g.id),
-                                    :title => 'Click to make changes to this group'%></td>
-                                <td><%= g.current_youth %></td>
-                                <td><%= g.current_counselors %></td>
-                                <td><%= g.current_total %></td>
-                                <td><% s = Session.find(g.session_id)%><%= link_to Site.find(s.site_id).name, sched_program_session_path(:id => @screen_info[:liaison].id,
-                                    :session => g.session_id),:title => "Click to see what other groups are coming to this site at this week." %></td>
-                                <td><%= link_to Period.find(s.period_id).name, "#",
-                                                :title => "Starts on #{Period.find(s.period_id).start_date.strftime("%m/%d/%y")
-                                                } and ends on #{Period.find(s.period_id).end_date.strftime("%m/%d/%y")}" %></td>
-                                <td><%= link_to "Update Roster", show_roster_path(g.roster_id),
-                                                :title => "Click to update the participant rosters." %></td>
-                                <td><%= link_to number_to_currency(@screen_info[:invoice_info][i][:current_balance]),
-                                                invoice_path(g.id), :title => "Click to review and print your current invoice." %></td>
-                                <td><%= link_to "Make Payment", record_payment_path(:group_id => g.id),
-                                                :title => "Click to record payment. Eventually to be replaced by payment gateway." %></td>
-                                <% if can? :create, Adjustment %>
-                                    <td><%= link_to "Adjustment", make_adjustment_path(g.id),
-                                              :title => "Click to make an adjustment (new church discount, scholarship, etc)." %></td>
-                                <% else %>
-                                    <td></td>
-                                <% end %>
-                                <% i += 1 %>
-                            </tr>
-                        <% end %></tbody>
-                    </table>
 <!--=======-->
+      <% @liaison = @screen_info[:liaison] %>
+      <%=  render :partial => 'schedule_info' %>
                         <!--<% if cannot? :edit, @screen_info[:liaison] %>-->
         <!--<div class="panel">-->
           <!--<%= form_for(@screen_info[:liaison]) do |r| %>-->
@@ -154,9 +113,6 @@
     <% end %>
     <!--Current Schedule Section -->
 
-        </table>
-    </div>
-</div>
 <!--Downloads Section -->
       <% if can? :edit, @screen_info[:liaison] %>
             <div class="panel">

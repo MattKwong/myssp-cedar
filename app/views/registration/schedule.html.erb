@@ -80,7 +80,7 @@
                                                       :onchange => 'get_session_id()' ) %></td>
                                 <td id="alt_schedule_link">
                                     <%= link_to "Schedule this choice",
-                                        scheduled_groups_schedule_path(:priority => 10, :id => "alt_text",
+                                        new_scheduled_group_path(:priority => 10, :id => "alt_text",
                                                                   :reg => @registration.id), :hidden => true %></td>
                             </tr>
                          </table>
