@@ -1,0 +1,179 @@
+<%= render 'layouts/myssp_header' %>
+<div id="active_admin_content">
+  <div id="main_content_wrapper">
+    <div id="group_content">
+      <%= render 'layouts/myssp_group_data' %>
+      <div class="panel">
+        <% if @screen_info[:invoice_data][:second_payment_due?] %>
+            <h3><%= "
+Current Invoice:: Due date: #{@screen_info[:invoice_data][:payment_schedule].second_payment_date.strftime("%m/%d/%Y")}"%></h3>
+            <div class="panel_contents">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <th>Date</th>
+                <th >Description</th>
+                <th>Amount Due</th>
+                <th>Amount Received</th>
+                </thead>
+                <tbody>
+                <% @screen_info[:invoice_data][:event_list].each do |e| %>
+                    <tr>
+                      <td><%= e[:date].strftime("%m/%d/%Y") %></td>
+                      <td><%= e[:name] %></td>
+                      <td class= "money"><% unless e[:amount_due].nil? %>
+                            <%= e[:amount_due] %><% end %>
+                      </td>
+                      <td class= "money"><% unless e[:amount_received].nil? %>
+                            <%= e[:amount_received] %><% end %>
+                      </td>
+                    </tr>
+                <% end %>
+                <tr>
+                  <td></td>
+                  <td>Paid to date</td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:amount_paid]) %></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>Balance Due</td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:current_balance]) %></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+        <% else %>
+            <h3><%= "Current Invoice:: Due date: #{@screen_info[:invoice_data][:payment_schedule].final_payment_date.strftime("%m/%d/%Y")}"%></h3>
+            <div class="panel_contents">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <th></th>
+                <th>Number</th>
+                <th>Amount Per</th>
+                <th>Total Amount</th>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Deposits</td>
+                  <td><%= @screen_info[:invoice_data][:deposits_due_count] %></td>
+                  <td><%= number_to_currency @screen_info[:invoice_data][:payment_schedule].deposit %></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:deposit_amount]) %></td>
+                </tr>
+                <tr>
+                  <td>2nd Payments</td>
+                  <td><%= @screen_info[:invoice_data][:second_payments_due_count] %></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:payment_schedule].second_payment) %></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:second_payment_amount]) %></td>
+                </tr>
+                <tr>
+                  <td>Final Payments</td>
+                  <td><%= @screen_info[:scheduled_group].current_total %></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:payment_schedule].final_payment) %></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:final_payment_amount]) %></td>
+                </tr>
+                <tr>
+                  <td>Net Adjustments</td>
+                  <td></td>
+                  <td></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:adjustment_total]) %></td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td></td>
+                  <td></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:deposit_amount] +
+                                                     @screen_info[:invoice_data][:second_payment_amount] +
+                                                     @screen_info[:invoice_data][:final_payment_amount]) %></td>
+                </tr>
+                <tr>
+                  <td>Paid to date</td>
+                  <td></td>
+                  <td></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:amount_paid]) %></td>
+                </tr>
+                <% if @screen_info[:invoice_data][:second_late_payment_required?]%>
+                    <tr>
+                      <td>Second Payment Late Charge</td>
+                      <td></td>
+                      <td></td>
+                      <td><%= number_to_currency(@screen_info[:invoice_data][:second_late_payment_amount]) %></td>
+                    </tr>
+                <% end %>
+                <% if @screen_info[:invoice_data][:final_late_payment_required?]%>
+                    <tr>
+                      <td>Second Payment Late Charge</td>
+                      <td></td>
+                      <td></td>
+                      <td><%= number_to_currency(@screen_info[:invoice_data][:final_late_payment_amount]) %></td>
+                    </tr>
+                <% end %>
+                <tr>
+                  <td>Balance Due</td>
+                  <td></td>
+                  <td></td>
+                  <td><%= number_to_currency(@screen_info[:invoice_data][:current_balance]) %></td>
+                </tr>
+                </tbody>
+        <% end %>
+        <div>Instructions for updating and paying this invoice.<br><br>
+          1. If necessary, update your enrollment numbers. To increase them, call the office at 916-488-6441.
+          To decrease, <%= link_to "click here", edit_scheduled_group_path(@screen_info[:scheduled_group].id) %>.<br><br>
+          2. To pay by credit card, <%= link_to "click here", record_payment_path(:group_id => @screen_info[:scheduled_group].id),
+                                                :title => "Click to record payment. Eventually to be replaced by payment gateway."%>. To pay by check,
+          <%= link_to "print this invoice", invoice_path(:group_id => @screen_info[:scheduled_group].id, :format => "pdf") %> and mail it with a check to the SSP office.</div>
+        </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Current Statement</h3>
+        <div class="panel_contents">
+          <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Payment Notes</th>
+            <th>Amount Due</th>
+            <th>Amount Received</th>
+            </thead>
+            <tbody>
+            <% @screen_info[:invoice_data][:event_list].each do |e| %>
+                <tr>
+                  <td><%= e[0].strftime("%m/%d/%y") %></td>
+                  <td><%= e[1] %></td>
+                  <td><% unless e[2].nil? %>
+                        <%= e[2] %>
+                    <% end %>
+                  </td>
+                  <td><% unless e[3].nil? %>
+                        <%= e[3] %>
+                    <% end %>
+                  </td>
+                  <td><% unless e[4].nil? %>
+                        <%= e[4] %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            <tr>
+              <td></td>
+              <td>Totals</td><td></td>
+              <td><%= number_to_currency(@screen_info[:invoice_data][:total_due]) %></td>
+              <td><%= number_to_currency(@screen_info[:invoice_data][:amount_paid]) %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Balance Due</td><td></td>
+              <td><%= number_to_currency(@screen_info[:invoice_data][:current_balance]) %></td>
+            </tr>
+            </tbody>
+          </table>
+          <div>This statement shows the entire cost of your SSP trip and does not necessary show what you currently owe.
+            To determine your current (or next) payment to SSP, refer to the invoice section above. To print a copy of this
+            statement for your records,
+            <%= link_to " click here.", statement_path(:group_id => @screen_info[:scheduled_group].id, :format => "pdf") %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
