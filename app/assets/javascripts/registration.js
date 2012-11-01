@@ -495,6 +495,7 @@ $(document).ready(function() {
         //Send the confirming email and update the payment information
         //retrieve the registration id
         registration_id = $("input[name=registration_id]").val();
+
         $.get("pay_by_check?reg_id=" + registration_id
             + "&amount_paid=" + amount_paid + "&deposit_amount=" + deposit_amount + "&payment_tracking_number="
             + payment_tracking_number);

@@ -5,7 +5,7 @@ FactoryGirl.define do
   factory :admin_user do
     first_name 'Test'
     last_name 'Admin'
-    user_role_id UserRole.find_by_name("Admin").id
+    #user_role_id UserRole.find_by_name("Admin").id
     email 'adminuser@factory.com'
     password 'password'
     confirmed_at Time.now
@@ -14,7 +14,7 @@ FactoryGirl.define do
   factory :liaison_user, class: AdminUser do
     first_name 'Susan'
     last_name 'Liaison'
-    user_role_id UserRole.find_by_name("Liaison").id
+    #user_role_id UserRole.find_by_name("Liaison").id
     liaison_id Liaison.first.id
     email 'adminuserliaison@factory.com'
     password 'password'
