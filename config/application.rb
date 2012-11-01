@@ -17,7 +17,7 @@ module Spoic3
   class Application < Rails::Application
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.digest = true
+    #config.assets.digest = true
     config.assets.initialize_on_precompile = false
     config.assets.precompile += ['print.css']
     #config.force_ssl = true

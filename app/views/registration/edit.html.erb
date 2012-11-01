@@ -72,6 +72,10 @@
                                 <td><%= r.label "Choice #10" %></td>
                                 <td><%= r.select :request10, Session.active.by_type(@registration.group_type_id).collect {|s| [s.name, s.id]}, :include_blank => true %></td>
                             </tr>
+                           <tr>
+                                <td><%= r.label "Comments" %></td>
+                                <td><%= r.text_field :comments %></td>
+                            </tr>
                             </table>
                             <div class="actions">
                                 <%= r.submit %>

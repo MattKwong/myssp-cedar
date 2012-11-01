@@ -1,0 +1,83 @@
+<%= Date.today.strftime("%B %d, %Y") %>
+
+Dear <%= @group.liaison.first_name %>,
+
+A credit card payment was a processed for your group today:
+
+Payment method:             <%=  @payment.payment_method %>
+Payment method:             <%=  @payment.payment_type %>
+Payment type:               <%=  @params[:payment_tracking_number] %>
+Payment notes:              <%=  @params[:payment_comments] %>
+Amount charged to card:     <%=  sprintf('%.2f', @params[:payment_amount]) %>
+Processing charge:          <%=  sprintf('%.2f', @params[:processing_charge]) %>
+
+Please review the information below and contact us if you think any of this is incorrect.
+
+Group name:                 <%=	@group.name %>
+
+Church:                     <%= @group.church.name %>
+
+Liaison:                    <%= @group.liaison.name %>
+
+Number of youth:            <%= @group.requested_youth %>
+
+Number of counselors:       <%= @group.requested_counselors %>
+
+Total:                      <%= @group.requested_total %>
+
+<% if @params[:group_status] == "registration" %>
+
+Choice #1:                  <%= Session.find(@group.request1).name %>
+
+<% if @group.request2 != nil  %>
+Choice #2:                  <%= Session.find(@group.request2).name %>
+
+<% if @group.request3 != nil%>
+Choice #3:                  <%= Session.find(@group.request3).name %>
+
+<% if @group.request4 != nil%>
+Choice #4:                  <%= Session.find(@group.request4).name %>
+
+<% if @group.request5 != nil%>
+Choice #5:                  <%= Session.find(@group.request5).name %>
+
+<% if @group.request6 != nil%>
+Choice #6:                  <%= Session.find(@group.request6).name %>
+
+<% if @group.request7 != nil%>
+Choice #7:                  <%= Session.find(@group.request7).name %>
+
+<% if @group.request8 != nil%>
+Choice #8:                  <%= Session.find(@group.request8).name %>
+
+<% if @group.request9 != nil%>
+Choice #9:                  <%= Session.find(@group.request9).name %>
+
+<% if @group.request10 != nil%>
+Choice #10:                 <%= Session.find(@group.request10).name %>
+
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+No additional choices.
+<% else %>
+Session:                    <%= @group.session.name %>
+<% end %>
+
+Blessings,
+
+Meghan Osborn
+Business Manager
+meghan.osborn@sierraserviceproject.org
+www.sierraserviceproject.org
+916-488-6441
+
+Sierra Service Project
+PO Box 992
+Carmichael CA 95609

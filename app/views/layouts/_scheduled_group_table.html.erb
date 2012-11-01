@@ -1,35 +1,43 @@
-                  <table border="0" cellspacing="0" cellpadding="0" >
-                    <h3>Group Details </h3>
-                    <tr>
-                      <th>Group name</th>
-                      <td><%= @scheduled_group.name %></td>
-                      <th>Site</th>
-                      <td><%= Site.find(@session.site_id).name %></td>
-                    </tr>
-                    <tr>
-                      <th>Church name</th>
-                      <td><%= Church.find(@scheduled_group.church_id).name %></td>
-                      <th>Period</th>
-                      <td><%= Period.find(@session.period_id).name %></td>
-                    </tr>
-                    <tr>
-                      <th>Liaison name</th>
-                      <td><%= Liaison.find(@scheduled_group.liaison_id).name %></td>
-                      <th>Start Date</th>
-                      <td><%= Period.find(@session.period_id).start_date.to_formatted_s(:long) %></td>
-                    </tr>
-                    <tr>
-                      <th>Youth</th>
-                      <td><%= @scheduled_group.current_youth %></td>
-                      <th>End Date</th>
-                      <td><%= Period.find(@session.period_id).end_date.to_formatted_s(:long) %></td>
-                    </tr>
-                    <tr>
-                      <th>Counselors</th>
-                      <td><%= @scheduled_group.current_counselors %></td>
-                    </tr>
-                    <tr>
-                      <th>Total</th>
-                      <td><%= @scheduled_group.current_total %></td>
-                    </tr>
-                  </table>
+<table border="0" cellspacing="0" cellpadding="0" >
+  <h3>Group Details </h3>
+    <tr>
+      <th>Group name</th>
+      <td><%= @scheduled_group.name %></td>
+    </tr>
+    <tr>
+      <th>Church name</th>
+      <td><%= @scheduled_group.church.name %></td>
+    </tr>
+    <tr>
+      <th>Liaison name</th>
+      <td><%= @scheduled_group.liaison.name %></td>
+    </tr>
+    <tr>
+      <th>Youth</th>
+      <td><%= @scheduled_group.current_youth %></td>
+    </tr>
+    <tr>
+      <th>Counselors</th>
+      <td><%= @scheduled_group.current_counselors %></td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td><%= @scheduled_group.current_total %></td>
+    </tr>
+    <tr>
+      <th>Site</th>
+      <td><%= @scheduled_group.session.site.name %></td>
+    </tr>
+    <tr>
+      <th>Period</th>
+      <td><%= @scheduled_group.session.period.name %></td>
+    </tr>
+    <tr>
+      <th>Start Date</th>
+      <td><%= @scheduled_group.session.period.start_date.to_formatted_s(:long) %></td>
+    </tr>
+    <tr>
+      <th>End Date</th>
+      <td><%= @scheduled_group.session.period.end_date.to_formatted_s(:long) %></td>
+    </tr>
+</table>

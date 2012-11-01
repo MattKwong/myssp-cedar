@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag "print", :media => "print" %>
+<%= form_for(@scheduled_group) do |r| %>
+ <div id="active_admin_content"  class="without_sidebar">
+    <div id="main_content_wrapper">
+      <div id="main_content">
+          <div class="panel">
+            <div class="panel_contents">
+            <div class="attributes_table liaison" id="attributes_table_liaison_3">
+              <%= render 'layouts/scheduled_group_table' %>
+              <h3>This group has been scheduled. Use the buttons below to send a confirming email to the liaison, print the page or return to the registrations page.</h3>
+              <div class="actions">
+                <%= submit_tag 'Send Confirmation Email',  :id => @scheduled_group.id, :info =>"email"  %>
+                <span class="print"><%= submit_tag "Print This Page", :id => @scheduled_group.id, :info =>"email" %></span>
+                <%= link_to "Return to Registrations Page", "#" %>
+              </div>
+             <% end %>
+            </div>
+            </div>
+          </div>
+         </div>
+        </div>
+     </div>
+   </div>
+

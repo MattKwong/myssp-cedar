@@ -52,6 +52,9 @@ class ScheduledGroup < ActiveRecord::Base
                             :only_integer => true
   validates_numericality_of :current_counselors, :greater_than_or_equal_to => 0,
                             :only_integer => true
+  def late_payment_penalty
+    0.1
+  end
 
   def senior_high?
      session_type.name.include?("Senior High")
@@ -61,4 +64,72 @@ class ScheduledGroup < ActiveRecord::Base
      session_type.name.include?("Junior High")
   end
 
+  def current_balance
+    total_due - amount_paid
+  end
+
+  def amount_paid
+    Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', id])
+  end
+
+  def total_due
+    deposit_amount + second_pay_amount + final_pay_amount - adjustment_total
+  end
+
+  def adjustment_total
+    Adjustment.sum(:amount, :conditions => ['group_id = ?', id])
+  end
+
+  def deposit_amount
+    overall_high_water * session.payment_schedule.deposit
+  end
+
+  def overall_high_water
+    totals = ChangeHistory.find_all_by_group_id(id).map { |i| i.new_total }
+    totals << Registration.find(registration_id).requested_total << second_payment_total << current_total
+    totals.compact.max
+  end
+
+  def second_half_high_water
+    if second_payment_date.nil?
+      overall_high_water
+    else
+      totals = ChangeHistory.find_all_by_group_id(id).map { |i| if i.created_at > second_payment_date
+                                   i.new_total end }
+      totals << second_payment_total << current_total
+      totals.compact.max
+    end
+  end
+
+  def second_pay_amount
+    second_half_high_water * session.payment_schedule.second_payment
+  end
+
+  def second_late_penalty_amount
+    if second_late_penalty_due?
+      late_payment_penalty  * second_pay_amount
+    else
+      0
+    end
+  end
+
+  def final_pay_amount
+    current_total * session.payment_schedule.final_payment
+  end
+
+  def final_late_penalty_amount
+    if final_late_penalty_due?
+      late_payment_penalty  * final_pay_amount
+    else
+      0
+    end
+
+  end
+
+  def final_late_penalty_due?
+    Date.today > session.payment_schedule.final_payment_late_date ? true : false
+  end
+  def second_late_penalty_due?
+    Date.today > session.payment_schedule.second_payment_late_date ? true : false
+  end
 end

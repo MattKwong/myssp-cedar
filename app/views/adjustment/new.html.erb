@@ -3,7 +3,7 @@
   <div id="main_content_wrapper">
      <div id="main_content">
         <%= render 'layouts/myssp_group_data' %>
-        <%= form_for(@screen_info[:adjustment]) do |r| %>
+        <%= form_for(@adjustment) do |r| %>
            <%= render 'shared/error_messages_adjustment' %>
            <div class="panel">
               <div class="panel_contents">
@@ -13,7 +13,7 @@
                         <h3>Enter the adjustment details below.</h3>
                         <tr>
                            <td><%= r.label "Select adjustment code" %></td>
-                           <td><%= r.select(:reason_code, options_for_select(@screen_info[:adjustment_codes])) %></td>
+                           <td><%= r.select(:reason_code, options_for_select(AdjustmentCode.all.map { |i| [i.short_name, i.id]})) %></td>
                         </tr>
                         <tr>
                            <td><%= r.label "Adjustment Notes" %></td>
@@ -23,7 +23,7 @@
                            <td><%= r.label "Amount of Adjustment (please omit dollar sign and enter as positive number)" %></td>
                            <td><%= r.number_field :amount, :as => :number %></td>
                         </tr>
-                        <input type = "hidden" name="adjustment[group_id]" value= <%= @screen_info[:scheduled_group].id %> />
+                        <input type = "hidden" name="adjustment[group_id]" value= <%= @group.id %> />
                     </table>
                     <div class="actions">
                         <%= r.submit "Submit" %>

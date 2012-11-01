@@ -7,37 +7,39 @@ class PaymentController < ApplicationController
 #  end
 
   def new
-    payment = Payment.new()
-    payment_methods = 'Check', 'Credit Card', 'Cash'
-    if (params[:group_status] == 'registration')
-      payment_types = 'Deposit', 'Other'
-      group = Registration.find(params[:group_id])
-      site_name = Site.find(Session.find(group.request1).site_id).name
-      period_name = Period.find(Session.find(group.request1).period_id).name
-      start_date = Period.find(Session.find(group.request1).period_id).start_date
-      end_date = Period.find(Session.find(group.request1).period_id).end_date
-      session_type = SessionType.find(Session.find(group.request1).session_type_id).name
+    @payment = Payment.new()
+    @group_status = params[:group_status]
+    @payment_methods = 'Check', 'Credit Card', 'Cash'
+    if @group_status == 'registration'
+      @payment_types = 'Deposit', 'Other'
+      @group = Registration.find(params[:group_id])
+      #site_name = Site.find(Session.find(group.request1).site_id).name
+      #period_name = Period.find(Session.find(group.request1).period_id).name
+      #start_date = Period.find(Session.find(group.request1).period_id).start_date
+      #end_date = Period.find(Session.find(group.request1).period_id).end_date
+      #session_type = SessionType.find(Session.find(group.request1).session_type_id).name
     else
-      payment_types = 'Deposit', 'Second', 'Final', 'Other'
-      group = ScheduledGroup.find(params[:group_id])
-      site_name = Site.find(Session.find(group.session_id).site_id).name
-      period_name = Period.find(Session.find(group.session_id).period_id).name
-      start_date = Period.find(Session.find(group.session_id).period_id).start_date
-      end_date = Period.find(Session.find(group.session_id).period_id).end_date
-      session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
+      @payment_types = 'Deposit', 'Second', 'Final', 'Other'
+      @group = ScheduledGroup.find(params[:group_id])
+      #site_name = Site.find(Session.find(group.session_id).site_id).name
+      #period_name = Period.find(Session.find(group.session_id).period_id).name
+      #start_date = Period.find(Session.find(group.session_id).period_id).start_date
+      #end_date = Period.find(Session.find(group.session_id).period_id).end_date
+      #session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
     end
 
-    liaison_name = Liaison.find(group.liaison_id).name
-
-    @screen_info = {:scheduled_group => group, :group_status => params[:group_status],
-      :site_name => site_name, :period_name => period_name, :start_date => start_date,
-      :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
-      :liaison_name => liaison_name, :payment_methods => payment_methods}
-    logger.debug @screen_info
-    @page_title = "Record payment for: #{group.name}"
+    #liaison_name = Liaison.find(group.liaison_id).name
+    #
+    #@screen_info = {:scheduled_group => group, :group_status => params[:group_status],
+    #  :site_name => site_name, :period_name => period_name, :start_date => start_date,
+    #  :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
+    #  :liaison_name => liaison_name, :payment_methods => payment_methods}
+    @page_title = "Make payment for group: #{@group.name}"
   end
 
   def cc_payment
+    @group_status = params[:group_status]
+    logger.debug @group_status
     @registration = Registration.find(params[:id])
     @liaison = Registration.find(params[:id]).liaison
     @page_title = "Make Credit Card Payment for #{@registration.name}"
@@ -71,7 +73,10 @@ class PaymentController < ApplicationController
       #Needs to find and save the registration instance with the payment information
       p = Payment.create(:payment_date => Date.today, :registration_id => @registration.id, :payment_amount => (to_be_charged / 100),
                          :payment_method => "cc", :payment_type => 'Deposit', :payment_notes => params[:payment_comments])
-      unless p
+      if p
+        log_activity("CC Payment", "Group: #{@registration.name} Amount: $#{sprintf('%.2f', params[:amount_paid].to_f)}")
+        UserMailer.cc_payment_confirmation(@registration, p, params).deliver
+      else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
       end
     end
@@ -103,7 +108,8 @@ class PaymentController < ApplicationController
         end
       end
       payment.save!
-      log_activity("Payment", "#{sprintf('%.2f', payment.payment_amount)} paid for #{group.name}")
+      log_activity("Payment by check", "$#{sprintf('%.2f', payment.payment_amount)} paid for #{group.name}")
+      UserMailer.payment_confirmation(group, params).deliver
       flash[:notice] = "Successful entry of new payment."
       redirect_to myssp_path(:id => group.liaison_id)
     else
