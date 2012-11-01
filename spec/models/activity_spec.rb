@@ -59,10 +59,25 @@ describe Activity do
       item.should_not be_valid
     end
 
-    #it "should require user_id" do
-    #  item = Activity.new(@attr.merge(:user_id=> ""))
-    #  item.should_not be_valid
-    #end
+    it "should be an integer (Test 1)" do
+      item = Activity.new(@attr.merge(:user_id=> "x"))
+      item.should_not be_valid
+    end
+
+    it "should be an integer (Test 2)" do
+      item = Activity.new(@attr.merge(:user_id=> "4.4"))
+      item.should_not be_valid
+    end
+
+    it "should be greater than 0" do
+      item = Activity.new(@attr.merge(:user_id=> "0"))
+      item.should_not be_valid
+    end
+
+    it "should not be less than zero" do
+      item = Activity.new(@attr.merge(:user_id=> "-4"))
+      item.should_not be_valid
+    end
 
   end
 
@@ -75,26 +90,19 @@ describe Activity do
 
   end
 
-end
 
+  describe "activity date tests" do
 
-  describe "Data type tests" do
+    it "should require an activity_date" do
+      item = Activity.new(@attr.merge(:activity_date=> ""))
+      item.should_not be_valid
+    end
+
     it "should require a valid date" do
       item = Activity.new(@attr.merge(:activity_date=> "xyz"))
       item.should_not be_valid
     end
 
-    it "user id should be nonnegative integer" do
-      item = Activity.new(@attr.merge(:user_id=> 0))
-      item.should_not be_valid
-    end
-  end
-
-  describe "Valid entry" do
-    it "should create a valid entry" do
-      item = Activity.new(@attr)
-      item.should be_valid
-    end
   end
 
 end
