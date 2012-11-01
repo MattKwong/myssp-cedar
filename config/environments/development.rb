@@ -6,6 +6,8 @@ Spoic3::Application.configure do
   # since you don't have to restart the webserver when you make code changes.
   config.cache_classes = false
 
+  config.serve_static_assets = true
+
 # Do not compress assets
   config.assets.compress = false
 

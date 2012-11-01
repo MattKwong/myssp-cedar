@@ -31,6 +31,7 @@ class Session < ActiveRecord::Base
   scope :active, lambda { joins(:program).where("programs.active = ?", 't') }
   scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
+  scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
   def session_type_junior_high?
     if session_type.name == 'Summer Junior High'
@@ -207,5 +208,9 @@ class Session < ActiveRecord::Base
   def self.sites_for_group_type_senior
     group_type = SessionType.find_by_name("Summer Senior High").id
     self.sites_for_group_type(group_type)
+  end
+
+  def short_name
+    site.abbr + " " + period.name.first + period.name.last
   end
 end

@@ -19,12 +19,26 @@ ActiveAdmin.register Registration do
     column :church_id do |reg|
       link_to reg.liaison.church.name, admin_church_path(reg.liaison.church_id)
     end
-
+    column :group_type_id, :sortable => :group_type_id do |group_type|
+      group_type.session_type.name
+    end
     column :requested_youth, :label => "Youth"
     column :requested_counselors, :label => "Counselors"
     column :requested_total, :label => "Total"
-    column :group_type_id, :sortable => :group_type_id do |group_type|
-      group_type.session_type.name
+    column :request1, :sortable => :request1 do |reg|
+      if reg.request1
+        Session.find(reg.request1).short_name
+      end
+    end
+    column :request2, :sortable => :request2 do |reg|
+      if reg.request2
+        Session.find(reg.request2).short_name
+      end
+    end
+    column :request3, :sortable => :request3 do |reg|
+      if reg.request3
+        Session.find(reg.request3).short_name
+      end
     end
     default_actions
  end
@@ -33,18 +47,18 @@ ActiveAdmin.register Registration do
     panel "Request Details " do
       attributes_table_for registration do
         row("Registration Name") {registration.name}
-        row("Registration Type") {registration.group_type_id}
+        row("Registration Type") {registration.session_type.name}
         row("Liaison") {registration.liaison}
-        row("Request1") {registration.request1}
-        row("Request2") {registration.request2}
-        row("Request3") {registration.request3}
-        row("Request4") {registration.request4}
-        row("Request5") {registration.request5}
-        row("Request6") {registration.request6}
-        row("Request7") {registration.request7}
-        row("Request8") {registration.request8}
-        row("Request9") {registration.request9}
-        row("Request10") {registration.request10}
+        row("Request1") {if registration.request1 then Session.find(registration.request1).name end }
+        row("Request2") {if registration.request2 then Session.find(registration.request2).name end }
+        row("Request3") {if registration.request3 then Session.find(registration.request3).name end }
+        row("Request4") {if registration.request4 then Session.find(registration.request4).name end }
+        row("Request5") {if registration.request5 then Session.find(registration.request5).name end }
+        row("Request6") {if registration.request6 then Session.find(registration.request6).name end }
+        row("Request7") {if registration.request7 then Session.find(registration.request7).name end }
+        row("Request8") {if registration.request8 then Session.find(registration.request8).name end }
+        row("Request9") {if registration.request9 then Session.find(registration.request9).name end }
+        row("Request10") {if registration.request10 then Session.find(registration.request10).name end }
         row("Counselors") {registration.requested_counselors}
         row("Youth") {registration.requested_youth}
         row("Total") {registration.requested_total}
@@ -53,11 +67,29 @@ ActiveAdmin.register Registration do
         row("Amount due") {registration.amount_due}
         row("Payment method") {registration.payment_method}
         row("Payment notes") {registration.payment_notes}
-        row("Registration step") {registration.registration_step}
         row("Comments") {registration.comments}
         row("Created at") {registration.created_at}
         row("Updated at") {registration.updated_at}
       end
     end
+   end
+  form :title => :name do |f|
+    f.inputs "Edit Request Details" do
+      f.input :name
+      f.input :requested_youth
+      f.input :requested_counselors
+      f.input :comments
+      f.input :request1, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => false
+      f.input :request2, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request3, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request4, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request5, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request6, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request7, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request8, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request9, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+      f.input :request10, :as => :select, :collection => Session.active.by_type(f.object.group_type_id), :include_blank => true
+   end
+    f.buttons
   end
 end

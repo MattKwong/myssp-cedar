@@ -43,7 +43,7 @@ class AdminUser < ActiveRecord::Base
   has_many :purchases, :foreign_key => "purchaser_id", :dependent => :restrict
 
 
-  attr_accessible :email, :name, :user_role_id, :first_name, :last_name, :site_id,
+  attr_accessible :email, :name, :user_role_id, :first_name, :last_name, :site_id, :deleted_at,
                   :liaison_id, :password, :password_confirmation, :remember_me, :admin, :username, :phone
 
   before_validation do

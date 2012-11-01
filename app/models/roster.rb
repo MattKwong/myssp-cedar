@@ -17,15 +17,38 @@ class Roster < ActiveRecord::Base
     validates :group_id, :group_type, :presence => true
 
   def name
-#<<<<<<< HEAD
-#    unless group_id.nil?
-#      scheduled_group.name
-#=======
     unless self.scheduled_group.nil?
       self.scheduled_group.name
     else
       "None"
-#>>>>>>> upstream/master
     end
   end
+
+  def roster_status
+    items = RosterItem.find_all_by_roster_id(id)
+    if items.nil? || items.count == 0
+      return 'Not started'
+
+    else
+      if items.count < scheduled_group.current_total
+        return "Started"
+      else if items.count == scheduled_group.current_total
+             return "Completed"
+           else
+             return "Needs attention"
+           end
+      end
+    end
+
+  end
+
+  def left_to_enter
+    items = RosterItem.find_all_by_roster_id(id)
+    if items.nil? || items.count == 0
+      return scheduled_group.current_total
+    else
+      return scheduled_group.current_total - items.count
+    end
+  end
+
 end

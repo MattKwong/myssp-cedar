@@ -1,0 +1,41 @@
+<%= Date.today.strftime("%B %d, %Y") %>
+
+Dear <%= @group.liaison.first_name %>,
+
+This email is your confirmation that your group has been scheduled in the following session:
+
+Site:                       <%= @group.session.site.name %>
+Week:                       <%= @group.session.period.name %>
+Start Date:                 <%= @group.session.period.start_date.strftime("%a, %b %d, %Y") %>
+End Date:                   <%= @group.session.period.end_date.strftime("%a, %b %d, %Y")  %>
+
+
+The following is the current information that we have on your group:
+
+Group name:                 <%=	@group.name %>
+
+Church:                     <%= @group.church.name %>
+
+Liaison:                    <%= @group.liaison.name %>
+
+Number of youth:            <%= @group.current_youth %>
+
+Number of counselors:       <%= @group.current_counselors %>
+
+Total:                      <%= @group.current_total %>
+
+I am excited that your group will be participating in 2013 and I am looking forward to working with you to make SSP a
+fantastic experience for your group. If you have any questions or concerns, please give me a call at 916-488-6441. Email
+will be my primary way of communicating with you, so please notify me if you change your email address.
+
+Blessings,
+
+Meghan Osborn
+Business Manager
+meghan.osborn@sierraserviceproject.org
+www.sierraserviceproject.org
+916-488-6441
+
+Sierra Service Project
+PO Box 992
+Carmichael CA 95609

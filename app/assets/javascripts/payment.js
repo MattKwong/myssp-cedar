@@ -1,6 +1,7 @@
 var cc_processing_charge = 0;
 var cc_payment_amount = 0;
 var cc_to_be_charged = 0;
+var group_status;
 
 $(document).ready(function() {
     $("input[name=include_cc_charge]").attr("disabled", "disabled");
@@ -59,12 +60,12 @@ $(document).ready(function() {
             cvc: $('.card-cvc').val(),
             exp_month: $('.card-expiry-month').val(),
             exp_year: $('.card-expiry-year').val()
-        }, stripeResponseHandler);
+        }, stripePaymentResponseHandler);
         return false; // submit from callback
     });
 });
 
-function stripeResponseHandler(status, response) {
+function stripePaymentResponseHandler(status, response) {
     if (response.error) {
         // re-enable the submit button
         $('#pay_cc_now').removeAttr("disabled");
@@ -74,12 +75,12 @@ function stripeResponseHandler(status, response) {
         // token contains id, last4, and card type
         var token = response['id'];
         // and submit
-
-        payment_comments = $("input[name=payment_comments]").text();
+        group_status = $("input[name=group_status]").val();
+        payment_comments = $("input[name=payment_comments]").val();
         registration_id = $("input[name=registration_id]").val();
-        $.get("process_cc_payment?payment_amount=" + cc_payment_amount
+        $.get("process_cc_payment?reg_id=" + registration_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
-            + token + "&payment_comments=" + payment_comments,  function(data) {
+            + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
 
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();

@@ -1,0 +1,72 @@
+<%= Date.today.strftime("%B %d, %Y") %>
+
+Dear <%= @registration.liaison.first_name %>,
+
+This email is a confirmation of the changes that were made to your registration today. Below is the current registration
+information that is in our database.  Please contact Meghan at 916-488-6441 if you think any of this information is
+incorrect.
+
+Group name:                 <%=	@registration.name %>
+
+Church:                     <%= @registration.church.name %>
+
+Liaison:                    <%= @registration.liaison.name %>
+
+Number of youth:            <%= @registration.requested_youth %>
+
+Number of counselors:       <%= @registration.requested_counselors %>
+
+Total:                      <%= @registration.requested_total %>
+
+Choice #1: <%= Session.find(@registration.request1).name %>
+
+<% if @registration.request2 != nil  %>
+Choice #2: <%= Session.find(@registration.request2).name %>
+
+<% if @registration.request3 != nil%>
+Choice #3: <%= Session.find(@registration.request3).name %>
+
+<% if @registration.request4 != nil%>
+Choice #4: <%= Session.find(@registration.request4).name %>
+
+<% if @registration.request5 != nil%>
+Choice #5: <%= Session.find(@registration.request5).name %>
+
+<% if @registration.request6 != nil%>
+Choice #6: <%= Session.find(@registration.request6).name %>
+
+<% if @registration.request7 != nil%>
+Choice #7: <%= Session.find(@registration.request7).name %>
+
+<% if @registration.request8 != nil%>
+Choice #8: <%= Session.find(@registration.request8).name %>
+
+<% if @registration.request9 != nil%>
+Choice #9: <%= Session.find(@registration.request9).name %>
+
+<% if @registration.request10 != nil%>
+Choice #10: <%= Session.find(@registration.request10).name %>
+
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+No additional choices.
+
+
+Blessings,
+
+Meghan Osborn
+Business Manager
+meghan.osborn@sierraserviceproject.org
+www.sierraserviceproject.org
+916-488-6441
+
+Sierra Service Project
+PO Box 992
+Carmichael CA 95609

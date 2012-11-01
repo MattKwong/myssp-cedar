@@ -1,5 +1,5 @@
 
-<%= form_for(@screen_info[:payment]) do |r| %>
+<%= form_for(@payment) do |r| %>
     <div id="active_admin_content" class="without_sidebar">
   <div id="main_content_wrapper" >
      <div id="main_content">
@@ -16,13 +16,14 @@
                            <td><%= r.date_select(:payment_date, :default => Date.today) %></td>
                         </tr>
                         <tr>
-                           <td><%= r.label "Select payment method" %></td>
-                           <td><%= r.select(:payment_method, options_for_select(@screen_info[:payment_methods])) %></td>
+                           <td><%= r.label "Select payment type" %></td>
+                           <td><%= r.select(:payment_type, options_for_select(@payment_types)) %></td>
                         </tr>
                         <tr>
-                           <td><%= r.label "Select payment type" %></td>
-                           <td><%= r.select(:payment_type, options_for_select(@screen_info[:payment_types])) %></td>
+                           <td><%= r.label "Select payment method" %></td>
+                           <td><%= r.select(:payment_method, options_for_select(@payment_methods)) %></td>
                         </tr>
+
                         <tr>
                            <td><%= r.label "Payment Notes" %></td>
                            <td><%= r.text_field :payment_notes %></td>
@@ -31,12 +32,12 @@
                            <td><%= r.label "Amount Received (please omit dollar sign)" %></td>
                            <td><%= r.number_field :payment_amount, :as => :number %></td>
                         </tr>
-                        <input type = "hidden" name="group_id" value= <%= @screen_info[:scheduled_group].id %> />
-                        <input type = "hidden" name="group_status" value= <%= @screen_info[:group_status] %> />
+                        <input type = "hidden" name="group_id" value= <%= @group.id %> />
+                        <input type = "hidden" name="group_status" value= <%= @group_status %> />
                     </table>
                     <div class="actions">
                         <%= r.submit "Submit" %>
-                        <%= link_to "Cancel", admin_liaison_path(@screen_info[:scheduled_group].liaison_id)%>
+                        <%= link_to "Cancel", admin_liaison_path(@group.liaison_id)%>
                     </div>
 
                  </div>

@@ -1,5 +1,5 @@
 prawn_document() do |pdf|
-    logopath = "#{RAILS_ROOT}/public/images/logo.png"
+    logopath = ::Rails.root.join('public','logo.png')
     pdf.image logopath, :width => 80, :height => 80
     pdf.move_down(20)
 
@@ -25,7 +25,7 @@ prawn_document() do |pdf|
     pdf.text "Period: #{@screen_info[:period_name]} (#{@screen_info[:start_date].strftime("%m/%d/%y")} - #{@screen_info[:end_date].strftime("%m/%d/%y")})", :align => :right
     pdf.text "#{@screen_info[:church_info].city}, #{@screen_info[:church_info].state} #{@screen_info[:church_info].zip}"
     pdf.move_up(15)
-    pdf.text "Group Name: #{@screen_info[:scheduled_group].name}", :align => :right
+    pdf.text "Group Name: #{@group.name}", :align => :right
 
     pdf.move_down(60)
     pdf.table(@screen_info[:invoice_items], :header => true,

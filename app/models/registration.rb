@@ -54,34 +54,49 @@ class Registration < ActiveRecord::Base
 
 
    validates :name, :requested_youth, :requested_counselors, :presence => true
-   validates_numericality_of :requested_youth, :requested_counselors,
+   validates_numericality_of :requested_youth, :requested_counselors, :request1,
                              :only_integer => true, :greater_than_or_equal_to  => 1
+   validate :request_sequence, :message => "All requests must be made in order."
+   validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
+   before_validation do
+     self.requested_total = self.requested_youth + self.requested_counselors
+   end
+  # The next four methods are for compatibility with the ScheduleGroup model - to allow code sharing even though
+  # the attributes are named differently
+  def current_youth
+    requested_youth
+  end
 
+  def current_counselors
+    requested_counselors
+  end
 
- #TODO: Test that the requested totals don't exceed the limit which is currently 30'
+  def current_total
+    requested_total
+  end
 
-  #with_options :if => :step2? do |registration|
-  #  registration.validates_presence_of :request1
-  #  registration.validates_numericality_of :request1, :only_integer => true, :greater_than_or_equal_to  => 1, :message => "must be valid request"
-  #  registration.validate :request_sequence, :message => "All requests must be made in order."
-  #  registration.validate :check_for_duplicate_choices, :message => "You may not select the same session twice."
-  #end
-  #
-  #with_options :if => :step3? do |registration|
-  #  registration.validates_presence_of :amount_paid, :payment_method
-  #  registration.validates_numericality_of :amount_paid, :greater_than_or_equal_to  => 1
-  #end
-  #
-  #private
-  #def step1?
-  #  registration_step == 'Step 1'
-  #end
-  #def step2?
-  #  registration_step == 'Step 2'
-  #end
-  #def step3?
-  #  registration_step == 'Step 3'
-  #end
+  def session
+    Session.find(request1)
+  end
+
+  def limit
+    session_type.limit
+  end
+
+  def type
+    self.junior_high? ? "Junior High" : "Senior High"
+  end
+  def junior_high?
+    session_type.junior_high?
+  end
+
+  def senior_high?
+    session_type.senior_high?
+  end
+
+  def registration_limit
+    junior_high? ? 20 : 30
+  end
 
   def deposits_paid
     ##returns the value of deposit payments for this registration

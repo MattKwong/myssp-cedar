@@ -19,27 +19,29 @@
                     <th>Final Outstanding</th>
                     <th>Adjustments</th>
                     <th>Total Due</th>
+                    <th>Total Paid to Date</th>
                     <th>Current Balance Due</th>
                 </tr>
             </thead>
-            <tbody><% @invoices.each do |g| %>
-                    <td><%= link_to g[:church_name], admin_church_path(g[:church_id]) %></td>
-                    <td><%= link_to g[:group_name], invoice_path(g[:group_id]),
+            <tbody><% @groups.each do |g| %>
+                    <td><%= link_to g.church.name, admin_church_path(g.church_id) %></td>
+                    <td><%= link_to g.name, invoice_path(g.id),
                                     :title => "Click to review and print the current invoice." %></td>
-                    <td><%= g[:youth] %></td>
-                    <td><%= g[:counselors] %></td>
-                    <td><%= g[:deposits_due] %></td>
-                    <td><%= number_to_currency(g[:deposits_paid]) %></td>
-                    <td><%= number_to_currency(g[:deposits_outstanding]) %></td>
-                    <td><%= g[:second_payments_due] %></td>
-                    <td><%= number_to_currency(g[:second_payments_paid]) %></td>
-                    <td><%= number_to_currency(g[:second_payments_outstanding]) %></td>
-                    <td><%= g[:final_payments_due] %></td>
-                    <td><%= number_to_currency(g[:final_payments_paid]) %></td>
-                    <td><%= number_to_currency(g[:final_payments_outstanding]) %></td>
-                    <td><%= number_to_currency(g[:adjustments]) %></td>
-                    <td><%= number_to_currency(g[:total_due]) %></td>
-                    <td><%= number_to_currency(g[:current_balance]) %></td>
+                    <td><%= g.current_youth %></td>
+                    <td><%= g.current_counselors %></td>
+                    <td><%= number_to_currency g.deposit_amount %></td>
+                    <td><%= number_to_currency g.deposit_paid %></td>
+                    <td><%= number_to_currency g.deposit_outstanding  %></td>
+                    <td><%= number_to_currency g.second_pay_amount %></td>
+                    <td><%= number_to_currency g.second_pay_paid %></td>
+                    <td><%= number_to_currency g.second_pay_outstanding %></td>
+                    <td><%= number_to_currency g.final_pay_amount %></td>
+                    <td><%= number_to_currency g.final_pay_paid %></td>
+                    <td><%= number_to_currency g.final_pay_outstanding %></td>
+                    <td><%= number_to_currency(g.adjustment_total) %></td>
+                    <td><%= number_to_currency(g.total_due) %></td>
+                    <td><%= number_to_currency(g.amount_paid) %></td>
+                    <td><%= number_to_currency(g.current_balance) %></td>
                 </tr>
             <% end %>
             </tbody>

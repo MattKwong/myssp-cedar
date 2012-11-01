@@ -206,7 +206,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
             height: 38px;
             display: block;
             padding-bottom: 10px;
-            background: url("check.png") no-repeat;
+            background: url("pay_by_check.png") no-repeat;
         }
         .pay_now_button {
             /*margin-left: auto;*/
@@ -217,7 +217,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
             height: 38px;
             display: block;
             padding-bottom: 10px;
-            background: url("now.png") no-repeat;
+            background: url("pay_now.png") no-repeat;
         }
         img.back_button {
             float: left;
