@@ -25,6 +25,11 @@ describe Activity do
   #validates_numericality_of :user_id, :only_integer => true, :greater_than => 0
   #validates_datetime :activity_date
 
+  it "should create an instance with valid attributes" do
+    item = Activity.new(@attr)
+    item.should be_valid
+  end
+
   describe "activity date tests" do
 
     it "should require activity_date" do
