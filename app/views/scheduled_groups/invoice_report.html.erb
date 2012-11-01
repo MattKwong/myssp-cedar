@@ -19,6 +19,7 @@
                     <th>Final Outstanding</th>
                     <th>Adjustments</th>
                     <th>Total Due</th>
+                    <th>Total Paid to Date</th>
                     <th>Current Balance Due</th>
                 </tr>
             </thead>
@@ -35,10 +36,11 @@
                     <td><%= number_to_currency g.second_pay_paid %></td>
                     <td><%= number_to_currency g.second_pay_outstanding %></td>
                     <td><%= number_to_currency g.final_pay_amount %></td>
-                    <td><%= number_to_currency(g[:final_payments_paid]) %></td>
-                    <td><%= number_to_currency(g[:final_payments_outstanding]) %></td>
+                    <td><%= number_to_currency g.final_pay_paid %></td>
+                    <td><%= number_to_currency g.final_pay_outstanding %></td>
                     <td><%= number_to_currency(g.adjustment_total) %></td>
                     <td><%= number_to_currency(g.total_due) %></td>
+                    <td><%= number_to_currency(g.amount_paid) %></td>
                     <td><%= number_to_currency(g.current_balance) %></td>
                 </tr>
             <% end %>
