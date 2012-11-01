@@ -242,7 +242,7 @@ class ScheduledGroupsController < ApplicationController
   end
 
   def invoice_report
-    @invoices = build_invoice_report
+    @groups = ScheduledGroup.active.active_program
     @page_title = 'Invoice Report'
     respond_to do |format|
       format.csv { create_csv("invoice-#{Time.now.strftime("%Y%m%d")}.csv") }

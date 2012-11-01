@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
  end
 
   def current_ability
-    @current_ability ||= Ability.new(current_admin_user)
+      @current_ability ||= Ability.new(current_admin_user)
   end
 
   def log_activity(activity_date, activity_type, activity_details, user_id, user_name, user_role)

@@ -80,8 +80,20 @@ class ScheduledGroup < ActiveRecord::Base
     Adjustment.sum(:amount, :conditions => ['group_id = ?', id])
   end
 
-  def deposit_amount
+  def deposit_amount #the amount due for deposits
     overall_high_water * session.payment_schedule.deposit
+  end
+
+  def deposit_paid #the amount of the deposit_amount that has actually been paid
+    if amount_paid >= deposit_amount
+      deposit_amount
+    else
+      deposit_amount - amount_paid
+    end
+  end
+
+  def deposit_outstanding
+    deposit_amount - deposit_paid
   end
 
   def overall_high_water
@@ -112,6 +124,19 @@ class ScheduledGroup < ActiveRecord::Base
       0
     end
   end
+
+  def second_pay_paid #the amount of the deposit_amount that has actually been paid
+    if deposit_outstanding > 0 #no money left for second or final payments
+      0
+    else
+      deposit_amount + second_pay_amount - amount_paid
+    end
+  end
+
+  def second_pay_outstanding
+    second_pay_amount + second_late_penalty_amount - second_pay_paid
+  end
+
 
   def final_pay_amount
     current_total * session.payment_schedule.final_payment
