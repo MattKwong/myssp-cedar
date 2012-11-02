@@ -76,11 +76,12 @@ class PaymentController < ApplicationController
       if p
         log_activity("CC Payment", "Group: #{@registration.name} Amount: $#{sprintf('%.2f', params[:amount_paid].to_f)}")
         UserMailer.cc_payment_confirmation(@registration, p, params).deliver
+        render :partial => 'process_cc_payment'
       else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
+        render :partial => 'process_cc_payment'
       end
     end
-    render :partial => 'process_cc_payment'
   end
 
 

@@ -349,7 +349,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
     render :partial => "final_confirmation"
   end
 
-  def process_cc_payment
+  def process_cc_dep_payment
     token = params[:payment_tracking_number]
     @registration = Registration.find(params[:reg_id])
 

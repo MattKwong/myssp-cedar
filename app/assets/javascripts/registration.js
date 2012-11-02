@@ -460,27 +460,6 @@ $(document).ready(function() {
     });
 });
 
-
-//$(document).ready(function() {
-//    $('#submit_seventh').click(function(){
-//        //Send the data to the server and create the new registration record
-//        $.get("save_registration_data?group_type="+ group_type + "&session_choices=" + session_choices
-//            + "&comments=" + comments + "&requested_youth=" + requested_youth + "&requested_adults="
-//            + requested_adults + "&liaison_id=" + liaison_id, function(data) {
-//            $("#step_seven_data").html(data);
-//            deposit_amount = parseInt($("input[name=deposit_amount]").val());
-//        } );
-//
-//
-//        //update progress bar
-//        $('#progress_text').html('75% Complete');
-//        $('#progress').css('width','265px');
-//        //slide steps
-//        $('#seventh_step').slideUp();
-//        $('#eighth_step').slideDown();
-//    });
-//});
-
 $(document).ready(function() {
     $("#submit_seventh").addClass('disabled');
 //    $("#submit_seventh").removeAttr('onclick');
@@ -609,7 +588,7 @@ $(document).ready(function() {
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
 });
 
-function stripeResponseHandler(status, response) {
+function stripeDepositResponseHandler(status, response) {
     if (response.error) {
         // re-enable the submit button
         $('#pay_now').removeAttr("disabled");
@@ -621,7 +600,7 @@ function stripeResponseHandler(status, response) {
         // and submit
 //        alert(processing_charge);
         registration_id = $("input[name=registration_id]").val();
-        $.get("process_cc_payment?reg_id=" + registration_id  + "&deposit_amount=" + deposit_amount
+        $.get("process_cc_dep_payment?reg_id=" + registration_id  + "&deposit_amount=" + deposit_amount
             + "&amount_paid=" + to_be_charged + "&processing_charge=" + processing_charge + "&payment_tracking_number="
             + token,  function(data) {
 
@@ -666,7 +645,7 @@ $(document).ready(function() {
             cvc: $('.card-cvc').val(),
             exp_month: $('.card-expiry-month').val(),
             exp_year: $('.card-expiry-year').val()
-        }, stripeResponseHandler);
+        }, stripeDepositResponseHandler);
         return false; // submit from callback
     });
 });

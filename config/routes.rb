@@ -69,9 +69,9 @@ Spoic3::Application.routes.draw do
   match 'registration/get_sessions_for_type_and_site', :to => 'registration#get_sessions_for_type_and_site'
   match 'registration/get_alt_sessions_for_type_site', :to => 'registration#get_alt_sessions_for_type_site'
   match 'registration/save_registration_data', :to => 'registration#save_registration_data'
-  match 'registration/payment_gateway', :to => 'registration#process_cc_payment'
+  match 'registration/payment_gateway', :to => 'registration#process_cc_dep_payment'
   match 'registration/final_confirmation', :to => 'registration#final_confirmation'
-  match 'registration/process_cc_payment', :to => 'registration#process_cc_payment'
+  match 'registration/process_cc_dep_payment', :to => 'registration#process_cc_dep_payment'
   match 'registration/pay_by_check', :to => 'registration#pay_by_check'
   match 'registration/request_matrix', :to => 'registration#request_matrix'
 
