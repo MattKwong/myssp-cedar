@@ -39,7 +39,7 @@ $(document).ready(function() {
             $("td#cc_processing_charge").html("$" + cc_processing_charge.toFixed(2));
             $("td#cc_to_be_charged").html("$" + cc_to_be_charged.toFixed(2));
             $("#cc_payment_errors").html("");
-            $('#pay_now').removeAttr("disabled");
+            $('#pay_cc_now').removeAttr("disabled");
 
         } else {
             $("#cc_payment_errors").html("Please input a valid number - no $ or characters.");
@@ -98,7 +98,6 @@ function stripePaymentResponseHandler(status, response) {
                 table_html += token;
                 table_html += "</td></tr>";
                 $('#final_confirmation_table').append(table_html);
-
                 //slide steps
                 $('#cc_payment_step').slideUp();
                 $('#confirmation_step').slideDown();

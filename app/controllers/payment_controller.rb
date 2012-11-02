@@ -37,18 +37,16 @@ class PaymentController < ApplicationController
     @page_title = "Make payment for group: #{@group.name}"
   end
 
-  def cc_payment
+  def cc_payment #payments not made as part of the registration wizard
     @group_status = params[:group_status]
-    logger.debug @group_status
-    @registration = Registration.find(params[:id])
-    @liaison = Registration.find(params[:id]).liaison
-    @page_title = "Make Credit Card Payment for #{@registration.name}"
+    @group_status == 'registration' ? @group = Registration.find(params[:id]) : Registration.find(params[:id])
+    @page_title = "Make Credit Card Payment for #{@group.name}"
     render 'cc_payment'
   end
 
   def process_cc_payment
     token = params[:payment_tracking_number]
-    @registration = Registration.find(params[:id])
+    @group = Registration.find(params[:id])
     @payment_error_message = ''
     begin
       to_be_charged = (100 * params[:amount_paid].to_f).to_i
@@ -58,7 +56,7 @@ class PaymentController < ApplicationController
           :amount=> to_be_charged,
           :currency=>"usd",
           :card => token,
-          :description => @registration.name)
+          :description => @group.name)
     rescue Stripe::InvalidRequestError => e
       @payment_error_message = "There has been a problem processing your credit card."
       logger.debug e.message
@@ -70,12 +68,10 @@ class PaymentController < ApplicationController
     if e
       render :partial => 'process_cc_payment'
     else
-      #Needs to find and save the registration instance with the payment information
-      p = Payment.create(:payment_date => Date.today, :registration_id => @registration.id, :payment_amount => (to_be_charged / 100),
-                         :payment_method => "cc", :payment_type => 'Deposit', :payment_notes => params[:payment_comments])
+      p = Payment.record_deposit(@group.id, params[:payment_amount], params[:processing_charge], "cc", params[:payment_comments])
       if p
-        log_activity("CC Payment", "Group: #{@registration.name} Amount: $#{sprintf('%.2f', params[:amount_paid].to_f)}")
-        UserMailer.cc_payment_confirmation(@registration, p, params).deliver
+        log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', params[:payment_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")
+        UserMailer.cc_payment_confirmation(@group, p, params).deliver
         render :partial => 'process_cc_payment'
       else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
@@ -159,12 +155,4 @@ private
       flash[:error] = "Unknown problem occurred logging a transaction."
     end
   end
-
-  #def check_for_cancel
-  #unless params[:cancel].blank?
-  #  liaison_id = ScheduledGroup.find(params[:payment][:scheduled_group_id]).liaison_id
-  #  redirect_to myssp_path(liaison_id)
-  #  end
-  #end
-
 end

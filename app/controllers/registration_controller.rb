@@ -323,7 +323,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @processing_charge = (@deposit_amount * 0.029)
       @to_be_charged = @deposit_amount + @processing_charge
       set_registered_flag
-      log_activity(DateTime.now, "Registration Created", "Group Type: #{@registration.type } Total requested: #{@registration.requested_total}", @registration.liaison_id, @registration.liaison.name, "Liaison")
+      log_activity("Registration Created", "Group Type: #{@registration.type } Total requested: #{@registration.requested_total}")
     else
       @registration_saved = false
       @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."
@@ -380,13 +380,19 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @registration.payment_notes = params[:payment_tracking_number]
       @registration.save
       @deposit_amount = @registration.requested_total * 50
-      Payment.record_deposit(@registration.id, @deposit_amount, params[:processing_charge], "cc", @registration.payment_notes)
+      p = Payment.record_deposit(@registration.id, @deposit_amount, params[:processing_charge], "cc", @registration.payment_notes)
       #Create the confirmation email
-      UserMailer.registration_confirmation(@registration, params).deliver
-      render :partial => "final_confirmation"
+      if p
+        log_activity("CC Payment", "Group: #{@registration.name} Fee amount: $#{sprintf('%.2f', params[:deposit_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")
+        UserMailer.registration_confirmation(@registration, params).deliver
+        render :partial => "final_confirmation"
+      else
+        @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
+        render :partial => 'payment_gateway'
+      end
     end
-
   end
+
   def finish_up
     render myssp_path(current_admin_user.liaison_id)
   end
@@ -517,6 +523,18 @@ check amount listed in the Amount Due column. This can be paid either by check o
                   :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type}
   end
 
+  def log_activity(activity_type, activity_details)
+    a = Activity.new
+    a.activity_date = Time.now
+    a.activity_type = activity_type
+    a.activity_details = activity_details
+    a.user_id = current_admin_user.id
+    a.user_name = current_admin_user.name
+    a.user_role = current_admin_user.user_role
+    unless a.save!
+      flash[:error] = "Unknown problem occurred logging a transaction."
+    end
+  end
 
  end
 

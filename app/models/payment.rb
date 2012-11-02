@@ -34,10 +34,9 @@ class Payment < ActiveRecord::Base
     p = Payment.create(:payment_date => Date.today, :registration_id => reg_id, :payment_amount => deposit_amount,
           :payment_method => type, :payment_type => 'Deposit', :payment_notes => notes)
     if processing_charge.to_i > 0
-      Payment.create(:payment_date => Date.today, :registration_id => reg_id, :payment_amount => processing_charge,
+      p = Payment.create(:payment_date => Date.today, :registration_id => reg_id, :payment_amount => processing_charge,
                      :payment_method => type, :payment_type => 'Processing Charge', :payment_notes => notes)
     end
     return p
   end
-
 end

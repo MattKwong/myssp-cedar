@@ -695,7 +695,6 @@ $(document).ready(function() {
             $("#submit_seventh").hover(function() {
                 $(this).addClass('hover');
            });
-
         } else {
             $("#submit_seventh").addClass('disabled');
             $("#submit_seventh").unbind('click', submitSeventh);
