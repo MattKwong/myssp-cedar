@@ -198,21 +198,7 @@ class ScheduledGroupsController < ApplicationController
 
   def invoice
     @group= ScheduledGroup.find(params[:id])
-    #liaison_name = Liaison.find(@group.liaison_id).name
-    #site_name = Site.find(Session.find(@group.session_id).site_id).name
-    #period_name = Period.find(Session.find(@group.session_id).period_id).name
-    #start_date = Period.find(Session.find(@group.session_id).period_id).start_date
-    #end_date = Period.find(Session.find(@group.session_id).period_id).end_date
-    #session_type = SessionType.find(Session.find(@group.session_id).session_type_id).name
-    #invoice = calculate_invoice_data(@group)
-    #church = Church.find(@group.church_id)
-    #invoice_items = create_invoice_items(invoice)
-    #
-    #@screen_info = {:scheduled_group => @scheduled_group, :invoice_items => invoice_items,
-    #  :site_name => site_name, :period_name => period_name, :start_date => start_date,
-    #  :end_date => end_date,  :session_type => session_type, :invoice_data => invoice,
-    #  :liaison_name => liaison_name, :church_info => church}
-    @title = "Invoice for: #{@group.name}"
+    @page_title = "Invoice for: #{@group.name}"
   end
 
   def statement

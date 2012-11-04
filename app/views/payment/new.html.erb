@@ -4,12 +4,11 @@
   <div id="main_content_wrapper" >
      <div id="main_content">
 
-           <%= render 'shared/error_messages_payment' %>
            <div class="panel">
-              <div class="panel_contents">
-                 <div class="attributes_table liaison" id="attributes_table_liaison_3">
+              <div>
+                 <div>
                    <%= render 'layouts/myssp_group_data' %>
-                    <table border="0" cellspacing="0" cellpadding="0" >
+                    <table id="payment_table">
                         <h3>Enter the payment details below.</h3>
                         <tr>
                            <td><%= r.label "Select payment date" %></td>
@@ -17,21 +16,56 @@
                         </tr>
                         <tr>
                            <td><%= r.label "Select payment type" %></td>
-                           <td><%= r.select(:payment_type, options_for_select(@payment_types)) %></td>
+                           <td><%= r.select(:payment_type, options_for_select(@payment_types, @payment.payment_type)) %></td>
                         </tr>
                         <tr>
                            <td><%= r.label "Select payment method" %></td>
-                           <td><%= r.select(:payment_method, options_for_select(@payment_methods)) %></td>
+                           <td id="payment_method"><%= r.select(:payment_method, options_for_select(@payment_methods, @payment.payment_method)) %></td>
                         </tr>
-
-                        <tr>
-                           <td><%= r.label "Payment Notes" %></td>
-                           <td><%= r.text_field :payment_notes %></td>
-                        </tr>
-                        <tr>
-                           <td><%= r.label "Amount Received (please omit dollar sign)" %></td>
-                           <td><%= r.number_field :payment_amount, :as => :number %></td>
-                        </tr>
+                        <tbody id="cash_check_section">
+                            <tr>
+                              <td><%= r.label "Amount Received (please omit dollar sign)" %></td>
+                              <td><%= r.number_field :payment_amount, :as => :number, :value => sprintf('%.2f', @payment.payment_amount) %></td>
+                            </tr>
+                            <tr>
+                              <td><%= r.label "Payment Notes" %></td>
+                              <td><%= r.text_field :payment_notes %></td>
+                            </tr>
+                        </tbody>
+                        <tbody id="cc_section">
+                          <tr>
+                            <td><label>Payment Amount (please omit $)</label></td>
+                            <td><input type="number" size="10" autocomplete="off" name="cc_payment_amount" id="cc_payment_amount" /></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <label class="processing_fee_button">Include 2.9% processing fee that SSP pays</label>
+                              <%= check_box_tag("include_cc_charge", "accepted", false) %>
+                            </td>
+                            <td class = "input_money" name="cc_processing_charge" id="cc_processing_charge" ></td>
+                          </tr>
+                          <tr>
+                            <td><label>Total To Be Charged</label></td>
+                            <td class = "input_money" name="cc_total_charge" id="cc_to_be_charged" ></td>
+                          </tr>
+                          <tr>
+                            <td><label>Card Number</label></td>
+                            <td><input type="number" name="card_number" size="16" autocomplete="off" class="card-number" /></td>
+                          </tr>
+                          <tr>
+                            <td><label>CVC</label></td>
+                            <td><input type="number" size="3" autocomplete="off" name="card_cvc" class="card-cvc" /></td>
+                          </tr>
+                          <tr>
+                            <td><label>Expiration (MM/YYYY)</label></td>
+                            <td><span><input type="number" size="2" name="card-expiry-month" class="card-expiry-month"/>
+                              <input type="number" size="4" name="card-expiry-year" class="card-expiry-year"/></span></td>
+                          </tr>
+                          <tr>
+                            <td><label>Payment Comments</label></td>
+                            <td><%=  text_area :payment, :payment_notes, :cols => 30, :rows => 4 %></td>
+                          </tr>
+                        </tbody>
                         <input type = "hidden" name="group_id" value= <%= @group.id %> />
                         <input type = "hidden" name="group_status" value= <%= @group_status %> />
                     </table>
@@ -39,7 +73,6 @@
                         <%= r.submit "Submit" %>
                         <%= link_to "Cancel", admin_liaison_path(@group.liaison_id)%>
                     </div>
-
                  </div>
               </div>
            </div>

@@ -107,3 +107,21 @@ function stripePaymentResponseHandler(status, response) {
 
     };
 }
+//payment/new page
+$(document).ready(function() {
+    $("#payment_method").change(function(event) {
+        var selectedVal = $('#payment_method :selected').val();
+        if (selectedVal == 'Credit Card') {
+            $('#cc_section').show();
+            $('#cash_check_section').hide();
+        } else {
+            $('#cash_check_section').show();
+            $('#cc_section').hide();
+        }
+    });
+});
+
+
+$(document).ready(function() {
+    $("#payment_method").trigger('change');
+});

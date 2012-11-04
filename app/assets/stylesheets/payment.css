@@ -1,3 +1,12 @@
 #confirmation_step {
     display: none;
 }
+#payment_table td:first-child {
+    width: 25%;
+}
+#payment_table tr td {
+    background-color: #E8E8E8;
+}
+#cash_check_section, #cc_section {
+    display: none;
+}

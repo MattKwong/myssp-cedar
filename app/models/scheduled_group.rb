@@ -176,4 +176,13 @@ class ScheduledGroup < ActiveRecord::Base
   def second_late_penalty_due?
     Date.today > session.payment_schedule.second_payment_late_date ? true : false
   end
+
+  def likely_next_payment
+    second_payment_date.nil? ? 'Second' : 'Final'
+  end
+
+  def likely_next_pay_amount
+    likely_next_payment == 'Second' ? second_pay_outstanding : final_pay_outstanding
+  end
+
 end

@@ -2,40 +2,6 @@ class PaymentController < ApplicationController
   authorize_resource
   #before_filter :check_for_cancel, :only => [:create]
   layout 'admin_layout'
-#  def show
-#    redirect_to admin_payment_path(params[:id])
-#  end
-
-  def new
-    @payment = Payment.new()
-    @group_status = params[:group_status]
-    @payment_methods = 'Check', 'Credit Card', 'Cash'
-    if @group_status == 'registration'
-      @payment_types = 'Deposit', 'Other'
-      @group = Registration.find(params[:group_id])
-      #site_name = Site.find(Session.find(group.request1).site_id).name
-      #period_name = Period.find(Session.find(group.request1).period_id).name
-      #start_date = Period.find(Session.find(group.request1).period_id).start_date
-      #end_date = Period.find(Session.find(group.request1).period_id).end_date
-      #session_type = SessionType.find(Session.find(group.request1).session_type_id).name
-    else
-      @payment_types = 'Deposit', 'Second', 'Final', 'Other'
-      @group = ScheduledGroup.find(params[:group_id])
-      #site_name = Site.find(Session.find(group.session_id).site_id).name
-      #period_name = Period.find(Session.find(group.session_id).period_id).name
-      #start_date = Period.find(Session.find(group.session_id).period_id).start_date
-      #end_date = Period.find(Session.find(group.session_id).period_id).end_date
-      #session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
-    end
-
-    #liaison_name = Liaison.find(group.liaison_id).name
-    #
-    #@screen_info = {:scheduled_group => group, :group_status => params[:group_status],
-    #  :site_name => site_name, :period_name => period_name, :start_date => start_date,
-    #  :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
-    #  :liaison_name => liaison_name, :payment_methods => payment_methods}
-    @page_title = "Make payment for group: #{@group.name}"
-  end
 
   def cc_payment #payments not made as part of the registration wizard
     @group_status = params[:group_status]
@@ -80,67 +46,105 @@ class PaymentController < ApplicationController
     end
   end
 
+  def new
+    @payment = Payment.new()
+    @group_status = params[:group_status]
+    current_admin_user.admin? ? (@payment_methods = 'Check', 'Credit Card', 'Cash') : @payment_methods = ['Credit Card']
+    current_admin_user.admin? ? @payment.payment_method = 'Check' : @payment.payment_method = 'Credit Card'
+
+    if @group_status == 'registration'
+      @payment_types = 'Deposit', 'Other'
+      @group = Registration.find(params[:group_id])
+      @payment.payment_type = 'Deposit'
+    else
+      @payment_types = 'Deposit', 'Second', 'Final', 'Other'
+      @group = ScheduledGroup.find(params[:group_id])
+      @payment.payment_type = @group.likely_next_payment
+      @payment.payment_amount = @group.likely_next_pay_amount
+    end
+    @page_title = "Make payment for group: #{@group.name}"
+    logger.debug @payment.inspect
+  end
 
   def create
+    if params[:payment_method] == 'Credit Card'
+      process_cc_payment
+    else
+      process_cash_check_payment(params[:payment])
+    end
+  end
 
-    payment = Payment.new(params[:payment])
-
+  def process_cash_check_payment(payment)
+    @payment = Payment.new(payment)
+    logger.debug @payment.inspect
     if (params[:group_status] == 'registration')
       group = Registration.find(params[:group_id])
-      payment.registration_id = group.id
+      @payment.registration_id = group.id
     else
       group = ScheduledGroup.find(params[:group_id])
-      payment.scheduled_group_id = group.id
+      @payment.scheduled_group_id = group.id
     end
 
-    if payment.valid?
-      if payment.payment_type == 'Second'
-        group = ScheduledGroup.find(payment.scheduled_group_id)
-        group.second_payment_date = payment.payment_date
+    if @payment.valid?
+      if @payment.payment_type == 'Second'
+        group = ScheduledGroup.find(@payment.scheduled_group_id)
+        group.second_payment_date = @payment.payment_date
         group.second_payment_total=group.current_total
         if group.save!
-          log_activity("Scheduled Group second payment date recorded: ", "#{payment.payment_date} for #{group.name}")
+          log_activity("Scheduled Group second payment date recorded: ", "#{@payment.payment_date} for #{group.name}")
         else
           flash[:error] = "Unable to updated group record."
         end
       end
-      payment.save!
-      log_activity("Payment by check", "$#{sprintf('%.2f', payment.payment_amount)} paid for #{group.name}")
+      @payment.save!
+      log_activity("Payment by check", "$#{sprintf('%.2f', @payment.payment_amount)} paid for #{group.name}")
       UserMailer.payment_confirmation(group, params).deliver
       flash[:notice] = "Successful entry of new payment."
-      redirect_to myssp_path(:id => group.liaison_id)
+      redirect_to myssp_path(:id => group.liaison_id) and return
     else
       flash[:error] = "A problem occurred in creating this payment."
-      payment = Payment.new()
-      payment_methods = 'Check', 'Credit Card', 'Cash'
-      if (params[:group_status] == 'registration')
-        payment_types = 'Deposit', 'Other'
-        group = Registration.find(params[:group_id])
-        site_name = Site.find(Session.find(group.request1).site_id).name
-        period_name = Period.find(Session.find(group.request1).period_id).name
-        start_date = Period.find(Session.find(group.request1).period_id).start_date
-        end_date = Period.find(Session.find(group.request1).period_id).end_date
-        session_type = SessionType.find(Session.find(group.request1).session_type_id).name
+      #payment = Payment.new()
+      #payment_methods = 'Check', 'Credit Card', 'Cash'
+      #if (params[:group_status] == 'registration')
+      #  payment_types = 'Deposit', 'Other'
+      #  group = Registration.find(params[:group_id])
+      #  site_name = Site.find(Session.find(group.request1).site_id).name
+      #  period_name = Period.find(Session.find(group.request1).period_id).name
+      #  start_date = Period.find(Session.find(group.request1).period_id).start_date
+      #  end_date = Period.find(Session.find(group.request1).period_id).end_date
+      #  session_type = SessionType.find(Session.find(group.request1).session_type_id).name
+      #else
+      #  payment_types = 'Deposit', 'Second', 'Final', 'Other'
+      #  group = ScheduledGroup.find(params[:group_id])
+      #  site_name = Site.find(Session.find(group.session_id).site_id).name
+      #  period_name = Period.find(Session.find(group.session_id).period_id).name
+      #  start_date = Period.find(Session.find(group.session_id).period_id).start_date
+      #  end_date = Period.find(Session.find(group.session_id).period_id).end_date
+      #  session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
+      #end
+      #
+      #liaison_name = Liaison.find(group.liaison_id).name
+      #
+      #@screen_info = {:scheduled_group => group, :group_status => params[:group_status],
+      #                  :site_name => site_name, :period_name => period_name, :start_date => start_date,
+      #                  :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
+      #                  :liaison_name => liaison_name, :payment_methods => payment_methods}
+      @page_title = "Record payment for: #{group.name}"
+      #@payment = Payment.new
+      @group_status = params[:group_status]
+      current_admin_user.admin? ? (@payment_methods = 'Check', 'Credit Card', 'Cash') : @payment_methods = ['Credit Card']
+
+      if @group_status == 'registration'
+        @payment_types = 'Deposit', 'Other'
+        @group = Registration.find(params[:group_id])
       else
-        payment_types = 'Deposit', 'Second', 'Final', 'Other'
-        group = ScheduledGroup.find(params[:group_id])
-        site_name = Site.find(Session.find(group.session_id).site_id).name
-        period_name = Period.find(Session.find(group.session_id).period_id).name
-        start_date = Period.find(Session.find(group.session_id).period_id).start_date
-        end_date = Period.find(Session.find(group.session_id).period_id).end_date
-        session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
+        @payment_types = 'Deposit', 'Second', 'Final', 'Other'
+        @group = ScheduledGroup.find(params[:group_id])
       end
-
-      liaison_name = Liaison.find(group.liaison_id).name
-
-      @screen_info = {:scheduled_group => group, :group_status => params[:group_status],
-                        :site_name => site_name, :period_name => period_name, :start_date => start_date,
-                        :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
-                        :liaison_name => liaison_name, :payment_methods => payment_methods}
-        @page_title = "Record payment for: #{group.name}"
+      @page_title = "Make payment for group: #{@group.name}"
       render "payment/new"
     end
-    end
+  end
 
 private
   def log_activity(activity_type, activity_details)
