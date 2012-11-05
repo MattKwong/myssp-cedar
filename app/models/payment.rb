@@ -25,6 +25,7 @@ class Payment < ActiveRecord::Base
   validates_numericality_of :payment_amount, :message => "Payment amount must be a number."
   validates_inclusion_of :payment_type, :in => ['Initial', 'Deposit', 'Second', 'Final', 'Other', 'Processing Charge'], :message => "Invalid payment type"
   validates_exclusion_of :payment_amount, :in => [0], :message => "Payment amount cannot be zero."
+  scope :fee, where('payment_type <> ?', "Processing Charge")
 
   def self.deposits_paid(reg_id)
     Payment.find_all_by_registration_id_and_payment_type(reg_id, 'Deposit').sum(&:payment_amount)

@@ -160,8 +160,8 @@ function stripeCCPaymentResponseHandler(status, response) {
         // and submit
         group_status = $("input[name=group_status]").val();
         payment_comments = $("input[name=payment_comments]").val();
-        registration_id = $("input[name=registration_id]").val();
-        $.get("process_cc_scheduled_payment?reg_id=" + registration_id + "&payment_amount=" + cc_payment_amount
+        group_id = $("input[name=registration_id]").val();
+        $.get("process_cc_scheduled_payment?reg_id=" + group_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
             + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
 

@@ -202,29 +202,7 @@ class ScheduledGroupsController < ApplicationController
   end
 
   def statement
-    @scheduled_group = ScheduledGroup.find(params[:id])
-    invoice = calculate_invoice_data(params[:id])
-    @event_list = invoice[:event_list]
-
-
-#Add header and footers to event_list for statement
-    @event_list.insert(0, ["Date", "Item", "Notes", "Amount Due", "Amount Received"])
-    footer = ["", "Totals", "", number_to_currency(invoice[:total_due]), number_to_currency(invoice[:amount_paid])]
-    @event_list << footer
-    footer = ["", "Current Balance Due", "", number_to_currency(invoice[:current_balance]), ""]
-    @event_list << footer
-#Convert date column to formatted dates
-    for i in 0..@event_list.size - 1
-      if @event_list[i][0].instance_of?(Date)
-        @event_list[i][0] = @event_list[i][0].strftime("%m/%d/%Y")
-      end
-    end
-    @liaison_name = Liaison.find(@scheduled_group.liaison_id).name
-    @site_name = Site.find(Session.find(@scheduled_group.session_id).site_id).name
-    @period_name = Period.find(Session.find(@scheduled_group.session_id).period_id).name
-    @start_date = Period.find(Session.find(@scheduled_group.session_id).period_id).start_date
-    @end_date = Period.find(Session.find(@scheduled_group.session_id).period_id).end_date
-    @church = Church.find(@scheduled_group.church_id)
+    @group = ScheduledGroup.find(params[:id])
   end
 
   def invoice_report

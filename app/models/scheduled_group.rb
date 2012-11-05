@@ -65,12 +65,17 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def current_balance
-    total_due - amount_paid
+    total_due - fee_amount_paid
   end
 
-  def amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
+  def total_amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
     #Payment.sum(:payment_amount, :conditions => ['registration_id = ?', registration_id]) +
         Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', id])
+  end
+
+  def fee_amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
+    #Payment.sum(:payment_amount, :conditions => ['registration_id = ?', registration_id]) +
+        Payment.fee.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', id])
   end
 
   def total_due
@@ -86,10 +91,10 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def deposit_paid #the amount of the deposit_amount that has actually been paid
-    if amount_paid >= deposit_amount
+    if fee_amount_paid >= deposit_amount
       deposit_amount
     else
-      deposit_amount - amount_paid
+      deposit_amount - fee_amount_paid
     end
   end
 
@@ -132,11 +137,11 @@ class ScheduledGroup < ActiveRecord::Base
     else
       puts second_pay_amount.to_i
       puts deposit_amount.to_i
-      puts amount_paid.to_i
-      if (second_pay_amount + deposit_amount) < amount_paid
+      puts fee_amount_paid.to_i
+      if (second_pay_amount + deposit_amount) < fee_amount_paid
         second_pay_amount #second payment fully paid
       else
-        second_pay_amount + deposit_amount - amount_paid
+        second_pay_amount + deposit_amount - fee_amount_paid
       end
     end
   end
@@ -162,7 +167,7 @@ class ScheduledGroup < ActiveRecord::Base
     if second_pay_outstanding > 0 #no money left for final payments
       0
     else
-      deposit_amount + second_pay_amount + final_pay_amount - amount_paid
+      deposit_amount + second_pay_amount + final_pay_amount - fee_amount_paid
     end
   end
 
