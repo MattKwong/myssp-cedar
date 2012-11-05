@@ -22,7 +22,9 @@
                            <td><%= r.label "Select payment method" %></td>
                            <td id="payment_method"><%= r.select(:payment_method, options_for_select(@payment_methods, @payment.payment_method)) %></td>
                         </tr>
-                        <tbody id="cash_check_section">
+                      </table >
+                      <table id="cash_check_section">
+                        <tbody>
                             <tr>
                               <td><%= r.label "Amount Received (please omit dollar sign)" %></td>
                               <td><%= r.number_field :payment_amount, :as => :number, :value => sprintf('%.2f', @payment.payment_amount) %></td>
@@ -31,8 +33,20 @@
                               <td><%= r.label "Payment Notes" %></td>
                               <td><%= r.text_field :payment_notes %></td>
                             </tr>
+
+                            <tr><td><div class="actions">
+                              <%= r.submit "Submit", :id => "cash_check_submit" %>
+                              <%= link_to "Cancel", admin_liaison_path(@group.liaison_id)%>
+                            </div></td>
+                            <td></td>
+                            </tr>
                         </tbody>
-                        <tbody id="cc_section">
+                        <input type = "hidden" name="group_id" value= <%= @group.id %> />
+                        <input type = "hidden" name="group_status" value= <%= @group_status %> />
+                      </table>
+
+                       <table id="cc_section">
+                        <tbody>
                           <tr>
                             <td><label>Payment Amount (please omit $)</label></td>
                             <td><input type="number" size="10" autocomplete="off" name="cc_payment_amount" id="cc_payment_amount" /></td>
@@ -68,11 +82,14 @@
                         </tbody>
                         <input type = "hidden" name="group_id" value= <%= @group.id %> />
                         <input type = "hidden" name="group_status" value= <%= @group_status %> />
-                    </table>
-                    <div class="actions">
-                        <%= r.submit "Submit" %>
+                    <tr><td><div class="actions">
+                        <%= r.submit "Submit", :id => "cc_submit" %>
                         <%= link_to "Cancel", admin_liaison_path(@group.liaison_id)%>
-                    </div>
+                    </div></td>
+                    <td></td>
+                    </tr>
+
+                   </table>
                  </div>
               </div>
            </div>

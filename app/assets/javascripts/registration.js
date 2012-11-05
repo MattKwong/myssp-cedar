@@ -577,10 +577,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#back_gateway').click(function(){
-
         $('#gateway_step').slideUp();
         $('#eighth_step').slideDown();
-
     });
 });
 

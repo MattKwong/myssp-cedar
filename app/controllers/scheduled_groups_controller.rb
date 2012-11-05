@@ -262,7 +262,7 @@ private
       end
   end
 
-  def build_invoice_report
+  def build_invoice_report_delete
 
     invoices = []
 
@@ -409,7 +409,7 @@ private
   end
 
 
-  def create_invoice_items(invoice)
+  def create_invoice_items_delete(invoice)
 
     #Create invoice_items array
     invoice_items = Array[]

@@ -125,3 +125,68 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#payment_method").trigger('change');
 });
+
+$(document).ready(function() {
+    $("#cc_submit").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $("#cc_submit").click(function(event) {
+        // disable the submit button to prevent repeated clicks
+        $('#cc_submit').attr("disabled", "disabled");
+        // createToken returns immediately - the supplied callback submits the form if there are no errors
+
+        Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+        }, stripeCCPaymentResponseHandler);
+        return false; // submit from callback
+    });
+});
+function stripeCCPaymentResponseHandler(status, response) {
+    alert("CC Payment Handler")
+    if (response.error) {
+        // re-enable the submit button
+        $('#cc_submit').removeAttr("disabled");
+        // show the errors on the form
+        $("#cc_payment_errors").html(response.error.message);
+    } else {
+        // token contains id, last4, and card type
+        var token = response['id'];
+        // and submit
+        group_status = $("input[name=group_status]").val();
+        payment_comments = $("input[name=payment_comments]").val();
+        registration_id = $("input[name=registration_id]").val();
+        $.get("process_cc_scheduled_payment?reg_id=" + registration_id + "&payment_amount=" + cc_payment_amount
+            + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
+            + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
+
+            $("#gateway_data").html(data);
+            var error_message = $("input[name=gateway_error]").val();
+            if (error_message) {
+                $("#cc_payment_errors").html(error_message);
+            } else {
+                table_html += "<tr><td>Payment Amount</td><td>";
+                table_html += "$" + parseFloat(cc_payment_amount).toFixed(2);
+                table_html += "<tr><td>Processing Charge</td><td>";
+                table_html += "$" + parseFloat(cc_processing_charge).toFixed(2);
+                table_html += "<tr><td>Amount paid</td><td>";
+                table_html += "$" + parseFloat(cc_to_be_charged).toFixed(2);
+                table_html += "</td></tr>";
+                table_html += "<tr><td>Receipt id</td><td>";
+                table_html += token;
+                table_html += "</td></tr>";
+                $('#final_confirmation_table').append(table_html);
+                //slide steps
+                $('#cc_payment_step').slideUp();
+                $('#confirmation_step').slideDown();
+            };
+
+        });
+
+    };
+}
