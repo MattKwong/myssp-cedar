@@ -19,11 +19,11 @@ Church:                     <%= @group.church.name %>
 
 Liaison:                    <%= @group.liaison.name %>
 
-Number of youth:            <%= @group.requested_youth %>
+Number of youth:            <%= @group.current_youth %>
 
-Number of counselors:       <%= @group.requested_counselors %>
+Number of counselors:       <%= @group.current_counselors %>
 
-Total:                      <%= @group.requested_total %>
+Total:                      <%= @group.current_total %>
 
 <% if @params[:group_status] == "registration" %>
 

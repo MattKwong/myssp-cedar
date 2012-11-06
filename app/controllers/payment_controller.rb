@@ -69,7 +69,7 @@ class PaymentController < ApplicationController
 
   def create #payments for groups that are already scheduled
     if params[:payment_method] == 'Credit Card'
-      process_cc_payment
+      process_cc_scheduled_payment
     else
       process_cash_check_payment(params[:payment])
     end
@@ -123,7 +123,7 @@ class PaymentController < ApplicationController
   #payments for groups that are already scheduled
   def process_cc_scheduled_payment
     token = params[:payment_tracking_number]
-    @group = Registration.find(params[:id])
+    @group = ScheduledGroup.find(params[:id])
     @payment_error_message = ''
     begin
       to_be_charged = (100 * params[:amount_paid].to_f).to_i
@@ -143,16 +143,16 @@ class PaymentController < ApplicationController
     end
 
     if e
-      render :partial => 'process_cc_payment'
+      render :partial => 'process_cc_scheduled_payment'
     else
       p = Payment.record_deposit(@group.id, params[:payment_amount], params[:processing_charge], "cc", params[:payment_comments])
       if p
         log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', params[:payment_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")
         UserMailer.cc_payment_confirmation(@group, p, params).deliver
-        render :partial => 'process_cc_payment'
+        render :partial => 'process_cc_scheduled_payment'
       else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
-        render :partial => 'process_cc_payment'
+        render :partial => 'process_cc_scheduled_payment'
       end
     end
   end
