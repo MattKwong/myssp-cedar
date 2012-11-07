@@ -148,7 +148,6 @@ $(document).ready(function() {
     });
 });
 function stripeCCPaymentResponseHandler(status, response) {
-    alert("CC Payment Handler")
     if (response.error) {
         // re-enable the submit button
         $('#cc_submit').removeAttr("disabled");
@@ -160,33 +159,18 @@ function stripeCCPaymentResponseHandler(status, response) {
         // and submit
         group_status = $("input[name=group_status]").val();
         payment_comments = $("input[name=payment_comments]").val();
-        group_id = $("input[name=registration_id]").val();
+        group_id = $("input[name=group_id]").val();
         $.get("process_cc_scheduled_payment?reg_id=" + group_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
             + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
-
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
+            alert (error_message)
             if (error_message) {
                 $("#cc_payment_errors").html(error_message);
             } else {
-                table_html += "<tr><td>Payment Amount</td><td>";
-                table_html += "$" + parseFloat(cc_payment_amount).toFixed(2);
-                table_html += "<tr><td>Processing Charge</td><td>";
-                table_html += "$" + parseFloat(cc_processing_charge).toFixed(2);
-                table_html += "<tr><td>Amount paid</td><td>";
-                table_html += "$" + parseFloat(cc_to_be_charged).toFixed(2);
-                table_html += "</td></tr>";
-                table_html += "<tr><td>Receipt id</td><td>";
-                table_html += token;
-                table_html += "</td></tr>";
-                $('#final_confirmation_table').append(table_html);
-                //slide steps
-                $('#cc_payment_step').slideUp();
-                $('#confirmation_step').slideDown();
+                return;
             };
-
         });
-
     };
 }

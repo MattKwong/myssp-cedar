@@ -10,43 +10,6 @@ class PaymentController < ApplicationController
     render 'cc_payment'
   end
 
-  #payments for groups that are already scheduled
-  def process_cc_scheduled_payment
-    token = params[:payment_tracking_number]
-    @group = Registration.find(params[:id])
-    @payment_error_message = ''
-    begin
-      to_be_charged = (100 * params[:amount_paid].to_f).to_i
-      logger.debug to_be_charged
-      logger.debug token
-      charge = Stripe::Charge.create(
-          :amount=> to_be_charged,
-          :currency=>"usd",
-          :card => token,
-          :description => @group.name)
-    rescue Stripe::InvalidRequestError => e
-      @payment_error_message = "There has been a problem processing your credit card."
-      logger.debug e.message
-    rescue Stripe::CardError => e
-      @payment_error_message = e.message
-      logger.debug e.message
-    end
-
-    if e
-      render :partial => 'process_cc_payment'
-    else
-      p = Payment.record_deposit(@group.id, params[:payment_amount], params[:processing_charge], "cc", params[:payment_comments])
-      if p
-        log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', params[:payment_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")
-        UserMailer.cc_payment_confirmation(@group, p, params).deliver
-        render :partial => 'process_cc_payment'
-      else
-        @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
-        render :partial => 'process_cc_payment'
-      end
-    end
-  end
-
   def new
     @payment = Payment.new()
     @group_status = params[:group_status]
@@ -64,7 +27,6 @@ class PaymentController < ApplicationController
       @payment.payment_amount = @group.likely_next_pay_amount
     end
     @page_title = "Make payment for group: #{@group.name}"
-    logger.debug @payment.inspect
   end
 
   def create #payments for groups that are already scheduled
@@ -127,8 +89,6 @@ class PaymentController < ApplicationController
     @payment_error_message = ''
     begin
       to_be_charged = (100 * params[:amount_paid].to_f).to_i
-      logger.debug to_be_charged
-      logger.debug token
       charge = Stripe::Charge.create(
           :amount=> to_be_charged,
           :currency=>"usd",
@@ -136,20 +96,20 @@ class PaymentController < ApplicationController
           :description => @group.name)
     rescue Stripe::InvalidRequestError => e
       @payment_error_message = "There has been a problem processing your credit card."
-      logger.debug e.message
     rescue Stripe::CardError => e
       @payment_error_message = e.message
-      logger.debug e.message
     end
 
     if e
       render :partial => 'process_cc_scheduled_payment'
     else
-      p = Payment.record_deposit(@group.id, params[:payment_amount], params[:processing_charge], "cc", params[:payment_comments])
+      p = Payment.record_payment(@group.id, params[:payment_amount], params[:processing_charge], "cc", params[:payment_type], params[:payment_comments])
       if p
         log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', params[:payment_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")
         UserMailer.cc_payment_confirmation(@group, p, params).deliver
-        render :partial => 'process_cc_scheduled_payment'
+        flash[:notice] = "Successful entry of new payment."
+        redirect_to myssp_path(:id => @group.liaison_id)
+        #render :partial => 'process_cc_scheduled_payment'
       else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
         render :partial => 'process_cc_scheduled_payment'

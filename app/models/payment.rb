@@ -40,4 +40,17 @@ class Payment < ActiveRecord::Base
     end
     return p
   end
+
+  def self.record_payment(group_id, payment_amount, processing_charge, method, type, notes)
+    logger.debug group_id
+    p = Payment.create(:payment_date => Date.today, :scheduled_group_id => group_id, :registration_id => ScheduledGroup.find(group_id).registration_id,
+                   :payment_amount => payment_amount,
+                    :payment_method => method, :payment_type => type, :payment_notes => notes)
+    if processing_charge.to_i > 0
+      p = Payment.create(:payment_date => Date.today, :scheduled_group_id => group_id, :registration_id => ScheduledGroup.find(group_id).registration_id,
+                    :payment_amount => processing_charge,
+                     :payment_method => type, :payment_type => 'Processing Charge', :payment_notes => notes)
+    end
+    return p
+  end
 end
