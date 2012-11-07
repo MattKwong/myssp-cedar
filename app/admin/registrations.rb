@@ -12,9 +12,6 @@ ActiveAdmin.register Registration do
       link_to r.name, schedule_request_path(:id => r.id),
         :title => "Click to schedule this group"
     end
-    column :liaison_id do |r|
-      r.liaison.email1
-    end
     column :liaison_id do |liaison|
       link_to liaison.liaison.name, admin_liaison_path(liaison.liaison_id)
     end
@@ -123,12 +120,16 @@ ActiveAdmin.register Registration do
         Session.find(reg.request2).short_name
       end
     end
-        column :request3 do |reg|
+    column :request3 do |reg|
       if reg.request3
         Session.find(reg.request3).short_name
       end
     end
-
+    column :deposits_paid
+    column :amount_due do |reg|
+      number_to_currency (reg.deposits_due - reg.deposits_paid)
+    end
+    column :comments
     column :created_at
     column :updated_at
 

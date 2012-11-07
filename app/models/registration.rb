@@ -63,17 +63,6 @@ class Registration < ActiveRecord::Base
    end
   # The next four methods are for compatibility with the ScheduleGroup model - to allow code sharing even though
   # the attributes are named differently
-  def current_youth
-    requested_youth
-  end
-
-  def current_counselors
-    requested_counselors
-  end
-
-  def current_total
-    requested_total
-  end
 
   def session
     Session.find(request1)
