@@ -12,7 +12,9 @@ ActiveAdmin.register Registration do
       link_to r.name, schedule_request_path(:id => r.id),
         :title => "Click to schedule this group"
     end
-    column :liaison_id
+    column :liaison_id do |r|
+      r.liaison.email1
+    end
     column :liaison_id do |liaison|
       link_to liaison.liaison.name, admin_liaison_path(liaison.liaison_id)
     end
@@ -92,4 +94,44 @@ ActiveAdmin.register Registration do
    end
     f.buttons
   end
+
+  csv do
+    column :name
+    column :email1 do |r|
+      r.liaison.email1
+    end
+    column :liaison_name do |r|
+      r.liaison.name
+    end
+    column :church_name do |r|
+      r.liaison.church.name
+    end
+    column :group_type do |r|
+      r.session_type.name
+    end
+
+    column :requested_youth
+    column :requested_counselors
+    column :requested_total
+    column :request1 do |reg|
+      if reg.request1
+        Session.find(reg.request1).short_name
+      end
+    end
+    column :request2 do |reg|
+      if reg.request2
+        Session.find(reg.request2).short_name
+      end
+    end
+        column :request3 do |reg|
+      if reg.request3
+        Session.find(reg.request3).short_name
+      end
+    end
+
+    column :created_at
+    column :updated_at
+
+  end
+
 end
