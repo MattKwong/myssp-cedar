@@ -170,7 +170,43 @@ class ReportsController < ApplicationController
     return @rows
   end
 
-private
+  def year_to_year_report(scope = nil)
+    @headers = get_yty_headers
+    @rows = get_yty_rows
+
+    respond_to do |format|
+      format.csv { create_csv("year-to-year-#{Time.now.strftime("%Y%m%d")}.csv") }
+    end
+  end
+
+  def get_yty_headers
+    @headers = []
+    @headers << "Church Name"
+    @headers << "Group Type"
+    @headers << "2012 Total"
+    @headers << "2013 Total"
+    return @headers
+  end
+
+  def get_yty_rows
+    @rows = []
+    ScheduledGroup.not_active_program.each do |group|
+      logger.debug group.inspect
+      row = []
+      row << group.name << group.session_type.name << group.current_total
+      if Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id)
+        row << Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id).requested_total
+      else
+        row << "Not Registered"
+      end
+    @rows << row
+    end
+
+    logger.debug @rows
+    return @rows
+  end
+
+  private
   def trim(s)
     if s.instance_of?(String)
       s.chomp.strip!

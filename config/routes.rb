@@ -172,6 +172,7 @@ Spoic3::Application.routes.draw do
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_csv'
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_html'
   match "reports/participation_summary" => 'reports#participation_summary', :as => 'part_sum_csv'
+  match "reports/csv_report" => 'reports#year_to_year_report', :as => 'missing_churches_csv'
 
   match "reports/purchases_with_unaccounted" => 'purchases#show_all_unaccounted', :as => 'unaccounted_report'
   match "staff_reports/spending_by_site" => 'staff_reports#spending_by_site', :as => 'spending_by_site_report'
