@@ -182,6 +182,7 @@ class ReportsController < ApplicationController
   def get_yty_headers
     @headers = []
     @headers << "Church Name"
+    @headers << "Group Name"
     @headers << "Group Type"
     @headers << "2012 Total"
     @headers << "2013 Total"
@@ -191,14 +192,16 @@ class ReportsController < ApplicationController
   def get_yty_rows
     @rows = []
     ScheduledGroup.not_active_program.each do |group|
-      logger.debug group.inspect
       row = []
-      row << group.name << group.session_type.name << group.current_total
+      row << group.church.name << group.name << group.session_type.name << group.current_total.to_i
       if Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id)
-        row << Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id).requested_total
+        row << Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id).requested_total.to_i
+        row << Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id).liaison.email1
       else
-        row << "Not Registered"
+        row << ""
+        row << group.liaison.email1
       end
+      row << ""
     @rows << row
     end
 
