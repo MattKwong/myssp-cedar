@@ -18,10 +18,14 @@
         <td><%= @schedule[:site_names][i] %></td>
         <% count = @schedule[:period_count].to_s.to_i %>
         <% for j in 0..count - 1 do %>
-          <% if @schedule[:registration_matrix][i][j] > @senior_high_limit %>
-            <td class = "high"><%= @schedule[:registration_matrix][i][j].to_s %></td>
+          <% if @schedule[:registration_matrix][i][j] =='-' || @schedule[:registration_matrix][i][j] == 0 then %>
+               <td><%= @schedule[:registration_matrix][i][j].to_s %></td>
           <% else %>
-            <td><%= @schedule[:registration_matrix][i][j].to_s %></td>
+              <% if @schedule[:registration_matrix][i][j] > @senior_high_limit %>
+                <td class = "high"><%= @schedule[:registration_matrix][i][j].to_s %></td>
+              <% else %>
+                <td><%= @schedule[:registration_matrix][i][j].to_s %></td>
+              <% end %>
           <% end %>
         <% end %>
         <td><%= (@schedule[:registration_matrix][i][count]).to_s %></td>

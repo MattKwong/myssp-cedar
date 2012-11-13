@@ -21,21 +21,7 @@ class RegistrationController < ApplicationController
     #@liaison = Liaison.find(params[:id])
     render 'new'
   end
-  #this is the old create method
-  #def create       #triggered by register view
-  #  @registration = Registration.new(params[:registration])
-  #  authorize! :create, @registration
-  #  if (@registration.valid?)
-  #    @registration.save!
-  #    flash[:notice] = "Successful completion of Step 1!"
-  #    redirect_to edit_registration_path(:id => @registration.id)
-  #  else
-  #    @liaisons = Liaison.all.map { |l| [l.name, l.id ] }
-  #    @group_types = SessionType.all.map { |s| [s.name, s.id ] }
-  #    @title = "Register A Group"
-  #    render "register"
-  #  end
-  #end
+
   def index
     @title = "Manage Groups"
   end
@@ -85,58 +71,7 @@ class RegistrationController < ApplicationController
 check amount listed in the Amount Due column. This can be paid either by check or by credit card."
     end
     render "show"
-
-  end
-
-  def update_old          #follows posting of edit and process_payment forms
-    @registration = Registration.find(params[:id])
-    authorize! :update, @registration
-    @liaison = Liaison.find(@registration.liaison_id)
-    @group_type = SessionType.find(@registration.group_type_id)
-    @registration.church_id = @liaison.church_id
-    total_requested = @registration.requested_counselors + @registration.requested_youth
-    @registration.requested_total = total_requested
-    @registration.scheduled = false
-    @church = Church.find(@liaison.church_id)
-    @registration.update_attributes(params[:registration])
-    @payment_types = 'Check', 'Credit Card', 'Cash'
-
-
-    if (step2?) then
-      if @registration.update_attributes(params[:registration])
-        flash[:notice] = "Successful completion of Step 2"
-        redirect_to registration_payment_path(:id => @registration.id)
-      else
-        @sessions = Session.all.map  { |s| [s.name, s.id ]}
-        @sessions.insert(0, @temp)
-        @title = "Registration Step 2"
-        @page_title = "Register A Group: Step 3"
-        render "edit"
-      end
-    end
-
-    if (step3?)
-      if @registration.update_attributes(params[:registration]) then
-        @payment = Payment.new
-        @payment.registration_id = @registration.id
-        @payment.payment_method = @registration.payment_method
-        @payment.payment_amount=@registration.amount_paid
-        @payment.payment_date=Date.today
-        @payment.payment_notes=@registration.payment_notes
-        @payment.payment_type = 'Initial'
-        @church.registered=true
-        if @payment.save && @church.save then
-          flash[:notice] = "Successful completion of step 3"
-          redirect_to registration_success_path(:id => @registration.id)
-        else
-          flash[:error] = "Save of payment/registration failed."
-          @title = "Registration Step 3"
-          @page_title = "Register A Group: Step 3"
-          redirect_to registration_payment_path(:id => @registration.id)
-        end
-      end
-    end
-  end
+   end
 
   def process_payment   #prior to rendering process_payment step 3
     @registration = Registration.find(params[:id])
@@ -475,21 +410,6 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @reg_total = @sched_total = 0
     end
 
-    #@reg_total = 0
-    #@sched_total = 0
-    #for i in 0..@period_names.size - 1 do
-    #  for j in 0..@site_names.size - 1 do
-    #    @reg_total = @reg_total + @registration_matrix[i][j]
-    #    logger.debug @reg_total
-    #    @sched_total = @sched_total + @scheduled_matrix[i][j]
-    #  end
-    #  @registration_matrix[i][j] = @reg_total
-    #  @scheduled_matrix[j][i] = @sched_total
-    #  logger.debug i
-    #  logger.debug j
-    #  logger.debug @reg_total
-    #  @reg_total = @sched_total = 0
-    #end
     for j in 0 ..@period_names.size do
       for i in 0..@site_names.size - 1 do
         @reg_total = @reg_total + @registration_matrix[i][j]
@@ -511,12 +431,21 @@ check amount listed in the Amount Due column. This can be paid either by check o
     @period_names << "Total"
     @site_names << "Total"
 
+    #Replace zeros in cells which do not represent an active session
+    for i in 0..@site_names.size - 2 do
+      site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
+      for j in 0..@period_names.size - 2 do
+        period = Period.active.summer_domestic.find_by_name(@period_names[j]).id
+        if Session.where('site_id = ? AND period_id =  ?', site, period).size == 0
+          @registration_matrix[i][j] = "-"
+        end
+      end
+    end
+
     @schedule = { :site_count => @site_names.size - 1, :period_count => @period_names.size - 1,
                   :site_names => @site_names, :period_names => @period_names,
                   :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
                   :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type}
   end
-
-
  end
 

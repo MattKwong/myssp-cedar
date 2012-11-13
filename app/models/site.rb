@@ -22,6 +22,8 @@ class Site < ActiveRecord::Base
   default_scope :order => 'listing_priority'
   scope :inactive, where(:active => 'f')
   scope :active, where(:active => 't')
+  scope :summer_domestic, where(:summer_domestic => 't')
+
 
   has_many :sessions
   has_many :admin_users
