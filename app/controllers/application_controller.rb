@@ -1,25 +1,27 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery :only => [:create, :update]
+  #load_and_authorize_resource
   add_breadcrumb "Home", '/'
   layout 'admin_layout'
   rescue_from Timeout::Error, :with => :rescue_from_timeout
-
-
-  protected
+  before_filter :check_for_non_admin_lock_out , :except => [:create, :destroy]
 
   def log_off_and_lock_out_users
     @page_title = "Log Off and Lock Out NonAdmin Users"
-    puts "log off lock out"
-    @users = AdminUser.non_admin
-    logger.debug @users.inspect
-    @users.each do |user|
-      log_off_user(user)
-    end
+#Update a flag somewhere
     render 'log_off_and_lock_out_users'
   end
 
-  def log_off_user(user)
-    destroy_user_session_path(user)
+  protected
+
+  def check_for_non_admin_lock_out
+    if signed_in?
+      if current_admin_user.liaison? || current_admin_user.field_staff?
+        @page_title = "System Temporarily Unavailable"
+        flash[:notice] = "You are unable to use the MySSP system at this time."
+        render blocked_user_path
+      end
+    end
   end
 
   def after_sign_in_path_for(resource) #this overrides the default method in the devise library

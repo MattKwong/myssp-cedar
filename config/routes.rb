@@ -46,6 +46,7 @@ Spoic3::Application.routes.draw do
 
 
   match "ops_pages/timeout" => 'ops_pages#timeout', :as => 'timeout_error'
+  match "ops_pages/blocked_user" => 'ops_pages#blocked_user', :as => 'blocked_user'
   match "item_purchases/:program_id/index/:id" => 'item_purchases#index', :as => 'item_purchases'
   match "purchases/:id/delete" => 'purchases#destroy', :as => 'delete_purchase'
   match "food_inventory/:id/delete" => 'food_inventories#destroy', :as => 'delete_food_inventory'
