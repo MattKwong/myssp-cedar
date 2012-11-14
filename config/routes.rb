@@ -192,6 +192,8 @@ Spoic3::Application.routes.draw do
   match "registration/delete", :to => 'registration#delete'
   match 'RegistrationController', :to => 'pages#groups'
 
+  match "application/log_off_and_lock_out_users", :to => "application#log_off_and_lock_out_users", :as => 'lock_out'
+
   match '/admin', :to => 'admin#index'
   match 'ops_pages/food', :to => 'ops_pages#food', :as => 'food'
   match 'ops_pages/show', :to => 'ops_pages#show', :as => 'ops_pages_show'

@@ -36,6 +36,7 @@ class AdminUser < ActiveRecord::Base
   # :token_authenticatable, :encryptable,  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :confirmable, :rememberable, :trackable, :validatable
 
+  scope :non_admin, where(:admin => 'f')
   belongs_to :site
   belongs_to :user_role
 

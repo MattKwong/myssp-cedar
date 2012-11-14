@@ -1,13 +1,28 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery :only => [:create, :update]
   add_breadcrumb "Home", '/'
-
+  layout 'admin_layout'
   rescue_from Timeout::Error, :with => :rescue_from_timeout
+
 
   protected
 
-  def after_sign_in_path_for(resource)
- #this overrides the default method in the devise library
+  def log_off_and_lock_out_users
+    @page_title = "Log Off and Lock Out NonAdmin Users"
+    puts "log off lock out"
+    @users = AdminUser.non_admin
+    logger.debug @users.inspect
+    @users.each do |user|
+      log_off_user(user)
+    end
+    render 'log_off_and_lock_out_users'
+  end
+
+  def log_off_user(user)
+    destroy_user_session_path(user)
+  end
+
+  def after_sign_in_path_for(resource) #this overrides the default method in the devise library
 
    program_user = ProgramUser.find_by_user_id(resource.id)
 

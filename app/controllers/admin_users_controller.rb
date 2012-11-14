@@ -15,7 +15,6 @@ class AdminUsersController < Admin::AdminUsersController
   end
 
   def create
-
     if @user.staff?
       @user.skip_confirmation!
     end
@@ -26,6 +25,5 @@ class AdminUsersController < Admin::AdminUsersController
       render :action => 'new'
     end
   end
-
 
 end
