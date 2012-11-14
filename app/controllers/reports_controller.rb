@@ -11,23 +11,15 @@ class ReportsController < ApplicationController
       format.csv { create_csv("liaisons_and_churches-#{Time.now.strftime("%Y%m%d")}.csv") }
       format.html { @title = 'Liaisons and Churches'}
     end
-    end
-
-  def scheduled_liaisons
-    @headers = get_headers_scheduled_liaisons
-    @rows = get_rows_scheduled_liaisons
-
-    respond_to do |format|
-      format.csv { create_csv("scheduled liaisons-#{Time.now.strftime("%Y%m%d")}.csv") }
-      format.html { @title = 'Scheduled Liaison'}
-    end
   end
+
+
   def scheduled_liaisons
     @headers = get_headers_scheduled_liaisons
     @rows = get_rows_scheduled_liaisons
 
     respond_to do |format|
-      format.csv { create_csv("scheduled liaisons-#{Time.now.strftime("%Y%m%d")}.csv") }
+      format.csv { create_csv("scheduled-liaisons-#{Time.now.strftime("%Y%m%d")}.csv") }
       format.html { @title = 'Scheduled Liaison'}
     end
   end
@@ -59,7 +51,6 @@ class ReportsController < ApplicationController
   end
 
   def get_rows_full_report
-
       @rows = []
       liaisons = Liaison.all
       liaisons.each do |l|
@@ -75,26 +66,6 @@ class ReportsController < ApplicationController
           @rows << row
       end
       #logger.debug @rows
-      return @rows
-  end
-
-  def get_headers_scheduled_liaisons
-
-      @headers = []
-      @headers << "Liaison Name" << "Church" << "Liaison Email"
-      #logger.debug @headers.inspect
-      return @headers
-  end
-
-  def get_rows_scheduled_liaisons
-
-      @rows = []
-      liaisons = ScheduledGroup.all
-      liaisons.each do |l|
-          row = []
-          row << l.liaison.name << l.church.name << l.liaison.email1
-          @rows << row
-      end
       return @rows
   end
 
@@ -170,7 +141,7 @@ class ReportsController < ApplicationController
     return @rows
   end
 
-  def year_to_year_report(scope = nil)
+  def missing_churches(scope = nil)
     @headers = get_yty_headers
     @rows = get_yty_rows
 
@@ -201,11 +172,41 @@ class ReportsController < ApplicationController
         row << ""
         row << group.liaison.email1
       end
-      row << ""
+    row << ""
     @rows << row
     end
+    return @rows
+  end
 
-    logger.debug @rows
+  def new_churches
+    @headers = get_new_churches_headers
+    logger.debug @headers.inspect
+    @rows = get_new_churches_rows
+
+    respond_to do |format|
+      format.csv { create_csv("new-churches-#{Time.now.strftime("%Y%m%d")}.csv") }
+    end
+  end
+
+  def get_new_churches_headers
+    @headers = []
+    @headers << "Church Name"
+    @headers << "Group Name"
+    @headers << "Group Type"
+    @headers << "2013 Total"
+    @headers << "Liaison Email"
+    return @headers
+  end
+
+  def get_new_churches_rows
+    @rows = []
+    Registration.current.each do |group|
+      unless ScheduledGroup.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id)
+        row = []
+        row << group.church.name << group.name << group.session_type.name << group.requested_total.to_i << group.liaison.email1 << ""
+        @rows << row
+      end
+    end
     return @rows
   end
 
@@ -229,5 +230,4 @@ class ReportsController < ApplicationController
         headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
       end
   end
-
 end
