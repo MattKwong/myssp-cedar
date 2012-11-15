@@ -27,14 +27,11 @@ UserRole.create(:name => 'Admin', :description => 'Admin user with full capabili
 if UserRole.find_by_name("Liaison")
   UserRole.find_by_name("Liaison").delete
 end
-
 UserRole.create(:name => 'Liaison', :description => 'Liaison user role')
 
 if UserRole.find_by_name("Staff")
   UserRole.find_by_name("Staff").delete
-
 end
-
 UserRole.create(:name => 'Staff', :description => 'Field staff, work limited to one site only')
 
 

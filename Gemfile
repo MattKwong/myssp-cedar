@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'bundler', '1.2.0'
+gem 'bundler', '1.2.1'
 gem 'rake'
 gem 'haml'
 gem "formtastic", "2.1.0"
@@ -39,7 +39,7 @@ end
 
 group :development do
   gem 'faker', '0.3.1'
-  gem 'sqlite3', :require => 'sqlite3'
+  #gem 'sqlite3', :require => 'sqlite3'
   gem 'annotate', ">=2.5.0"
 end
 
