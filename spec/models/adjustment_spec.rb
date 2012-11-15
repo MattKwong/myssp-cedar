@@ -50,5 +50,13 @@ describe Adjustment do
 
   end
 
+  #describe "hierarchy test" do
+  #  it "should belong to a scheduled group" do
+  #    item = Adjustment.new(@attr)
+  #    scheduled_group = ScheduledGroup.new( :adjustment => item )
+  #    scheduled_group.should be valid
+  #  end
+  #end
+
 end
 
