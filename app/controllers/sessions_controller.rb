@@ -12,8 +12,7 @@ class SessionsController < Devise::SessionsController
     respond_with_navigational(resource, stub_options(resource)){ render :new }
   end
 
-
-    # POST /resource/sign_in
+  # POST /resource/sign_in
   def create
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?

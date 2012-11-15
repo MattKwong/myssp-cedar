@@ -46,6 +46,7 @@ Spoic3::Application.routes.draw do
 
 
   match "ops_pages/timeout" => 'ops_pages#timeout', :as => 'timeout_error'
+  match "ops_pages/blocked_user" => 'ops_pages#blocked_user', :as => 'blocked_user'
   match "item_purchases/:program_id/index/:id" => 'item_purchases#index', :as => 'item_purchases'
   match "purchases/:id/delete" => 'purchases#destroy', :as => 'delete_purchase'
   match "food_inventory/:id/delete" => 'food_inventories#destroy', :as => 'delete_food_inventory'
@@ -69,9 +70,9 @@ Spoic3::Application.routes.draw do
   match 'registration/get_sessions_for_type_and_site', :to => 'registration#get_sessions_for_type_and_site'
   match 'registration/get_alt_sessions_for_type_site', :to => 'registration#get_alt_sessions_for_type_site'
   match 'registration/save_registration_data', :to => 'registration#save_registration_data'
-  match 'registration/payment_gateway', :to => 'registration#process_cc_payment'
+  match 'registration/payment_gateway', :to => 'registration#process_cc_dep_payment'
   match 'registration/final_confirmation', :to => 'registration#final_confirmation'
-  match 'registration/process_cc_payment', :to => 'registration#process_cc_payment'
+  match 'registration/process_cc_dep_payment', :to => 'registration#process_cc_dep_payment'
   match 'registration/pay_by_check', :to => 'registration#pay_by_check'
   match 'registration/request_matrix', :to => 'registration#request_matrix'
 
@@ -172,6 +173,8 @@ Spoic3::Application.routes.draw do
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_csv'
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_html'
   match "reports/participation_summary" => 'reports#participation_summary', :as => 'part_sum_csv'
+  match "reports/missing_churches" => 'reports#missing_churches', :as => 'missing_churches_csv'
+  match "reports/new_churches" => 'reports#new_churches', :as => 'new_churches_csv'
 
   match "reports/purchases_with_unaccounted" => 'purchases#show_all_unaccounted', :as => 'unaccounted_report'
   match "staff_reports/spending_by_site" => 'staff_reports#spending_by_site', :as => 'spending_by_site_report'
@@ -189,6 +192,10 @@ Spoic3::Application.routes.draw do
   match "registration/update", :to => 'registration#update'
   match "registration/delete", :to => 'registration#delete'
   match 'RegistrationController', :to => 'pages#groups'
+
+  match "application/log_off_and_lock_out_users", :to => "application#lock_out_users", :as => 'lock_out'
+  match "application/unlock_users", :to => "application#unlock_users", :as => 'unlock'
+  match "application/update_flags", :to => "application#update_flags", :as => 'update_flags'
 
   match '/admin', :to => 'admin#index'
   match 'ops_pages/food', :to => 'ops_pages#food', :as => 'food'

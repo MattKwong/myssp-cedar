@@ -32,6 +32,7 @@ class ScheduledGroup < ActiveRecord::Base
   default_scope :include => :church, :order => 'churches.name'
   scope :active, where('current_total > ?', 0)
   scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
+  scope :not_active_program, where('scheduled_groups.created_at < ?', '2012-09-01'.to_datetime)
   has_many :payments
   has_many :change_histories
   has_many :adjustments

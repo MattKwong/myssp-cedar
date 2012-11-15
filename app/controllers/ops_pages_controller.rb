@@ -12,6 +12,11 @@ class OpsPagesController < ApplicationController
     #@exception = exception
   end
 
+  def blocked_user
+    puts "blocked user"
+    @page_title = "The System is Temporarily Unavailable"
+  end
+
   def construction
     @page_title = "SSP Construction Cost Tracking"
   end

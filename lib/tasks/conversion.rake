@@ -29,3 +29,7 @@ task :fix_quantities => :environment do
     #i.save
   end
 end
+
+task :test_it => :environment do
+  puts "Good morning, world"
+end

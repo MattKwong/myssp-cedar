@@ -32,18 +32,17 @@
                             <td><%= @schedule[:site_names][i] %></td>
                             <% count = @schedule[:period_count].to_s.to_i %>
                             <% for j in 0..count - 1 do %>
-                                <% if params[:reg_or_sched] == "registered" then %>
-                                     <% if @schedule[:registration_matrix][i][j] > 0 then %>
-                                      <td>
+                               <% if params[:reg_or_sched] == "registered" then %>
+                                  <td>
+                                    <% if @schedule[:registration_matrix][i][j] =='-' || @schedule[:registration_matrix][i][j] == 0 then %>
+                                        <%= @schedule[:registration_matrix][i][j].to_s %>
+                                    <% else %>
                                         <%= link_to (@schedule[:registration_matrix][i][j]).to_s,
-                                                    reg_program_session_path(:id  => @schedule[:session_id_matrix][i][j]),
-                                                    :title => "Click for details."  %>
-                                      </td>
-
-                                          <% else %>
-                                            <td><%= @schedule[:registration_matrix][i][j].to_s %></td>
+                                                  reg_program_session_path(:id  => @schedule[:session_id_matrix][i][j]),
+                                                  :title => "Click for details."  %>
                                     <% end %>
-                                <% else %>
+                                  </td>
+                               <% else %>
                                      <% if @schedule[:scheduled_matrix][i][j] > 0 then %>
                                           <td>
                                             <%= link_to (@schedule[:scheduled_matrix][i][j]).to_s,
@@ -64,9 +63,9 @@
                         </tr>
                         <% end %>
                         <tr>
-                             <% count = @schedule[:period_count].to_s.to_i %>
-                             <td><%= @schedule[:site_names][s_count] %></td>
-                             <% for j in 0..count do %>
+                            <% count = @schedule[:period_count].to_s.to_i %>
+                            <td><%= @schedule[:site_names][s_count] %></td>
+                            <% for j in 0..count do %>
                                 <% if params[:reg_or_sched] == "registered" then %>
                                     <td><%= (@schedule[:registration_matrix][@schedule[:site_count]][j]).to_s %></td>
                                 <% else %>

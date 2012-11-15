@@ -47,7 +47,8 @@ class ReportsController < ApplicationController
       end
       logger.debug @rows
       return @rows
-   end
+  end
+
 
 private
   def trim(s)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003172443) do
+ActiveRecord::Schema.define(:version => 20121115172908) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20121003172443) do
     t.string   "username"
     t.string   "phone"
     t.datetime "deleted_at"
+    t.boolean  "blocked"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -565,7 +566,6 @@ ActiveRecord::Schema.define(:version => 20121003172443) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.string   "comments"
     t.integer  "registration_id"
     t.integer  "scheduled_priority"
     t.integer  "liaison_id"
@@ -573,6 +573,7 @@ ActiveRecord::Schema.define(:version => 20121003172443) do
     t.integer  "group_type_id"
     t.integer  "second_payment_total"
     t.date     "second_payment_date"
+    t.text     "comments"
   end
 
   create_table "scheduled_histories", :force => true do |t|

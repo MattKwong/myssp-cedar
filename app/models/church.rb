@@ -34,6 +34,7 @@ class Church < ActiveRecord::Base
   scope :inactive, where(:active => 'f')
   scope :unregistered, where(:registered => 'f')
   scope :active, where(:active => 't')
+
   scope :registered, where(:registered => 't')
 
   attr_accessible :name, :active, :address1, :address2, :city, :email1, :fax,

@@ -7,7 +7,7 @@
      used as your login, please contact our office if you need to start using a new email. Also, to change liaisons
      entirely for your church, contact the office.</p>
       <div class="panel_contents" >
-        <%= form_for(@liaison) do |r| %>
+        <%= form_for @liaison, :url => { :action => "update" } do |r| %>
         <table border="0" cellspacing="0" cellpadding="0" >
           <tr>
             <td><%= r.label "Liaison Name" %></td>

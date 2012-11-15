@@ -1,13 +1,62 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery :only => [:create, :update]
+  #load_and_authorize_resource
   add_breadcrumb "Home", '/'
-
+  layout 'admin_layout'
   rescue_from Timeout::Error, :with => :rescue_from_timeout
+  before_filter :check_for_non_admin_lock_out , :except => [:create, :destroy]
+
+  def lock_out_users
+    AdminUser.non_admin.each do |user|
+      user.update_attributes(:blocked => true)
+    end
+    flash[:notice] = "Non-admin users have been blocked."
+    redirect_to :root
+  end
+
+  def unlock_users
+    AdminUser.non_admin.each do |user|
+      user.update_attributes(:blocked => false)
+    end
+    flash[:notice] = "Non-admin users have been unblocked."
+    redirect_to :root
+  end
+
+  def update_flags
+    Church.all.each do |church|
+      church.update_attribute(:registered, false)
+    end
+
+    Liaison.all.each do |liaison|
+      liaison.update_attributes(:registered => false, :scheduled => false)
+    end
+
+    Registration.current_unscheduled.each do |registration|
+      church = Church.find(registration.church_id)
+      church.update_attribute(:registered, true)
+      liaison = Liaison.find(registration.liaison_id)
+      liaison.update_attribute(:registered, true)
+    end
+
+    flash[:notice] = "Church and liaison scheduled and registered flags have been updated."
+    redirect_to :root
+  end
 
   protected
 
-  def after_sign_in_path_for(resource)
- #this overrides the default method in the devise library
+  def check_for_non_admin_lock_out
+    if signed_in?
+      if current_admin_user.liaison? || current_admin_user.field_staff?
+        if current_admin_user.blocked?
+          @page_title = "System Temporarily Unavailable"
+          flash[:notice] = "You are unable to use the MySSP system at this time."
+          render blocked_user_path
+        end
+      end
+    end
+  end
+
+  def after_sign_in_path_for(resource) #this overrides the default method in the devise library
 
    program_user = ProgramUser.find_by_user_id(resource.id)
 

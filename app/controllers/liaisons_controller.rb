@@ -7,8 +7,6 @@ class LiaisonsController < ApplicationController
   end
 
   def update
-    #logger.debug @liaison.inspect
-
     if @liaison.update_attributes(params[:liaison])
       flash[:success] = "Successful update of liaison information"
       redirect_to myssp_path(@liaison.id)

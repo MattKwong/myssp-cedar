@@ -45,6 +45,7 @@ class Registration < ActiveRecord::Base
   scope :junior_high_unscheduled, where(:group_type_id => 3)
   scope :other_unscheduled, where((:group_type_id == 1) || (:group_type_id == 4))
   scope :current, where('created_at > ?', '2012-09-01'.to_datetime)
+  scope :not_current, where('created_at < ?', '2012-09-01'.to_datetime)
 
   attr_accessible :name,:comments, :liaison_id, :request1, :request2, :request3,
                   :request4, :request5, :request6,:request7, :request8, :request9,
@@ -63,17 +64,6 @@ class Registration < ActiveRecord::Base
    end
   # The next four methods are for compatibility with the ScheduleGroup model - to allow code sharing even though
   # the attributes are named differently
-  def current_youth
-    requested_youth
-  end
-
-  def current_counselors
-    requested_counselors
-  end
-
-  def current_total
-    requested_total
-  end
 
   def session
     Session.find(request1)
