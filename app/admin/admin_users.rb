@@ -29,6 +29,7 @@ ActiveAdmin.register AdminUser do
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
+    column :blocked
     column "Actions" do |admin_user|
       if admin_user.active?
         link_to 'Inactivate', soft_delete_admin_user_path(admin_user)
@@ -49,6 +50,7 @@ ActiveAdmin.register AdminUser do
       f.input :user_role
       f.input :username, :hint => "Assign name to all site staff - no spaces"
       f.input :site
+      f.input :blocked
     end
     f.buttons
     end

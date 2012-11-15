@@ -45,7 +45,8 @@ class AdminUser < ActiveRecord::Base
 
 
   attr_accessible :email, :name, :user_role_id, :first_name, :last_name, :site_id, :deleted_at,
-                  :liaison_id, :password, :password_confirmation, :remember_me, :admin, :username, :phone
+                  :liaison_id, :password, :password_confirmation, :remember_me, :admin, :username,
+                  :phone, :blocked
 
   before_validation do
     unless self.phone.nil?

@@ -6,10 +6,20 @@ class ApplicationController < ActionController::Base
   rescue_from Timeout::Error, :with => :rescue_from_timeout
   before_filter :check_for_non_admin_lock_out , :except => [:create, :destroy]
 
-  def log_off_and_lock_out_users
-    @page_title = "Log Off and Lock Out NonAdmin Users"
-#Update a flag somewhere
-    render 'log_off_and_lock_out_users'
+  def lock_out_users
+    AdminUser.non_admin.each do |user|
+      user.update_attributes(:blocked => true)
+    end
+    flash[:notice] = "Non-admin users have been blocked."
+    redirect_to :root
+  end
+
+  def unlock_users
+    AdminUser.non_admin.each do |user|
+      user.update_attributes(:blocked => false)
+    end
+    flash[:notice] = "Non-admin users have been unblocked."
+    redirect_to :root
   end
 
   protected
@@ -17,9 +27,11 @@ class ApplicationController < ActionController::Base
   def check_for_non_admin_lock_out
     if signed_in?
       if current_admin_user.liaison? || current_admin_user.field_staff?
-        @page_title = "System Temporarily Unavailable"
-        flash[:notice] = "You are unable to use the MySSP system at this time."
-        render blocked_user_path
+        if current_admin_user.blocked?
+          @page_title = "System Temporarily Unavailable"
+          flash[:notice] = "You are unable to use the MySSP system at this time."
+          render blocked_user_path
+        end
       end
     end
   end

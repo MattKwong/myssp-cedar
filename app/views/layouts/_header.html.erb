@@ -18,8 +18,10 @@
                           registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'summer_domestic')%></li>
                   <li><%= link_to "Reset user password",
                           new_admin_user_password_path %></li>
-                  <li><%= link_to "Log off and lock out users",
+                  <li><%= link_to "Lock out non-admin users",
                                   lock_out_path %></li>
+                  <li><%= link_to "Unblock non-admin users",
+                                  unlock_path %></li>
                 </ul>
              </li>
              <li class="has_nested" ><a href="#">Reports</a>
