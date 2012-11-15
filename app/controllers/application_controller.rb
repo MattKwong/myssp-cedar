@@ -22,6 +22,26 @@ class ApplicationController < ActionController::Base
     redirect_to :root
   end
 
+  def update_flags
+    Church.all.each do |church|
+      church.update_attribute(:registered, false)
+    end
+
+    Liaison.all.each do |liaison|
+      liaison.update_attributes(:registered => false, :scheduled => false)
+    end
+
+    Registration.current_unscheduled.each do |registration|
+      church = Church.find(registration.church_id)
+      church.update_attribute(:registered, true)
+      liaison = Liaison.find(registration.liaison_id)
+      liaison.update_attribute(:registered, true)
+    end
+
+    flash[:notice] = "Church and liaison scheduled and registered flags have been updated."
+    redirect_to :root
+  end
+
   protected
 
   def check_for_non_admin_lock_out

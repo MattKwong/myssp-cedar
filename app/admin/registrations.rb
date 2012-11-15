@@ -92,6 +92,13 @@ ActiveAdmin.register Registration do
     f.buttons
   end
 
+  filter :request1, :as => :select, :collection => proc { Session.active.all }
+  filter :request2, :as => :select, :collection => proc { Session.active.all }
+  filter :request3, :as => :select, :collection => proc { Session.active.all }
+  filter :name
+  filter :church
+  filter :liaison
+
   csv do
     column :name
     column :email1 do |r|

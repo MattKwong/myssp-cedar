@@ -33,6 +33,8 @@ class ScheduledGroupsController < ApplicationController
                               :group_type => SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).id)
       @scheduled_group.update_attribute('roster_id', roster.id)
       @registration.update_attribute('scheduled', true)
+      liaison = Liaison.find(@registration.liaison_id)
+      liaison.update_attribute(:scheduled, true)
       payments = Payment.find_all_by_registration_id(@registration.id)
       payments.each do |p|
         p.update_attribute('scheduled_group_id', @scheduled_group.id)

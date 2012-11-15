@@ -195,6 +195,7 @@ Spoic3::Application.routes.draw do
 
   match "application/log_off_and_lock_out_users", :to => "application#lock_out_users", :as => 'lock_out'
   match "application/unlock_users", :to => "application#unlock_users", :as => 'unlock'
+  match "application/update_flags", :to => "application#update_flags", :as => 'update_flags'
 
   match '/admin', :to => 'admin#index'
   match 'ops_pages/food', :to => 'ops_pages#food', :as => 'food'

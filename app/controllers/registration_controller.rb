@@ -272,6 +272,9 @@ check amount listed in the Amount Due column. This can be paid either by check o
     liaison = Liaison.find(@registration.liaison_id)
     liaison.registered = true
     liaison.save
+    church = Church.find(@registration.liaison_id)
+    church.registered = true
+    church.save
   end
 
   def pay_by_check
