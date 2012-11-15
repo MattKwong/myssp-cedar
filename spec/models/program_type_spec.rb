@@ -20,10 +20,6 @@ describe ProgramType do
   #validates :name, :description, :position, :presence => true
   #validates :name, :uniqueness => true
 
-  it "should create a new instance with valid attributes" do
-    item = ProgramType.create!(@attr)
-    item.should be_valid
-  end
 
   it "should create a new instance with valid attributes" do
     item = ProgramType.create!(@attr)

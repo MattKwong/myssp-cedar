@@ -16,23 +16,36 @@ describe LiaisonType do
     @attr = { :name => "Generic Type", :description => "Liaison Type Description"}
   end
 
+  #validates :name, :presence => true, :uniqueness => true
+  #validates :description, :presence => true
+
   it "should create a new instance with valid attributes" do
-    LiaisonType.create!(@attr)
+    item = LiaisonType.create!(@attr)
+    item.should be_valid
   end
 
-  it "name should not be blank" do
-    no_name = LiaisonType.new(@attr.merge(:name => ""))
-    no_name.should_not be_valid
+  describe "name tests" do
+
+    it "name should not be blank" do
+      no_name = LiaisonType.new(@attr.merge(:name => ""))
+      no_name.should_not be_valid
+    end
+
+    it "name should be unique" do
+      church1 = LiaisonType.create!(@attr.merge(:name => "John Doe"))
+      church2 = LiaisonType.new(@attr.merge(:name => "John Doe"))
+      church2.should_not be_valid
+    end
+
   end
 
-  it "name should be unique" do
-    church1 = LiaisonType.create!(@attr)
-    church2 = LiaisonType.new(@attr)
-    church2.should_not be_valid
+  describe "description tests" do
+
+    it "description should not be blank" do
+      church2 = LiaisonType.new(@attr.merge(:description => ""))
+      church2.should_not be_valid
+    end
+
   end
 
-  it "description should not be blank" do
-    church2 = LiaisonType.new(@attr.merge(:description => ""))
-    church2.should_not be_valid
-  end
 end
