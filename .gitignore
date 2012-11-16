@@ -1,4 +1,4 @@
-.idea/
+.idea/misc.xml
 .idea/*
 .bundle
 db/*.sqlite3
