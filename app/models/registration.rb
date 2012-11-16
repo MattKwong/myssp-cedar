@@ -65,6 +65,11 @@ class Registration < ActiveRecord::Base
   # The next four methods are for compatibility with the ScheduleGroup model - to allow code sharing even though
   # the attributes are named differently
 
+  def set_scheduled_flag(value)
+    self.scheduled = value
+    self.save!
+  end
+
   def session
     Session.find(request1)
   end

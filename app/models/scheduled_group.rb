@@ -12,7 +12,7 @@
 #  created_at           :datetime
 #  updated_at           :datetime
 #  name                 :string(255)
-#  comments             :string(255)
+#  comments             :text
 #  registration_id      :integer
 #  scheduled_priority   :integer
 #  liaison_id           :integer
@@ -53,6 +53,39 @@ class ScheduledGroup < ActiveRecord::Base
                             :only_integer => true
   validates_numericality_of :current_counselors, :greater_than_or_equal_to => 0,
                             :only_integer => true
+
+  def self.schedule(group_id, session_id, choice)
+    group = ScheduledGroup.new
+    reg = Registration.find(group_id)
+    group.current_youth = reg.requested_youth
+    group.current_counselors = reg.requested_counselors
+    group.current_total = reg.requested_total
+    group.session_id = session_id
+    group.church_id = reg.church_id
+    group.name = reg.name
+    group.comments = reg.comments
+    group.registration_id = reg.id
+    group.scheduled_priority = choice
+    group.liaison_id = reg.liaison_id
+    group.group_type_id = reg.group_type_id
+    group.second_payment_total = 0
+    group.save!
+    roster = Roster.new(:group_id => group.id, :group_type => group.group_type_id)
+    roster.save!
+    group.update_attribute(:roster_id, roster.id)
+    reg.set_scheduled_flag(true)
+
+  #update payments
+    Payment.find_all_by_registration_id(reg.id).each do |payment|
+      payment.update_attribute(:scheduled_group_id, group.id)
+    end
+    return group
+  end
+
+  def move(session_id, choice)
+    self.update_attributes(:session_id => session_id, :scheduled_priority => choice)
+  end
+
   def late_payment_penalty
     0.1
   end
@@ -157,9 +190,9 @@ class ScheduledGroup < ActiveRecord::Base
     else
       0
     end
-
   end
-  def final_pay_paid #the amount of the deposit_amount that has actually been paid
+
+    def final_pay_paid #the amount of the deposit_amount that has actually been paid
     if second_pay_outstanding > 0 #no money left for final payments
       0
     else

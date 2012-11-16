@@ -33,6 +33,19 @@ class Session < ActiveRecord::Base
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
+  def self.optimal_set(session_id)
+    #Returns the array of ids of registrations from a session that constitute the optimal groups to put in this session
+    #
+    requests = Registration.find_all_by_request1(session_id)
+    requests.sort_by!(&:requested_total).reverse
+    puts requests
+    target = 65
+    distance = 65
+    current_total = 0
+    number_of_requests = requests.count
+    requests.each { |r| puts r.requested_total }
+  end
+
   def session_type_junior_high?
     if session_type.name == 'Summer Junior High'
       true
