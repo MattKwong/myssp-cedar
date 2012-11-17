@@ -79,6 +79,7 @@ class ScheduledGroup < ActiveRecord::Base
     Payment.find_all_by_registration_id(reg.id).each do |payment|
       payment.update_attribute(:scheduled_group_id, group.id)
     end
+    puts "Scheduling of #{group.name} in #{group.session.name}, choice #{choice} completed."
     return group
   end
 

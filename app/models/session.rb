@@ -21,6 +21,7 @@ class Session < ActiveRecord::Base
   belongs_to :payment_schedule
   belongs_to :program
   has_many :scheduled_groups
+  has_many :registrations
   accepts_nested_attributes_for :scheduled_groups
 
   default_scope includes(:period).order('periods.start_date ASC')
@@ -33,17 +34,158 @@ class Session < ActiveRecord::Base
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
-  def self.optimal_set(session_id)
+  def rollback_requests
+    ScheduledGroup.find_all_by_session_id(id).each do |group|
+      Registration.find(group.registration_id).update_attribute(:scheduled, false)
+      group.destroy
+      puts "Rollback of group #{group.name} done"
+    end
+  end
+
+  def schedule_requests(target, max)
+    #Finds the optimal set of requests for this session and schedules them.
+    #Requests that cannot be scheduled are scheduled in the first on their request list which has room
+    groups_to_schedule = optimal_set(target, max)
+    groups_to_schedule.each do |group_id|
+      ScheduledGroup.schedule(group_id, id, 1)
+    end
+
+    #schedule remaining groups
+    remaining_requests = Registration.unscheduled.find_all_by_request1(id)
+    remaining_requests.each do |reg|
+      puts reg.id
+      if reg.request2.nil?
+        puts "Unable to schedule group #{reg.name}: request 2"
+      else
+        if (max - Session.find(reg.request2).scheduled_total) <= reg.requested_total
+          ScheduledGroup.schedule(reg.id, reg.request2, 2)
+        else
+          if reg.request3.nil?
+            puts "Unable to schedule group #{reg.name}: request 3"
+          else
+            if (max - Session.find(reg.request3).scheduled_total) <= reg.requested_total
+              ScheduledGroup.schedule(reg.id, reg.request3, 3)
+            else
+              if reg.request4.nil?
+                puts "Unable to schedule group #{reg.name}: request 4"
+              else
+                if (max - Session.find(reg.request4).scheduled_total) <= reg.requested_total
+                  ScheduledGroup.schedule(reg.id, reg.request4, 4)
+                else
+                  if reg.request5.nil?
+                    puts "Unable to schedule group #{reg.name}: request 5"
+                  else
+                    if (max - Session.find(reg.request5).scheduled_total) <= reg.requested_total
+                      ScheduledGroup.schedule(reg.id, reg.request5, 5)
+                    else
+                      if reg.request6.nil?
+                        puts "Unable to schedule group #{reg.name}: request 6"
+                      else
+                        if (max - Session.find(reg.request6).scheduled_total) <= reg.requested_total
+                          ScheduledGroup.schedule(reg.id, reg.request6, 6)
+                        else
+                          if reg.request7.nil?
+                            puts "Unable to schedule group #{reg.name}: request 7"
+                          else
+                            if (max - Session.find(reg.request7).scheduled_total) <= reg.requested_total
+                              ScheduledGroup.schedule(reg.id, reg.request7, 7)
+                            else
+                              if reg.request8.nil?
+                                puts "Unable to schedule group #{reg.name}: request 8"
+                              else
+                                if (max - Session.find(reg.request8).scheduled_total) <= reg.requested_total
+                                  ScheduledGroup.schedule(reg.id, reg.request8, 8)
+                                else
+                                  if reg.request9.nil?
+                                    puts "Unable to schedule group #{reg.name}: request 9"
+                                  else
+                                    if (max - Session.find(reg.request9).scheduled_total) <= reg.requested_total
+                                      ScheduledGroup.schedule(reg.id, reg.request9, 9)
+                                    else
+                                      if reg.request10.nil?
+                                        puts "Unable to schedule group #{reg.name}: request 10"
+                                      else
+                                        if (max - Session.find(reg.request10).scheduled_total) <= reg.requested_total
+                                          ScheduledGroup.schedule(reg.id, reg.request10, 10)
+                                        else
+                                          puts "Unable to scheduled group #{reg.name} to 10 tries."
+                                        end
+                                      end
+                                    end
+                                  end
+                                end
+                              end
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def optimal_set(target, max)
     #Returns the array of ids of registrations from a session that constitute the optimal groups to put in this session
-    #
-    requests = Registration.find_all_by_request1(session_id)
-    requests.sort_by!(&:requested_total).reverse
-    puts requests
-    target = 65
-    distance = 65
-    current_total = 0
-    number_of_requests = requests.count
-    requests.each { |r| puts r.requested_total }
+    puts "in optimal_set"
+    requests = Registration.current_unscheduled.find_all_by_request1(id).map {|a| a.id}
+    session_sets = create_combo_set(requests)
+    optimal = find_optimal(session_sets, target - scheduled_total, max - scheduled_total)
+    puts session_sets[optimal][:session_list]
+    return session_sets[optimal][:session_list]
+  end
+
+  def create_combo_set(requests)
+    #accepts an array of n session ids and returns an array of arrays of all possible combinations of those ids
+    combos = Array.new
+    if requests.length <= 2
+      combos << [requests.first] << [requests.second] << [requests.first, requests.second]
+      return combos
+    else
+      count = requests.length
+      subset_requests = requests.first(count - 1)
+      session_sets = create_combo_set(subset_requests)
+      #add the latest element - requests[count - 1] - to each of the elements in session_sets
+      new_sets = session_sets
+      new_sets.each do |set|
+        new_set = set << requests[count - 1]
+        session_sets << new_set
+      end
+      session_sets << [requests[count - 1]]
+      return session_sets
+    end
+  end
+
+  def find_total(list_of_requests)
+    total = 0
+    list_of_requests.each { |req| total += Registration.find(req).requested_total}
+    total
+  end
+
+  def find_optimal(request_sets, target, max)
+    #This routine accepts an array of hashes containing a total session value.
+    #It returns the index of the array element that is closest to target
+    #puts target, max
+    distance = target
+    best_set = -1
+    index = 0
+    request_sets.each do |set|
+      unless set[:total] > max
+        if (target - set[:total]) < distance
+          best_set = index
+          distance = target - set[:total]
+          #puts distance, best_set
+        end
+      end
+      index = index + 1
+      #puts index, best_set, set[:total], distance
+    end
+    return best_set
   end
 
   def session_type_junior_high?
@@ -66,6 +208,12 @@ class Session < ActiveRecord::Base
 
   def scheduled_total
     scheduled_adults + scheduled_youth
+  end
+
+  def registered_total
+    #Returns the number of first choice spots requested by unscheduled groups
+    requests = Registration.current_unscheduled.find_all_by_request1(id)
+    total = (requests.map &:requested_total).sum
   end
 
   def session_food_purchased

@@ -39,7 +39,7 @@ class Registration < ActiveRecord::Base
   accepts_nested_attributes_for :session_type
 
   scope :scheduled, where(:scheduled => 't')
-  scope :unscheduled, where(:scheduled => 'f')
+  scope :unscheduled, where('scheduled <> ?', 't')
   scope :current_unscheduled, where(:scheduled => 'f').where('created_at > ?', '2012-09-01'.to_datetime)
   scope :high_school_unscheduled, where((:group_type_id == 2) && (:scheduled == 'f'))
   scope :junior_high_unscheduled, where(:group_type_id => 3)
