@@ -1,0 +1,54 @@
+<div id="active_admin_content" class="without_sidebar">
+  <div id="main_content_wrapper">
+    <div id="main_content">
+      <div class="panel panel_contents">
+        <div class="panel_contents">
+            <div class="attributes_table" >
+                <%= form_tag  '/application/run_schedule'  do %>
+                  <table>
+                    <tr>
+                      <td><h4>Select the type of groups you want to schedule:</h4></td>
+                      <td><%= select_tag "group_type", "<option>Senior High</option><option>Junior High</option>".html_safe %></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><h4>Select the scheduling method you want to use:</h4></td>
+                      <td><%= select_tag "method", "<option>Largest First</option><option>Smallest First</option>".html_safe  %></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><h4>Enter session target and maximum values:</h4></td>
+                      <td>
+                        <%= label_tag "Target" %>
+                        <%= number_field_tag 'target' %>
+                      </td>
+                      <td>
+                        <%= label_tag "Maximum" %>
+                        <%= number_field_tag 'max' %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><%= submit_tag("Run Scheduling Algorithm") %></td>
+                      <td></td>
+                    </tr>
+
+                  <br>
+                  </table>
+                  <br>
+                  <h3>Other Actions</h3>
+                    <br>
+                    <%= link_to "Rollback Senior High Schedule", rollback_senior_schedule_path %>
+                    <br>
+                    <%= link_to "Rollback Junior High Schedule", rollback_junior_schedule_path %>
+                    <br>
+                    <%= link_to "Update Request Values", update_requests_path %>
+
+                <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

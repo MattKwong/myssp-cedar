@@ -6,6 +6,62 @@ class ApplicationController < ActionController::Base
   rescue_from Timeout::Error, :with => :rescue_from_timeout
   before_filter :check_for_non_admin_lock_out , :except => [:create, :destroy]
 
+  def auto_schedule
+    @page_title = "Auto Schedule Groups"
+    #@schedule_object = {:group_type => '2', :schedule_method => 'largest_first', :target => 65, :max => 69}
+    render 'auto_schedule'
+  end
+
+  def run_schedule
+    @page_title = "Schedule Results"
+    @method = params[:method]
+    @group_type = params[:group_type]
+    @target = params[:target].to_i
+    @max = params[:max].to_i
+    if params[:target] == '' || params[:max] == ''
+      flash[:error] = "You must enter target and max values."
+      @page_title = "Auto Schedule Groups"
+      render 'auto_schedule'
+    else
+      if params[:method] == "Largest First"
+        if params[:group_type] == "Senior High"
+          SessionType.senior_high.first.schedule_largest_first(params[:target].to_i, params[:max].to_i)
+          @results = SessionType.senior_high.first.report_scheduling_results(@target)
+        else
+          SessionType.junior_high.first.schedule_largest_first(params[:target].to_i, params[:max].to_i)
+          @results = SessionType.junior_high.first.report_scheduling_results(@target)
+        end
+      else
+        if params[:group_type] == "Senior High"
+          SessionType.senior_high.first.schedule_smallest_first(params[:target].to_i, params[:max].to_i)
+          @results = SessionType.senior_high.first.report_scheduling_results(@target)
+        else
+          SessionType.junior_high.first.schedule_smallest_first(params[:target].to_i, params[:max].to_i)
+          @results = SessionType.junior_high.first.report_scheduling_results(@target)
+        end
+      end
+    end
+  end
+
+  def rollback_senior_schedule
+    SessionType.senior_high.first.rollback
+    flash[:notice] = "All senior high groups have been unscheduled."
+    redirect_to auto_schedule_path
+  end
+
+  def rollback_junior_schedule
+    SessionType.junior_high.first.rollback
+    flash[:notice] = "All junior high groups have been unscheduled."
+    redirect_to auto_schedule_path
+  end
+
+  def update_requests
+    SessionType.junior_high.first.update_session_requests
+    SessionType.senior_high.first.update_session_requests
+    flash[:notice] = "Session request values have been updated."
+    redirect_to auto_schedule_path
+  end
+
   def lock_out_users
     AdminUser.non_admin.each do |user|
       user.update_attributes(:blocked => true)

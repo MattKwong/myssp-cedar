@@ -61,7 +61,13 @@ Spoic3::Application.routes.draw do
   match 'programs/:id/get_sessions_info', :to => 'programs#get_sessions_items'
   match 'programs/:id/get_staff_info', :to => 'programs#get_staff_items'
 
-#
+#Auto scheduling routes
+  match 'application/auto_schedule', :to => 'application#auto_schedule', :as => 'auto_schedule'
+  match 'application/run_schedule', :to => 'application#run_schedule', :as => 'run_schedule'
+  match 'application/rollback_junior_schedule', :to => 'application#rollback_junior_schedule', :as => 'rollback_junior_schedule'
+  match 'application/rollback_senior_schedule', :to => 'application#rollback_senior_schedule', :as => 'rollback_senior_schedule'
+  match 'application/update_requests', :to => 'application#update_requests', :as => 'update_requests'
+
 
 #Routes for registration jquery calls
   match 'registration/get_limit_info', :to => 'registration#get_limit_info'
