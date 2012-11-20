@@ -62,6 +62,11 @@ class ApplicationController < ActionController::Base
     redirect_to auto_schedule_path
   end
 
+  def report_results
+    @jh_results = SessionType.junior_high.first.report_scheduling_results
+    @sh_results = SessionType.senior_high.first.report_scheduling_results
+  end
+
   def lock_out_users
     AdminUser.non_admin.each do |user|
       user.update_attributes(:blocked => true)

@@ -33,7 +33,7 @@ class ScheduledGroup < ActiveRecord::Base
   scope :active, where('current_total > ?', 0)
   scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
   scope :not_active_program, where('scheduled_groups.created_at < ?', '2012-09-01'.to_datetime)
-  scope :high_school, where(:group_type_id == 2)
+  scope :high_school, where(:group_type_id => 2)
   scope :junior_high, where(:group_type_id => 3)
 
   has_many :payments

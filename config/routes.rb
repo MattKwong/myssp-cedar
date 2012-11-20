@@ -67,7 +67,7 @@ Spoic3::Application.routes.draw do
   match 'application/rollback_junior_schedule', :to => 'application#rollback_junior_schedule', :as => 'rollback_junior_schedule'
   match 'application/rollback_senior_schedule', :to => 'application#rollback_senior_schedule', :as => 'rollback_senior_schedule'
   match 'application/update_requests', :to => 'application#update_requests', :as => 'update_requests'
-
+  match 'application/report_results', :to => 'application#report_results', :as => 'report_results'
 
 #Routes for registration jquery calls
   match 'registration/get_limit_info', :to => 'registration#get_limit_info'
