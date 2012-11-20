@@ -22,7 +22,7 @@ ActiveAdmin.register ScheduledGroup do
           link_to scheduled_group.session.period, admin_session_path(period) end }
        row("Start Date") { scheduled_group.session.period.start_date }
        row("End Date") { scheduled_group.session.period.end_date }
-       row("Priority") { scheduled_group.scheduled_choice}
+       row("Priority") { scheduled_group.scheduled_priority}
        row("2nd Payment Count") { scheduled_group.second_payment_total }
        row("2nd Payment Date") { scheduled_group.second_payment_date }
      end
