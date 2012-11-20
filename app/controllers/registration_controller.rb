@@ -419,7 +419,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
         @sched_total = @sched_total + @scheduled_matrix[i][j]
       end
       @registration_matrix[@site_names.size][j] = @reg_total
-      @scheduled_matrix[@site_names.size][i] = @sched_total
+      @scheduled_matrix[@site_names.size][j] = @sched_total
       @reg_total = @sched_total = 0
     end
     #Grand total

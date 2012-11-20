@@ -56,6 +56,19 @@ class SessionType < ActiveRecord::Base
     end
   end
 
+  def send_confirmation_emails
+    sessions = Session.active.find_all_by_session_type_id(id)
+    number = 0
+    sessions.each do |session|
+      groups = ScheduledGroup.find_all_by_session_id(session.id)
+      groups.each do |group|
+        group.send_confirmation_email
+        number += 1
+      end
+    end
+    number
+  end
+
   def report_scheduling_results(target = nil)
     results = Array.new
     if self.senior_high?

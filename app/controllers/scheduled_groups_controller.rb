@@ -82,7 +82,7 @@ class ScheduledGroupsController < ApplicationController
       when 'Print This Page'
 
       when 'Send Confirmation Email'
-        UserMailer.schedule_confirmation(@scheduled_group, params).deliver
+        UserMailer.schedule_confirmation(@scheduled_group).deliver
         flash[:notice] = "Confirmation email has been sent for group #{@scheduled_group.name}."
     end
     redirect_to admin_registrations_path

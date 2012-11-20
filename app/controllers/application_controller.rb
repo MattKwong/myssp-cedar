@@ -62,6 +62,15 @@ class ApplicationController < ActionController::Base
     redirect_to auto_schedule_path
   end
 
+  def send_emails
+    number = SessionType.junior_high.first.send_confirmation_emails
+    flash[:notice] = "#{number} schedule confirmation emails have been sent to Junior High groups."
+
+    number = SessionType.senior_high.first.send_confirmation_emails
+    flash[:notice] += "  #{number} schedule confirmation emails have been sent to Senior High groups."
+    redirect_to auto_schedule_path
+  end
+
   def report_results
     @jh_results = SessionType.junior_high.first.report_scheduling_results
     @sh_results = SessionType.senior_high.first.report_scheduling_results

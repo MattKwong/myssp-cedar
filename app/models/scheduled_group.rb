@@ -86,6 +86,10 @@ class ScheduledGroup < ActiveRecord::Base
     return group
   end
 
+  def send_confirmation_email
+    UserMailer.schedule_confirmation(self).deliver
+  end
+
   def move(session_id, choice)
     self.update_attributes(:session_id => session_id, :scheduled_priority => choice)
   end
