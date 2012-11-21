@@ -31,7 +31,9 @@ class PaymentController < ApplicationController
 
   def create #payments for groups that are already scheduled
     if params[:payment_method] == 'Credit Card'
-      process_cc_scheduled_payment
+      process_cc_scheduled_payment(params[:group_id], params[:cc_payment_amount], params[:cc_to_be_charged],
+                                   params[:cc_processing_charge], params[:token], params[:payment_comments],
+                                   params[:group_status])
     else
       process_cash_check_payment(params[:payment])
     end
@@ -83,12 +85,12 @@ class PaymentController < ApplicationController
   end
 
   #payments for groups that are already scheduled
-  def process_cc_scheduled_payment
-    token = params[:payment_tracking_number]
-    @group = ScheduledGroup.find(params[:id])
+  def process_cc_scheduled_payment(group_id, cc_payment_amount, cc_to_be_charged, cc_processing_charge, token, payment_comments,
+      group_status)
+    @group = ScheduledGroup.find(group_id)
     @payment_error_message = ''
     begin
-      to_be_charged = (100 * params[:amount_paid].to_f).to_i
+      to_be_charged = (100 * cc_to_be_charged.to_f).to_i
       charge = Stripe::Charge.create(
           :amount=> to_be_charged,
           :currency=>"usd",
@@ -97,15 +99,15 @@ class PaymentController < ApplicationController
     rescue Stripe::InvalidRequestError => e
       @payment_error_message = "There has been a problem processing your credit card."
     rescue Stripe::CardError => e
-      @payment_error_message = e.message
+      flash[:error] = @payment_error_message = e.message
     end
 
     if e
       render :partial => 'process_cc_scheduled_payment'
     else
-      p = Payment.record_payment(@group.id, params[:payment_amount], params[:processing_charge], "cc", params[:payment_type], params[:payment_comments])
+      p = Payment.record_payment(group_id, cc_payment_amount, cc_processing_charge, "cc", "cc", payment_comments).save
       if p
-        log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', params[:payment_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")
+        log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
         UserMailer.cc_payment_confirmation(@group, p, params).deliver
         flash[:notice] = "Successful entry of new payment."
         redirect_to myssp_path(:id => @group.liaison_id)

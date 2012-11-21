@@ -158,11 +158,12 @@ function stripeCCPaymentResponseHandler(status, response) {
         var token = response['id'];
         // and submit
         group_status = $("input[name=group_status]").val();
-        payment_comments = $("input[name=payment_comments]").val();
+        payment_notes = $("input[name=payment_notes]").val();
         group_id = $("input[name=group_id]").val();
-        $.get("process_cc_scheduled_payment?reg_id=" + group_id + "&payment_amount=" + cc_payment_amount
+        $.get("create?group_id=" + group_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
-            + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
+            + token + "&payment_notes=" + payment_notes + "&group_status=" + group_status  + "&payment_method="
+            + "Credit Card", function(data) {
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
             alert (error_message)

@@ -21,15 +21,15 @@ class RegistrationController < ApplicationController
     @title = "Manage Groups"
   end
 
-  def register                #prior to display of register view
-    @registration = Registration.new
-    authorize! :create, @registration
-    @liaisons = Liaison.all.map { |l| [l.name, l.id ]}
-    @group_types = SessionType.all.map { |s| [s.name, s.id ]}
-    @title = "Register A Group"
-    @page_title = "Register A Group"
-    render "register"
-  end
+  #def register                #prior to display of register view
+  #  @registration = Registration.new
+  #  authorize! :create, @registration
+  #  @liaisons = Liaison.all.map { |l| [l.name, l.id ]}
+  #  @group_types = SessionType.all.map { |s| [s.name, s.id ]}
+  #  @title = "Register A Group"
+  #  @page_title = "Register A Group"
+  #  render "register"
+  #end
 
   def edit              #prior to /:id/edit view
     @registration = Registration.find(params[:id])

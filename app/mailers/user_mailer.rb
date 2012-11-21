@@ -31,10 +31,13 @@ class UserMailer < ActionMailer::Base
     mail(:to => group.liaison.email1, :subject => "Payment Confirmation")
   end
 
-  def cc_payment_confirmation(group, p, params)
+  def cc_payment_confirmation(group, p, cc_payment_amount, cc_processing_charge, payment_comments, group_status)
     @group = group
-    @params = params
     @payment = p
+    @cc_payment_amount = cc_payment_amount
+    @cc_processing_charge = cc_processing_charge
+    @cc_payment_comments = payment_comments
+    @group_status = group_status
     mail(:to => group.liaison.email1, :subject => "Credit Card Payment Confirmation")
   end
 
