@@ -63,8 +63,8 @@ class ApplicationController < ActionController::Base
   end
 
   def send_emails
-    #number = SessionType.junior_high.first.send_confirmation_emails
-    #flash[:notice] = "#{number} schedule confirmation emails have been sent to Junior High groups."
+    number = SessionType.junior_high.first.send_confirmation_emails
+    flash[:notice] = "#{number} schedule confirmation emails have been sent to Junior High groups."
 
     number = SessionType.senior_high.first.send_confirmation_emails
     flash[:notice] += "  #{number} schedule confirmation emails have been sent to Senior High groups."
