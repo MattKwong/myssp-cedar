@@ -13,12 +13,7 @@ class RegistrationController < ApplicationController
     @periods_available = Period.all
   end
 
-
-
   def create
-    #@registration=Registration.new
-    #@registration.liaison_id = params[:id]
-    #@liaison = Liaison.find(params[:id])
     render 'new'
   end
 

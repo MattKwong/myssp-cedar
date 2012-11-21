@@ -2,6 +2,12 @@
 
 Dear <%= @group.liaison.first_name %>,
 
+Thank you for registering your group with Sierra Service Project!  Plans for next summer are falling
+into place, and we are thrilled your group will be a part of it.  We have just finished the process
+of scheduling 124 churches for the summer, totaling over 1,665 participants.  This is another wonderful
+blessing but also made for a challenging process. Despite this, we are pleased to announce that 98% of
+the groups were placed in their first or second choice.
+
 This email is your confirmation that your group has been scheduled in the following session:
 
 Site:                       <%= @group.session.site.name %>
@@ -12,21 +18,19 @@ End Date:                   <%= @group.session.period.end_date.strftime("%a, %b 
 
 The following is the current information that we have on your group:
 
-Group name:                 <%=	@group.name %>
-
 Church:                     <%= @group.church.name %>
-
+Group Type:                 <%= @group.session_type.name %>
 Liaison:                    <%= @group.liaison.name %>
-
 Number of youth:            <%= @group.current_youth %>
-
 Number of counselors:       <%= @group.current_counselors %>
-
 Total:                      <%= @group.current_total %>
 
-I am excited that your group will be participating in 2013 and I am looking forward to working with you to make SSP a
-fantastic experience for your group. If you have any questions or concerns, please give me a call at 916-488-6441. Email
-will be my primary way of communicating with you, so please notify me if you change your email address.
+We will be updating our current availability on our website early next week. Also, the MySSP portal will
+remain offline over the weekend and be accessible early next week.  Please call the office to discuss any
+additions to your group at (916) 488-6441.
+
+If you have any questions or concerns, please give me a call at 916-488-6441. Email will be my primary way
+of communicating with you, so please notify me if you change your email address.
 
 Blessings,
 

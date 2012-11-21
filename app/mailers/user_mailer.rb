@@ -40,6 +40,6 @@ class UserMailer < ActionMailer::Base
 
   def schedule_confirmation(group)
     @group = group
-    mail(:to => @group.liaison.email1, :subject => "Schedule Confirmation")
+    mail(:to => @group.liaison.email1, :subject => "2013 SSP Placement Confirmation for your #{@group.session_type.name} Group")
   end
 end
