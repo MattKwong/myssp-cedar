@@ -32,7 +32,7 @@ class PaymentController < ApplicationController
   def create #payments for groups that are already scheduled
     if params[:payment_method] == 'Credit Card'
       process_cc_scheduled_payment(params[:group_id], params[:cc_payment_amount], params[:cc_to_be_charged],
-                                   params[:cc_processing_charge], params[:token], params[:payment_comments],
+                                   params[:cc_processing_charge], params[:payment_tracking_number], params[:payment_notes],
                                    params[:group_status])
     else
       process_cash_check_payment(params[:payment])
