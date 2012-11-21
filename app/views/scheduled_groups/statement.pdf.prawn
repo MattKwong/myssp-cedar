@@ -13,24 +13,27 @@ prawn_document() do |pdf|
 
     pdf.move_down(20)
     pdf.text "Bill To:", :style => :bold
-    pdf.text @liaison_name
-    pdf.text @church.name
+    pdf.text @group.liaison.name
+    pdf.text @group.church.name
     pdf.move_up(15)
-    pdf.text "Site: #{@site_name}", :align => :right
-    pdf.text @church.address1
+    pdf.text "Site: #{@group.session.site.name}", :align => :right
+    pdf.text @group.church.address1
     pdf.move_up(15)
-    pdf.text "Period: #{@period_name} (#{@start_date.strftime("%m/%d/%y")} - #{@end_date.strftime("%m/%d/%y")})", :align => :right
-    pdf.text "#{@church.city}, #{@church.state} #{@church.zip}"
+    pdf.text "Period: #{@group.session.period.name} (#{@group.session.period.start_date.strftime("%m/%d/%y")} - #{@group.session.period.end_date.strftime("%m/%d/%y")})", :align => :right
+    pdf.text "#{@group.church.city}, #{@group.church.state} #{@group.church.zip}"
     pdf.move_up(15)
-    pdf.text "Group Name: #{@scheduled_group.name}", :align => :right
-
+    pdf.text "Group Name: #{@group.name}", :align => :right
     pdf.move_down(30)
+    items = Array.new
+    items[0] = ["","Number", "Amount Per", "Total Amount"]
+    items[1] = ["Deposits", @group.overall_high_water, number_to_currency(@group.session.payment_schedule.deposit),
+            number_to_currency(@group.deposit_amount)]
 
-    pdf.table(@event_list, :header => true,
+    pdf.table(items, :header => true,
             :column_widths => {0 => 60, 1 => 170, 2 => 150, 3 => 70, 4 => 70 },
             :row_colors => ["F0F0F0", "FFFFCC"] ) do
             cells.size = 10
-            row(0).style :align => :left
+             row(0).style :align => :left
             column(1).style :align => :left
             column(2).style :align => :left
             column(3).style :align => :right

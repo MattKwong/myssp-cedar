@@ -39,7 +39,7 @@ $(document).ready(function() {
             $("td#cc_processing_charge").html("$" + cc_processing_charge.toFixed(2));
             $("td#cc_to_be_charged").html("$" + cc_to_be_charged.toFixed(2));
             $("#cc_payment_errors").html("");
-            $('#pay_now').removeAttr("disabled");
+            $('#pay_cc_now').removeAttr("disabled");
 
         } else {
             $("#cc_payment_errors").html("Please input a valid number - no $ or characters.");
@@ -98,7 +98,6 @@ function stripePaymentResponseHandler(status, response) {
                 table_html += token;
                 table_html += "</td></tr>";
                 $('#final_confirmation_table').append(table_html);
-
                 //slide steps
                 $('#cc_payment_step').slideUp();
                 $('#confirmation_step').slideDown();
@@ -106,5 +105,72 @@ function stripePaymentResponseHandler(status, response) {
 
         });
 
+    };
+}
+//payment/new page
+$(document).ready(function() {
+    $("#payment_method").change(function(event) {
+        var selectedVal = $('#payment_method :selected').val();
+        if (selectedVal == 'Credit Card') {
+            $('#cc_section').show();
+            $('#cash_check_section').hide();
+        } else {
+            $('#cash_check_section').show();
+            $('#cc_section').hide();
+        }
+    });
+});
+
+
+$(document).ready(function() {
+    $("#payment_method").trigger('change');
+});
+
+$(document).ready(function() {
+    $("#cc_submit").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $("#cc_submit").click(function(event) {
+        // disable the submit button to prevent repeated clicks
+        $('#cc_submit').attr("disabled", "disabled");
+        // createToken returns immediately - the supplied callback submits the form if there are no errors
+
+        Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+        }, stripeCCPaymentResponseHandler);
+        return false; // submit from callback
+    });
+});
+function stripeCCPaymentResponseHandler(status, response) {
+    if (response.error) {
+        // re-enable the submit button
+        $('#cc_submit').removeAttr("disabled");
+        // show the errors on the form
+        $("#cc_payment_errors").html(response.error.message);
+    } else {
+        // token contains id, last4, and card type
+        var token = response['id'];
+        // and submit
+        group_status = $("input[name=group_status]").val();
+        payment_comments = $("input[name=payment_comments]").val();
+        group_id = $("input[name=group_id]").val();
+        $.get("process_cc_scheduled_payment?reg_id=" + group_id + "&payment_amount=" + cc_payment_amount
+            + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
+            + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
+            $("#gateway_data").html(data);
+            var error_message = $("input[name=gateway_error]").val();
+            alert (error_message)
+            if (error_message) {
+                $("#cc_payment_errors").html(error_message);
+            } else {
+                return;
+            };
+        });
     };
 }

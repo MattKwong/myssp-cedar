@@ -16,26 +16,43 @@ prawn_document() do |pdf|
     pdf.text "Bill To:", :style => :bold
     pdf.move_up(15)
     pdf.text "Please return a copy of this invoice with your payment", :style => :bold, :align => :right
-    pdf.text @screen_info[:liaison_name]
-    pdf.text @screen_info[:church_info].name
+    pdf.text @group.liaison.name
+    pdf.text @group.church.name
     pdf.move_up(15)
-    pdf.text "Site: #{@screen_info[:site_name]}", :align => :right
-    pdf.text @screen_info[:church_info].address1
+    pdf.text "Site: #{@group.session.site.name}", :align => :right
+    pdf.text @group.church.address1
     pdf.move_up(15)
-    pdf.text "Period: #{@screen_info[:period_name]} (#{@screen_info[:start_date].strftime("%m/%d/%y")} - #{@screen_info[:end_date].strftime("%m/%d/%y")})", :align => :right
-    pdf.text "#{@screen_info[:church_info].city}, #{@screen_info[:church_info].state} #{@screen_info[:church_info].zip}"
+    pdf.text "Period: #{@group.session.period.name} (#{@group.session.period.start_date.strftime("%m/%d/%y")} - #{@group.session.period.end_date.strftime("%m/%d/%y")})", :align => :right
+    pdf.text "#{@group.church.city}, #{@group.church.state} #{@group.church.zip}"
     pdf.move_up(15)
     pdf.text "Group Name: #{@group.name}", :align => :right
-
     pdf.move_down(60)
-    pdf.table(@screen_info[:invoice_items], :header => true,
-            :column_widths => {0 => 220, 1 => 120, 2 => 120, 3 => 80 },
+    items = Array.new
+    items[0] = ["","Number Registered", "Amount Per Person", "Total Amount Due"]
+    items[1] = ["Deposits", @group.overall_high_water, number_to_currency(@group.session.payment_schedule.deposit),
+            number_to_currency(@group.deposit_amount)]
+    items[2] = ["2nd Payments", @group.second_half_high_water, number_to_currency(@group.session.payment_schedule.second_payment),
+            number_to_currency(@group.second_pay_amount)]
+    items[3] = ["Final Payments", @group.current_total, number_to_currency(@group.session.payment_schedule.final_payment),
+            number_to_currency(@group.final_pay_amount)]
+    items[4] = ["Net Adjustments", "", "", number_to_currency(@group.adjustment_total)]
+    items[5] = ["Total", "", "", number_to_currency(@group.total_due)]
+    items[6] = ["Paid to Date", "", "", number_to_currency(@group.fee_amount_paid)]
+    items[7] = ["Second Payment Late Charge", "", "", number_to_currency(@group.second_late_penalty_amount)]
+    items[8] = ["Final Payment Late Charge", "", "", number_to_currency(@group.final_late_penalty_amount)]
+    items[9] = ["Balance Due", "", "", number_to_currency(@group.current_balance)]
+
+    pdf.table(items, :header => true,
+            :column_widths => {0 => 120, 1 => 140, 2 => 140, 3 => 140},
             :row_colors => ["F0F0F0", "FFFFCC"] ) do
-            row(0).style :align => :center
-            column(1).style :align => :center
-            column(2).style :align => :right
+            cells.size = 10
+             row(0).style :align => :left
+            column(1).style :align => :left
+            column(2).style :align => :left
             column(3).style :align => :right
-          end
+            column(4).style :align => :right
+    end
+
 
     pdf.move_down(60)
     pdf.text "If you have any questions about this invoice call the SSP office at 916-488-6441."

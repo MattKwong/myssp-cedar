@@ -577,10 +577,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#back_gateway').click(function(){
-
         $('#gateway_step').slideUp();
         $('#eighth_step').slideDown();
-
     });
 });
 
@@ -695,7 +693,6 @@ $(document).ready(function() {
             $("#submit_seventh").hover(function() {
                 $(this).addClass('hover');
            });
-
         } else {
             $("#submit_seventh").addClass('disabled');
             $("#submit_seventh").unbind('click', submitSeventh);

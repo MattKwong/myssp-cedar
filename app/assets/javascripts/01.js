@@ -119,20 +119,6 @@ $(document).ready(function() {
         });
     });
 
-//$('html').ajaxStart(function(){
-//    $(this).addClass('wait').bind('click',function(){
-//        return false;
-//    });
-//}).ajaxStop(function(){
-//        $(this).removeClass('wait').unbind('click');
-//    });
-
-//$(document).ready(function() {
-//  $("#food-snapshot-toggle h3").click(function() {
-//     $("div#food-snapshot-info").toggle("fast");
-// });
-//});
-
 $(document).ready(function() {
 $("#food-snapshot-toggle h3").hover(function() {
 $(this).addClass('hover');
@@ -140,15 +126,7 @@ $(this).addClass('hover');
 $(this).removeClass('hover');
  });
 });
-//$(document).ready(function() {
-//    $("#food-snapshot-toggle h3").trigger('click');
-//});
-//
-//$(document).ready(function() {
-//  $("#projects-toggle h3").click(function() {
-//     $("div#projects-info").toggle("fast");
-// });
-//});
+
 
 $(document).ready(function() {
 $("#projects-toggle h3").hover(function() {
@@ -157,15 +135,6 @@ $(this).addClass('hover');
 $(this).removeClass('hover');
  });
 });
-
-//$(document).ready(function() {
-//    $("#projects-toggle h3").trigger('click');
-//});
-//$(document).ready(function() {
-//  $("#purchases-toggle h3").click(function() {
-//     $("div#purchases-info").toggle("fast");
-// });
-//});
 
 $(document).ready(function() {
 $("#purchases-toggle h3").hover(function() {
