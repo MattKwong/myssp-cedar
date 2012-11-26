@@ -27,6 +27,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
     /*float: left;*/
     vertical-align: middle;
 }
+#available_data td.junior-high {
+    background-color: #ff2525;
+}
 #reg_container {
     /*background: url('container.png') no-repeat;*/
     width: 754px;
@@ -250,6 +253,14 @@ input[type="submit"]:focus, input[type="button"]:focus {
             float: left;
             padding-left: 10px;
             background: url("popular.png") no-repeat;
+        }
+        img.available_button {
+            border: none;
+            width: 175px;
+            height: 38px;
+            float: left;
+            padding-left: 10px;
+            background: url("available.png") no-repeat;
         }
         .center
         {

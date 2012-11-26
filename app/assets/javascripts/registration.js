@@ -664,6 +664,22 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $("#available_link").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $("#available_link").click(function() {
+        $.get("availability_matrix",  function(data) {
+            $('#available_data').html(data);
+            $('#available_data').modal();
+            $('#available_data').addClass("hidden")
+        });
+    });
+});
+
 function submitSeventh() {
 //        alert("submitSeventh was clicked");
             //Send the data to the server and create the new registration record

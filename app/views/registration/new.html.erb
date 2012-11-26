@@ -2,9 +2,11 @@
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "http://www.sierraserviceproject.org/2013/MySSP Registration User Guide.pdf" %></h4>
-        <img id="request_link" class="reg_buttons popular_button">
+        <!--<img id="request_link" class="reg_buttons popular_button">-->
+        <img id="available_link" class="reg_buttons available_button">
         <div class="clear"></div>
-        <div class="hidden" id="request_data"></div>
+        <div class="hidden" id="available_data"></div>
+        <!--<div class="hidden" id="request_data"></div>-->
         <h3>This online system has been set up for your convenience. If you run into problems, refer to the user guide
           accessible through the 'Help' link above. Also, don't hesitate to pick up the phone and call Meghan at 916-488-6441 
           during normal business hours. Alternatively, send her an email at <%= mail_to "meghan.osborn@sierraserviceproject.org",
@@ -13,7 +15,6 @@
         that you have already input, use the 'Back' button which will appear at the bottom of the form.</h3>
     </div>
         <div id='reg_container'>
-          <!--<form action="#" method="post">-->
           <%=  form_for @registration do |r| %>
               <div id="first_step">
               <h1>Step 1: Confirm Church Information</h1>

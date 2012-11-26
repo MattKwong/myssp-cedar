@@ -13,9 +13,9 @@ class RegistrationController < ApplicationController
     @periods_available = Period.all
   end
 
-  def create
-    render 'new'
-  end
+  #def create
+  #  render 'new'
+  #end
 
   def index
     @title = "Manage Groups"
@@ -68,28 +68,28 @@ check amount listed in the Amount Due column. This can be paid either by check o
     render "show"
    end
 
-  def process_payment   #prior to rendering process_payment step 3
-    @registration = Registration.find(params[:id])
-    authorize! :update, @registration
-    @liaison = Liaison.find(@registration.liaison_id)
-    @church = Church.find(@liaison.church_id)
-    @group_type = SessionType.find(@registration.group_type_id)
-    @session = Session.find(@registration.request1)
-    @payment_schedule = PaymentSchedule.find(@session.payment_schedule_id)
-    @registration.amount_due= @payment_schedule.deposit * (@registration.requested_counselors + @registration.requested_youth)
-    @payment_types = 'Check', 'Credit Card', 'Cash'
-    @title = "Registration Step 3"
-    @page_title = "Register A Group: Step 3"
-  end
-
-  def successful
-    @title = "Completed Registration"
-    @page_title = "Register A Group: Complete"
-    @registration = Registration.find(params[:id])
-    @church = Church.find(@registration.church_id)
-    @liaison = Liaison.find(@registration.liaison_id)
-    @session = Session.find(@registration.request1)
-  end
+  #def process_payment   #prior to rendering process_payment step 3
+  #  @registration = Registration.find(params[:id])
+  #  authorize! :update, @registration
+  #  @liaison = Liaison.find(@registration.liaison_id)
+  #  @church = Church.find(@liaison.church_id)
+  #  @group_type = SessionType.find(@registration.group_type_id)
+  #  @session = Session.find(@registration.request1)
+  #  @payment_schedule = PaymentSchedule.find(@session.payment_schedule_id)
+  #  @registration.amount_due= @payment_schedule.deposit * (@registration.requested_counselors + @registration.requested_youth)
+  #  @payment_types = 'Check', 'Credit Card', 'Cash'
+  #  @title = "Registration Step 3"
+  #  @page_title = "Register A Group: Step 3"
+  #end
+  #
+  #def successful
+  #  @title = "Completed Registration"
+  #  @page_title = "Register A Group: Complete"
+  #  @registration = Registration.find(params[:id])
+  #  @church = Church.find(@registration.church_id)
+  #  @liaison = Liaison.find(@registration.liaison_id)
+  #  @session = Session.find(@registration.request1)
+  #end
 
   def schedule
     @title = "Schedule a Group"
@@ -335,10 +335,18 @@ check amount listed in the Amount Due column. This can be paid either by check o
     @senior_high_limit = 60
     render :partial => 'request_matrix', :reg_or_sched => "registered"
   end
+
+  def availability_matrix
+    jh_default = 50
+    sh_default = 65
+    @matrix = build_schedule("Scheduled", "summer_domestic", sh_default, jh_default)
+    render :partial => 'availability_matrix'
+  end
+
   private
 
-  def build_schedule(reg_or_sched, type)
-
+  def build_schedule(reg_or_sched, type, sh_default = nil, jh_default = nil)
+    #TODO: Add logic to create an availablity matrix containing available spots.
     @schedule = {}
     if type == "summer_domestic" then
       @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
@@ -375,6 +383,8 @@ check amount listed in the Amount Due column. This can be paid either by check o
     @registration_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
     @scheduled_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
     @session_id_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
+    @avail_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
+
 
     Registration.all(:conditions => "(request1 IS NOT NULL) AND (scheduled = 'f')").each do |r|
         @session = Session.find(r.request1)
@@ -401,6 +411,29 @@ check amount listed in the Amount Due column. This can be paid either by check o
           unless (@column_position.nil? || @row_position.nil?)
           end
     end
+
+    #Populate the availability_matrix by traversing the scheduled_matrix
+    #
+    for i in 0..@site_names.size - 1 do
+      for j in 0..@period_names.size - 1 do
+        if @session_id_matrix[i][j] > 0
+          session = Session.find(@session_id_matrix[i][j])
+          logger.debug session.inspect
+          if session.senior_high?
+            session_max = session.schedule_max.nil? ? sh_default : session.schedule_max
+          else
+            session_max = session.schedule_max.nil? ? jh_default : session.schedule_max
+          end
+          @avail_matrix[i][j] = session_max - @scheduled_matrix[i][j]
+          if @avail_matrix[i][j] < 0
+            @avail_matrix[i][j] = 0
+          end
+          logger.debug @avail_matrix[i][j].inspect
+
+        end
+      end
+    end
+
 #total the rows and columns
     @reg_total = 0
     @sched_total = 0
@@ -449,7 +482,8 @@ check amount listed in the Amount Due column. This can be paid either by check o
     @schedule = { :site_count => @site_names.size - 1, :period_count => @period_names.size - 1,
                   :site_names => @site_names, :period_names => @period_names,
                   :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
-                  :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type}
+                  :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type,
+                  :avail_matrix => @avail_matrix}
   end
 
   def log_activity(activity_type, activity_details)

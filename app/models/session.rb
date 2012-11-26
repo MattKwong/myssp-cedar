@@ -26,7 +26,8 @@ class Session < ActiveRecord::Base
 
   #default_scope includes(:period).order('periods.start_date ASC')
 
-  attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id, :requests
+  attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id,
+                  :requests, :schedule_max
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
   scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
@@ -34,6 +35,13 @@ class Session < ActiveRecord::Base
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
+  def senior_high?
+    session_type.senior_high?
+  end
+
+  def junior_high?
+    session_type.junior_high?
+  end
   def rollback_requests
     ScheduledGroup.find_all_by_session_id(id).each do |group|
       Registration.find(group.registration_id).update_attribute(:scheduled, false)

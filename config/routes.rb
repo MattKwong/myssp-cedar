@@ -82,6 +82,7 @@ Spoic3::Application.routes.draw do
   match 'registration/process_cc_dep_payment', :to => 'registration#process_cc_dep_payment'
   match 'registration/pay_by_check', :to => 'registration#pay_by_check'
   match 'registration/request_matrix', :to => 'registration#request_matrix'
+  match 'registration/availability_matrix', :to => 'registration#availability_matrix'
 
   match 'payment/:id/cc_payment', :to => 'payment#cc_payment', :as => 'cc_payment'
   match 'payment/:id/process_cc_payment', :to => 'payment#process_cc_payment', :as => 'process_cc_payment'
