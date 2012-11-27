@@ -24,7 +24,7 @@ class Session < ActiveRecord::Base
   has_many :registrations
   accepts_nested_attributes_for :scheduled_groups
 
-  #default_scope includes(:period).order('periods.start_date ASC')
+  default_scope includes(:period).order('periods.start_date ASC')
 
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id,
                   :requests, :schedule_max
@@ -34,6 +34,14 @@ class Session < ActiveRecord::Base
   scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
+
+  def sh_default
+    65
+  end
+
+  def jh_default
+    50
+  end
 
   def senior_high?
     session_type.senior_high?
@@ -376,7 +384,7 @@ class Session < ActiveRecord::Base
     sites = Array.new
 
     if SessionType.find(group_type).name == "Summer Junior High"
-      sessions = Session.junior_high.active
+      sessions = Session.junior_high.active.with_availability
     else
       sessions = Session.senior_high.active
     end
@@ -386,6 +394,34 @@ class Session < ActiveRecord::Base
     #logger.debug sites.uniq
     sites.uniq
 
+  end
+
+  def self.sites_with_avail_for_type(group_type)
+    sites = Array.new
+
+    if SessionType.find(group_type).name == "Summer Junior High"
+      sessions = Session.junior_high.active
+    else
+      sessions = Session.senior_high.active
+    end
+    sessions.each do |session|
+
+      if session.available > 0
+        sites.push(session.site)
+      end
+    end
+
+    sites.uniq
+  end
+
+  def available
+    default_max = self.junior_high? ? self.jh_default : self.sh_default
+    session_max = self.schedule_max.nil? ? default_max : self.schedule_max
+    session_available = session_max - self.scheduled_total
+    if session_available < 2
+      session_available = 0
+    end
+    session_available
   end
 
   def self.alt_sites_for_group_type(group_type, session_selections)
@@ -417,6 +453,10 @@ class Session < ActiveRecord::Base
   def self.sites_for_group_type_senior
     group_type = SessionType.find_by_name("Summer Senior High").id
     self.sites_for_group_type(group_type)
+  end
+  def self.sites_with_avail_for_type_senior
+    group_type = SessionType.find_by_name("Summer Senior High").id
+    self.sites_with_avail_for_type(group_type)
   end
 
   def short_name

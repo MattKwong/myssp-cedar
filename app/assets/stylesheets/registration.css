@@ -260,7 +260,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
             height: 38px;
             float: left;
             padding-left: 10px;
-            background: url("available.png") no-repeat;
+            background: url("availability.png") no-repeat;
         }
         .center
         {

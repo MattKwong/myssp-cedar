@@ -49,7 +49,7 @@ class ScheduledGroup < ActiveRecord::Base
   validates :name, :liaison_id, :session_id, :church_id, :registration_id, :group_type_id, :presence => true
   validates_numericality_of :liaison_id, :session_id, :church_id, :registration_id, :group_type_id,
                             :second_payment_total, :only_integer => true
-  validates_numericality_of :scheduled_priority, :greater_than => 0,
+  validates_numericality_of :scheduled_priority, :greater_than_or_equal_to  => 0,
                             :less_than_or_equal_to => 10,
                             :only_integer => true
   validates_numericality_of :current_youth, :greater_than_or_equal_to => 0,
