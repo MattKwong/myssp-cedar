@@ -6,10 +6,10 @@ A credit card payment was a processed for your group today:
 
 Payment method:             <%=  @payment.payment_method %>
 Payment method:             <%=  @payment.payment_type %>
-Payment type:               <%=  @params[:payment_tracking_number] %>
-Payment notes:              <%=  @params[:payment_comments] %>
-Amount charged to card:     <%=  sprintf('%.2f', @params[:payment_amount]) %>
-Processing charge:          <%=  sprintf('%.2f', @params[:processing_charge]) %>
+Payment type:               <%=  @token %>
+Payment notes:              <%=  @cc_payment_comments %>
+Amount charged to card:     <%=  sprintf('%.2f', @cc_payment_amount) %>
+Processing charge:          <%=  sprintf('%.2f', @cc_processing_charge) %>
 
 Please review the information below and contact us if you think any of this is incorrect.
 
@@ -19,13 +19,13 @@ Church:                     <%= @group.church.name %>
 
 Liaison:                    <%= @group.liaison.name %>
 
-Number of youth:            <%= @group.requested_youth %>
+Number of youth:            <%= @group.current_youth %>
 
-Number of counselors:       <%= @group.requested_counselors %>
+Number of counselors:       <%= @group.current_counselors %>
 
-Total:                      <%= @group.requested_total %>
+Total:                      <%= @group.current_total %>
 
-<% if @params[:group_status] == "registration" %>
+<% if @group_status == "registration" %>
 
 Choice #1:                  <%= Session.find(@group.request1).name %>
 

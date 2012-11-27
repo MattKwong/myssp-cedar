@@ -31,7 +31,7 @@
                             :title => "Click to update the participant rosters." %></td>
             <td><%= link_to number_to_currency(g.current_balance),
                             invoice_path(g.id), :title => "Click to review and print your current invoice." %></td>
-            <td><%= link_to "Make Payment", record_payment_path(:group_id => g.id),
+            <td><%= link_to "Make Payment", record_payment_path(:group_id => g.id, :group_status => 'schedule'),
                             :title => "Click to make a payment." %></td>
             <% if can? :create, Adjustment %>
                 <td><%= link_to "Adjustment", make_adjustment_path(g.id),

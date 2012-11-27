@@ -2,7 +2,6 @@
 <div id='active_admin_content'>
     <div id="reg_container">
         <div id="cc_payment_step">
-
         <h4>You are entering SSP's secure payment gateway. You may use a credit or debit
             card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
         <div class="hidden" id="gateway_data"></div>
@@ -58,15 +57,15 @@
                 <p>Your payment has been successfully processed. Please print a copy of this page for your records. If
                     you have any questions, don't hesitate to call Meghan Osborn at 916-488-6441.</p>
                 <table id="final_confirmation_table">
-                    <tr><td>Your Name</td><td><%= @liaison.name %></td></tr>
-                    <tr><td>Your Email</td><td><%= @liaison.email1 %></td></tr>
-                    <tr><td>Your Cell Phone</td><td><%= @liaison.cell_phone %></td></tr>
-                    <tr><td>Your Home Phone</td><td><%= @liaison.home_phone %></td></tr>
-                    <tr><td>Your Work Phone</td><td><%= @liaison.work_phone %></td></tr>
+                    <tr><td>Your Name</td><td><%= @group.liaison.name %></td></tr>
+                    <tr><td>Your Email</td><td><%= @group.liaison.email1 %></td></tr>
+                    <tr><td>Your Cell Phone</td><td><%= @group.liaison.cell_phone %></td></tr>
+                    <tr><td>Your Home Phone</td><td><%= @group.liaison.home_phone %></td></tr>
+                    <tr><td>Your Work Phone</td><td><%= @group.liaison.work_phone %></td></tr>
                     <tr></tr>
-                    <tr><td>Your Church</td><td><%= @liaison.church.name %></td></tr>
-                    <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
-                    <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
+                    <tr><td>Your Church</td><td><%= @group.liaison.church.name %></td></tr>
+                    <tr><td>City</td><td><%= @group.liaison.church.city %></td></tr>
+                    <tr><td>State</td><td><%= @group.liaison.church.state %></td></tr>
                     <tr></tr>
                 </table>
                 <div class="clear"></div>

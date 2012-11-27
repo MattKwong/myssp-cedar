@@ -2,7 +2,7 @@
 
 Dear <%= @registration.liaison.first_name %>,
 
-Thank you for registering your group with Sierra Service Project.  This email confirms that your group is registered to
+Thank you for registering your group with Sierra Service Project.  This email confirms that your group is scheduled to
 participate in our summer 2013 program.
 
 The following is the registration information that you provided to us:
@@ -38,51 +38,8 @@ Payment Notes:              Paid by credit card. Receipt id: #{@registration.pay
 %>
 <% end %>
 
-The following are your site and week requests:
+Your group has been scheduled to attend: <%= Session.find(@registration.request1).name %>
 
-Choice #1: <%= Session.find(@registration.request1).name %>
-
-<% if @registration.request2 != nil  %>
-Choice #2: <%= Session.find(@registration.request2).name %>
-
-<% if @registration.request3 != nil%>
-Choice #3: <%= Session.find(@registration.request3).name %>
-
-<% if @registration.request4 != nil%>
-Choice #4: <%= Session.find(@registration.request4).name %>
-
-<% if @registration.request5 != nil%>
-Choice #5: <%= Session.find(@registration.request5).name %>
-
-<% if @registration.request6 != nil%>
-Choice #6: <%= Session.find(@registration.request6).name %>
-
-<% if @registration.request7 != nil%>
-Choice #7: <%= Session.find(@registration.request7).name %>
-
-<% if @registration.request8 != nil%>
-Choice #8: <%= Session.find(@registration.request8).name %>
-
-<% if @registration.request9 != nil%>
-Choice #9: <%= Session.find(@registration.request9).name %>
-
-<% if @registration.request10 != nil%>
-Choice #10: <%= Session.find(@registration.request10).name %>
-
-<% end %>
-<% end %>
-<% end %>
-<% end %>
-<% end %>
-<% end %>
-<% end %>
-<% end %>
-<% end %>
-No additional choices.
-
-We will notify you of your group's placement by the end of November.  In the past, we have been able to place 90% of all
-groups in their 1st or 2nd choice. We hope to be able to do that again this year. If you need to make any changes to this
-registration, please call me.
 
 I am excited that your group will be participating in 2013 and I am looking forward to working with you to make SSP a
 fantastic experience for your group. If you have any questions or concerns, please give me a call at 916-488-6441. Email

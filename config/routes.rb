@@ -82,9 +82,12 @@ Spoic3::Application.routes.draw do
   match 'registration/process_cc_dep_payment', :to => 'registration#process_cc_dep_payment'
   match 'registration/pay_by_check', :to => 'registration#pay_by_check'
   match 'registration/request_matrix', :to => 'registration#request_matrix'
+  match 'registration/availability_matrix', :to => 'registration#availability_matrix'
+  match 'registration/get_session_name', :to => 'registration#get_session_name'
 
   match 'payment/:id/cc_payment', :to => 'payment#cc_payment', :as => 'cc_payment'
   match 'payment/:id/process_cc_payment', :to => 'payment#process_cc_payment', :as => 'process_cc_payment'
+  match 'payment/:id/create', :to => 'payment#create', :as => 'create'
   match "payment/:group_id/new" => 'payment#new', :as => "record_payment"
 
   match "registration/:id/edit" => 'registration#edit', :as => "edit_registration"
@@ -128,7 +131,7 @@ Spoic3::Application.routes.draw do
 # Old registration routes
   match "move_stage/:id" => 'projects#move_stage', :as =>'project_review'
   match "registration/schedule", :to => 'registration#schedule', :as => "registration_schedule"
-  match "registration/register", :to => 'registration#register'
+  #match "registration/register", :to => 'registration#register'
   match "registration/:id/update", :to => 'registration#process_payment', :as => 'registration_payment'
   match "registration/:id/finalize" => 'registration#finalize', :as => 'registration_finalize'
   match "registration/:id/successful" => 'registration#successful', :as => 'registration_success'
