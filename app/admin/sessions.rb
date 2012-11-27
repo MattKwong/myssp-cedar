@@ -5,8 +5,12 @@ ActiveAdmin.register Session do
 
   show :title => :name
 
+  scope :active , :default => true
+  #scope :all,   scope :not_current, where('created_at < ?', '2012-09-01'.to_datetime)
+
   index do
     column "Session Name", :name
+    column "Maximum", :schedule_max
     default_actions
   end
 
