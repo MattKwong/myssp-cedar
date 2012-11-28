@@ -2,6 +2,8 @@ var cc_processing_charge = 0;
 var cc_payment_amount = 0;
 var cc_to_be_charged = 0;
 var group_status;
+var payment_type;
+var payment_notes;
 
 $(document).ready(function() {
     $("input[name=include_cc_charge]").attr("disabled", "disabled");
@@ -32,7 +34,7 @@ $(document).ready(function() {
     $('input[name=cc_payment_amount]').change(function(){
         //Pull the deposit_amount and processing_charge
         $("input[name=include_cc_charge]").removeAttr("disabled");
-        cc_payment_amount = $('input[name=cc_payment_amount]').val();;
+        cc_payment_amount = $('input[name=cc_payment_amount]').val();
         if ($.isNumeric(cc_payment_amount)) {
 
             cc_to_be_charged = (parseFloat(cc_payment_amount) + parseFloat(cc_processing_charge));
@@ -76,7 +78,7 @@ function stripePaymentResponseHandler(status, response) {
         var token = response['id'];
         // and submit
         group_status = $("input[name=group_status]").val();
-        payment_comments = $("input[name=payment_comments]").val();
+        payment_comments = $("textarea#payment_comments").val();
         registration_id = $("input[name=registration_id]").val();
         $.get("process_cc_payment?reg_id=" + registration_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
@@ -136,8 +138,9 @@ $(document).ready(function() {
     $("#cc_submit").click(function(event) {
         // disable the submit button to prevent repeated clicks
         $('#cc_submit').attr("disabled", "disabled");
+        payment_notes = $("textarea[name=payment_notes]").val();
+        alert("1 payment_notes are " + payment_notes);
         // createToken returns immediately - the supplied callback submits the form if there are no errors
-
         Stripe.createToken({
             number: $('.card-number').val(),
             cvc: $('.card-cvc').val(),
@@ -157,16 +160,17 @@ function stripeCCPaymentResponseHandler(status, response) {
         // token contains id, last4, and card type
         var token = response['id'];
         // and submit
+        payment_type = $("#payment_type :selected").val();
         group_status = $("input[name=group_status]").val();
-        payment_notes = $("input[name=payment_notes]").val();
+        payment_notes = $("textarea#payment_payment_comments").val();
+        alert("2 payment_notes are " + payment_notes);
         group_id = $("input[name=group_id]").val();
         $.get("create?group_id=" + group_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
             + token + "&payment_notes=" + payment_notes + "&group_status=" + group_status  + "&payment_method="
-            + "Credit Card", function(data) {
+            + "Credit Card" + "&payment_type=" + payment_type, function(data) {
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
-            alert (error_message)
             if (error_message) {
                 $("#cc_payment_errors").html(error_message);
             } else {

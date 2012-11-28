@@ -5,8 +5,7 @@ Dear <%= @group.liaison.first_name %>,
 A credit card payment was a processed for your group today:
 
 Payment method:             <%=  @payment.payment_method %>
-Payment method:             <%=  @payment.payment_type %>
-Payment type:               <%=  @token %>
+Payment type:               <%=  @payment.payment_type %>
 Payment notes:              <%=  @cc_payment_comments %>
 Amount charged to card:     <%=  sprintf('%.2f', @cc_payment_amount) %>
 Processing charge:          <%=  sprintf('%.2f', @cc_processing_charge) %>

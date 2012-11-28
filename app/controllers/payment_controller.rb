@@ -31,8 +31,8 @@ class PaymentController < ApplicationController
 
   def create #payments for groups that are already scheduled
     if params[:payment_method] == 'Credit Card'
-      process_cc_scheduled_payment(params[:group_id], params[:cc_payment_amount], params[:cc_to_be_charged],
-                                   params[:cc_processing_charge], params[:payment_tracking_number], params[:payment_notes],
+      process_cc_scheduled_payment(params[:group_id], params[:payment_amount], params[:amount_paid],
+                                   params[:processing_charge], params[:payment_tracking_number], params[:payment_notes],
                                    params[:group_status])
     else
       process_cash_check_payment(params[:payment])
@@ -91,6 +91,7 @@ class PaymentController < ApplicationController
     @payment_error_message = ''
     begin
       to_be_charged = (100 * cc_to_be_charged.to_f).to_i
+      logger.debug to_be_charged
       charge = Stripe::Charge.create(
           :amount=> to_be_charged,
           :currency=>"usd",
@@ -105,13 +106,13 @@ class PaymentController < ApplicationController
     if e
       render :partial => 'process_cc_scheduled_payment'
     else
-      p = Payment.record_payment(group_id, cc_payment_amount, cc_processing_charge, "cc", "cc", payment_comments).save
-      if p
+      p = Payment.record_payment(group_id, cc_payment_amount, cc_processing_charge, "cc", "cc", payment_comments)
+       if p
         log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
-        UserMailer.cc_payment_confirmation(@group, p, params).deliver
+        UserMailer.cc_payment_confirmation(@group, p, cc_payment_amount, cc_processing_charge, payment_comments, group_status).deliver
         flash[:notice] = "Successful entry of new payment."
-        redirect_to myssp_path(:id => @group.liaison_id)
-        #render :partial => 'process_cc_scheduled_payment'
+       # redirect_to myssp_path(:id => @group.liaison_id)
+        redirect_to myssp_path(:id => @group.liaison_id) and return
       else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
         render :partial => 'process_cc_scheduled_payment'

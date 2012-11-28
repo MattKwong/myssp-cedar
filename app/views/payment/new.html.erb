@@ -18,7 +18,7 @@
                         </tr>
                         <tr>
                            <td><%= r.label "Select payment type" %></td>
-                           <td><%= r.select(:payment_type, options_for_select(@payment_types, @payment.payment_type)) %></td>
+                           <td id="payment_type"><%= r.select(:payment_type, options_for_select(@payment_types, @payment.payment_type)) %></td>
                         </tr>
                         <tr>
                            <td><%= r.label "Select payment method" %></td>
@@ -33,7 +33,7 @@
                             </tr>
                             <tr>
                               <td><%= r.label "Payment Notes" %></td>
-                              <td><%= r.text_field :payment_notes %></td>
+                              <td id="payment_notes"><%= r.text_field :payment_notes %></td>
                             </tr>
 
                             <tr><td><div class="actions">
