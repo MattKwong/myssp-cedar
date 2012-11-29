@@ -5,9 +5,51 @@ class PaymentController < ApplicationController
 
   def cc_payment #payments not made as part of the registration wizard, groups not yet scheduled
     @group_status = params[:group_status]
+    @registration_id = params[:id]
+    @group = Registration.find(@registration_id )
     @group_status == 'registration' ? @group = Registration.find(params[:id]) : Registration.find(params[:id])
     @page_title = "Make Credit Card Payment for #{@group.name}"
     render 'cc_payment'
+  end
+
+  def process_cc_payment   #for a registered but not scheduled group
+    group_id = params[:reg_id]
+    cc_payment_amount = params[:payment_amount]
+    cc_amount_to_be_charged = params[:amount_to_be_charged]
+    cc_processing_charge = params[:processing_charge]
+    token = params[:token]
+    payment_notes = params[:payment_notes]
+    group_status = params[:group_status]
+
+    @group = Registration.find(group_id)
+    @payment_error_message = ''
+      begin
+        to_be_charged = (100 * cc_amount_to_be_charged.to_f).to_i
+        charge = Stripe::Charge.create(
+            :amount=> to_be_charged,
+            :currency=>"usd",
+            :card => token,
+            :description => @group.name)
+      rescue Stripe::InvalidRequestError => e
+        @payment_error_message = "There has been a problem processing your credit card."
+      rescue Stripe::CardError => e
+        flash[:error] = @payment_error_message = e.message
+      end
+
+      if e
+        render 'cc_payment'
+      else
+        p = Payment.record_deposit(group_id, cc_payment_amount, cc_processing_charge, "cc", payment_comments)
+        if p
+          log_payment_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
+          UserMailer.cc_payment_confirmation(@group, p, cc_payment_amount, cc_processing_charge, payment_comments, group_status).deliver
+          #flash[:notice] = "Successful entry of new payment."
+          #redirect_to myssp_path(:id => @group.liaison_id)
+        else
+          @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
+        end
+        render 'cc_payment'
+      end
   end
 
   def new
@@ -56,13 +98,13 @@ class PaymentController < ApplicationController
         group.second_payment_date = @payment.payment_date
         group.second_payment_total=group.current_total
         if group.save!
-          log_activity("Scheduled Group second payment date recorded: ", "#{@payment.payment_date} for #{group.name}")
+          log_payment_activity("Scheduled Group second payment date recorded: ", "#{@payment.payment_date} for #{group.name}")
         else
           flash[:error] = "Unable to updated group record."
         end
       end
       @payment.save!
-      log_activity("Payment by check", "$#{sprintf('%.2f', @payment.payment_amount)} paid for #{group.name}")
+      log_payment_activity("Payment by check", "$#{sprintf('%.2f', @payment.payment_amount)} paid for #{group.name}")
       UserMailer.payment_confirmation(group, params).deliver
       flash[:notice] = "Successful entry of new payment."
       redirect_to myssp_path(:id => group.liaison_id) and return
@@ -108,20 +150,19 @@ class PaymentController < ApplicationController
     else
       p = Payment.record_payment(group_id, cc_payment_amount, cc_processing_charge, "cc", "cc", payment_comments)
        if p
-        log_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
+        log_payment_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
         UserMailer.cc_payment_confirmation(@group, p, cc_payment_amount, cc_processing_charge, payment_comments, group_status).deliver
-        flash[:notice] = "Successful entry of new payment."
-       # redirect_to myssp_path(:id => @group.liaison_id)
-        redirect_to myssp_path(:id => @group.liaison_id) and return
+        #flash[:notice] = "Successful entry of new payment."
+        #redirect_to myssp_path(:id => @group.liaison_id)
       else
         @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
-        render :partial => 'process_cc_scheduled_payment'
       end
+        render :partial => 'process_cc_scheduled_payment'
     end
   end
 
 private
-  def log_activity(activity_type, activity_details)
+  def log_payment_activity(activity_type, activity_details)
     a = Activity.new
     a.activity_date = Time.now
     a.activity_type = activity_type

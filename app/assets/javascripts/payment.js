@@ -27,7 +27,7 @@ $(document).ready(function() {
         cc_to_be_charged = (parseFloat(cc_payment_amount) + parseFloat(cc_processing_charge));
 
         $("td#cc_processing_charge").html("$" + cc_processing_charge);
-        $("td#cc_to_be_charged").html("$" + cc_to_be_charged);
+        $("td#cc_to_be_charged").html("$" + cc_to_be_charged.toFixed(2));
     });
 });
 $(document).ready(function() {
@@ -52,6 +52,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+    // This is triggered by submitting the credit card payment for registered - not scheduled - groups
     $("#pay_cc_now").click(function(event) {
         // disable the submit button to prevent repeated clicks
         $('#pay_cc_now').attr("disabled", "disabled");
@@ -81,7 +82,7 @@ function stripePaymentResponseHandler(status, response) {
         payment_comments = $("textarea#payment_comments").val();
         registration_id = $("input[name=registration_id]").val();
         $.get("process_cc_payment?reg_id=" + registration_id + "&payment_amount=" + cc_payment_amount
-            + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
+            + "&amount_to_be_charged=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
             + token + "&payment_comments=" + payment_comments + "&group_status=" + group_status,  function(data) {
 
             $("#gateway_data").html(data);
@@ -101,13 +102,11 @@ function stripePaymentResponseHandler(status, response) {
                 table_html += "</td></tr>";
                 $('#final_confirmation_table').append(table_html);
                 //slide steps
-                $('#cc_payment_step').slideUp();
-                $('#confirmation_step').slideDown();
-            };
-
+                $('#cc_payment_step').hide();
+                $('#confirmation_step').show();
+            }
         });
-
-    };
+    }
 }
 //payment/new page
 $(document).ready(function() {
@@ -138,8 +137,7 @@ $(document).ready(function() {
     $("#cc_submit").click(function(event) {
         // disable the submit button to prevent repeated clicks
         $('#cc_submit').attr("disabled", "disabled");
-        payment_notes = $("textarea[name=payment_notes]").val();
-        alert("1 payment_notes are " + payment_notes);
+        payment_notes = $("input#payment_payment_notes").val();
         // createToken returns immediately - the supplied callback submits the form if there are no errors
         Stripe.createToken({
             number: $('.card-number').val(),
@@ -158,12 +156,11 @@ function stripeCCPaymentResponseHandler(status, response) {
         $("#cc_payment_errors").html(response.error.message);
     } else {
         // token contains id, last4, and card type
+        $("#cc_payment_errors").html('');
         var token = response['id'];
         // and submit
         payment_type = $("#payment_type :selected").val();
         group_status = $("input[name=group_status]").val();
-        payment_notes = $("textarea#payment_payment_comments").val();
-        alert("2 payment_notes are " + payment_notes);
         group_id = $("input[name=group_id]").val();
         $.get("create?group_id=" + group_id + "&payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
@@ -174,8 +171,11 @@ function stripeCCPaymentResponseHandler(status, response) {
             if (error_message) {
                 $("#cc_payment_errors").html(error_message);
             } else {
-                return;
-            };
+//                $('#cc_section').hide();
+                $('#main_data').hide();
+//                $('#payment_table').hide();
+                $('#confirmation_step').show();
+             };
         });
-    };
+    }
 }
