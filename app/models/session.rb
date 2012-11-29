@@ -462,4 +462,8 @@ class Session < ActiveRecord::Base
   def short_name
     site.abbr + " " + period.name.first + period.name.last
   end
+
+  def self.build_schedule(type, program_type, sh_maximum, jh_maximum)
+
+  end
 end
