@@ -21,11 +21,19 @@
       <% count = @matrices[:period_count].to_s.to_i %>
       <% for j in 0..count - 1 do %>
           <% if @matrices[:session_id_matrix][i][j] > 0 %>
-              <% if @matrices[:avail_matrix][i][j] <= 0 %>
-                <td class="paragraph_text" valign="middle" height="30" align="center" style="text-align: center">Full</td>
+              <% if @matrices[:senior_high][i][j] %>
+                  <% if @matrices[:avail_matrix][i][j] <= 0 %>
+                    <td class="paragraph_text" valign="middle" height="30" align="center" style="text-align: center">Full</td>
+                  <% else %>
+                    <td class="paragraph_text" valign="middle" height="30" align="center" style="text-align: center"><%= @matrices[:avail_matrix][i][j].to_s %></td>
+                  <% end %>
               <% else %>
-                <td class="paragraph_text" valign="middle" height="30" align="center" style="text-align: center"><%= @matrices[:avail_matrix][i][j].to_s %></td>
-              <% end %>
+                  <% if @matrices[:avail_matrix][i][j] <= 0 %>
+                    <td class="jh_background paragraph_text" valign="middle" height="30" align="center" style="text-align: center">Full</td>
+                  <% else %>
+                    <td class="jh_background paragraph_text" valign="middle" height="30" align="center" style="text-align: center"><%= @matrices[:avail_matrix][i][j].to_s %></td>
+                  <% end %>
+               <% end %>
           <% else %>
               <td class="graybackground paragraph_text" valign="middle" height="30" align="center" style="text-align: center">N/A</td>
           <% end %>

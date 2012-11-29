@@ -19,7 +19,7 @@ module Spoic3
     config.assets.enabled = true
     #config.assets.digest = true
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += ['print.css']
+    config.assets.precompile += ['print.css' 'availability.css']
     #config.force_ssl = true
 
     # Version of your assets, change this if you want to expire all your assets

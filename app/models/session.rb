@@ -470,7 +470,7 @@ class Session < ActiveRecord::Base
       @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
       period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
       period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| "#{p.start_date.strftime("%b %d")} - #{p.end_date.strftime("%b %d")}"}
-      period_jh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| "#{p.start_date.strftime("%b %d")} - #{(p.end_date - 1).strftime("%b %d")}"}
+      period_jh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| "#{p.start_date.strftime("%b %d")} - #{(p.end_date.to_date - 1).strftime("%b %d")}"}
       @title = @page_title = "#{program_type} Schedule: #{matrix_type}"
 
     #Assign a ordinal value to each row and column
