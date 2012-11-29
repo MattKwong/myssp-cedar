@@ -37,7 +37,7 @@ class PaymentController < ApplicationController
       end
 
       if e
-        render 'cc_payment'
+        render :partial => 'process_cc_payment'
       else
         p = Payment.record_deposit(group_id, cc_payment_amount, cc_processing_charge, "cc", payment_comments)
         if p
@@ -48,7 +48,7 @@ class PaymentController < ApplicationController
         else
           @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
         end
-        render 'cc_payment'
+        render :partial => 'process_cc_payment'
       end
   end
 
