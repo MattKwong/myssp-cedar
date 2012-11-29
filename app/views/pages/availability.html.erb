@@ -1,27 +1,33 @@
-<table border="0" cellspacing="0" cellpadding="0">
-<thead>
-<tr>
-  <td></td>
-  <% for i in 0..@matrices[:period_count] -1 do %>
-      <td><%= @matrices[:period_names][i]%></td>
-  <% end %>
-</tr>
-</thead>
+<%= stylesheet_link_tag "availability" %>
+<table width="800" cellspacing="0" cellpadding="0" border="1" align="center">
+    <thead>
+        <tr>
+          <td class="table_middle" valign="top" height="30" align="left">
+            <span class="table_middle">
+                <span class="heading">Senior High Availability</span>
+            </span>
+          </td>
+          <% for i in 0..@matrices[:period_count] -1 do %>
+              <td class="intext_emphasis" width="75" valign="middle" height="30" align="center" style="text-align: center">
+                <%= @matrices[:period_names][i]%><br><%= @matrices[:period_sh_dates][i] %></td>
+         <% end %>
+    </tr>
+    </thead>
 <tbody>
 <% s_count = @matrices[:site_count].to_s.to_i %>
 <% for i in 0..s_count - 1 do %>
     <tr>
-      <td><%= @matrices[:site_names][i] %></td>
+      <td class="table_middle" width="160" height="30" align="left"><%= @matrices[:site_names][i] %></td>
       <% count = @matrices[:period_count].to_s.to_i %>
       <% for j in 0..count - 1 do %>
           <% if @matrices[:session_id_matrix][i][j] > 0 %>
-              <% if @matrices[:senior_high][i][j] %>
-                  <td class="senior-high"><%= @matrices[:avail_matrix][i][j].to_s %></td>
+              <% if @matrices[:avail_matrix][i][j] <= 0 %>
+                <td class="paragraph_text" valign="middle" height="30" align="center" style="text-align: center">Full</td>
               <% else %>
-                  <td class="junior-high"><%= @matrices[:avail_matrix][i][j].to_s %></td>
+                <td class="paragraph_text" valign="middle" height="30" align="center" style="text-align: center"><%= @matrices[:avail_matrix][i][j].to_s %></td>
               <% end %>
           <% else %>
-              <td>-</td>
+              <td class="graybackground paragraph_text" valign="middle" height="30" align="center" style="text-align: center">N/A</td>
           <% end %>
       <% end %>
     </tr>
