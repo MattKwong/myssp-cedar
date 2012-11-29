@@ -1,9 +1,33 @@
-<div id="active_admin_content"  class="with_sidebar">
-  <div id="main_content_wrapper">
-    <div class="panel">
-      <h2>Here is what is currently available!</h2>
-
-    </div>
- </div>
- </div>
+<table border="0" cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+  <td></td>
+  <% for i in 0..@matrices[:period_count] -1 do %>
+      <td><%= @matrices[:period_names][i]%></td>
+  <% end %>
+</tr>
+</thead>
+<tbody>
+<% s_count = @matrices[:site_count].to_s.to_i %>
+<% for i in 0..s_count - 1 do %>
+    <tr>
+      <td><%= @matrices[:site_names][i] %></td>
+      <% count = @matrices[:period_count].to_s.to_i %>
+      <% for j in 0..count - 1 do %>
+          <% if @matrices[:session_id_matrix][i][j] > 0 %>
+              <% if @matrices[:senior_high][i][j] %>
+                  <td class="senior-high"><%= @matrices[:avail_matrix][i][j].to_s %></td>
+              <% else %>
+                  <td class="junior-high"><%= @matrices[:avail_matrix][i][j].to_s %></td>
+              <% end %>
+          <% else %>
+              <td>-</td>
+          <% end %>
+      <% end %>
+    </tr>
+<% end %>
+<tr>
+</tr>
+</tbody>
+</table>
 

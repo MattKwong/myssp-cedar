@@ -23,7 +23,7 @@ class PagesController < ApplicationController
     @page_title = "Current Availability"
     @title = "Availability"
 
-    @matrix = Session.build_schedule("Scheduled", "summer_domestic", 65, 50)
+    @matrices = Session.session_matrices("Availability", "Domestic Summer", 65, 50)
     #render :partial => 'availability_matrix'
     render :layout => nil
   end
