@@ -1,14 +1,11 @@
 <%= stylesheet_link_tag "application" %>
-<table id="availability" width="800" cellspacing="0" cellpadding="0" border="1" align="center">
+<table id="availability">
     <thead>
         <tr>
-          <td class="atable_middle" valign="top" height="30" align="left">
-            <span class="table_middle">
-                <span class="heading">Availability</span>
-            </span>
+          <td class="availability ">
           </td>
           <% for i in 0..@matrices[:period_count] -1 do %>
-              <td class="intext_emphasis" width="75" valign="middle" height="30" align="center" style="text-align: center">
+              <td class="intext_emphasis">
                 <%= @matrices[:period_names][i]%><br><%= @matrices[:period_sh_dates][i] %></td>
          <% end %>
     </tr>
@@ -17,7 +14,7 @@
 <% s_count = @matrices[:site_count].to_s.to_i %>
 <% for i in 0..s_count - 1 do %>
     <tr>
-      <td class="table_middle availability " width="160" height="30" align="left"><%= @matrices[:site_names][i] %></td>
+      <td class="table_middle availability "><%= @matrices[:site_names][i] %></td>
       <% count = @matrices[:period_count].to_s.to_i %>
       <% for j in 0..count - 1 do %>
           <% if @matrices[:session_id_matrix][i][j] > 0 %>

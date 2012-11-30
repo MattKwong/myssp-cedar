@@ -1,18 +1,22 @@
 #availability {
-   width: 850px !important;
-   border: 1px black !important;
+   width: 750px !important;
    text-align: center !important;
+    border: 1px solid black !important;
+    border-collapse: collapse;
 }
 
 .availability {
     background-color: white !important;
     vertical-align: middle !important;
+    border: 1px solid black !important;
+    border-collapse: collapse;
 }
 .table_middle {
     text-align: left;
     vertical-align: middle;
     font-size: 12px;
     text-indent: 10px;
+
 }
 .paragraph_text {
     font-family: Arial, Helvetica, sans-serif;
@@ -23,6 +27,8 @@
     font-style: normal;
     text-decoration: none;
     background-color: white;
+    border: 1px solid black !important;
+    border-collapse: collapse;
 }
 
 .intext_emphasis {
@@ -32,6 +38,9 @@
     font-weight: bolder;
     text-decoration: none;
     width: 90px;
+    border: 1px solid black !important;
+    border-collapse: collapse;
+    text-align: center;
 }
 
 .heading {
@@ -41,6 +50,8 @@
     color: #036;
     text-decoration: none;
     font-weight: bold;
+
+
 }
 
 .graybackground {
