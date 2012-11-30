@@ -470,7 +470,7 @@ class Session < ActiveRecord::Base
       @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
       period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
       period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map do |p|
-          "#{p.start_date.strftime("%b %d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %d") : p.end_date.strftime("%b %d")}"
+          "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
           end
 
     #Assign a ordinal value to each row and column

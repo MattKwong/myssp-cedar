@@ -1,7 +1,7 @@
 <table id="availability">
   <thead>
   <tr>
-    <td class="availability ">
+    <td class="paragraph_text">
     </td>
     <% for i in 0..@matrices[:period_count] -1 do %>
         <td class="intext_emphasis">
@@ -35,8 +35,10 @@
             <% end %>
         <% end %>
       </tr>
+
   <% end %>
   <tr>
   </tr>
+  <tr><td class="intext_emphasis" colspan="7" style="text-align: center" >This information is current as of <%= Time.now.strftime("%B %d at %-I:%M %p %Z") %></td></tr>
   </tbody>
 </table>
