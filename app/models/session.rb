@@ -469,8 +469,10 @@ class Session < ActiveRecord::Base
     #Assumes summer domestic. Sites are the rows; weeks are the columns
       @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
       period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
-      period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| "#{p.start_date.strftime("%b %d")} - #{p.end_date.strftime("%b %d")}"}
-      period_jh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| "#{p.start_date.strftime("%b %d")} - #{(p.end_date.to_date - 1).strftime("%b %d")}"}
+      period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map do |p|
+          "#{p.start_date.strftime("%b %d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %d") : p.end_date.strftime("%b %d")}"
+          end
+
       @title = @page_title = "#{program_type} Schedule: #{matrix_type}"
 
     #Assign a ordinal value to each row and column
@@ -585,6 +587,6 @@ class Session < ActiveRecord::Base
                     :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
                     :session_id_matrix => @session_id_matrix, :matrix_type => matrix_type, :program_type => program_type,
                     :avail_matrix => @avail_matrix, :senior_high => @senior_high, :period_sh_dates => period_sh_dates,
-                    :period_jh_dates => period_jh_dates}
+                    }
   end
 end

@@ -1,5 +1,5 @@
 #availability {
-   width: 750px !important;
+   width: 700px !important;
    text-align: center !important;
     border: 1px solid black !important;
     border-collapse: collapse;
@@ -37,7 +37,7 @@
     color: #000;
     font-weight: bolder;
     text-decoration: none;
-    width: 90px;
+    width: 78px;
     border: 1px solid black !important;
     border-collapse: collapse;
     text-align: center;
@@ -50,8 +50,6 @@
     color: #036;
     text-decoration: none;
     font-weight: bold;
-
-
 }
 
 .graybackground {
