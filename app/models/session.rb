@@ -463,7 +463,7 @@ class Session < ActiveRecord::Base
     site.abbr + " " + period.name.first + period.name.last
   end
 
-  def self.session_matrices(matrix_type, program_type, sh_maximum = 65, jh_maximum = 50)
+  def self.session_matrices(program_type, sh_maximum = 65, jh_maximum = 50)
     #Returns a matrix of session availability, organized in rows and columns with row labels and column headers.
     #Matrix type is Registration, Scheduled or Availability
     #Assumes summer domestic. Sites are the rows; weeks are the columns
@@ -472,8 +472,6 @@ class Session < ActiveRecord::Base
       period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map do |p|
           "#{p.start_date.strftime("%b %d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %d") : p.end_date.strftime("%b %d")}"
           end
-
-      @title = @page_title = "#{program_type} Schedule: #{matrix_type}"
 
     #Assign a ordinal value to each row and column
       @site_ordinal = Array.new
@@ -585,7 +583,7 @@ class Session < ActiveRecord::Base
       @matrices = { :site_count => @site_names.size - 1, :period_count => period_names.size - 1,
                     :site_names => @site_names, :period_names => period_names,
                     :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
-                    :session_id_matrix => @session_id_matrix, :matrix_type => matrix_type, :program_type => program_type,
+                    :session_id_matrix => @session_id_matrix, :program_type => program_type,
                     :avail_matrix => @avail_matrix, :senior_high => @senior_high, :period_sh_dates => period_sh_dates,
                     }
   end

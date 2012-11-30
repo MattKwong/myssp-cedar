@@ -1,36 +1,5 @@
 <h2 class="modal_heading">Current Availability by Site and Week</h2>
 <p>Below is the current information on availability at all of our summer sites. You may proceed to register a group in any session that has enough open spaces to accommodate your group.</p>  
 <p>Please call the SSP office (916-488-6441) if you have any questions or special considerations. We will do our best to work with you to get your group registered!</p>
-<table border="0" cellspacing="0" cellpadding="0">
-  <thead>
-  <tr>
-    <td></td>
-    <% for i in 0..@schedule[:period_count] -1 do %>
-        <td><%= @schedule[:period_names][i]%></td>
-    <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% s_count = @schedule[:site_count].to_s.to_i %>
-  <% for i in 0..s_count - 1 do %>
-      <tr>
-        <td><%= @schedule[:site_names][i] %></td>
-        <% count = @schedule[:period_count].to_s.to_i %>
-        <% for j in 0..count - 1 do %>
-          <% if @schedule[:session_id_matrix][i][j] > 0 %>
-            <% if Session.find(@schedule[:session_id_matrix][i][j]).senior_high? %>
-              <td class="senior-high"><%= @schedule[:avail_matrix][i][j].to_s %></td>
-            <% else %>
-              <td class="junior-high"><%= @schedule[:avail_matrix][i][j].to_s %></td>
-            <% end %>
-          <% else %>
-            <td>-</td>
-          <% end %>
-        <% end %>
-      </tr>
-  <% end %>
-  <tr>
-  </tr>
-  </tbody>
-</table>
-<p>Junior high sessions are highlighted in yellow.</p>
+<%= render :partial => 'availability_table' %>
+<p>Junior high sessions are highlighted in green.</p>
