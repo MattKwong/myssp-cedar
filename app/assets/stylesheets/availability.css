@@ -1,3 +1,13 @@
+#availability {
+   width: 850px !important;
+   border: 1px black !important;
+   text-align: center !important;
+}
+
+.availability {
+    background-color: white !important;
+    vertical-align: middle !important;
+}
 .table_middle {
     text-align: left;
     vertical-align: middle;
@@ -12,14 +22,16 @@
     font-weight: normal;
     font-style: normal;
     text-decoration: none;
+    background-color: white;
 }
 
 .intext_emphasis {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     color: #000;
     font-weight: bolder;
     text-decoration: none;
+    width: 90px;
 }
 
 .heading {
@@ -32,10 +44,12 @@
 }
 
 .graybackground {
-    background-color: #CCC;
+    background-color: #CCC !important;
+    vertical-align: middle !important;
     color: #000;
 }
 .jh_background {
-    background-color: #94cca8;
+    background-color: #94cca8 !important;
+    vertical-align: middle !important;
     color: #000;
 }
