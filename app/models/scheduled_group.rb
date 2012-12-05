@@ -39,7 +39,7 @@ class ScheduledGroup < ActiveRecord::Base
   scope :junior_high, where(:group_type_id => 3)
 
   has_many :payments
-  has_many :change_histories
+  has_many :change_historiesc
   has_many :adjustments
   belongs_to :church
   belongs_to :liaison
