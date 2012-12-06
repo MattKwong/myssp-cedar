@@ -23,60 +23,81 @@
 require 'spec_helper'
 
 describe Church do
+
   before (:each) do
     if Church.find_by_name("First Church")
       Church.find_by_name("First Church").delete
     end
     @attr = { :name => "First Church", :address1 => "4410 S. Budlong Avenue", :city => "Los Angeles", :state => "CA",
               :zip => "90037", :email1 => "info@example.com", :registered => false,
-    :office_phone => "123-456-7890", :fax => "123-456-7890", :liaison_id => 1, :active => true, :church_type_id => 1 }
+              :office_phone => "123-456-7890", :fax => "123-456-7890", :liaison_id => 1, :active => true, :church_type_id => 1 }
   end
-  describe "Valid Church" do
-    it "should be valid" do
-      Church.new(@attr).should be_valid
-    end
+
+  it "should create an instance with valid attributes" do
+      item = Church.new(@attr)
+      item.should be_valid
   end
-  describe "Church name tests" do
+
+  describe "name tests" do
+
     it "should require a name" do
-      no_name_church = Church.new(@attr.merge(:name => ""))
-      no_name_church.should_not be_valid
+      item = Church.new(@attr.merge(:name => ""))
+      item.should_not be_valid
     end
 
-    it "should reject a short name" do
+    it "should reject a short name (name < 6 characters)" do
       short_name = "a" * 5
-      short_name_church = Church.new(@attr.merge(:name => short_name))
-      short_name_church.should_not be_valid
+      item = Church.new(@attr.merge(:name => short_name))
+      item.should_not be_valid
     end
 
-    it "should reject a long name" do
+    it "should reject a long name (name > 45 characters)" do
       long_name = "a" * 46
-      long_name_church = Church.new(@attr.merge(:name => long_name))
-      long_name_church.should_not be_valid
+      item = Church.new(@attr.merge(:name => long_name))
+      item.should_not be_valid
     end
+
+    it "name should be unique" do
+      item1 = Church.create!(@attr.merge(:name => 'Testing Name'))
+      item2 = Church.new(@attr.merge(:name => 'Testing Name'))
+      item2.should_not be_valid
+    end
+
   end
   
-  describe "Address and city tests"  do
+  describe "address tests"  do
+
     it "should require an address1" do
-      no_add1_church = Church.new(@attr.merge(:address1 => ""))
-      no_add1_church.should_not be_valid
+      item = Church.new(@attr.merge(:address1 => ""))
+      item.should_not be_valid
     end
+
+  end
+
+  describe "city tests" do
 
     it "should require a city" do
       no_city_church = Church.new(@attr.merge(:city => ""))
       no_city_church.should_not be_valid
     end
+
   end
   
   describe "State tests" do
-    
-    it "should accept a valid state abbreviation" do
-      good_state = Church.new(@attr)
-      good_state.should be_valid
-    end
 
     it "should require a state" do
       no_state_church = Church.new(@attr.merge(:state => ""))
       no_state_church.should_not be_valid
+    end
+
+    it "should not be less than 2 characters" do
+      item = Site.new(@attr.merge(:state => "C"))
+      item.should_not be_valid
+    end
+
+    it "should not be more than 2 characters" do
+      item = Site.new(@attr.merge(:state => "CAL"))
+      item.should_not be_valid
     end
 
     it "should be in a valid states abbreviation" do
@@ -88,23 +109,23 @@ describe Church do
   
   describe "zip code tests" do
 
-    it "should accept a valid zip code" do
-      good_zip = Church.new(@attr)
-      good_zip.should be_valid
-    end
-
     it "should require a zip code" do
       no_zip = Church.new(@attr.merge(:zip => ""))
       no_zip.should_not be_valid
     end
 
-    it "should be 5 digits" do
-      bad_zip = Church.new(@attr.merge(:zip => "1234"))
-      bad_zip.should_not be_valid
+    it "should not be less than 5 digits" do
+      item = Site.new(@attr.merge(:zip => "1234"))
+      item.should_not be_valid
+    end
+
+    it "should not be greater than 5 digits" do
+      item = Site.new(@attr.merge(:zip => "123456"))
+      item.should_not be_valid
     end
 
     it "should only be digits" do
-      bad_zip = Church.new(@attr.merge(:zip => "xxxxx"))
+      bad_zip = Church.new(@attr.merge(:zip => "1234x"))
       bad_zip.should_not be_valid
     end
 
@@ -117,32 +138,66 @@ describe Church do
       no_email.should be_valid
     end
 
-    it "should reject an invalid email" do
+    it "should reject an invalid email format (1)" do
       bad_email = Church.new(@attr.merge(:email1 => "info@example"))
       bad_email.should_not be_valid
     end
 
-    it "should reject a duplicate email" do
-      good_email = Church.new(@attr)
-      good_email.save
-      dup_email = Church.new(@attr.merge(:name => "Duplicate email church"))
-      dup_email.should_not be_valid
+    it "should reject an invalid email format (2)" do
+      bad_email = Church.new(@attr.merge(:email1 => "info@example.com1"))
+      bad_email.should_not be_valid
     end
+
+    it "name should be unique" do
+      item1 = Church.create!(@attr.merge(:email1 => 'test@example.com'))
+      item2 = Church.new(@attr.merge(:email1 => 'test@example.com'))
+      item2.should_not be_valid
+    end
+
+    #it "should reject a duplicate email" do
+    #  good_email = Church.new(@attr)
+    #  good_email.save
+    #  dup_email = Church.new(@attr.merge(:name => "Duplicate email church"))
+    #  dup_email.should_not be_valid
+    #end
   end
   
-  describe "Office and Fax tests"
+  describe "office phone tests" do
+
     it "should have an office phone" do
       no_phone = Church.new(@attr.merge(:office_phone => ""))
       no_phone.should_not be_valid
     end
 
-    it "should reject an invalid office phone" do
-      bad_phone = Church.new(@attr.merge(:office_phone => "123-4567"))
-      bad_phone.should_not be_valid
+    it "should reject a phone number of wrong format" do
+      item = Site.new(@attr.merge(:office_phone => "(123)456-7890"))
+      item.should_not be_valid
     end
 
-    it "should reject an invalid fax phone" do
-      bad_phone = Church.new(@attr.merge(:fax => "123-4567"))
-      bad_phone.should_not be_valid
+    it "should reject a phone number of with letters" do
+      item = Site.new(@attr.merge(:office_phone => "a23-b56-c890"))
+      item.should_not be_valid
     end
+
+  end
+
+  describe "fax phone tests" do
+
+    it "should allow an empty fax" do
+      item = Site.new(@attr.merge(:fax => ""))
+      item.should be_valid
+    end
+
+    it "should reject a phone number of wrong format" do
+      item = Site.new(@attr.merge(:fax => "(123)456-7890"))
+      item.should_not be_valid
+    end
+
+    it "should reject a phone number of with letters" do
+      item = Site.new(@attr.merge(:fax => "a23-b56-c890"))
+      item.should_not be_valid
+    end
+
+  end
+
 end
