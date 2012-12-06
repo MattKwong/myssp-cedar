@@ -1,0 +1,42 @@
+<%= stylesheet_link_tag "print", :media => "print" %>
+    <div id="active_admin_content" class="without_sidebar">
+      <div id="main_content_wrapper">
+        <div id="main_content">
+          <div class="panel panel_contents">
+            <div class="panel_contents">
+              <div class="attributes_table" >
+                <h2><%= "Current Schedule Reports" %></h2>
+                <table>
+                  <thead>
+                    <tr>Senior High Results</tr>
+                    <td>Description</td>
+                    <td>Number of Groups</td>
+                    <td>Number of Requests</td>
+                  </thead>
+                <% @sh_results.each do |r| %>
+                  <tr>
+                    <td><%= r[:description] %></td>
+                    <td><%= r[:number_groups] %></td>
+                    <td><%= r[:number_requests] %></td>
+                  </tr>
+                <% end %>
+
+                  <tr><td>Junior High Results</td></tr>
+                    <td>Description</td>
+                    <td>Number of Groups</td>
+                    <td>Number of Requests</td>
+
+                <% @jh_results.each do |r| %>
+                  <tr>
+                    <td><%= r[:description] %></td>
+                    <td><%= r[:number_groups] %></td>
+                    <td><%= r[:number_requests] %></td>
+                  </tr>
+                <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
