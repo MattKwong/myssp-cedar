@@ -20,16 +20,11 @@ describe ProgramType do
   #validates :name, :description, :position, :presence => true
   #validates :name, :uniqueness => true
 
-<<<<<<< HEAD
-
-=======
->>>>>>> remotes/upstream/master
   it "should create a new instance with valid attributes" do
     item = ProgramType.create!(@attr)
     item.should be_valid
   end
 
-<<<<<<< HEAD
   describe "name tests" do
 
     it "should require a name" do
@@ -58,49 +53,11 @@ describe ProgramType do
 
     it "should require a position" do
       item = ProgramType.new(@attr.merge(:position => ''))
-=======
-  it "should create a new instance with valid attributes" do
-    item = ProgramType.create!(@attr)
-    item.should be_valid
-  end
-
-  describe "name tests" do
-
-    it "should require a name" do
-      item = ProgramType.new(@attr.merge(:name => ''))
-      item.should_not be_valid
-    end
-
-    it "name should be unique" do
-      item1 = ProgramType.create!(@attr.merge(:name => 'Test'))
-      item2 = ProgramType.new(@attr.merge(:name => 'Test'))
-      item2.should_not be_valid
-    end
-
-  end
-
-  describe "description tests" do
-
-    it "should require a description" do
-      item = ProgramType.new(@attr.merge(:description => ''))
->>>>>>> remotes/upstream/master
       item.should_not be_valid
     end
 
   end
 
-<<<<<<< HEAD
-=======
-  describe "position tests" do
-
-    it "should require a position" do
-      item = ProgramType.new(@attr.merge(:position => ''))
-      item.should_not be_valid
-    end
-
-  end
-
->>>>>>> remotes/upstream/master
   it "should create a correct abbreviation" do
     item = ProgramType.create!(@attr.merge(:name => "Test Name"))
     item.abbr_name.should == "TeNa"
