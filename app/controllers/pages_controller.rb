@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  layout 'admin_layout'
   def home
     @page_title = "SSP Information Center"
     @title = "Welcome"
@@ -18,6 +17,15 @@ class PagesController < ApplicationController
   def help
     @page_title = "SSP Information Center"
     @title = "Help"
+  end
+
+  def availability
+    @page_title = "Current Availability"
+    @title = "Availability"
+
+    @matrices = Session.session_matrices("Domestic Summer", 65, 50)
+    #render :partial => 'availability_matrix'
+    render :layout => nil
   end
 
 end

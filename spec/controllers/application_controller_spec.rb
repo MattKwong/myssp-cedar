@@ -59,7 +59,6 @@ describe ApplicationController do
 
   end
 
-
 #should test routes to admin, liaison and staff logons
 #should test that activity log is written to
 

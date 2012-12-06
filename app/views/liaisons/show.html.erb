@@ -63,12 +63,15 @@
                                 <td><%= g.requested_counselors %></td>
                                 <td><%= g.requested_total %></td>
                                 <td><%= g.created_at.strftime("%m/%d/%y") %></td>
-                                <td><%= number_to_currency(g.deposits_paid) %></td>
-                                <td><%= number_to_currency(g.deposits_due - g.deposits_paid) %></td>
-                                <%  if !g.scheduled? %>
-                                    <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration' ),
+                                <% if !g.scheduled? %>
+                                  <td><%= number_to_currency(g.deposits_paid) %></td>
+                                  <td><%= number_to_currency(g.deposits_due - g.deposits_paid) %></td>
+
+                                  <td><%= link_to "Pay by CC", cc_payment_path(:id => g.id, :group_status => 'registration' ),
                                                     :title => "Click to make credit card payment." %></td>
                                 <% else %>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                 <% end %>
                                 <% if @current_admin_user.admin?  && !g.scheduled? %>

@@ -8,6 +8,9 @@ ActiveAdmin.register Registration do
   scope :current_unscheduled, :default => true
 
  index :title => "Registration Requests" do
+    column "Year" do |r|
+      r.created_at < "09-01-2012".to_datetime ? "2012" : "2013"
+    end
     column :name do |r|
       link_to r.name, schedule_request_path(:id => r.id),
         :title => "Click to schedule this group"
@@ -21,22 +24,27 @@ ActiveAdmin.register Registration do
     column :group_type_id, :sortable => :group_type_id do |group_type|
       group_type.session_type.name
     end
-    column :requested_youth, :label => "Youth"
-    column :requested_counselors, :label => "Counselors"
-    column :requested_total, :label => "Total"
+    column "Youth", :requested_youth
+    column "Counselors", :requested_counselors
+    column "Total", :requested_total
     column :request1, :sortable => :request1 do |reg|
       if reg.request1
         Session.find(reg.request1).short_name
       end
     end
     column :request2, :sortable => :request2 do |reg|
-      if reg.request2
+      if reg.request2.is_a?(Numeric) && reg.request2 > 0
         Session.find(reg.request2).short_name
       end
     end
     column :request3, :sortable => :request3 do |reg|
-      if reg.request3
+      if reg.request3.is_a?(Numeric) && reg.request3 > 0
         Session.find(reg.request3).short_name
+      end
+    end
+    column :request4, :sortable => :request4 do |reg|
+      if reg.request4.is_a?(Numeric) && reg.request4 > 0
+        Session.find(reg.request4).short_name
       end
     end
     default_actions
@@ -130,6 +138,11 @@ ActiveAdmin.register Registration do
     column :request3 do |reg|
       if reg.request3
         Session.find(reg.request3).short_name
+      end
+    end
+    column :request4 do |reg|
+      if reg.request4
+        Session.find(reg.request4).short_name
       end
     end
     column :deposits_paid

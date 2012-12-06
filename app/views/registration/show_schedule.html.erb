@@ -43,16 +43,15 @@
                                     <% end %>
                                   </td>
                                <% else %>
-                                     <% if @schedule[:scheduled_matrix][i][j] > 0 then %>
-                                          <td>
-                                            <%= link_to (@schedule[:scheduled_matrix][i][j]).to_s,
-                                                sched_program_session_path(:id => current_admin_user.id,
-                                                            :session => @schedule[:session_id_matrix][i][j]),
-                                                            :title => "Click for details."  %>
-                                          </td>
-                                     <% else %>
-                                            <td><%= @schedule[:scheduled_matrix][i][j].to_s %></td>
-                                     <% end %>
+                                  <td>
+                                    <% if @schedule[:scheduled_matrix][i][j] =='-' || @schedule[:scheduled_matrix][i][j] == 0 then %>
+                                        <%= @schedule[:scheduled_matrix][i][j].to_s %>
+                                    <% else %>
+                                        <%= link_to (@schedule[:scheduled_matrix][i][j]).to_s,
+                                                    sched_program_session_path(:id  => @schedule[:session_id_matrix][i][j]),
+                                                    :title => "Click for details."  %>
+                                    <% end %>
+                                  </td>
                                 <% end %>
                             <% end %>
                             <% if params[:reg_or_sched] == "registered" then %>

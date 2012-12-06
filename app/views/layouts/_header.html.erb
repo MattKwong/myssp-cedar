@@ -9,7 +9,6 @@
             <!--<%= link_to "Site", @program_return_path %>-->
              <li class="has_nested" ><a href="#">Group Manager</a>
                 <ul>
-                  <li><%= link_to "Register a group", registration_register_path%></li>
                   <li><%= link_to "Schedule a group", admin_registrations_path%></li>
                   <li><%= link_to "Invoice report", invoice_report_path%></li>
                   <li><%= link_to "Show the schedule - scheduled summer domestic",
@@ -24,6 +23,8 @@
                                   unlock_path %></li>
                   <li><%= link_to "Update Flags",
                                   update_flags_path %></li>
+                  <li><%= link_to "Auto Schedule",
+                                  auto_schedule_path %></li>
                 </ul>
              </li>
              <li class="has_nested" ><a href="#">Reports</a>
@@ -39,7 +40,7 @@
                   <li><%= link_to "Purchases with Unaccounted $", unaccounted_report_path%></li>
                   <li><%= link_to "Spending Report", spending_by_site_report_path%></li>
                   <li><%= link_to "Participant Summary: CSV", part_sum_csv_path(:format => :csv)%></li>
-                  <li><%= link_to "Missing Churches: CSV", missing_churches_csv_path(:format => :csv)%></li>
+                  <li><%= link_to "Year-to-Year: CSV", missing_churches_csv_path(:format => :csv)%></li>
                   <li><%= link_to "New Churches: CSV", new_churches_csv_path(:format => :csv)%></li>
                 </ul>
             </li>

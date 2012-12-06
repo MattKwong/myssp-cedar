@@ -39,10 +39,10 @@ class Registration < ActiveRecord::Base
   accepts_nested_attributes_for :session_type
 
   scope :scheduled, where(:scheduled => 't')
-  scope :unscheduled, where(:scheduled => 'f')
+  scope :unscheduled, where('scheduled <> ?', 't')
   scope :current_unscheduled, where(:scheduled => 'f').where('created_at > ?', '2012-09-01'.to_datetime)
-  scope :high_school_unscheduled, where((:group_type_id == 2) && (:scheduled == 'f'))
-  scope :junior_high_unscheduled, where(:group_type_id => 3)
+  scope :senior_high_unscheduled, where('group_type_id = ? AND scheduled <> ?', 2, 't')
+  scope :junior_high_unscheduled, where((:group_type_id == 3) && (:scheduled != 't'))
   scope :other_unscheduled, where((:group_type_id == 1) || (:group_type_id == 4))
   scope :current, where('created_at > ?', '2012-09-01'.to_datetime)
   scope :not_current, where('created_at < ?', '2012-09-01'.to_datetime)
@@ -64,6 +64,11 @@ class Registration < ActiveRecord::Base
    end
   # The next four methods are for compatibility with the ScheduleGroup model - to allow code sharing even though
   # the attributes are named differently
+
+  def set_scheduled_flag(value)
+    self.scheduled = value
+    self.save!
+  end
 
   def session
     Session.find(request1)
@@ -198,4 +203,137 @@ class Registration < ActiveRecord::Base
   def current_total
     requested_total
   end
+  def self.build_schedule(reg_or_sched, type, sh_default = nil, jh_default = nil)
+
+    @schedule = {}
+    if type == "summer_domestic" then
+      @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
+#      @site_names = Site.order(:listing_priority).find_all.map { |s| s.name}
+      @period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
+#      @period_names = Period.order(:start_date).find_all.map { |p| p.name}
+      @title = @page_title = "Domestic Summer Schedule"
+    else
+      @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, false).map { |s| s.name}
+#      @site_names = Site.order(:listing_priority).find_all.map { |s| s.name}
+      @period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, false).map { |p| p.name}
+#      @period_names = Period.order(:start_date).find_all.map { |p| p.name}
+      @title = @page_title = "Special Program Schedule"
+    end
+
+    if reg_or_sched == 'scheduled'
+      @title += ': Scheduled'
+      @page_title += ': Scheduled'
+    else
+      @title += ': Unscheduled'
+      @page_title += ': Unscheduled'
+    end
+
+    @period_ordinal = Array.new
+    for i in 0..@period_names.size - 1 do
+      @period_ordinal[i] = @period_names[i]
+    end
+
+    @site_ordinal = Array.new
+    for i in 0..@site_names.size - 1 do
+      @site_ordinal[i] = @site_names[i]
+    end
+
+    @registration_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
+    @scheduled_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
+    @session_id_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
+    @avail_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
+
+
+    Registration.all(:conditions => "(request1 IS NOT NULL) AND (scheduled = 'f')").each do |r|
+      @session = Session.find(r.request1)
+      @site = Site.find(@session.site_id)
+
+      @period = Period.find(@session.period_id)
+      @row_position = @site_ordinal.index(@site.name)
+      @column_position = @period_ordinal.index(@period.name)
+      @session_id_matrix[@row_position][@column_position] = @session.id
+      @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
+      unless (@column_position.nil? || @row_position.nil?)
+      end
+
+    end
+
+    ScheduledGroup.active_program.each do |r|
+      @session = Session.find(r.session_id)
+      @site = Site.find(@session.site_id)
+      @period = Period.find(@session.period_id)
+      @row_position = @site_ordinal.index(@site.name)
+      @column_position = @period_ordinal.index(@period.name)
+      @session_id_matrix[@row_position][@column_position] = @session.id
+      @scheduled_matrix[@row_position][@column_position] += r.current_total
+      unless (@column_position.nil? || @row_position.nil?)
+      end
+    end
+
+    #Populate the availability_matrix by traversing the scheduled_matrix
+    #
+    for i in 0..@site_names.size - 1 do
+      for j in 0..@period_names.size - 1 do
+        if @session_id_matrix[i][j] > 0
+          session = Session.find(@session_id_matrix[i][j])
+          @avail_matrix[i][j] = session.available
+          if @avail_matrix[i][j] < 0
+            @avail_matrix[i][j] = 0
+          end
+        end
+      end
+    end
+
+#total the rows and columns
+    @reg_total = 0
+    @sched_total = 0
+    for i in 0..@site_names.size - 1 do
+      for j in 0..@period_names.size - 1 do
+        @reg_total += @registration_matrix[i][j]
+        @sched_total += @scheduled_matrix[i][j]
+      end
+      @registration_matrix[i][@period_names.size] = @reg_total
+      @scheduled_matrix[i][@period_names.size] = @sched_total
+      @reg_total = @sched_total = 0
+    end
+
+    for j in 0 ..@period_names.size do
+      for i in 0..@site_names.size - 1 do
+        @reg_total = @reg_total + @registration_matrix[i][j]
+        @sched_total = @sched_total + @scheduled_matrix[i][j]
+      end
+      @registration_matrix[@site_names.size][j] = @reg_total
+      @scheduled_matrix[@site_names.size][j] = @sched_total
+      @reg_total = @sched_total = 0
+    end
+#Grand total
+    @reg_total = @sched_total = 0
+    for i in 0..@site_names.size - 1 do
+      @reg_total = @reg_total + @registration_matrix[i][@period_names.size]
+      @sched_total = @sched_total + @scheduled_matrix[i][@period_names.size]
+    end
+    @registration_matrix[@site_names.size][@period_names.size] = @reg_total
+    @scheduled_matrix[@site_names.size][@period_names.size] = @sched_total
+
+    @period_names << "Total"
+    @site_names << "Total"
+
+    #Replace zeros in cells which do not represent an active session
+    for i in 0..@site_names.size - 2 do
+      site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
+      for j in 0..@period_names.size - 2 do
+        period = Period.active.summer_domestic.find_by_name(@period_names[j]).id
+        if Session.where('site_id = ? AND period_id =  ?', site, period).size == 0
+          @registration_matrix[i][j] = "-"
+        end
+      end
+    end
+
+    @schedule = { :site_count => @site_names.size - 1, :period_count => @period_names.size - 1,
+                  :site_names => @site_names, :period_names => @period_names,
+                  :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
+                  :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type,
+                  :avail_matrix => @avail_matrix}
+  end
+
 end

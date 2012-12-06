@@ -94,20 +94,20 @@ class ReportsController < ApplicationController
 
       @headers = []
       @headers << "Liaison Name" << "Church" << "Liaison Email"
-      logger.debug @headers.inspect
       return @headers
   end
 
   def get_rows_scheduled_liaisons
 
       @rows = []
-      liaisons = ScheduledGroup.all
+      liaisons = ScheduledGroup.active_program.active
+      puts liaisons.count
       liaisons.each do |l|
           row = []
           row << l.liaison.name << l.church.name << l.liaison.email1
           @rows << row
       end
-      return @rows
+      @rows.uniq!
    end
 
   def participation_summary
@@ -153,29 +153,34 @@ class ReportsController < ApplicationController
   def get_yty_headers
     @headers = []
     @headers << "Church Name"
-    @headers << "Group Name"
-    @headers << "Group Type"
-    @headers << "2012 Total"
-    @headers << "2013 Total"
-    return @headers
+    @headers << "2012 JH Groups"
+    @headers << "2012 JH Participants"
+    @headers << "2013 JH Groups"
+    @headers << "2013 JH Participants"
+    @headers << "2012 SH Groups"
+    @headers << "2012 SH Participants"
+    @headers << "2013 SH Groups"
+    @headers << "2013 SH Participants"
+    @headers
   end
 
   def get_yty_rows
     @rows = []
-    ScheduledGroup.not_active_program.each do |group|
+    churches = Church.registered
+    churches.each do |church|
       row = []
-      row << group.church.name << group.name << group.session_type.name << group.current_total.to_i
-      if Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id)
-        row << Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id).requested_total.to_i
-        row << Registration.current.find_by_church_id_and_group_type_id(group.church_id, group.group_type_id).liaison.email1
-      else
-        row << ""
-        row << group.liaison.email1
-      end
-    row << ""
+      row << church.name << ScheduledGroup.program_2012.junior_high.find_all_by_church_id(church.id).count
+      row << (ScheduledGroup.program_2012.junior_high.find_all_by_church_id(church.id).map &:current_total).sum
+      row << ScheduledGroup.active_program.junior_high.find_all_by_church_id(church.id).count
+      row << (ScheduledGroup.active_program.junior_high.find_all_by_church_id(church.id).map &:current_total).sum
+      row << ScheduledGroup.program_2012.senior_high.find_all_by_church_id(church.id).count
+      row << (ScheduledGroup.program_2012.senior_high.find_all_by_church_id(church.id).map &:current_total).sum
+      row << ScheduledGroup.active_program.senior_high.find_all_by_church_id(church.id).count
+      row << (ScheduledGroup.active_program.senior_high.find_all_by_church_id(church.id).map &:current_total).sum
+      row << ""
     @rows << row
     end
-    return @rows
+    @rows
   end
 
   def new_churches

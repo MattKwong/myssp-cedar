@@ -12,7 +12,7 @@
 #  created_at           :datetime
 #  updated_at           :datetime
 #  name                 :string(255)
-#  comments             :string(255)
+#  comments             :text
 #  registration_id      :integer
 #  scheduled_priority   :integer
 #  liaison_id           :integer
@@ -32,7 +32,12 @@ class ScheduledGroup < ActiveRecord::Base
   default_scope :include => :church, :order => 'churches.name'
   scope :active, where('current_total > ?', 0)
   scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
+  scope :program_2012, joins(:session => :program).where('programs.active = ? AND programs.start_date > ? AND programs.start_date < ?', 'f', '2011-09-30', '2012-10-01')
   scope :not_active_program, where('scheduled_groups.created_at < ?', '2012-09-01'.to_datetime)
+  scope :high_school, where(:group_type_id => 2)
+  scope :senior_high, where(:group_type_id => 2)
+  scope :junior_high, where(:group_type_id => 3)
+
   has_many :payments
   has_many :change_histories
   has_many :adjustments
@@ -46,13 +51,53 @@ class ScheduledGroup < ActiveRecord::Base
   validates :name, :liaison_id, :session_id, :church_id, :registration_id, :group_type_id, :presence => true
   validates_numericality_of :liaison_id, :session_id, :church_id, :registration_id, :group_type_id,
                             :second_payment_total, :only_integer => true
-  validates_numericality_of :scheduled_priority, :greater_than => 0,
+  validates_numericality_of :scheduled_priority, :greater_than_or_equal_to  => 0,
                             :less_than_or_equal_to => 10,
                             :only_integer => true
   validates_numericality_of :current_youth, :greater_than_or_equal_to => 0,
                             :only_integer => true
   validates_numericality_of :current_counselors, :greater_than_or_equal_to => 0,
                             :only_integer => true
+
+  def self.schedule(group_id, session_id, choice)
+    group = ScheduledGroup.new
+    reg = Registration.find(group_id)
+    group.current_youth = reg.requested_youth
+    group.current_counselors = reg.requested_counselors
+    group.current_total = reg.requested_total
+    group.session_id = session_id
+    group.church_id = reg.church_id
+    group.name = reg.name
+    group.comments = reg.comments
+    group.registration_id = reg.id
+    group.scheduled_priority = choice
+    group.liaison_id = reg.liaison_id
+    group.group_type_id = reg.group_type_id
+    group.second_payment_total = 0
+    group.save!
+    roster = Roster.new(:group_id => group.id, :group_type => group.group_type_id)
+    roster.save!
+    group.update_attribute(:roster_id, roster.id)
+    reg.set_scheduled_flag(true)
+
+  #update payments
+    Payment.find_all_by_registration_id(reg.id).each do |payment|
+      payment.update_attribute(:scheduled_group_id, group.id)
+    end
+  #update registration
+    reg.update_attribute(:scheduled, true)
+    puts "Scheduling of #{group.name} in #{group.session.name}, choice #{choice} completed."
+    return group
+  end
+
+  def send_confirmation_email
+    UserMailer.schedule_confirmation(self).deliver
+  end
+
+  def move(session_id, choice)
+    self.update_attributes(:session_id => session_id, :scheduled_priority => choice)
+  end
+
   def late_payment_penalty
     0.1
   end
@@ -66,12 +111,17 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def current_balance
-    total_due - amount_paid
+    total_due - fee_amount_paid
   end
 
-  def amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
+  def total_amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
     #Payment.sum(:payment_amount, :conditions => ['registration_id = ?', registration_id]) +
         Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', id])
+  end
+
+  def fee_amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
+    #Payment.sum(:payment_amount, :conditions => ['registration_id = ?', registration_id]) +
+        Payment.fee.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', id])
   end
 
   def total_due
@@ -87,10 +137,10 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def deposit_paid #the amount of the deposit_amount that has actually been paid
-    if amount_paid >= deposit_amount
+    if fee_amount_paid >= deposit_amount
       deposit_amount
     else
-      deposit_amount - amount_paid
+      deposit_amount - fee_amount_paid
     end
   end
 
@@ -133,11 +183,11 @@ class ScheduledGroup < ActiveRecord::Base
     else
       puts second_pay_amount.to_i
       puts deposit_amount.to_i
-      puts amount_paid.to_i
-      if (second_pay_amount + deposit_amount) < amount_paid
+      puts fee_amount_paid.to_i
+      if (second_pay_amount + deposit_amount) < fee_amount_paid
         second_pay_amount #second payment fully paid
       else
-        second_pay_amount + deposit_amount - amount_paid
+        second_pay_amount + deposit_amount - fee_amount_paid
       end
     end
   end
@@ -157,13 +207,13 @@ class ScheduledGroup < ActiveRecord::Base
     else
       0
     end
-
   end
-  def final_pay_paid #the amount of the deposit_amount that has actually been paid
+
+    def final_pay_paid #the amount of the deposit_amount that has actually been paid
     if second_pay_outstanding > 0 #no money left for final payments
       0
     else
-      deposit_amount + second_pay_amount + final_pay_amount - amount_paid
+      deposit_amount + second_pay_amount + final_pay_amount - fee_amount_paid
     end
   end
 
@@ -177,4 +227,13 @@ class ScheduledGroup < ActiveRecord::Base
   def second_late_penalty_due?
     Date.today > session.payment_schedule.second_payment_late_date ? true : false
   end
+
+  def likely_next_payment
+    second_payment_date.nil? ? 'Second' : 'Final'
+  end
+
+  def likely_next_pay_amount
+    likely_next_payment == 'Second' ? second_pay_outstanding : final_pay_outstanding
+  end
+
 end

@@ -2,152 +2,167 @@ class PaymentController < ApplicationController
   authorize_resource
   #before_filter :check_for_cancel, :only => [:create]
   layout 'admin_layout'
-#  def show
-#    redirect_to admin_payment_path(params[:id])
-#  end
+
+  def cc_payment #payments not made as part of the registration wizard, groups not yet scheduled
+    @group_status = params[:group_status]
+    @registration_id = params[:id]
+    @group = Registration.find(@registration_id )
+    @group_status == 'registration' ? @group = Registration.find(params[:id]) : Registration.find(params[:id])
+    @page_title = "Make Credit Card Payment for #{@group.name}"
+    render 'cc_payment'
+  end
+
+  def process_cc_payment   #for a registered but not scheduled group
+    group_id = params[:reg_id]
+    cc_payment_amount = params[:payment_amount]
+    cc_amount_to_be_charged = params[:amount_to_be_charged]
+    cc_processing_charge = params[:processing_charge]
+    token = params[:token]
+    payment_notes = params[:payment_notes]
+    group_status = params[:group_status]
+
+    @group = Registration.find(group_id)
+    @payment_error_message = ''
+      begin
+        to_be_charged = (100 * cc_amount_to_be_charged.to_f).to_i
+        charge = Stripe::Charge.create(
+            :amount=> to_be_charged,
+            :currency=>"usd",
+            :card => token,
+            :description => @group.name)
+      rescue Stripe::InvalidRequestError => e
+        @payment_error_message = "There has been a problem processing your credit card."
+      rescue Stripe::CardError => e
+        flash[:error] = @payment_error_message = e.message
+      end
+
+      if e
+        render :partial => 'process_cc_payment'
+      else
+        p = Payment.record_deposit(group_id, cc_payment_amount, cc_processing_charge, "cc", payment_comments)
+        if p
+          log_payment_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
+          UserMailer.cc_payment_confirmation(@group, p, cc_payment_amount, cc_processing_charge, payment_comments, group_status).deliver
+          #flash[:notice] = "Successful entry of new payment."
+          #redirect_to myssp_path(:id => @group.liaison_id)
+        else
+          @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
+        end
+        render :partial => 'process_cc_payment'
+      end
+  end
 
   def new
     @payment = Payment.new()
     @group_status = params[:group_status]
-    @payment_methods = 'Check', 'Credit Card', 'Cash'
+    current_admin_user.admin? ? (@payment_methods = 'Check', 'Credit Card', 'Cash') : @payment_methods = ['Credit Card']
+    current_admin_user.admin? ? @payment.payment_method = 'Check' : @payment.payment_method = 'Credit Card'
+
     if @group_status == 'registration'
       @payment_types = 'Deposit', 'Other'
       @group = Registration.find(params[:group_id])
-      #site_name = Site.find(Session.find(group.request1).site_id).name
-      #period_name = Period.find(Session.find(group.request1).period_id).name
-      #start_date = Period.find(Session.find(group.request1).period_id).start_date
-      #end_date = Period.find(Session.find(group.request1).period_id).end_date
-      #session_type = SessionType.find(Session.find(group.request1).session_type_id).name
+      @payment.payment_type = 'Deposit'
     else
       @payment_types = 'Deposit', 'Second', 'Final', 'Other'
       @group = ScheduledGroup.find(params[:group_id])
-      #site_name = Site.find(Session.find(group.session_id).site_id).name
-      #period_name = Period.find(Session.find(group.session_id).period_id).name
-      #start_date = Period.find(Session.find(group.session_id).period_id).start_date
-      #end_date = Period.find(Session.find(group.session_id).period_id).end_date
-      #session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
+      @payment.payment_type = @group.likely_next_payment
+      @payment.payment_amount = @group.likely_next_pay_amount
     end
-
-    #liaison_name = Liaison.find(group.liaison_id).name
-    #
-    #@screen_info = {:scheduled_group => group, :group_status => params[:group_status],
-    #  :site_name => site_name, :period_name => period_name, :start_date => start_date,
-    #  :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
-    #  :liaison_name => liaison_name, :payment_methods => payment_methods}
     @page_title = "Make payment for group: #{@group.name}"
   end
 
-  def cc_payment
-    @group_status = params[:group_status]
-    logger.debug @group_status
-    @registration = Registration.find(params[:id])
-    @liaison = Registration.find(params[:id]).liaison
-    @page_title = "Make Credit Card Payment for #{@registration.name}"
-    render 'cc_payment'
-  end
-
-  def process_cc_payment
-    token = params[:payment_tracking_number]
-    @registration = Registration.find(params[:id])
-    @payment_error_message = ''
-    begin
-      to_be_charged = (100 * params[:amount_paid].to_f).to_i
-      logger.debug to_be_charged
-      logger.debug token
-      charge = Stripe::Charge.create(
-          :amount=> to_be_charged,
-          :currency=>"usd",
-          :card => token,
-          :description => @registration.name)
-    rescue Stripe::InvalidRequestError => e
-      @payment_error_message = "There has been a problem processing your credit card."
-      logger.debug e.message
-    rescue Stripe::CardError => e
-      @payment_error_message = e.message
-      logger.debug e.message
-    end
-
-    if e
-      render :partial => 'process_cc_payment'
+  def create #payments for groups that are already scheduled
+    if params[:payment_method] == 'Credit Card'
+      process_cc_scheduled_payment(params[:group_id], params[:payment_amount], params[:amount_paid],
+                                   params[:processing_charge], params[:payment_tracking_number], params[:payment_notes],
+                                   params[:group_status])
     else
-      #Needs to find and save the registration instance with the payment information
-      p = Payment.create(:payment_date => Date.today, :registration_id => @registration.id, :payment_amount => (to_be_charged / 100),
-                         :payment_method => "cc", :payment_type => 'Deposit', :payment_notes => params[:payment_comments])
-      if p
-        log_activity("CC Payment", "Group: #{@registration.name} Amount: $#{sprintf('%.2f', params[:amount_paid].to_f)}")
-        UserMailer.cc_payment_confirmation(@registration, p, params).deliver
-        render :partial => 'process_cc_payment'
-      else
-        @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
-        render :partial => 'process_cc_payment'
-      end
+      process_cash_check_payment(params[:payment])
     end
   end
 
-
-  def create
-
-    payment = Payment.new(params[:payment])
-
+  def process_cash_check_payment(payment)
+    @payment = Payment.new(payment)
+    logger.debug @payment.inspect
     if (params[:group_status] == 'registration')
       group = Registration.find(params[:group_id])
-      payment.registration_id = group.id
+      @payment.registration_id = group.id
     else
       group = ScheduledGroup.find(params[:group_id])
-      payment.scheduled_group_id = group.id
+      @payment.scheduled_group_id = group.id
     end
 
-    if payment.valid?
-      if payment.payment_type == 'Second'
-        group = ScheduledGroup.find(payment.scheduled_group_id)
-        group.second_payment_date = payment.payment_date
+    if @payment.valid?
+      if @payment.payment_type == 'Second'
+        group = ScheduledGroup.find(@payment.scheduled_group_id)
+        group.second_payment_date = @payment.payment_date
         group.second_payment_total=group.current_total
         if group.save!
-          log_activity("Scheduled Group second payment date recorded: ", "#{payment.payment_date} for #{group.name}")
+          log_payment_activity("Scheduled Group second payment date recorded: ", "#{@payment.payment_date} for #{group.name}")
         else
           flash[:error] = "Unable to updated group record."
         end
       end
-      payment.save!
-      log_activity("Payment by check", "$#{sprintf('%.2f', payment.payment_amount)} paid for #{group.name}")
+      @payment.save!
+      log_payment_activity("Payment by check", "$#{sprintf('%.2f', @payment.payment_amount)} paid for #{group.name}")
       UserMailer.payment_confirmation(group, params).deliver
       flash[:notice] = "Successful entry of new payment."
-      redirect_to myssp_path(:id => group.liaison_id)
+      redirect_to myssp_path(:id => group.liaison_id) and return
     else
       flash[:error] = "A problem occurred in creating this payment."
-      payment = Payment.new()
-      payment_methods = 'Check', 'Credit Card', 'Cash'
-      if (params[:group_status] == 'registration')
-        payment_types = 'Deposit', 'Other'
-        group = Registration.find(params[:group_id])
-        site_name = Site.find(Session.find(group.request1).site_id).name
-        period_name = Period.find(Session.find(group.request1).period_id).name
-        start_date = Period.find(Session.find(group.request1).period_id).start_date
-        end_date = Period.find(Session.find(group.request1).period_id).end_date
-        session_type = SessionType.find(Session.find(group.request1).session_type_id).name
+      @page_title = "Record payment for: #{group.name}"
+      @group_status = params[:group_status]
+      current_admin_user.admin? ? (@payment_methods = 'Check', 'Credit Card', 'Cash') : @payment_methods = ['Credit Card']
+
+      if @group_status == 'registration'
+        @payment_types = 'Deposit', 'Other'
+        @group = Registration.find(params[:group_id])
       else
-        payment_types = 'Deposit', 'Second', 'Final', 'Other'
-        group = ScheduledGroup.find(params[:group_id])
-        site_name = Site.find(Session.find(group.session_id).site_id).name
-        period_name = Period.find(Session.find(group.session_id).period_id).name
-        start_date = Period.find(Session.find(group.session_id).period_id).start_date
-        end_date = Period.find(Session.find(group.session_id).period_id).end_date
-        session_type = SessionType.find(Session.find(group.session_id).session_type_id).name
+        @payment_types = 'Deposit', 'Second', 'Final', 'Other'
+        @group = ScheduledGroup.find(params[:group_id])
       end
-
-      liaison_name = Liaison.find(group.liaison_id).name
-
-      @screen_info = {:scheduled_group => group, :group_status => params[:group_status],
-                        :site_name => site_name, :period_name => period_name, :start_date => start_date,
-                        :end_date => end_date,  :session_type => session_type, :payment => payment, :payment_types => payment_types,
-                        :liaison_name => liaison_name, :payment_methods => payment_methods}
-        @page_title = "Record payment for: #{group.name}"
+      @page_title = "Make payment for group: #{@group.name}"
       render "payment/new"
     end
+  end
+
+  #payments for groups that are already scheduled
+  def process_cc_scheduled_payment(group_id, cc_payment_amount, cc_to_be_charged, cc_processing_charge, token, payment_comments,
+      group_status)
+    @group = ScheduledGroup.find(group_id)
+    @payment_error_message = ''
+    begin
+      to_be_charged = (100 * cc_to_be_charged.to_f).to_i
+      logger.debug to_be_charged
+      charge = Stripe::Charge.create(
+          :amount=> to_be_charged,
+          :currency=>"usd",
+          :card => token,
+          :description => @group.name)
+    rescue Stripe::InvalidRequestError => e
+      @payment_error_message = "There has been a problem processing your credit card."
+    rescue Stripe::CardError => e
+      flash[:error] = @payment_error_message = e.message
     end
 
+    if e
+      render :partial => 'process_cc_scheduled_payment'
+    else
+      p = Payment.record_payment(group_id, cc_payment_amount, cc_processing_charge, "cc", "cc", payment_comments)
+       if p
+        log_payment_activity("CC Payment", "Group: #{@group.name} Fee amount: $#{sprintf('%.2f', cc_payment_amount.to_f)} Processing chg: $#{sprintf('%.2f', cc_processing_charge.to_f)}")
+        UserMailer.cc_payment_confirmation(@group, p, cc_payment_amount, cc_processing_charge, payment_comments, group_status).deliver
+        #flash[:notice] = "Successful entry of new payment."
+        #redirect_to myssp_path(:id => @group.liaison_id)
+      else
+        @payment_error_message = "Unsuccessful save of payment record - please contact the SSP office."
+      end
+        render :partial => 'process_cc_scheduled_payment'
+    end
+  end
+
 private
-  def log_activity(activity_type, activity_details)
+  def log_payment_activity(activity_type, activity_details)
     a = Activity.new
     a.activity_date = Time.now
     a.activity_type = activity_type
@@ -159,12 +174,4 @@ private
       flash[:error] = "Unknown problem occurred logging a transaction."
     end
   end
-
-  #def check_for_cancel
-  #unless params[:cancel].blank?
-  #  liaison_id = ScheduledGroup.find(params[:payment][:scheduled_group_id]).liaison_id
-  #  redirect_to myssp_path(liaison_id)
-  #  end
-  #end
-
 end

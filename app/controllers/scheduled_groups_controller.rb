@@ -8,7 +8,7 @@ class ScheduledGroupsController < ApplicationController
   layout 'admin_layout'
 
   def program_session
-    session = Session.find(params[:session])
+    session = Session.find(params[:id])
     @groups = ScheduledGroup.active_program.find_all_by_session_id(session.id)
     @session_week = Period.find(session.period.id).name
     @session_site = Site.find(session.site_id).name
@@ -82,7 +82,7 @@ class ScheduledGroupsController < ApplicationController
       when 'Print This Page'
 
       when 'Send Confirmation Email'
-        UserMailer.schedule_confirmation(@scheduled_group, params).deliver
+        UserMailer.schedule_confirmation(@scheduled_group).deliver
         flash[:notice] = "Confirmation email has been sent for group #{@scheduled_group.name}."
     end
     redirect_to admin_registrations_path
@@ -200,47 +200,11 @@ class ScheduledGroupsController < ApplicationController
 
   def invoice
     @group= ScheduledGroup.find(params[:id])
-    #liaison_name = Liaison.find(@group.liaison_id).name
-    #site_name = Site.find(Session.find(@group.session_id).site_id).name
-    #period_name = Period.find(Session.find(@group.session_id).period_id).name
-    #start_date = Period.find(Session.find(@group.session_id).period_id).start_date
-    #end_date = Period.find(Session.find(@group.session_id).period_id).end_date
-    #session_type = SessionType.find(Session.find(@group.session_id).session_type_id).name
-    #invoice = calculate_invoice_data(@group)
-    #church = Church.find(@group.church_id)
-    #invoice_items = create_invoice_items(invoice)
-    #
-    #@screen_info = {:scheduled_group => @scheduled_group, :invoice_items => invoice_items,
-    #  :site_name => site_name, :period_name => period_name, :start_date => start_date,
-    #  :end_date => end_date,  :session_type => session_type, :invoice_data => invoice,
-    #  :liaison_name => liaison_name, :church_info => church}
-    @title = "Invoice for: #{@group.name}"
+    @page_title = "Invoice for: #{@group.name}"
   end
 
   def statement
-    @scheduled_group = ScheduledGroup.find(params[:id])
-    invoice = calculate_invoice_data(params[:id])
-    @event_list = invoice[:event_list]
-
-
-#Add header and footers to event_list for statement
-    @event_list.insert(0, ["Date", "Item", "Notes", "Amount Due", "Amount Received"])
-    footer = ["", "Totals", "", number_to_currency(invoice[:total_due]), number_to_currency(invoice[:amount_paid])]
-    @event_list << footer
-    footer = ["", "Current Balance Due", "", number_to_currency(invoice[:current_balance]), ""]
-    @event_list << footer
-#Convert date column to formatted dates
-    for i in 0..@event_list.size - 1
-      if @event_list[i][0].instance_of?(Date)
-        @event_list[i][0] = @event_list[i][0].strftime("%m/%d/%Y")
-      end
-    end
-    @liaison_name = Liaison.find(@scheduled_group.liaison_id).name
-    @site_name = Site.find(Session.find(@scheduled_group.session_id).site_id).name
-    @period_name = Period.find(Session.find(@scheduled_group.session_id).period_id).name
-    @start_date = Period.find(Session.find(@scheduled_group.session_id).period_id).start_date
-    @end_date = Period.find(Session.find(@scheduled_group.session_id).period_id).end_date
-    @church = Church.find(@scheduled_group.church_id)
+    @group = ScheduledGroup.find(params[:id])
   end
 
   def invoice_report
@@ -278,7 +242,7 @@ private
       end
   end
 
-  def build_invoice_report
+  def build_invoice_report_delete
 
     invoices = []
 
@@ -425,7 +389,7 @@ private
   end
 
 
-  def create_invoice_items(invoice)
+  def create_invoice_items_delete(invoice)
 
     #Create invoice_items array
     invoice_items = Array[]

@@ -16,8 +16,12 @@ test: &test
   adapter: postgresql
   encoding: unicode
   database: myssp_test
+<<<<<<< HEAD
   username: postgres
   password: password
+=======
+  username: rickeaton
+>>>>>>> remotes/upstream/master
   pool: 5
   timeout: 5000
 
@@ -26,8 +30,12 @@ production:
   adapter: postgresql
   encoding: unicode
   database: myssp_production
+<<<<<<< HEAD
   username: postgres
   password: password
+=======
+  username: rickeaton
+>>>>>>> remotes/upstream/master
   pool: 5
   timeout: 5000
 
