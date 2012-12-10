@@ -149,6 +149,14 @@ class ReportsController < ApplicationController
       format.csv { create_csv("year-to-year-#{Time.now.strftime("%Y%m%d")}.csv") }
     end
   end
+  def missing_churches_alt(scope = nil)
+    @headers = get_yty_headers_alt
+    @rows = get_yty_rows_alt
+
+    respond_to do |format|
+      format.csv { create_csv("year-to-year-#{Time.now.strftime("%Y%m%d")}.csv") }
+    end
+  end
 
   def get_yty_headers
     @headers = []
@@ -177,6 +185,32 @@ class ReportsController < ApplicationController
       row << (ScheduledGroup.program_2012.senior_high.find_all_by_church_id(church.id).map &:current_total).sum
       row << ScheduledGroup.active_program.senior_high.find_all_by_church_id(church.id).count
       row << (ScheduledGroup.active_program.senior_high.find_all_by_church_id(church.id).map &:current_total).sum
+      row << ""
+    @rows << row
+    end
+    @rows
+  end
+
+  def get_yty_headers_alt
+
+    @headers = []
+    @headers << "Group Name" << "Group Type"
+    @headers << "Church" << "City"
+    @headers << "Participants" << "Site"
+    @headers << "Liaison Name" << "Liaison Work Phone" << "Liaison Cell Phone" << "Liaison Email"
+    @headers
+  end
+
+  def get_yty_rows_alt
+    @rows = []
+    missing = ScheduledGroup.program_2012.joins(:church).where('churches.registered = ?', false)
+
+    missing.each do |group|
+      row = []
+      row << group.name << group.session_type.name
+      row << group.church.name << group.church.city
+      row << group.current_total << group.session.site.name
+      row << group.liaison.name << group.liaison.work_phone << group.liaison.cell_phone << group.liaison.email1
       row << ""
     @rows << row
     end

@@ -183,7 +183,7 @@ Spoic3::Application.routes.draw do
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_csv'
   match "reports/rosters" => 'reports#rosters', :as => 'rosters_html'
   match "reports/participation_summary" => 'reports#participation_summary', :as => 'part_sum_csv'
-  match "reports/missing_churches" => 'reports#missing_churches', :as => 'missing_churches_csv'
+  match "reports/missing_churches" => 'reports#missing_churches_alt', :as => 'missing_churches_csv'
   match "reports/new_churches" => 'reports#new_churches', :as => 'new_churches_csv'
 
   match "reports/purchases_with_unaccounted" => 'purchases#show_all_unaccounted', :as => 'unaccounted_report'
@@ -210,9 +210,10 @@ Spoic3::Application.routes.draw do
   match '/admin', :to => 'admin#index'
   match 'ops_pages/food', :to => 'ops_pages#food', :as => 'food'
   match 'ops_pages/show', :to => 'ops_pages#show', :as => 'ops_pages_show'
+  match 'ops_pages/show_prior_year', :to => 'ops_pages#show_prior_year', :as => 'ops_pages_show_old'
   match 'ops_pages/construction', :to => 'ops_pages#construction', :as => 'construction'
   match 'ops_pages/staff', :to => 'ops_pages#staff', :as => 'staff'
-  match 'ops_pages/index', :to => 'ops_pages#index', :as => 'ops_indx'
+  match 'ops_pages/index', :to => 'ops_pages#index', :as => 'ops_index'
 
   match '/help', :to => 'pages#help', :as => 'help'
   match '/contact', :to => 'pages#contact'

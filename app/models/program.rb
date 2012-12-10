@@ -31,6 +31,7 @@ class Program < ActiveRecord::Base
   scope :active, where(:active => true)
   scope :current, where(:active => true)
   scope :past, where(:active => false)
+  scope :in_2012, where('start_date > ? AND start_date < ?', '2011-09-30', '2012-10-01')
 
   def total_days
     total = 0
