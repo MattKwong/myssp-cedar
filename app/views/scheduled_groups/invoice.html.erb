@@ -86,14 +86,14 @@
                 </table>
              </div>
          <div>This statement shows the entire cost of your SSP trip and does not necessary show what you currently owe.
-         To determine your current (or next) payment to SSP, refer to the invoice section above. To print a copy of this
+         To determine your current (or next) payment to SSP, refer to the invoice section below. To print a copy of this
          statement for your records,
          <%= link_to " click here.", statement_path(:group_id => @group.id, :format => "pdf") %></div>
         </table>
                </div>
         </div>
     <div class="panel">
-    <% if @group.second_payment_date.nil? %>
+    <!-- if @group.second_payment_date.nil? %>-->
         <h3><%= "Current Invoice Due: #{@group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
           <div class="panel_contents">
             <table border="0" cellspacing="0" cellpadding="0">
@@ -171,7 +171,7 @@
       2. To pay by credit card, <%= link_to "click here", record_payment_path(:group_id => @group.id) %>. To pay by check,
       <%= link_to "print this invoice", invoice_path(:group_id => @group.id, :format => "pdf") %> and mail it with a check to the SSP office.</div>
 
-        <% end %>
+        <!--<end %>-->
         </div>
         </div>
      </div>
