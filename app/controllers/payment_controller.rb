@@ -71,6 +71,18 @@ class PaymentController < ApplicationController
     @page_title = "Make payment for group: #{@group.name}"
   end
 
+  def new_standalone_cc
+    #Used to create cc payment which is not associated with a currently registered summer group.
+    #Used for central america, weekend and spring break. Accepts payments, doesn't update database, sends data
+    #in an email to admin@sierraserviceproject.org
+    @standalone_payment = {:payment_date => @payment_date, :name_on_card => @name_on_card, :program => @program, :notes => @notes, :amount_charged => @amount_charged,
+                            :processing_charge => @processing_charge}
+  end
+
+  def create_standalone_cc
+    redirect_to :back
+  end
+
   def create #payments for groups that are already scheduled
     if params[:payment_method] == 'Credit Card'
       process_cc_scheduled_payment(params[:group_id], params[:payment_amount], params[:amount_paid],

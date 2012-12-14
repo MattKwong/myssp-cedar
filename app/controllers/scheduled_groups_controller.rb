@@ -532,7 +532,7 @@ private
         @session = Session.find(@scheduled_group.session_id)
         @sessions = Session.find_all_by_session_type_id(@scheduled_group.group_type_id).map { |s| [s.name, s.id ]}
         @liaison = Liaison.find(@scheduled_group.liaison_id)
-        @title = "Change Schedule"
+        @title = "Make Changes to Group"
         params[:id => @group.id]
         render "edit"
      else
@@ -557,7 +557,7 @@ private
           @group.current_total = new_values[:current_counselors].to_i + new_values[:current_youth].to_i
         end
 
-        if @group.update_attributes(@group) then
+        if @group.save then
           log_activity("Group Update", "Count changed to #{@group.current_total}")
           redirect_to change_confirmation_path(@group_id, :change_id => change_record.id)
         else

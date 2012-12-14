@@ -89,6 +89,7 @@ Spoic3::Application.routes.draw do
   match 'payment/:id/process_cc_payment', :to => 'payment#process_cc_payment', :as => 'process_cc_payment'
   match 'payment/:id/create', :to => 'payment#create', :as => 'create'
   match "payment/:group_id/new" => 'payment#new', :as => "record_payment"
+  match "payment/new_standalone_cc" => 'payment#new_standalone_cc', :as => "standalone_cc_payment"
 
   match "registration/:id/edit" => 'registration#edit', :as => "edit_registration"
   match "registration/:id/show" => 'registration#show', :as => "show_registration"
