@@ -12,51 +12,53 @@
                    <table id="payment_table">
                         <h3>Enter the payment details below.</h3>
                         <tr>
-                           <td><%= text_field_tag "Name on Card", "name_on_card" %></td>
+                           <td><label>Name on Card</label></td>
+                           <td><%= text_field_tag :name_on_card %></td>
                         </tr>
                         <tr>
-                           <td id="program"><%= text_field_tag "Program",  "program" %></td>
+                          <td><label>Program</label></td>
+                          <td id="program"><%= text_field_tag :program %></td>
                         </tr>
                         <tr>
-                          <td id="notes"><%= text_field_tag "Notes", :notes %></td>
+                          <td><label>Notes</label></td>
+                          <td id="notes"><%= text_field_tag :notes %></td>
                         </tr>
 
-                        <!--<tbody>-->
-                          <!--<tr>-->
-                            <!--<td><label>Payment Amount (please omit $)</label></td>-->
-                            <!--<td><input type="number" size="10" autocomplete="off" name="cc_payment_amount" id="cc_payment_amount" /></td>-->
-                          <!--</tr>-->
-                          <!--<tr>-->
-                            <!--<td>-->
-                              <!--<label class="processing_fee_button">Include 2.9% processing fee that SSP pays</label>-->
-                              <!--<%= check_box_tag("include_cc_charge", "accepted", false) %>-->
-                            <!--</td>-->
-                            <!--<td class = "input_money" name="cc_processing_charge" id="cc_processing_charge" ></td>-->
-                          <!--</tr>-->
-                          <!--<tr>-->
-                            <!--<td><label>Total To Be Charged</label></td>-->
-                            <!--<td class = "input_money" name="cc_total_charge" id="cc_to_be_charged" ></td>-->
-                          <!--</tr>-->
-                          <!--<tr>-->
-                            <!--<td><label>Card Number</label></td>-->
-                            <!--<td><input type="number" name="card_number" size="16" autocomplete="off" class="card-number" /></td>-->
-                          <!--</tr>-->
-                          <!--<tr>-->
-                            <!--<td><label>CVC</label></td>-->
-                            <!--<td><input type="number" size="3" autocomplete="off" name="card_cvc" class="card-cvc" /></td>-->
-                          <!--</tr>-->
-                          <!--<tr>-->
-                            <!--<td><label>Expiration (MM/YYYY)</label></td>-->
-                            <!--<td><span><input type="number" size="2" name="card-expiry-month" class="card-expiry-month"/>-->
-                              <!--<input type="number" size="4" name="card-expiry-year" class="card-expiry-year"/></span></td>-->
-                          <!--</tr>-->
+                        <tbody>
+                          <tr>
+                            <td><label>Payment Amount (please omit $)</label></td>
+                            <td><input type="number" size="10" autocomplete="off" name="cc_payment_amount" id="cc_payment_amount" /></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <label class="processing_fee_button">Include 2.9% processing fee that SSP pays</label>
+                              <%= check_box_tag("include_cc_charge", "accepted", false) %>
+                            </td>
+                            <td class = "input_money" name="cc_processing_charge" id="cc_processing_charge" ></td>
+                          </tr>
+                          <tr>
+                            <td><label>Total To Be Charged</label></td>
+                            <td class = "input_money" name="cc_total_charge" id="cc_to_be_charged" ></td>
+                          </tr>
+                          <tr>
+                            <td><label>Card Number</label></td>
+                            <td><input type="number" name="card_number" size="16" autocomplete="off" class="card-number" /></td>
+                          </tr>
+                          <tr>
+                            <td><label>CVC</label></td>
+                            <td><input type="number" size="3" autocomplete="off" name="card_cvc" class="card-cvc" /></td>
+                          </tr>
+                          <tr>
+                            <td><label>Expiration (MM/YYYY)</label></td>
+                            <td><span><input type="number" size="2" name="card-expiry-month" class="card-expiry-month"/>
+                              <input type="number" size="4" name="card-expiry-year" class="card-expiry-year"/></span></td>
+                          </tr>
                         </tbody>
                       <tr><td><div class="actions">
                         <%= submit_tag "Submit Payment" %>
                     </div></td>
                     <td></td>
                     </tr>
-
                    </table>
                    </div>
                  </div>

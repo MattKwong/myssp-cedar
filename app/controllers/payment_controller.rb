@@ -80,7 +80,8 @@ class PaymentController < ApplicationController
   end
 
   def create_standalone_cc
-    redirect_to :back
+    @page_title = "Payment Successful"
+    render 'payment/standalone_created'
   end
 
   def create #payments for groups that are already scheduled
