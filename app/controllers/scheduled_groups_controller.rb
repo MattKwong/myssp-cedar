@@ -557,7 +557,7 @@ private
           @group.current_total = new_values[:current_counselors].to_i + new_values[:current_youth].to_i
         end
 
-        if @group.update_attributes(@group) then
+        if @group.save then
           log_activity("Group Update", "Count changed to #{@group.current_total}")
           redirect_to change_confirmation_path(@group_id, :change_id => change_record.id)
         else
