@@ -532,7 +532,7 @@ private
         @session = Session.find(@scheduled_group.session_id)
         @sessions = Session.find_all_by_session_type_id(@scheduled_group.group_type_id).map { |s| [s.name, s.id ]}
         @liaison = Liaison.find(@scheduled_group.liaison_id)
-        @title = "Change Schedule"
+        @title = "Make Changes to Group"
         params[:id => @group.id]
         render "edit"
      else

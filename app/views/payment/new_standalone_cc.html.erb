@@ -1,0 +1,87 @@
+
+<%= form_tag '/payment/create_standalone_cc' do %>
+    <div id="active_admin_content" class="without_sidebar">
+  <div id="main_content_wrapper" >
+     <div id="main_content">
+       <div class="hidden" id="gateway_data"></div>
+       <div class = "errors" id="cc_payment_errors"></div>
+       <div class="panel" id="main_data">
+              <div>
+                 <div>
+                   <div id="payment_form"></div>
+                   <table id="payment_table">
+                        <h3>Enter the payment details below.</h3>
+                        <tr>
+                           <td><label>Name on Card</label></td>
+                           <td id="payer_name"><%= text_field_tag :payer_name %></td>
+                        </tr>
+                        <tr>
+                          <td><label>Program</label></td>
+                          <td id="program"><%= text_field_tag :program %></td>
+                        </tr>
+                        <tr>
+                          <td><label>Notes</label></td>
+                          <td id="notes"><%= text_field_tag :notes %></td>
+                        </tr>
+
+                        <tbody>
+                          <tr>
+                            <td><label>Payment Amount (please omit $)</label></td>
+                            <td><input type="number" size="10" autocomplete="off" name="cc_payment_amount" id="cc_payment_amount" /></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <label class="processing_fee_button">Include 2.9% processing fee that SSP pays</label>
+                              <%= check_box_tag("include_cc_charge", "accepted", false) %>
+                            </td>
+                            <td class = "input_money" name="cc_processing_charge" id="cc_processing_charge" ></td>
+                          </tr>
+                          <tr>
+                            <td><label>Total To Be Charged</label></td>
+                            <td class = "input_money" name="cc_total_charge" id="cc_to_be_charged" ></td>
+                          </tr>
+                          <tr>
+                            <td><label>Card Number</label></td>
+                            <td><input type="number" name="card_number" size="16" autocomplete="off" class="card-number" /></td>
+                          </tr>
+                          <tr>
+                            <td><label>CVC</label></td>
+                            <td><input type="number" size="3" autocomplete="off" name="card_cvc" class="card-cvc" /></td>
+                          </tr>
+                          <tr>
+                            <td><label>Expiration (MM/YYYY)</label></td>
+                            <td><span><input type="number" size="2" name="card-expiry-month" class="card-expiry-month"/>
+                              <input type="number" size="4" name="card-expiry-year" class="card-expiry-year"/></span></td>
+                          </tr>
+                        </tbody>
+                      <tr><td><div class="actions" id="standalone_submit">
+                        <%= submit_tag "Submit Payment" %>
+                    </div></td>
+                    <td></td>
+                    </tr>
+                   </table>
+                   </div>
+                 </div>
+              </div>
+           </div>
+        <% end %>
+     </div>
+<div id="confirmation_step">
+  <h2 align="center" >Payment Successfully Processed</h2>
+  <div class="form">
+    <p align="center">This credit card payment has been successfully processed and an email record has been sent to
+      admin@sierraserviceprojectorg.</p>
+    <div class="clear"></div>
+  </div>
+  <br>
+  <div class="button_container">
+    <div class="reg_button center ">
+      <!--<img class="print_button" id="print_ninth" >-->
+      <%=  link_to image_tag("return.png", :alt => ":return"), :back, :class=>"return_button",
+                   :title => 'Return to liaison page' %>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>

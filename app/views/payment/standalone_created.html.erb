@@ -1,0 +1,44 @@
+<div id="active_admin_content" class="without_sidebar">
+  <div id="main_content_wrapper" >
+    <div id="main_content">
+
+  <p align="left" >This payment has been successfully recorded and a documenting email has been sent to admin@sierraserviceproject.org.</p>
+  <div class="panel">
+    <div class="panel_contents">
+      <table id="payment_table" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+      <td><label>Name on Card</label></td>
+      <td><%= params[:name_on_card] %></td>
+    </tr>
+    <tr>
+      <td><label>Program</label></td>
+      <td><%= params[:program] %></td>
+    </tr>
+    <tr>
+      <td><label>Notes</label></td>
+      <td><%= params[:notes] %></td>
+    </tr>
+    <tr>
+      <td><label>Amount of Payment</label></td>
+      <td><%= params[:cc_payment_amount] %></td>
+    </tr>
+    <tr>
+      <td><label>Included Processing Charge</label></td>
+      <td><%= params[:cc_payment_amount] %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+    <div class="clear"></div>
+        <br>
+    </div>
+<div class="button_container">
+    <div class="reg_button center ">
+        <%=  link_to "Enter Another", :back %>
+        <%=  link_to "Return to Main", :root %>
+    </div>
+</div>
+</div>
+</div>
