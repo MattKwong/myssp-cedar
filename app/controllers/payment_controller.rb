@@ -75,13 +75,16 @@ class PaymentController < ApplicationController
     #Used to create cc payment which is not associated with a currently registered summer group.
     #Used for central america, weekend and spring break. Accepts payments, doesn't update database, sends data
     #in an email to admin@sierraserviceproject.org
+    @page_title = "Input Credit Card Payment (Non-Summer Payment)"
     @standalone_payment = {:payment_date => @payment_date, :name_on_card => @name_on_card, :program => @program, :notes => @notes, :amount_charged => @amount_charged,
                             :processing_charge => @processing_charge}
   end
 
   def create_standalone_cc
-    @page_title = "Payment Successful"
-    render 'payment/standalone_created'
+    @page_title = "Standalone Credit Card Payment Successful"
+    log_payment_activity("Standalone payment recorded. ", "$#{sprintf('%.2f', params[:amount_paid])} paid by #{params[:name]}")
+    UserMailer.standalone_payment_confirmation(params).deliver
+    render 'standalone_created'
   end
 
   def create #payments for groups that are already scheduled

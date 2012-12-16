@@ -13,7 +13,7 @@
                         <h3>Enter the payment details below.</h3>
                         <tr>
                            <td><label>Name on Card</label></td>
-                           <td><%= text_field_tag :name_on_card %></td>
+                           <td id="payer_name"><%= text_field_tag :payer_name %></td>
                         </tr>
                         <tr>
                           <td><label>Program</label></td>
@@ -54,7 +54,7 @@
                               <input type="number" size="4" name="card-expiry-year" class="card-expiry-year"/></span></td>
                           </tr>
                         </tbody>
-                      <tr><td><div class="actions">
+                      <tr><td><div class="actions" id="standalone_submit">
                         <%= submit_tag "Submit Payment" %>
                     </div></td>
                     <td></td>
@@ -69,8 +69,8 @@
 <div id="confirmation_step">
   <h2 align="center" >Payment Successfully Processed</h2>
   <div class="form">
-    <p align="center">Your credit card payment has been successfully processed and a receipt has been emailed to you. If
-      you have any questions, don't hesitate to call Meghan Osborn at 916-488-6441.</p>
+    <p align="center">This credit card payment has been successfully processed and an email record has been sent to
+      admin@sierraserviceprojectorg.</p>
     <div class="clear"></div>
   </div>
   <br>
