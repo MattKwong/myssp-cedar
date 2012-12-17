@@ -48,37 +48,6 @@ class ScheduledGroupsController < ApplicationController
       flash[:error] = @scheduled_group.errors
     end
   end
-#TODO delete this
-#  def confirmation       # before the confirmation screen
-#    @title = @page_title = "Group Confirmation"
-#    @registration = Registration.find(params[:reg])
-#    church_name = Church.find(@registration.church_id).name
-#    if ScheduledGroup.find_all_by_registration_id(params[:reg]).count == 0
-#      @scheduled_group = ScheduledGroup.new(:church_id => @registration.church_id,
-#                        :name => @registration.name, :registration_id => @registration.id,
-#                        :current_youth => @registration.requested_youth,
-#                        :current_counselors => @registration.requested_counselors,
-#                        :current_total => @registration.requested_total,
-#                        :liaison_id => @registration.liaison_id, :session_id => params[:id],
-#                        :group_type_id => @registration.group_type_id,
-#                        :scheduled_priority => params[:priority],
-#                        :second_payment_total => 0)
-#    else if ScheduledGroup.find_all_by_registration_id(params[:reg]).count == 1
-#      @scheduled_group = ScheduledGroup.find_by_registration_id(params[:reg])
-#      if @scheduled_group.second_payment_total.nil?
-#        @scheduled_group.second_payment_total= 0
-#      end
-#         else
-#          flash[:error] = "Duplicate schedules exist for this registration. Contact support."
-#         end
-#    end
-#
-#    @scheduled_group.save!
-#    roster = Roster.create!(:group_id => @scheduled_group.id,
-#      :group_type => SessionType.find(Session.find(@scheduled_group.session_id).session_type_id).id)
-#    @scheduled_group.update_attribute('roster_id', roster.id)
-#    @session = Session.find(params[:id])
-#  end
 
   def update
     @scheduled_group = ScheduledGroup.find(params[:id])
