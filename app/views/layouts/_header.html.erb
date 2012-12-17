@@ -90,7 +90,11 @@
         <% end %>
         <% if signed_in? && current_admin_user.liaison? %>
             <li><%= link_to "MySSP", myssp_path(current_admin_user.liaison_id) %></li>
-            <li><%= link_to "Register a Group", new_registration_path(:id => params[:id]) %></li>
+            <li class="has_nested" ><a href='#'>Register</a>
+                <ul>
+                    <li><%= link_to "Register a Summer Group", new_registration_path(:id => params[:id]) %></li>
+                    <li><%= link_to "Register a Weekend Group", new_weekend_registration_path(:id => params[:id]) %></li>
+                </ul>
         <% end %>
       <li><%= link_to "Help", help_path %></li>
     </ul>

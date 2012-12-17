@@ -4,13 +4,24 @@ class RegistrationController < ApplicationController
   require 'erb'
 
   def new
-    @page_title = "Register a New Group"
+    @page_title = "Register a New Summer Group"
     @liaison = Liaison.find(params[:id])
     @registration = Registration.new
     @site_selection = ''
     @available_sites = Site.all
     @period_selection = ''
     @periods_available = Period.all
+  end
+
+  def new_weekend
+    puts (can? :create, Registration)
+    @page_title = "Register a New Weekend Group"
+    @liaison = Liaison.find(params[:id])
+    @registration = Registration.new
+    @site_selection = ''
+    #@available_sites = Site.weekend.all
+    @period_selection = ''
+    #@periods_available = Period.weekend.all
   end
 
   def index
