@@ -43,7 +43,7 @@ class UserMailer < ActionMailer::Base
 
   def standalone_payment_confirmation(params)
     @params = params
-    mail(:to => 'admin@sierraserviceproject.org', :subject => "Standalone Credit Card Payment Notice")
+    mail(:to => @params[:payer_email], :subject => "Credit Card Payment Notice")
   end
 
   def schedule_confirmation(group)

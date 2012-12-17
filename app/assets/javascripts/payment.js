@@ -6,6 +6,7 @@ var payment_type;
 var payment_notes;
 var program;
 var payer_name;
+var payer_email;
 
 $(document).ready(function() {
     $("input[name=include_cc_charge]").attr("disabled", "disabled");
@@ -210,11 +211,12 @@ function stripeStandalonePaymentResponseHandler(status, response) {
         var token = response['id'];
         // and submit
         payer_name = $("input[name=payer_name]").val();
+        payer_email = $("input[name=payer_email]").val();
         program = $("input[name=program]").val();
         payment_notes = $("input[name=notes]").val();
         $.get("create_standalone_cc?payment_amount=" + cc_payment_amount
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
-            + token + "&notes=" + payment_notes + "&name=" + payer_name  + "&program=" + program, function(data) {
+            + token + "&notes=" + payment_notes + "&name=" + payer_name  + "&program=" + program + "&payer_email=" + payer_email, function(data) {
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
             if (error_message) {
