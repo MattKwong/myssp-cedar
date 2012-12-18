@@ -1,9 +1,12 @@
 <div id="active_admin_content"  class="with_sidebar">
   <div id="main_content_wrapper">
     <div id="main_content">
-    <p><%= link_to 'Register A Summer Group', new_registration_path(:id => params[:id])%>  <%= link_to 'Register A Weekend of Service Group', new_weekend_registration_path(:id => params[:id])%></p>
+    <div class="scopes">
+        <%= button_to 'Register A Summer Group', new_registration_path(:id => params[:id])%>
+        <%= button_to 'Register A Weekend of Service Group', new_weekend_registration_path(:id => params[:id])%>
+    </div>
     <div class="panel">
-   <%= form_for(@screen_info[:liaison]) do |r| %>
+    <%= form_for(@screen_info[:liaison]) do |r| %>
       <h3>Church Details</h3>
       <div class="panel_contents">
           <div class="attributes_table church" id="church_info_table">
