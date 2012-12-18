@@ -467,11 +467,12 @@ class Session < ActiveRecord::Base
     #Returns a matrix of session availability, organized in rows and columns with row labels and column headers.
     #Matrix type is Registration, Scheduled or Availability
     #Assumes summer domestic. Sites are the rows; weeks are the columns
-      @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
-      period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
-      period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map do |p|
-          "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
-          end
+    sum_dom = program_type == "summer_domestic" ? true : false
+    @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, sum_dom).map { |s| s.name}
+    period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, sum_dom).map { |p| p.name}
+    period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, sum_dom).map do |p|
+        "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
+    end
 
     #Assign a ordinal value to each row and column
       @site_ordinal = Array.new
@@ -491,27 +492,33 @@ class Session < ActiveRecord::Base
       @avail_matrix = Array.new(@site_names.size + 1){ Array.new(period_names.size + 1, 0)}
       @senior_high = Array.new(@site_names.size + 1){ Array.new(period_names.size + 1, true)}
 
-      Registration.all(:conditions => "(request1 IS NOT NULL) AND (scheduled = 'f')").each do |r|
-        @session = Session.find(r.request1)
-        @site = Site.find(@session.site_id)
-        @period = Period.find(@session.period_id)
-        @row_position = @site_ordinal.index(@site.name)
-        @column_position = @period_ordinal.index(@period.name)
-        @session_id_matrix[@row_position][@column_position] = @session.id
-        @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
-        #unless (@column_position.nil? || @row_position.nil?)
-        #end
+      sum_dom ? registrations = Registration.summer_domestic.unscheduled.current : Registration.other.unscheduled.current
+
+      if registrations
+        registrations.each do |r|
+          @session = Session.find(r.request1)
+          @site = Site.find(@session.site_id)
+          @period = Period.find(@session.period_id)
+          @row_position = @site_ordinal.index(@site.name)
+          @column_position = @period_ordinal.index(@period.name)
+          @session_id_matrix[@row_position][@column_position] = @session.id
+          @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
+        end
       end
 
-      ScheduledGroup.active_program.each do |r|
-        @session = Session.find(r.session_id)
-        @site = Site.find(@session.site_id)
-        @period = Period.find(@session.period_id)
-        @row_position = @site_ordinal.index(@site.name)
-        @column_position = @period_ordinal.index(@period.name)
-        @session_id_matrix[@row_position][@column_position] = @session.id
-        @scheduled_matrix[@row_position][@column_position] += r.current_total
-        unless (@column_position.nil? || @row_position.nil?)
+      sum_dom ? scheduled_groups = ScheduledGroup.summer_domestic.active_program : ScheduledGroup.other.active_program
+
+      if scheduled_groups
+        scheduled_groups .each do |r|
+          @session = Session.find(r.session_id)
+          @site = Site.find(@session.site_id)
+          @period = Period.find(@session.period_id)
+          @row_position = @site_ordinal.index(@site.name)
+          @column_position = @period_ordinal.index(@period.name)
+          @session_id_matrix[@row_position][@column_position] = @session.id
+          @scheduled_matrix[@row_position][@column_position] += r.current_total
+          #unless (@column_position.nil? || @row_position.nil?)
+          #end
         end
       end
 
@@ -554,7 +561,7 @@ class Session < ActiveRecord::Base
         @reg_total = @sched_total = 0
       end
 
-    #Grand totalS
+    #Grand totals
       @reg_total = @sched_total = 0
       for i in 0..@site_names.size - 1 do
         @reg_total = @reg_total + @registration_matrix[i][period_names.size]
@@ -567,14 +574,16 @@ class Session < ActiveRecord::Base
       @site_names << "Total"
 
     #Replace zeros in cells which do not represent an active session
-      for i in 0..@site_names.size - 2 do
-        site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
-        for j in 0..period_names.size - 2 do
-          period = Period.active.summer_domestic.find_by_name(period_names[j]).id
-          if Session.where('site_id = ? AND period_id = ?', site, period).size == 0
-            @registration_matrix[i][j] = "-"
-            @scheduled_matrix[i][j] = "-"
-            @avail_matrix[i][j] = "-"
+      if sum_dom
+        for i in 0..@site_names.size - 2 do
+          site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
+          for j in 0..period_names.size - 2 do
+            period = Period.active.summer_domestic.find_by_name(period_names[j]).id
+            if Session.where('site_id = ? AND period_id = ?', site, period).size == 0
+              @registration_matrix[i][j] = "-"
+              @scheduled_matrix[i][j] = "-"
+              @avail_matrix[i][j] = "-"
+            end
           end
         end
       end

@@ -41,10 +41,13 @@ class Registration < ActiveRecord::Base
   scope :scheduled, where(:scheduled => 't')
   scope :unscheduled, where('scheduled <> ?', 't')
   scope :current_unscheduled, where(:scheduled => 'f').where('created_at > ?', '2012-09-01'.to_datetime)
+  scope :senior_high, where('group_type_id = ?', 2)
+  scope :junior_high, where('group_type_id = ?', 3)
   scope :senior_high_unscheduled, where('group_type_id = ? AND scheduled <> ?', 2, 't')
-  scope :junior_high_unscheduled, where((:group_type_id == 3) && (:scheduled != 't'))
-  scope :other_unscheduled, where((:group_type_id == 1) || (:group_type_id == 4))
-  scope :current, where('created_at > ?', '2012-09-01'.to_datetime)
+  scope :junior_high_unscheduled, where('group_type_id = ? AND scheduled <> ?', 3, 't')
+  scope :other, lambda {joins(:session_type).where('session_types.name <> ? AND session_types.name <> ?', "Summer Senior High", "Summer Junior High")}
+  scope :summer_domestic, lambda {joins(:session_type).where('session_types.name = ? OR session_types.name = ?', "Summer Senior High", "Summer Junior High")}
+  scope :current, where('registrations.created_at > ?', '2012-09-01'.to_datetime)
   scope :not_current, where('created_at < ?', '2012-09-01'.to_datetime)
 
   attr_accessible :name,:comments, :liaison_id, :request1, :request2, :request3,

@@ -19,6 +19,7 @@ class Period < ActiveRecord::Base
   accepts_nested_attributes_for :sessions
   scope :active, where(:active => true)
   scope :summer_domestic, where(:summer_domestic => true)
+  scope :other, where(:summer_domestic => false)
 
   validates :name, :start_date, :end_date, :presence => true
   validate :start_date_before_end_date

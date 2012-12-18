@@ -37,6 +37,8 @@ class ScheduledGroup < ActiveRecord::Base
   scope :high_school, where(:group_type_id => 2)
   scope :senior_high, where(:group_type_id => 2)
   scope :junior_high, where(:group_type_id => 3)
+  scope :other, lambda {joins(:session_type).where('session_types.name <> ? AND session_types.name <> ?', "Summer Senior High", "Summer Junior High")}
+  scope :summer_domestic, lambda {joins(:session_type).where('session_types.name = ? OR session_types.name = ?', "Summer Senior High", "Summer Junior High")}
 
   has_many :payments
   has_many :change_historiesc
