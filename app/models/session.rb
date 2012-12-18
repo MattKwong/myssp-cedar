@@ -546,7 +546,7 @@ class Session < ActiveRecord::Base
           period = Period.find(session.period_id)
           row_position = @site_ordinal.index(site.name)
           column_position = @period_ordinal.index(period.name)
-          @scheduled_matrix[@row_position][@column_position] += r.current_total
+          @scheduled_matrix[row_position][column_position] += r.current_total
           #unless (@column_position.nil? || @row_position.nil?)
           #end
         end
