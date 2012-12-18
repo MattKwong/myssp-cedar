@@ -95,7 +95,7 @@ class ScheduledGroupsController < ApplicationController
   def edit
     @scheduled_group = ScheduledGroup.find(params[:id])
     @session = Session.find(@scheduled_group.session_id)
-    @sessions = Session.find_all_by_session_type_id(@scheduled_group.group_type_id).sort_by{|e| e.name}.map { |s| [s.name, s.id ]}
+    @sessions = Session.active.find_all_by_session_type_id(@scheduled_group.group_type_id).sort_by{|e| e.name}.map { |s| [s.name, s.id ]}
     @liaison = Liaison.find(@scheduled_group.liaison_id)
     @title = @page_title = "Change Schedule"
     @notes = String.new
@@ -112,8 +112,8 @@ class ScheduledGroupsController < ApplicationController
     @current_date = Time.now.strftime("%a, %b %d, %Y")
     @first_name = liaison.first_name
     @week = period.name
-    @start_date = period.start_date.strftime("%a, %b %d, %Y")
-    @end_date = period.end_date.strftime("%a, %b %d, %Y")
+    @start_date = period.start_date.strftime("%A, %B %d, %Y at %l:%M %p")
+    @end_date = @session.period_end_date.strftime("%A, %B %d, %Y at %l:%M %p")
     @group_name = @scheduled_group.name
     @church_name = Church.find(@scheduled_group.church_id).name
     @liaison_name = liaison.name
