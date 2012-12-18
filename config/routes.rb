@@ -83,6 +83,7 @@ Spoic3::Application.routes.draw do
   match 'registration/pay_by_check', :to => 'registration#pay_by_check'
   match 'registration/request_matrix', :to => 'registration#request_matrix'
   match 'registration/availability_matrix', :to => 'registration#availability_matrix'
+  match 'registration/other_availability_matrix', :to => 'registration#other_availability_matrix'
   match 'registration/get_session_name', :to => 'registration#get_session_name'
 
   match 'payment/:id/cc_payment', :to => 'payment#cc_payment', :as => 'cc_payment'
@@ -95,6 +96,7 @@ Spoic3::Application.routes.draw do
   match "registration/:id/edit" => 'registration#edit', :as => "edit_registration"
   match "registration/:id/show" => 'registration#show', :as => "show_registration"
   match "registration/new_weekend" => 'registration#new_weekend', :as => "new_weekend_registration"
+  match "registration/new" => 'registration#new', :as => "new_registration"
 
   match "items/new", :to => 'items#new', :as => 'add_item'
   resources :vendors #, :only => [:index]

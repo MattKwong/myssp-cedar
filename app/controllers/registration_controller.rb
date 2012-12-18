@@ -404,6 +404,14 @@ check amount listed in the Amount Due column. This can be paid either by check o
     render :partial => 'availability_matrix'
   end
 
+  def other_availability_matrix
+    jh_default = 50
+    sh_default = 65
+    @matrices = Session.session_matrices("other", sh_default, jh_default)
+    logger.debug @matrices
+    render :partial => 'other_availability_matrix'
+  end
+
   private
 
 #  def build_schedule(reg_or_sched, type, sh_default = nil, jh_default = nil)

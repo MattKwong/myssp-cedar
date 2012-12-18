@@ -33,7 +33,24 @@ class Session < ActiveRecord::Base
   scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
   scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
+  scope :summer_domestic, lambda { joins(:session_type).where("session_types.name = ? OR session_types.name = ?", 'Summer Senior High', 'Summer Junior High') }
+  scope :other, lambda { joins(:session_type).where("session_types.name <> ? AND session_types.name <> ?", 'Summer Senior High', 'Summer Junior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
+
+  def default_max
+    case
+      when session_type.senior_high?
+        sh_default
+      when session_type.junior_high?
+        jh_default
+      when session_type.break?
+        break_default
+      when session_type.weekend?
+        we_default
+      else
+        40
+    end
+  end
 
   def sh_default
     65
@@ -41,6 +58,14 @@ class Session < ActiveRecord::Base
 
   def jh_default
     50
+  end
+
+  def we_default
+    35
+  end
+
+  def break_default
+    35
   end
 
   def senior_high?
@@ -463,7 +488,7 @@ class Session < ActiveRecord::Base
     site.abbr + " " + period.name.first + period.name.last
   end
 
-  def self.session_matrices(program_type, sh_maximum = 65, jh_maximum = 50)
+  def self.session_matrices(program_type, sh_maximum = 65, jh_maximum = 50, we_maximum = 30)
     #Returns a matrix of session availability, organized in rows and columns with row labels and column headers.
     #Matrix type is Registration, Scheduled or Availability
     #Assumes summer domestic. Sites are the rows; weeks are the columns
@@ -494,15 +519,21 @@ class Session < ActiveRecord::Base
 
       sum_dom ? registrations = Registration.summer_domestic.unscheduled.current : Registration.other.unscheduled.current
 
+      sessions = sum_dom ? Session.active.summer_domestic : Session.active.other
+      sessions.each do |session|
+        row_position = @site_ordinal.index(session.site.name)
+        column_position = @period_ordinal.index(session.period.name)
+        @session_id_matrix[row_position][column_position] = session.id
+      end
+
       if registrations
         registrations.each do |r|
-          @session = Session.find(r.request1)
-          @site = Site.find(@session.site_id)
-          @period = Period.find(@session.period_id)
-          @row_position = @site_ordinal.index(@site.name)
-          @column_position = @period_ordinal.index(@period.name)
-          @session_id_matrix[@row_position][@column_position] = @session.id
-          @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
+          session = Session.find(r.request1)
+          site = Site.find(session.site_id)
+          period = Period.find(session.period_id)
+          row_position = @site_ordinal.index(site.name)
+          column_position = @period_ordinal.index(period.name)
+          @registration_matrix[row_position][column_position] += r.requested_counselors + r.requested_youth
         end
       end
 
@@ -510,12 +541,11 @@ class Session < ActiveRecord::Base
 
       if scheduled_groups
         scheduled_groups .each do |r|
-          @session = Session.find(r.session_id)
-          @site = Site.find(@session.site_id)
-          @period = Period.find(@session.period_id)
-          @row_position = @site_ordinal.index(@site.name)
-          @column_position = @period_ordinal.index(@period.name)
-          @session_id_matrix[@row_position][@column_position] = @session.id
+          session = Session.find(r.session_id)
+          site = Site.find(session.site_id)
+          period = Period.find(session.period_id)
+          row_position = @site_ordinal.index(site.name)
+          column_position = @period_ordinal.index(period.name)
           @scheduled_matrix[@row_position][@column_position] += r.current_total
           #unless (@column_position.nil? || @row_position.nil?)
           #end
@@ -574,16 +604,26 @@ class Session < ActiveRecord::Base
       @site_names << "Total"
 
     #Replace zeros in cells which do not represent an active session
-      if sum_dom
-        for i in 0..@site_names.size - 2 do
-          site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
-          for j in 0..period_names.size - 2 do
-            period = Period.active.summer_domestic.find_by_name(period_names[j]).id
-            if Session.where('site_id = ? AND period_id = ?', site, period).size == 0
-              @registration_matrix[i][j] = "-"
-              @scheduled_matrix[i][j] = "-"
-              @avail_matrix[i][j] = "-"
-            end
+    #  if sum_dom
+    #    for i in 0..@site_names.size - 2 do
+    #      site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
+    #      for j in 0..period_names.size - 2 do
+    #        period = Period.active.summer_domestic.find_by_name(period_names[j]).id
+    #        if Session.where('site_id = ? AND period_id = ?', site, period).size == 0
+    #          @registration_matrix[i][j] = "-"
+    #          @scheduled_matrix[i][j] = "-"
+    #          @avail_matrix[i][j] = "-"
+    #        end
+    #      end
+    #    end
+    #  end
+    #
+      for i in 0..@site_names.size - 2 do
+        for j in 0..period_names.size - 2 do
+          if @session_id_matrix[i][j] == 0
+            @registration_matrix[i][j] = "-"
+            @scheduled_matrix[i][j] = "-"
+            @avail_matrix[i][j] = "-"
           end
         end
       end

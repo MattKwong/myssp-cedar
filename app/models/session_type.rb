@@ -19,12 +19,22 @@ class SessionType < ActiveRecord::Base
   scope :senior_high, where(:name => 'Summer Senior High')
   scope :junior_high, where(:name => 'Summer Junior High')
 
+
   def junior_high?
     name == "Summer Junior High" ? true : false
   end
   def senior_high?
     name == "Summer Senior High" ? true : false
   end
+
+  def weekend?
+    name == "Weekend of Service" ? true : false
+  end
+
+  def break?
+    name == "Winter and Spring Break" ? true : false
+  end
+
   def limit
     self.junior_high? ? 20 : 30
   end
