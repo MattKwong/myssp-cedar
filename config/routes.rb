@@ -176,7 +176,7 @@ Spoic3::Application.routes.draw do
     put 'process_payment'
   end
   match "scheduled_groups/invoice_report" => 'scheduled_groups#invoice_report', :as => 'invoice_report'
-  match "scheduled_groups/invoice_report.csv" => 'scheduled_groups#invoice_report', :as => 'invoice_report_csv'
+  #match "scheduled_groups/invoice_report.csv" => 'scheduled_groups#invoice_report', :as => 'invoice_report_csv'
   match "scheduled_groups/tshirt_report" => 'scheduled_groups#tshirt_report', :as => 'tshirt_report'
   match "scheduled_groups/tshirt_report.csv" => 'scheduled_groups#tshirt_report', :as => 'tshirt_report_csv'
   match "reports/church_and_liaison" => 'reports#church_and_liaison', :as => 'church_and_liaison_csv'

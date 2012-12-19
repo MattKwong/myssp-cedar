@@ -29,7 +29,8 @@
              </li>
              <li class="has_nested" ><a href="#">Reports</a>
                 <ul>
-                  <li><%= link_to "Invoice report", invoice_report_path%></li>
+                  <li><%= link_to "Invoice report: html", invoice_report_path(:format => :html)%></li>
+                  <li><%= link_to "Invoice report: CSV", invoice_report_path(:format => :csv)%></li>
                   <li><%= link_to "Scheduled Liaisons: Web page", scheduled_liaisons_html_path(:format => :html)%></li>
                   <li><%= link_to "Scheduled Liaisons: CSV", scheduled_liaisons_csv_path(:format => :csv)%></li>
                   <li><%= link_to "All Churches and Liaisons: CSV", church_and_liaison_csv_path(:format => :csv)%></li>
