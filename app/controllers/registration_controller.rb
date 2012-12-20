@@ -16,7 +16,7 @@ class RegistrationController < ApplicationController
   def new_weekend
     puts (can? :create, Registration)
     @page_title = "Register a New Weekend Group"
-    @liaison = Liaison.find(params[:id])
+    @liaison = Liaison.find(params[:liaison_id])
     @registration = Registration.new
     @site_selection = ''
     #@available_sites = Site.weekend.all
@@ -115,15 +115,21 @@ check amount listed in the Amount Due column. This can be paid either by check o
     jh_max = 20
     sh_max = 30
     session = Session.find_by_site_id_and_period_id(params[:site], params[:week])
+
     if session.junior_high?
       session_max = session.available < jh_max ? session.available : jh_max
     else
       session_max = session.available < sh_max ? session.available : sh_max
     end
 
-    @limit_text = "Registering for #{session.name}. You may register up to #{session_max} persons in total. We suggest a ratio of 1 counselor for every 4 junior high youth and 5 senior high youth."
-    @limit = session_max
-      #@site_text = "Below is a list of the sites that are hosting junior high programs this summer. When you select a site, the available sessions will appear."
+    if session.summer_domestic?
+      @limit_text = "Registering for #{session.name}. You may register up to #{session_max} persons in total. We suggest a ratio of 1 counselor for every 4 junior high youth and 5 senior high youth."
+      @limit = session_max
+    else
+      @limit_text = "Registering for #{session.name}. You may register up to #{session.available} persons in total. We recommend a ratio of about 1 adult for every 4 or 5 youth."
+      @limit = session.available
+    end
+
     @group_type_name =  session.session_type.name
     @session_name =  session.name
 
@@ -136,7 +142,11 @@ check amount listed in the Amount Due column. This can be paid either by check o
     else
        @list_of_sites = Session.sites_with_avail_for_type_senior
     end
+    render :partial => "site_selector"
+  end
 
+  def get_sites_for_other_groups
+    @list_of_sites = Session.sites_with_avail_for_other
     render :partial => "site_selector"
   end
 
@@ -196,9 +206,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   #end
 
   def get_sessions_for_type_and_site
-    #
-    #This is the pre-scheduling version of the routine.
-    #
+
     @list_of_sessions = Array.new
     if SessionType.find(params[:value]).name == "Summer Junior High"
       sessions = Session.junior_high.active.find_all_by_site_id(params[:site])
@@ -212,6 +220,19 @@ check amount listed in the Amount Due column. This can be paid either by check o
       end
     end
 
+    @site_name = Site.find(params[:site]).name
+    render :partial => "session_selector"
+  end
+
+  def get_other_sessions_for_site
+    @list_of_sessions = Array.new
+    sessions = Session.other.active.find_all_by_site_id(params[:site])
+
+    sessions.each do |s|
+      if s.available > 0
+        @list_of_sessions << s.period
+      end
+    end
     @site_name = Site.find(params[:site]).name
     render :partial => "session_selector"
   end
@@ -241,18 +262,15 @@ check amount listed in the Amount Due column. This can be paid either by check o
   end
 
   def save_registration_data
-    #
-    # This is the post-scheduling version of this routine.
-    #
     @registration = Registration.new
     liaison = Liaison.find(params[:liaison_id])
     @registration.church_id = liaison.church_id
     @registration.comments = params[:comments]
-    @registration.comments = params[:comments]
-    @registration.group_type_id = params[:group_type]
+    #@registration.group_type_id = params[:group_type]
     @registration.liaison_id = liaison.id
-    @registration.name = "#{liaison.church.name} #{SessionType.find(params[:group_type]).name}"
     session = Session.find_by_site_id_and_period_id(params[:site_choice], params[:week_choice])
+    @registration.name = "#{liaison.church.name} #{session.name}"
+    @registration.group_type_id = session.session_type_id
     @registration.request1 = session.id
     @registration.requested_counselors = params[:requested_adults].to_i
     @registration.requested_youth = params[:requested_youth].to_i
@@ -413,140 +431,6 @@ check amount listed in the Amount Due column. This can be paid either by check o
   end
 
   private
-
-#  def build_schedule(reg_or_sched, type, sh_default = nil, jh_default = nil)
-#
-#    @schedule = {}
-#    if type == "summer_domestic" then
-#      @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
-##      @site_names = Site.order(:listing_priority).find_all.map { |s| s.name}
-#      @period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
-##      @period_names = Period.order(:start_date).find_all.map { |p| p.name}
-#      @title = @page_title = "Domestic Summer Schedule"
-#    else
-#      @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, false).map { |s| s.name}
-##      @site_names = Site.order(:listing_priority).find_all.map { |s| s.name}
-#      @period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, false).map { |p| p.name}
-##      @period_names = Period.order(:start_date).find_all.map { |p| p.name}
-#      @title = @page_title = "Special Program Schedule"
-#    end
-#
-#    if reg_or_sched == 'scheduled'
-#      @title += ': Scheduled'
-#      @page_title += ': Scheduled'
-#    else
-#      @title += ': Unscheduled'
-#      @page_title += ': Unscheduled'
-#    end
-#
-#    @period_ordinal = Array.new
-#    for i in 0..@period_names.size - 1 do
-#      @period_ordinal[i] = @period_names[i]
-#    end
-#
-#    @site_ordinal = Array.new
-#    for i in 0..@site_names.size - 1 do
-#      @site_ordinal[i] = @site_names[i]
-#    end
-#
-#    @registration_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
-#    @scheduled_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
-#    @session_id_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
-#    @avail_matrix = Array.new(@site_names.size + 1){ Array.new(@period_names.size + 1, 0)}
-#
-#
-#    Registration.all(:conditions => "(request1 IS NOT NULL) AND (scheduled = 'f')").each do |r|
-#        @session = Session.find(r.request1)
-#        @site = Site.find(@session.site_id)
-#
-#        @period = Period.find(@session.period_id)
-#        @row_position = @site_ordinal.index(@site.name)
-#        @column_position = @period_ordinal.index(@period.name)
-#        @session_id_matrix[@row_position][@column_position] = @session.id
-#        @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
-#          unless (@column_position.nil? || @row_position.nil?)
-#          end
-#
-#    end
-#
-#    ScheduledGroup.active_program.each do |r|
-#        @session = Session.find(r.session_id)
-#        @site = Site.find(@session.site_id)
-#        @period = Period.find(@session.period_id)
-#        @row_position = @site_ordinal.index(@site.name)
-#        @column_position = @period_ordinal.index(@period.name)
-#        @session_id_matrix[@row_position][@column_position] = @session.id
-#        @scheduled_matrix[@row_position][@column_position] += r.current_total
-#          unless (@column_position.nil? || @row_position.nil?)
-#          end
-#    end
-#
-#    #Populate the availability_matrix by traversing the scheduled_matrix
-#    #
-#    for i in 0..@site_names.size - 1 do
-#      for j in 0..@period_names.size - 1 do
-#        if @session_id_matrix[i][j] > 0
-#          session = Session.find(@session_id_matrix[i][j])
-#          @avail_matrix[i][j] = session.available
-#          if @avail_matrix[i][j] < 0
-#            @avail_matrix[i][j] = 0
-#          end
-#         end
-#      end
-#    end
-#
-##total the rows and columns
-#    @reg_total = 0
-#    @sched_total = 0
-#    for i in 0..@site_names.size - 1 do
-#      for j in 0..@period_names.size - 1 do
-#        @reg_total += @registration_matrix[i][j]
-#        @sched_total += @scheduled_matrix[i][j]
-#      end
-#      @registration_matrix[i][@period_names.size] = @reg_total
-#      @scheduled_matrix[i][@period_names.size] = @sched_total
-#      @reg_total = @sched_total = 0
-#    end
-#
-#    for j in 0 ..@period_names.size do
-#      for i in 0..@site_names.size - 1 do
-#        @reg_total = @reg_total + @registration_matrix[i][j]
-#        @sched_total = @sched_total + @scheduled_matrix[i][j]
-#      end
-#      @registration_matrix[@site_names.size][j] = @reg_total
-#      @scheduled_matrix[@site_names.size][j] = @sched_total
-#      @reg_total = @sched_total = 0
-#    end
-#    #Grand total
-#    @reg_total = @sched_total = 0
-#    for i in 0..@site_names.size - 1 do
-#      @reg_total = @reg_total + @registration_matrix[i][@period_names.size]
-#      @sched_total = @sched_total + @scheduled_matrix[i][@period_names.size]
-#    end
-#    @registration_matrix[@site_names.size][@period_names.size] = @reg_total
-#    @scheduled_matrix[@site_names.size][@period_names.size] = @sched_total
-#
-#    @period_names << "Total"
-#    @site_names << "Total"
-#
-#    #Replace zeros in cells which do not represent an active session
-#    for i in 0..@site_names.size - 2 do
-#      site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
-#      for j in 0..@period_names.size - 2 do
-#        period = Period.active.summer_domestic.find_by_name(@period_names[j]).id
-#        if Session.where('site_id = ? AND period_id =  ?', site, period).size == 0
-#          @registration_matrix[i][j] = "-"
-#        end
-#      end
-#    end
-#
-#    @schedule = { :site_count => @site_names.size - 1, :period_count => @period_names.size - 1,
-#                  :site_names => @site_names, :period_names => @period_names,
-#                  :registration_matrix => @registration_matrix, :scheduled_matrix => @scheduled_matrix,
-#                  :session_id_matrix => @session_id_matrix, :reg_or_sched => reg_or_sched, :type => type,
-#                  :avail_matrix => @avail_matrix}
-#  end
-#
   def log_activity(activity_type, activity_details)
     a = Activity.new
     a.activity_date = Time.now

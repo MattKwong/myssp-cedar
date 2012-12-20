@@ -15,7 +15,7 @@
         <div id='reg_container'>
           <!--<form action="#" method="post">-->
           <%=  form_for @registration do |r| %>
-              <div id="first_step">
+              <div id="first_step_other">
               <h1>Step 1: Confirm Church Information</h1>
                 <div class="form">
                     <p>Below is the information on file for you and your church.
@@ -37,89 +37,86 @@
                 </div>
               <div class="clear"></div>
               <div class="button_container">
-                  <img class="reg_button next_button" id="submit_first"  >
+                  <img class="reg_button next_button" id="submit_first_other"  >
                   <div class="cancel_button"><%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back %></div>
               </div>
             </div>
-
-
-            <div id="second_step">
+            <div id="second_step_other">
               <h1>Step 2: Select Group Type</h1>
               <div class="form_elements">
-              <div class="form" id align="group_type_buttons">
-                <p>Select the type of group you are registering.</p>
-                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
-                    <%= label_tag(:group_senior, "Senior High") %>
-                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Junior High').id) %>
-                    <%= label_tag(:group_junior, "Junior High") %>
-              </div>
+                  <div class="form" id align="group_type_buttons">
+                    <p>Select the type of group you are registering.</p>
+                    <div>
+                      <td><%= r.label "Select group type" %></td>
+                      <td id="group_type"><%= select_tag "group_type", options_for_select(['Junior High', 'Senior High', 'Junior and Senior High', 'Intergenerational'], 'Junior and Senior High') %></td>
+
+                    </div>
+                  </div>
               </div>
               <div class="clear"></div>
               <div class = "errors" id="error_text_group"></div>
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_second" >
+                <img class="reg_button next_button" id="submit_second_other" >
                 <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_second" :alt align="Back" >
+                <img class="reg_button back_button" id="back_second_other" :alt align="Back" >
               </div>
             </div>
             <div class="clear"></div>
 
-            <div id="third_step">
-
+            <div id="third_step_other">
               <h1>Step 3: Select Site and Session</h1>
               <div class="form">
                 <div id='site_info'></div>
                 <table id="info_table_third" class="registration_table"></table>
                 <table>
-
-              <tr>
-                <td><%= r.label "Site" %></td>
-                <td id="site_selector"></td>
-              </tr>
-              <tr >
-                <td><%= r.label "Session" %></td>
-                <td id="session_selector"></td>
-              </tr>
-              </table>
+                      <tr>
+                        <td><%= r.label "Site" %></td>
+                        <td id="site_selector_other"></td>
+                      </tr>
+                      <tr >
+                        <td><%= r.label "Session" %></td>
+                        <td id="session_selector_other"></td>
+                      </tr>
+                </table>
                 </div>
               <h3 id="session_name" class align="center"></h3>
                 <div class="clear"></div>
               <div class = "errors" id="error_text_selections"></div>
               <div class="button_container">
-                <img class="reg_button next_button" id="submit_third" align="right" >
+                <img class="reg_button next_button" id="submit_third_other" align="right" >
                 <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
                      :title => 'Cancel and return to liaison page'} %>
-                <img class="reg_button back_button" id="back_third" >
+                <img class="reg_button back_button" id="back_third_other" >
               </div>
             </div>
                 <div class="clear"></div>
-            <div id="fourth_step">
-            <h1>Step 4: Number of Participants</h1>
-            <div class="form">
-            <div id='limit_info'></div>
-            <table id="info_table_fourth" class="registration_table"></table>
-            <table class='registration_table'>
-            <tr>
-            <td><%= r.label "Youth" %></td>
-            <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
-            </tr>
-            <tr>
-            <td><%= r.label "Counselors" %></td>
-            <td><%= r.number_field :requested_counselors, :min => 1, :size => 2, :max => 8 %></td>
-            </tr>
-            <tr>
-            <td>Total Requested</td>
-            <td id="requested_total"></td>
-            </table>
-            </div>
-            <div class="clear"></div>
-            <div class = "errors" id="error_text_numbers"></div>
-            <div class="button_container">
-            <img class="reg_button next_button" id="submit_fourth" align="right">
-            <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
-                                                                                     :title => 'Cancel and return to liaison page'} %>
-            <img class="reg_button back_button" id="back_fourth" >
-            </div>
+            <div id="fourth_step_other">
+                <h1>Step 4: Number of Participants</h1>
+                <div class="form">
+                    <div id='limit_info'></div>
+                    <table id="info_table_fourth" class="registration_table"></table>
+                    <table class='registration_table'>
+                        <tr>
+                            <td><%= r.label "Youth" %></td>
+                            <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
+                        </tr>
+                        <tr>
+                            <td><%= r.label "Adults" %></td>
+                            <td><%= r.number_field :requested_counselors, :min => 1, :size => 2, :max => 8 %></td>
+                            </tr>
+                        <tr>
+                        <td>Total Requested</td>
+                        <td id="requested_total"></td>
+                    </table>
+                </div>
+                <div class="clear"></div>
+                <div class = "errors" id="error_text_numbers"></div>
+                <div class="button_container">
+                    <img class="reg_button next_button" id="submit_fourth_other" align="right">
+                    <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
+                                                                                         :title => 'Cancel and return to liaison page'} %>
+                    <img class="reg_button back_button" id="back_fourth_other" >
+                </div>
             </div>
             <div class="clear"></div>
 

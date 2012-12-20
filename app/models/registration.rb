@@ -85,11 +85,11 @@ class Registration < ActiveRecord::Base
     self.junior_high? ? "Junior High" : "Senior High"
   end
   def junior_high?
-    session_type.junior_high?
+    session.junior_high?
   end
 
   def senior_high?
-    session_type.senior_high?
+    session.senior_high?
   end
 
   def registration_limit

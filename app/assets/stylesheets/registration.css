@@ -45,6 +45,10 @@ input[type="submit"]:focus, input[type="button"]:focus {
     #seventh_step, #eighth_step , #ninth_step, #gateway_step {
         display: none;
     }
+    #second_step_other, #third_step_other, #fourth_step_other, #fifth_step_other, #sixth_step,
+    #seventh_step, #eighth_step , #ninth_step, #gateway_step {
+        display: none;
+    }
     #reg_container #first_step { display: block; }
 
     #reg_container .form { margin: 10px 50px 0 72px;}

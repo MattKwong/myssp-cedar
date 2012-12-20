@@ -19,7 +19,6 @@ class SessionType < ActiveRecord::Base
   scope :senior_high, where(:name => 'Summer Senior High')
   scope :junior_high, where(:name => 'Summer Junior High')
 
-
   def junior_high?
     name == "Summer Junior High" ? true : false
   end

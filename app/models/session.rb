@@ -34,6 +34,7 @@ class Session < ActiveRecord::Base
   scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
   scope :summer_domestic, lambda { joins(:session_type).where("session_types.name = ? OR session_types.name = ?", 'Summer Senior High', 'Summer Junior High') }
+  scope :weekend, lambda { joins(:session_type).where("session_types.name = ?", 'Weekend of Service') }
   scope :other, lambda { joins(:session_type).where("session_types.name <> ? AND session_types.name <> ?", 'Summer Senior High', 'Summer Junior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
@@ -75,6 +76,10 @@ class Session < ActiveRecord::Base
   def junior_high?
     session_type.junior_high?
   end
+  def summer_domestic?
+    senior_high? || junior_high?
+  end
+
   def rollback_requests
     ScheduledGroup.find_all_by_session_id(id).each do |group|
       Registration.find(group.registration_id).update_attribute(:scheduled, false)
@@ -435,7 +440,17 @@ class Session < ActiveRecord::Base
         sites.push(session.site)
       end
     end
+    sites.uniq
+  end
 
+  def self.sites_with_avail_for_other
+    sites = Array.new
+    sessions = Session.weekend.active
+    sessions.each do |session|
+      if session.available > 0
+        sites.push(session.site)
+      end
+    end
     sites.uniq
   end
 

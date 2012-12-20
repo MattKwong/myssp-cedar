@@ -73,8 +73,10 @@ Spoic3::Application.routes.draw do
 #Routes for registration jquery calls
   match 'registration/get_limit_info', :to => 'registration#get_limit_info'
   match 'registration/get_sites_for_group_type', :to => 'registration#get_sites_for_group_type'
+  match 'registration/get_sites_for_other_groups', :to => 'registration#get_sites_for_other_groups'
   match 'registration/get_alt_sites_for_group_type', :to => 'registration#get_alt_sites_for_group_type'
   match 'registration/get_sessions_for_type_and_site', :to => 'registration#get_sessions_for_type_and_site'
+  match 'registration/get_other_sessions_for_site', :to => 'registration#get_other_sessions_for_site'
   match 'registration/get_alt_sessions_for_type_site', :to => 'registration#get_alt_sessions_for_type_site'
   match 'registration/save_registration_data', :to => 'registration#save_registration_data'
   match 'registration/payment_gateway', :to => 'registration#process_cc_dep_payment'
