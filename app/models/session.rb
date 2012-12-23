@@ -31,10 +31,10 @@ class Session < ActiveRecord::Base
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
   scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
-  scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
-  scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
-  scope :summer_domestic, lambda { joins(:session_type).where("session_types.name = ? OR session_types.name = ?", 'Summer Senior High', 'Summer Junior High') }
-  scope :weekend, lambda { joins(:session_type).where("session_types.name = ?", 'Weekend of Service') }
+  scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Junior High') }
+  scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Senior High') }
+  #scope :summer_domestic, self.program.summer_domestic
+  #scope :weekend, lambda { joins(:session_type).where("session_types.name = ?", 'Weekend of Service') }
   scope :other, lambda { joins(:session_type).where("session_types.name <> ? AND session_types.name <> ?", 'Summer Senior High', 'Summer Junior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
@@ -507,10 +507,10 @@ class Session < ActiveRecord::Base
     #Returns a matrix of session availability, organized in rows and columns with row labels and column headers.
     #Matrix type is Registration, Scheduled or Availability
     #Assumes summer domestic. Sites are the rows; weeks are the columns
-    sum_dom = program_type == "summer_domestic" ? true : false
-    @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, sum_dom).map { |s| s.name}
-    period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, sum_dom).map { |p| p.name}
-    period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, sum_dom).map do |p|
+    sum_dom = program_type == "summer_domestic" ? "Summer Domestic" : "Weekend of Service"
+    @site_names = Site.order(:listing_priority).find_all_hosting(sum_dom).map { |s| s.name}
+    period_names = Period.order(:start_date).find_all_hosting(sum_dom).map { |p| p.name}
+    period_sh_dates = Period.order(:start_date).find_all_hosting(sum_dom).map do |p|
         "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
     end
 
@@ -534,7 +534,7 @@ class Session < ActiveRecord::Base
 
       sum_dom ? registrations = Registration.summer_domestic.unscheduled.current : Registration.other.unscheduled.current
 
-      sessions = sum_dom ? Session.active.summer_domestic : Session.active.other
+      sessions = program_type == "Summer Domestic" ? Session.summer_domestic : Session.weekend_of_service
       sessions.each do |session|
         row_position = @site_ordinal.index(session.site.name)
         column_position = @period_ordinal.index(session.period.name)
@@ -651,4 +651,16 @@ class Session < ActiveRecord::Base
                     :avail_matrix => @avail_matrix, :senior_high => @senior_high, :period_sh_dates => period_sh_dates,
                     }
   end
+
+  def self.find_all_by_program_type(type)
+    Session.active.joins(:program => :program_type).where('program_types.name = ?', type)
+  end
+
+  def self.summer_domestic
+    active.find_all_by_program_type("Summer Domestic")
+  end
+  def self.weekend_of_service
+    active.find_all_by_program_type("Weekend of Service")
+  end
+
 end
