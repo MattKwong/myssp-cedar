@@ -17,7 +17,7 @@ class Session < ActiveRecord::Base
 
   belongs_to :site
   belongs_to :period
-  belongs_to :session_type
+  has_and_belongs_to_many :session_types
   belongs_to :payment_schedule
   belongs_to :program
   has_many :scheduled_groups
@@ -27,14 +27,14 @@ class Session < ActiveRecord::Base
   default_scope includes(:period).order('periods.start_date ASC')
 
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id,
-                  :requests, :schedule_max
+                  :requests, :schedule_max, :session_type_ids
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
   scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
-  scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Junior High') }
-  scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Senior High') }
+  scope :junior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Junior High') }
+  scope :senior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Senior High') }
   #scope :summer_domestic, self.program.summer_domestic
-  #scope :weekend, lambda { joins(:session_type).where("session_types.name = ?", 'Weekend of Service') }
+  scope :weekend, lambda { joins(:session_types).where("session_types.name = ?", 'Weekend of Service') }
   scope :other, lambda { joins(:session_type).where("session_types.name <> ? AND session_types.name <> ?", 'Summer Senior High', 'Summer Junior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
@@ -70,15 +70,16 @@ class Session < ActiveRecord::Base
   end
 
   def senior_high?
-    session_type.senior_high?
+    session_types.any? { |st| st.senior_high?}
   end
 
   def junior_high?
-    session_type.junior_high?
+    session_types.any? { |st| st.junior_high?}
   end
-  def summer_domestic?
-    senior_high? || junior_high?
-  end
+  #
+  #def summer_domestic?
+  #  senior_high? || junior_high?
+  #end
 
   def rollback_requests
     ScheduledGroup.find_all_by_session_id(id).each do |group|
@@ -413,7 +414,7 @@ class Session < ActiveRecord::Base
   def self.sites_for_group_type(group_type)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active.with_availability
     else
       sessions = Session.senior_high.active
@@ -429,7 +430,7 @@ class Session < ActiveRecord::Base
   def self.sites_with_avail_for_type(group_type)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active
     else
       sessions = Session.senior_high.active
@@ -467,7 +468,7 @@ class Session < ActiveRecord::Base
   def self.alt_sites_for_group_type(group_type, session_selections)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active
     else
       sessions = Session.senior_high.active
@@ -491,11 +492,11 @@ class Session < ActiveRecord::Base
   end
 
   def self.sites_for_group_type_senior
-    group_type = SessionType.find_by_name("Summer Senior High").id
+    group_type = SessionType.find_by_name("Senior High").id
     self.sites_for_group_type(group_type)
   end
   def self.sites_with_avail_for_type_senior
-    group_type = SessionType.find_by_name("Summer Senior High").id
+    group_type = SessionType.find_by_name("Senior High").id
     self.sites_with_avail_for_type(group_type)
   end
 
@@ -507,10 +508,10 @@ class Session < ActiveRecord::Base
     #Returns a matrix of session availability, organized in rows and columns with row labels and column headers.
     #Matrix type is Registration, Scheduled or Availability
     #Assumes summer domestic. Sites are the rows; weeks are the columns
-    sum_dom = program_type == "summer_domestic" ? "Summer Domestic" : "Weekend of Service"
-    @site_names = Site.order(:listing_priority).find_all_hosting(sum_dom).map { |s| s.name}
-    period_names = Period.order(:start_date).find_all_hosting(sum_dom).map { |p| p.name}
-    period_sh_dates = Period.order(:start_date).find_all_hosting(sum_dom).map do |p|
+    sum_dom = program_type == "Summer Domestic" ? "Summer Domestic" : "Weekend of Service"
+    @site_names = Site.order(:listing_priority).find_all_hosting(program_type).map { |s| s.name}
+    period_names = Period.order(:start_date).find_all_hosting(program_type).map { |p| p.name}
+    period_sh_dates = Period.order(:start_date).find_all_hosting(program_type).map do |p|
         "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
     end
 
@@ -555,7 +556,7 @@ class Session < ActiveRecord::Base
       sum_dom ? scheduled_groups = ScheduledGroup.summer_domestic.active_program : ScheduledGroup.other.active_program
 
       if scheduled_groups
-        scheduled_groups .each do |r|
+        scheduled_groups.each do |r|
           session = Session.find(r.session_id)
           site = Site.find(session.site_id)
           period = Period.find(session.period_id)

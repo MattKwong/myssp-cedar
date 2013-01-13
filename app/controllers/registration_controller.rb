@@ -15,7 +15,7 @@ class RegistrationController < ApplicationController
 
   def new_weekend
     puts (can? :create, Registration)
-    @page_title = "Register a New Weekend Group"
+    @page_title = "Register a New Group"
     @liaison = Liaison.find(params[:liaison_id])
     @registration = Registration.new
     @site_selection = ''
@@ -137,7 +137,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   end
 
   def get_sites_for_group_type
-    if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
+    if params[:value] == SessionType.find_by_name("Junior High").id.to_s
        @list_of_sites = Session.sites_with_avail_for_type(params[:value])
     else
        @list_of_sites = Session.sites_with_avail_for_type_senior
@@ -179,7 +179,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
     #logger.debug @session_choices
     #logger.debug @session_choices_names.inspect
 
-    if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
+    if params[:value] == SessionType.find_by_name("Junior High").id.to_s
        @list_of_sites = Session.alt_sites_for_group_type(params[:value], @session_choices)
     else
        @list_of_sites = Session.sites_for_group_type_senior
@@ -208,7 +208,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def get_sessions_for_type_and_site
 
     @list_of_sessions = Array.new
-    if SessionType.find(params[:value]).name == "Summer Junior High"
+    if SessionType.find(params[:value]).name == "Junior High"
       sessions = Session.junior_high.active.find_all_by_site_id(params[:site])
     else
       sessions = Session.senior_high.active.find_all_by_site_id(params[:site])
@@ -410,7 +410,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   end
 
   def request_matrix
-    @matrix = Session.session_matrices("summer_domestic")
+    @matrix = Session.session_matrices("Summer Domestic")
     @senior_high_limit = 60
     render :partial => 'request_matrix', :reg_or_sched => "registered"
   end
@@ -418,14 +418,14 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def availability_matrix
     jh_default = 50
     sh_default = 65
-    @matrices = Session.session_matrices("summer_domestic", sh_default, jh_default)
+    @matrices = Session.session_matrices("Summer Domestic", sh_default, jh_default)
     render :partial => 'availability_matrix'
   end
 
   def other_availability_matrix
     jh_default = 50
     sh_default = 65
-    @matrices = Session.session_matrices("other", sh_default, jh_default)
+    @matrices = Session.session_matrices("Weekend of Service", sh_default, jh_default)
     logger.debug @matrices
     render :partial => 'other_availability_matrix'
   end

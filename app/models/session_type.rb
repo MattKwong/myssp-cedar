@@ -12,18 +12,19 @@
 class SessionType < ActiveRecord::Base
 
   attr_accessible :name, :description
+  has_and_belongs_to_many :sessions
 
   validates :name, :description, :presence => true
   validates :name, :uniqueness => true
 
-  scope :senior_high, where(:name => 'Summer Senior High')
-  scope :junior_high, where(:name => 'Summer Junior High')
+  scope :senior_high, where(:name => 'Senior High')
+  scope :junior_high, where(:name => 'Junior High')
 
   def junior_high?
-    name == "Summer Junior High" ? true : false
+    name == "Junior High" ? true : false
   end
   def senior_high?
-    name == "Summer Senior High" ? true : false
+    name == "Senior High" ? true : false
   end
 
   def weekend?

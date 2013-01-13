@@ -38,10 +38,9 @@ class ScheduledGroup < ActiveRecord::Base
   scope :senior_high, where(:group_type_id => 2)
   scope :junior_high, where(:group_type_id => 3)
   scope :other, lambda {joins(:session_type).where('session_types.name <> ? AND session_types.name <> ?', "Summer Senior High", "Summer Junior High")}
-  scope :summer_domestic, lambda {joins(:session_type).where('session_types.name = ? OR session_types.name = ?', "Summer Senior High", "Summer Junior High")}
-
+  scope :summer_domestic, lambda { sessions.summer_domestic }
   has_many :payments
-  has_many :change_historiesc
+  has_many :change_histories
   has_many :adjustments
   belongs_to :church
   belongs_to :liaison
@@ -60,6 +59,10 @@ class ScheduledGroup < ActiveRecord::Base
                             :only_integer => true
   validates_numericality_of :current_counselors, :greater_than_or_equal_to => 0,
                             :only_integer => true
+
+  def self.find_all_summer_domestic
+    where()
+  end
 
   def self.schedule(group_id, session_id, choice)
     group = ScheduledGroup.new

@@ -153,7 +153,8 @@ $(document).ready(function() {
         $('#second_step').removeClass('error').removeClass('valid');
         var error = 0;
         //save the group type
-        group_type = $("select[name=group_type]:selected").text();
+//        group_type = $("select[name=group_type]:selected").val();
+        group_type = $("#group_type").val();
         if( group_type == undefined) {
             $('#error_text_group').html('Error: You must select a group type.');
             error++
@@ -163,7 +164,7 @@ $(document).ready(function() {
         if(!error) {
             $("#second_step_other").addClass('valid');
             //ajax call to get sites that are hosting group_type of groups
-            $.get("get_sites_for_other_groups",
+            $.get("get_sites_for_other_groups?type=" + group_type,
                 function(data){ $("#site_selector_other").html(data);} );
 
             $('#site_info').html($('input[name=site_text]').val());
