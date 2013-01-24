@@ -35,6 +35,14 @@ class Session < ActiveRecord::Base
   scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
 
+  def period_end_date
+    if session_type.junior_high?
+      period.end_date - 1.day
+    else
+      period.end_date
+    end
+  end
+
   def sh_default
     65
   end

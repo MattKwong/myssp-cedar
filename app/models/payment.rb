@@ -26,6 +26,7 @@ class Payment < ActiveRecord::Base
   validates_inclusion_of :payment_type, :in => ['Initial', 'Deposit', 'Second', 'Final', 'Other', 'Processing Charge'], :message => "Invalid payment type"
   validates_exclusion_of :payment_amount, :in => [0], :message => "Payment amount cannot be zero."
   scope :fee, where('payment_type <> ?', "Processing Charge")
+  scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
 
   def self.deposits_paid(reg_id)
     Payment.find_all_by_registration_id_and_payment_type(reg_id, 'Deposit').sum(&:payment_amount)
@@ -46,13 +47,11 @@ class Payment < ActiveRecord::Base
                    :payment_amount => payment_amount,
                     :payment_method => method, :payment_type => "Second", :payment_notes => notes)
     p.save
-    logger.debug p.inspect
     if processing_charge.to_i > 0
       q = Payment.create(:payment_date => Date.today, :scheduled_group_id => group_id, :registration_id => ScheduledGroup.find(group_id).registration_id,
                     :payment_amount => processing_charge,
                      :payment_method => type, :payment_type => 'Processing Charge', :payment_notes => notes)
     end
-    logger.debug p.inspect
     return p
   end
 end

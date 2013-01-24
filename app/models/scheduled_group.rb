@@ -39,7 +39,7 @@ class ScheduledGroup < ActiveRecord::Base
   scope :junior_high, where(:group_type_id => 3)
 
   has_many :payments
-  has_many :change_histories
+  has_many :change_historiesc
   has_many :adjustments
   belongs_to :church
   belongs_to :liaison
@@ -121,7 +121,7 @@ class ScheduledGroup < ActiveRecord::Base
 
   def fee_amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
     #Payment.sum(:payment_amount, :conditions => ['registration_id = ?', registration_id]) +
-        Payment.fee.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', id])
+        Payment.fee.where('scheduled_group_id = ?', id).sum(&:payment_amount)
   end
 
   def total_due
@@ -140,7 +140,7 @@ class ScheduledGroup < ActiveRecord::Base
     if fee_amount_paid >= deposit_amount
       deposit_amount
     else
-      deposit_amount - fee_amount_paid
+      fee_amount_paid
     end
   end
 
@@ -177,8 +177,9 @@ class ScheduledGroup < ActiveRecord::Base
     end
   end
 
-  def second_pay_paid #the amount of the deposit_amount that has actually been paid
-    if deposit_outstanding > 0 #no money left for second or final payments
+  def second_pay_paid #the amount of the second_pay_amount that has actually been paid
+
+    if (deposit_amount - fee_amount_paid) >= 0 #no money left for second or final payments
       0
     else
       puts second_pay_amount.to_i
@@ -187,7 +188,8 @@ class ScheduledGroup < ActiveRecord::Base
       if (second_pay_amount + deposit_amount) < fee_amount_paid
         second_pay_amount #second payment fully paid
       else
-        second_pay_amount + deposit_amount - fee_amount_paid
+        #second_pay_amount + deposit_amount - fee_amount_paid
+        fee_amount_paid - deposit_paid
       end
     end
   end

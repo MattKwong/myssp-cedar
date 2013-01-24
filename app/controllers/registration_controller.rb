@@ -95,6 +95,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
 
   def show_schedule
     @schedule = Session.session_matrices(params[:type])
+    @page_title = "#{params[:type].titleize} Groups By Site and Week"
   end
 
 

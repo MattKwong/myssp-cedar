@@ -4,6 +4,9 @@ var cc_to_be_charged = 0;
 var group_status;
 var payment_type;
 var payment_notes;
+var program;
+var payer_name;
+var payer_email;
 
 $(document).ready(function() {
     $("input[name=include_cc_charge]").attr("disabled", "disabled");
@@ -30,13 +33,13 @@ $(document).ready(function() {
         $("td#cc_to_be_charged").html("$" + cc_to_be_charged.toFixed(2));
     });
 });
+
 $(document).ready(function() {
     $('input[name=cc_payment_amount]').change(function(){
         //Pull the deposit_amount and processing_charge
         $("input[name=include_cc_charge]").removeAttr("disabled");
         cc_payment_amount = $('input[name=cc_payment_amount]').val();
         if ($.isNumeric(cc_payment_amount)) {
-
             cc_to_be_charged = (parseFloat(cc_payment_amount) + parseFloat(cc_processing_charge));
             $("td#cc_processing_charge").html("$" + cc_processing_charge.toFixed(2));
             $("td#cc_to_be_charged").html("$" + cc_to_be_charged.toFixed(2));
@@ -166,6 +169,54 @@ function stripeCCPaymentResponseHandler(status, response) {
             + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
             + token + "&payment_notes=" + payment_notes + "&group_status=" + group_status  + "&payment_method="
             + "Credit Card" + "&payment_type=" + payment_type, function(data) {
+            $("#gateway_data").html(data);
+            var error_message = $("input[name=gateway_error]").val();
+            if (error_message) {
+                $("#cc_payment_errors").html(error_message);
+            } else {
+//                $('#cc_section').hide();
+                $('#main_data').hide();
+//                $('#payment_table').hide();
+                $('#confirmation_step').show();
+             };
+        });
+    }
+}
+
+//Standalone Credit Card Payment
+$(document).ready(function() {
+    $("#standalone_submit").click(function(event) {
+        // disable the submit button to prevent repeated clicks
+        $('#standalone_submit').attr("disabled", "disabled");
+        payment_notes = $("input#payment_payment_notes").val();
+        // createToken returns immediately - the supplied callback submits the form if there are no errors
+        Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+        }, stripeStandalonePaymentResponseHandler);
+        return false; // submit from callback
+    });
+});
+function stripeStandalonePaymentResponseHandler(status, response) {
+    if (response.error) {
+        // re-enable the submit button
+        $('#standalone_submit').removeAttr("disabled");
+        // show the errors on the form
+        $("#cc_payment_errors").html(response.error.message);
+    } else {
+        // token contains id, last4, and card type
+        $("#cc_payment_errors").html('');
+        var token = response['id'];
+        // and submit
+        payer_name = $("input[name=payer_name]").val();
+        payer_email = $("input[name=payer_email]").val();
+        program = $("input[name=program]").val();
+        payment_notes = $("input[name=notes]").val();
+        $.get("create_standalone_cc?payment_amount=" + cc_payment_amount
+            + "&amount_paid=" + cc_to_be_charged + "&processing_charge=" + cc_processing_charge + "&payment_tracking_number="
+            + token + "&notes=" + payment_notes + "&name=" + payer_name  + "&program=" + program + "&payer_email=" + payer_email, function(data) {
             $("#gateway_data").html(data);
             var error_message = $("input[name=gateway_error]").val();
             if (error_message) {

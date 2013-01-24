@@ -25,6 +25,11 @@ class OpsPagesController < ApplicationController
     @page_title = "Staff"
   end
 
+  def show_prior_year
+    @page_title = "2012 Programs"
+    @active_programs = Program.in_2012
+  end
+
   def show
     @page_title = "Programs"
     program_user = ProgramUser.find_by_user_id(current_admin_user.id)

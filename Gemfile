@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
-gem 'bundler', '1.2.1'
+gem 'rails', '3.2.11'
+gem 'bundler', '1.2.0'
 gem 'rake'
 gem 'haml'
 gem "formtastic", "2.1.0"

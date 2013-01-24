@@ -41,6 +41,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => group.liaison.email1, :subject => "Credit Card Payment Confirmation")
   end
 
+  def standalone_payment_confirmation(params)
+    @params = params
+    mail(:to => @params[:payer_email], :subject => "Credit Card Payment Notice")
+  end
+
   def schedule_confirmation(group)
     @group = group
     mail(:to => @group.liaison.email1, :subject => "2013 SSP Placement Confirmation for your #{@group.session_type.name} Group")
