@@ -120,7 +120,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   end
 
   def get_sites_for_group_type
-    if params[:value] == SessionType.find_by_name("Summer Junior High").id.to_s
+    if params[:value] == SessionType.find_by_name("Junior High").id.to_s
        @list_of_sites = Session.sites_with_avail_for_type(params[:value])
     else
        @list_of_sites = Session.sites_with_avail_for_type_senior

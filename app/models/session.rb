@@ -253,7 +253,7 @@ class Session < ActiveRecord::Base
 
 
   def session_type_junior_high?
-    if session_type.name == 'Summer Junior High'
+    if session_type.name == 'Junior High'
       true
     else
       false
@@ -391,7 +391,7 @@ class Session < ActiveRecord::Base
   def self.sites_for_group_type(group_type)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active.with_availability
     else
       sessions = Session.senior_high.active
@@ -407,7 +407,7 @@ class Session < ActiveRecord::Base
   def self.sites_with_avail_for_type(group_type)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active
     else
       sessions = Session.senior_high.active
@@ -435,7 +435,7 @@ class Session < ActiveRecord::Base
   def self.alt_sites_for_group_type(group_type, session_selections)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active
     else
       sessions = Session.senior_high.active
@@ -459,11 +459,11 @@ class Session < ActiveRecord::Base
   end
 
   def self.sites_for_group_type_senior
-    group_type = SessionType.find_by_name("Summer Senior High").id
+    group_type = SessionType.find_by_name("Senior High").id
     self.sites_for_group_type(group_type)
   end
   def self.sites_with_avail_for_type_senior
-    group_type = SessionType.find_by_name("Summer Senior High").id
+    group_type = SessionType.find_by_name("Senior High").id
     self.sites_with_avail_for_type(group_type)
   end
 
