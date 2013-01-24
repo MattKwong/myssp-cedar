@@ -49,9 +49,9 @@
               <div class="form_elements">
               <div class="form" id align="group_type_buttons">
                 <p>Select the type of group you are registering.</p>
-                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
+                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Senior High').id) %>
                     <%= label_tag(:group_senior, "Senior High") %>
-                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Junior High').id) %>
+                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Junior High').id) %>
                     <%= label_tag(:group_junior, "Junior High") %>
               </div>
               </div>
