@@ -33,13 +33,15 @@ class ScheduledGroup < ActiveRecord::Base
   scope :active, where('current_total > ?', 0)
   scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
   scope :program_2012, joins(:session => :program).where('programs.active = ? AND programs.start_date > ? AND programs.start_date < ?', 'f', '2011-09-30', '2012-10-01')
+  scope :in_fiscal_year, lambda { |year| joins(:session => :program).where('programs.start_date > ? AND programs.start_date < ?', "#{year.to_i - 1}-09-30", "#{year.to_i}-10-01")}
+  #scope :in_fiscal_year, lambda { |year| joins(:session => :program).where('programs.active = ? AND programs.start_date > ? AND programs.start_date < ?', 'f', "#{year.to_i - 1}-09-30", "#{year.to_i}-10-01")}
   scope :not_active_program, where('scheduled_groups.created_at < ?', '2012-09-01'.to_datetime)
   scope :high_school, where(:group_type_id => 2)
   scope :senior_high, where(:group_type_id => 2)
   scope :junior_high, where(:group_type_id => 3)
 
   has_many :payments
-  has_many :change_historiesc
+  has_many :change_histories
   has_many :adjustments
   belongs_to :church
   belongs_to :liaison
