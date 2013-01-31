@@ -19,6 +19,7 @@ class Period < ActiveRecord::Base
   accepts_nested_attributes_for :sessions
   scope :active, where(:active => true)
   scope :summer_domestic, where(:summer_domestic => true)
+  scope :other, where(:summer_domestic => false)
 
   validates :name, :start_date, :end_date, :presence => true
   validate :start_date_before_end_date
@@ -40,4 +41,21 @@ class Period < ActiveRecord::Base
        end
     end
   end
+
+  def self.find_all_hosting(program_type)
+    periods = Array.new
+    Session.find_all_by_program_type(program_type).each do |session|
+      periods << session.period
+    end
+    periods.uniq
+  end
+
+  def self.summer_domestic
+    active.find_all_hosting("Summer Domestic")
+  end
+
+  def self.weekend_of_service
+    active.find_all_hosting("Weekend of Service")
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125052347) do
+ActiveRecord::Schema.define(:version => 20121224185158) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -593,6 +593,11 @@ ActiveRecord::Schema.define(:version => 20121125052347) do
     t.datetime "updated_at"
   end
 
+  create_table "session_types_sessions", :id => false, :force => true do |t|
+    t.integer "session_id"
+    t.integer "session_type_id"
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "name"
     t.integer  "site_id"
@@ -635,6 +640,22 @@ ActiveRecord::Schema.define(:version => 20121125052347) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_subtype_id"
+  end
+
+  create_table "supporters", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "affiliation"
+    t.string   "profession"
+    t.string   "employer"
+    t.string   "gender"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "user_roles", :force => true do |t|
