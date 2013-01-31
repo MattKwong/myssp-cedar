@@ -54,8 +54,23 @@ feature "Logged in Admin" do
     current_path.should == '/admin/liaisons'
   end
 
-  pending scenario "CC Payment tests" do
-    # Not sure what CC Payment is
+  scenario "can access CC Payment page by direct link" do
+    visit '/admin_users/sign_in'
+    fill_in 'Email', :with => TestUser.email
+    fill_in 'Password', :with => TestUser.password
+    click_button('Sign in')
+    #save_and_open_page
+    visit '/admin/new_standalone_cc'
+  end
+
+  scenario "can access CC Payment page by clicking link" do
+    visit '/admin_users/sign_in'
+    fill_in 'Email', :with => TestUser.email
+    fill_in 'Password', :with => TestUser.password
+    click_button('Sign in')
+    #save_and_open_page
+    click_link('CC Payments')
+    current_path.should == 'new_standalone_cc'
   end
 
   scenario "can access Purchases page by direct link" do
