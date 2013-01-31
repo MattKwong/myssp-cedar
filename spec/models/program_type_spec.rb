@@ -25,6 +25,11 @@ describe ProgramType do
     item.should be_valid
   end
 
+  it "should create a new instance with valid attributes" do
+    item = ProgramType.create!(@attr)
+    item.should be_valid
+  end
+
   describe "name tests" do
 
     it "should require a name" do
