@@ -155,7 +155,7 @@ feature "Logged in Admin" do
     click_link('Admin Users')
     fill_in 'q_email', :with => TargetUser.email
     click_button('filter')
-    click_link('Inactivate)
+    click_link('Inactivate')
     current_path.should == '/admin/admin_users'
   end
 
