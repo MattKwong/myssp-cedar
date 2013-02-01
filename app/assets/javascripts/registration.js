@@ -328,7 +328,8 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $("#site_selector_other").change(function(){
-            $.get("get_other_sessions_for_site?site="+ $("#site_selector_site_id").val(),
+            $.get("get_other_sessions_for_site?site="+ $("#site_selector_site_id").val()
+                + "&type=" + group_type,
                 function(data){ $("#session_selector_other").html(data);})
         }
     );
@@ -365,7 +366,7 @@ $(document).ready(function() {
         }
         if(!error){
         //ajax call to get group limits and appropriate text
-        $.get("get_limit_info?value="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
+        $.get("get_limit_info?type="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
             function(data){ $("#limit_info").html(data);
         group_type_name = $("input[name=group_type_name]").val();
         session_name = $("input[name=session_name]").val();

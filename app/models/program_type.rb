@@ -28,4 +28,8 @@ class ProgramType < ActiveRecord::Base
     (name.split.collect { |i| i[0..1] }).join
   end
 
+  def summer_domestic?
+    name == "Summer Domestic"
+  end
+
 end

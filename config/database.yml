@@ -1,3 +1,4 @@
+
 development:
   host: localhost
   adapter: postgresql
@@ -5,8 +6,7 @@ development:
   database: myssp_development
   pool: 5
   timeout: 5000
-  username: postgres
-  password: password
+  username: rickeaton
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -16,12 +16,7 @@ test: &test
   adapter: postgresql
   encoding: unicode
   database: myssp_test
-<<<<<<< HEAD
-  username: postgres
-  password: password
-=======
   username: rickeaton
->>>>>>> remotes/upstream/master
   pool: 5
   timeout: 5000
 
@@ -30,12 +25,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: myssp_production
-<<<<<<< HEAD
-  username: postgres
-  password: password
-=======
   username: rickeaton
->>>>>>> remotes/upstream/master
   pool: 5
   timeout: 5000
 

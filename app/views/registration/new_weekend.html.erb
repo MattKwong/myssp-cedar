@@ -45,10 +45,9 @@
               <h1>Step 2: Select Group Type</h1>
               <div class="form_elements">
                   <div class="form" id align="group_type_buttons">
-                    <p>Select the type of group you are registering.</p>
                     <div>
                       <td><%= r.label "Select group type" %></td>
-                      <td id="group_type"><%= select_tag "group_type", options_for_select(['Junior High', 'Senior High', 'Junior and Senior High', 'Intergenerational'], 'Junior and Senior High') %></td>
+                      <td id="group_type"><%= select_tag "group_type", options_for_select(@group_types = SessionType.all.map{|a| a.name}) %></td>
 
                     </div>
                   </div>

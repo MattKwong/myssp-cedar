@@ -33,14 +33,14 @@ class ScheduledGroup < ActiveRecord::Base
   scope :active, where('current_total > ?', 0)
   scope :active_program, joins(:session => :program).where(:programs => {:active => 't'})
   scope :program_2012, joins(:session => :program).where('programs.active = ? AND programs.start_date > ? AND programs.start_date < ?', 'f', '2011-09-30', '2012-10-01')
-  scope :in_fiscal_year, lambda { |year| joins(:session => :program).where('programs.start_date > ? AND programs.start_date < ?', "#{year.to_i - 1}-09-30", "#{year.to_i}-10-01")}
-  #scope :in_fiscal_year, lambda { |year| joins(:session => :program).where('programs.active = ? AND programs.start_date > ? AND programs.start_date < ?', 'f', "#{year.to_i - 1}-09-30", "#{year.to_i}-10-01")}
+  #scope :in_fiscal_year, lambda { |year| joins(:session => :program).where('programs.start_date > ? AND programs.start_date < ?', "#{year.to_i - 1}-09-30", "#{year.to_i}-10-01")}
+  scope :in_fiscal_year, lambda { |year| joins(:session => :program).where('programs.active = ? AND programs.start_date > ? AND programs.start_date < ?', 'f', "#{year.to_i - 1}-09-30", "#{year.to_i}-10-01")}
   scope :not_active_program, where('scheduled_groups.created_at < ?', '2012-09-01'.to_datetime)
   scope :high_school, where(:group_type_id => 2)
   scope :senior_high, where(:group_type_id => 2)
   scope :junior_high, where(:group_type_id => 3)
   scope :other, lambda {joins(:session_type).where('session_types.name <> ? AND session_types.name <> ?', "Summer Senior High", "Summer Junior High")}
-  scope :summer_domestic, lambda { sessions.summer_domestic }
+
   has_many :payments
   has_many :change_histories
   has_many :adjustments
@@ -62,8 +62,12 @@ class ScheduledGroup < ActiveRecord::Base
   validates_numericality_of :current_counselors, :greater_than_or_equal_to => 0,
                             :only_integer => true
 
+  def self.summer_domestic?
+    Session.summer_domestic
+  end
+
   def self.find_all_summer_domestic
-    where()
+    ScheduledGroup.joins(:programs).where(summer_domestic?)
   end
 
   def self.schedule(group_id, session_id, choice)

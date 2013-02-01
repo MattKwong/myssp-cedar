@@ -18,10 +18,9 @@ class RegistrationController < ApplicationController
     @page_title = "Register a New Group"
     @liaison = Liaison.find(params[:liaison_id])
     @registration = Registration.new
+
     @site_selection = ''
-    #@available_sites = Site.weekend.all
     @period_selection = ''
-    #@periods_available = Period.weekend.all
   end
 
   def index
@@ -146,7 +145,8 @@ check amount listed in the Amount Due column. This can be paid either by check o
   end
 
   def get_sites_for_other_groups
-    @list_of_sites = Session.sites_with_avail_for_other
+    @list_of_sites = Session.sites_with_avail_for_type(params[:type])
+    #@list_of_sites = Session.sites_with_avail_for_other
     render :partial => "site_selector"
   end
 
@@ -226,13 +226,13 @@ check amount listed in the Amount Due column. This can be paid either by check o
 
   def get_other_sessions_for_site
     @list_of_sessions = Array.new
-    sessions = Session.other.active.find_all_by_site_id(params[:site])
-
+    sessions = Session.sessions_with_avail_for_type_and_site_id(params[:type], params[:site])
     sessions.each do |s|
       if s.available > 0
         @list_of_sessions << s.period
       end
     end
+
     @site_name = Site.find(params[:site]).name
     render :partial => "session_selector"
   end
