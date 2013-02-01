@@ -46,7 +46,11 @@ class Site < ActiveRecord::Base
   validates :listing_priority, :numericality => true
 
   def self.find_all_hosting(program_type)
-    Site.active.joins(:programs => :program_type).where('program_types.name = ?', program_type).uniq
+    if program_type == "Summer Domestic"
+      Site.active.joins(:programs => :program_type).where('program_types.name = ?', "Summer Domestic").uniq
+    else
+      Site.active.joins(:programs => :program_type).where('program_types.name <> ?', "Summer Domestic").uniq
+    end
   end
 
   def self.summer_domestic

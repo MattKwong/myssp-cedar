@@ -17,7 +17,6 @@ class Session < ActiveRecord::Base
 
   belongs_to :site
   belongs_to :period
-  #has_and_belongs_to_many :session_types
   belongs_to :session_type
   belongs_to :payment_schedule
   belongs_to :program
@@ -25,13 +24,14 @@ class Session < ActiveRecord::Base
   has_many :registrations
   accepts_nested_attributes_for :scheduled_groups
 
-  default_scope includes(:period).order('periods.start_date ASC')
+  #default_scope includes(:period).order('periods.start_date ASC')
 
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id,
-                  :requests, :schedule_max, :session_type_id
+                  :requests, :schedule_max, :session_type_id, :waitlist_flag
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
   scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
+  scope :inactive, lambda { includes(:program).where("programs.active <> ?", 't') }
   scope :junior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Junior High') }
   scope :senior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Senior High') }
   scope :summer_domestic, lambda { summer_domestic? }
@@ -534,7 +534,7 @@ class Session < ActiveRecord::Base
 
       sum_dom ? registrations = Registration.summer_domestic.unscheduled.current : Registration.other.unscheduled.current
 
-      sessions = program_type == "Summer Domestic" ? Session.summer_domestic : Session.weekend_of_service
+      sessions = program_type == "Summer Domestic" ? Session.summer_domestic : Session.other
       sessions.each do |session|
         row_position = @site_ordinal.index(session.site.name)
         column_position = @period_ordinal.index(session.period.name)
@@ -551,10 +551,10 @@ class Session < ActiveRecord::Base
           @registration_matrix[row_position][column_position] += r.requested_counselors + r.requested_youth
         end
       end
-
-      sum_dom ? sessions = Session.active.joins(:program).joins(:program => :program_type).where('program_types.name = ?', "Summer Domestic").map {|s| s.id}
-                : Session.active.joins(:program).joins(:program => :program_type).where('program_types.name <> ?', "Summer Domestic").map {|s| s.id}
-      #sum_dom ? scheduled_groups = ScheduledGroup.summer_domestic.active_program : ScheduledGroup.other.active_program
+     #sum_dom ? sessions = Session.active.joins(:program, :program => :program_type).where('program_types.name = ?', "Summer Domestic").map {|s| s.id}
+     #           : Session.active.joins(:program, :program => :program_type).where('program_types.name <> ?', "Summer Domestic").map {|s| s.id}
+     # #sum_dom ? scheduled_groups = ScheduledGroup.summer_domestic.active_program : ScheduledGroup.other.active_program
+      sessions.map! {|s| s.id}
       scheduled_groups =  ScheduledGroup.find_all_by_session_id(sessions)
       logger.debug scheduled_groups.inspect
       if scheduled_groups
@@ -656,15 +656,19 @@ class Session < ActiveRecord::Base
   end
 
   def self.find_all_by_program_type(type)
-    Session.active.joins(:program => :program_type).where('program_types.name = ?', type)
+    if type == "Summer Domestic"
+      Session.active.joins(:program => :program_type).where('program_types.name = ?', "Summer Domestic")
+    else
+      Session.active.joins(:program => :program_type).where('program_types.name <> ?', "Summer Domestic")
+    end
   end
 
   def self.summer_domestic
     active.find_all_by_program_type("Summer Domestic")
   end
 
-  def self.weekend_of_service
-    active.find_all_by_program_type("Weekend of Service")
+  def self.other
+    active.find_all_by_program_type("Other")
   end
 
 end

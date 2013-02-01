@@ -2,8 +2,7 @@
   <div id="main_content_wrapper">
     <div id="main_content">
     <div class="scopes">
-        <%= button_to 'Register A Summer Group', new_registration_path(:id => params[:id])%>
-        <%= button_to 'Register A Weekend of Service Group', new_weekend_registration_path(:liaison_id => params[:id])%>
+        <%= button_to 'Register A Group', new_registration_path(:liaison_id => params[:id])%>
     </div>
     <div class="panel">
     <%= form_for(@screen_info[:liaison]) do |r| %>

@@ -116,20 +116,24 @@ class LiaisonsController < ApplicationController
     deposit_amount = overall_high_water * payment_schedule.deposit
 
 #Find the number of second payments owed:
+
     second_pay_amount = second_half_high_water * payment_schedule.second_payment
-    if (group.second_payment_date.nil? && Date.today > payment_schedule.second_payment_late_date) ||
-        (!group.second_payment_date.nil? && group.second_payment_date > payment_schedule.second_payment_late_date)
-      second_payment_late_due = true
-      second_payment_late_amount = late_payment_penalty * second_pay_amount
+    unless payment_schedule.second_payment_date.nil?
+      if (group.second_payment_date.nil? && Date.today > payment_schedule.second_payment_late_date) ||
+          (!group.second_payment_date.nil? && group.second_payment_date > payment_schedule.second_payment_late_date)
+        second_payment_late_due = true
+        second_payment_late_amount = late_payment_penalty * second_pay_amount
+      end
     end
 
 #Find the number of final payments owed:
-     final_pay_amount = group.current_total * payment_schedule.final_payment
-     if Date.today > payment_schedule.final_payment_late_date
-       final_late_payment_due = true
-       final_late_payment_amount = late_payment_penalty  * final_pay_amount
-     end
-
+    final_pay_amount = group.current_total * payment_schedule.final_payment
+    unless payment_schedule.final_payment_late_date.nil?
+       if Date.today > payment_schedule.final_payment_late_date
+         final_late_payment_due = true
+         final_late_payment_amount = late_payment_penalty  * final_pay_amount
+       end
+    end
      total_due = deposit_amount + second_pay_amount + final_pay_amount - adjustment_total
      amount_paid = Payment.sum(:payment_amount, :conditions => ['scheduled_group_id = ?', group_id])
      current_balance = total_due - amount_paid
@@ -159,15 +163,17 @@ class LiaisonsController < ApplicationController
               "#{number_to_currency(payment_schedule.deposit * original_reg.requested_total)}", ""]
     event_list << event
 
-    if group.second_payment_date.nil?
-      second_payment_due = true
-      event = [payment_schedule.second_payment_date,"2nd payment of #{number_to_currency(payment_schedule.second_payment)} each for #{group.current_total} persons",
-            "#{number_to_currency(payment_schedule.second_payment * group.current_total)}", ""]
-    else
-      event = [group.second_payment_date, "2nd payment of #{number_to_currency(payment_schedule.second_payment)} per person for #{group.second_payment_total} persons",
-            "#{number_to_currency(payment_schedule.second_payment * group.second_payment_total)}", ""]
+    unless payment_schedule.second_payment_date.nil?
+      if group.second_payment_date.nil?
+        second_payment_due = true
+        event = [payment_schedule.second_payment_date,"2nd payment of #{number_to_currency(payment_schedule.second_payment)} each for #{group.current_total} persons",
+              "#{number_to_currency(payment_schedule.second_payment * group.current_total)}", ""]
+      else
+        event = [group.second_payment_date, "2nd payment of #{number_to_currency(payment_schedule.second_payment)} per person for #{group.second_payment_total} persons",
+              "#{number_to_currency(payment_schedule.second_payment * group.second_payment_total)}", ""]
+      end
+      event_list << event
     end
-    event_list << event
 
     event = [payment_schedule.final_payment_date, "Final payment of #{number_to_currency(payment_schedule.final_payment)} each for #{group.current_total} persons",
           "#{number_to_currency(payment_schedule.final_payment * group.current_total)}", ""]
@@ -295,14 +301,18 @@ class LiaisonsController < ApplicationController
   end
 
   def calculate_2nd_payment_status(group, checklist, invoice)
-    due = invoice[:deposit_amount] + invoice[:second_payment_amount]
-    if invoice[:amount_paid] >= due
-      "Paid"
+    if invoice[:second_payment_amount] == 0
+      "None required"
     else
-      if Date.today < invoice[:second_payment_due_date]
-        "Not due yet"
+      due = invoice[:deposit_amount] + invoice[:second_payment_amount]
+      if invoice[:amount_paid] >= due
+        "Paid"
       else
-        "Past due"
+        if Date.today < invoice[:second_payment_due_date]
+          "Not due yet"
+        else
+          "Past due"
+        end
       end
     end
   end

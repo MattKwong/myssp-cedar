@@ -235,10 +235,11 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def final_late_penalty_due?
-    Date.today > session.payment_schedule.final_payment_late_date ? true : false
+    session.payment_schedule.final_payment_late_date.nil? || Date.today <= session.payment_schedule.final_payment_late_date  ? false : true
   end
+
   def second_late_penalty_due?
-    Date.today > session.payment_schedule.second_payment_late_date ? true : false
+    session.payment_schedule.second_payment_late_date.nil? || Date.today <= session.payment_schedule.second_payment_late_date  ? false : true
   end
 
   def likely_next_payment

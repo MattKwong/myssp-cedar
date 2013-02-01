@@ -2,18 +2,18 @@ class RegistrationController < ApplicationController
   load_and_authorize_resource
   layout 'admin_layout'
   require 'erb'
+  #
+  #def new
+  #  @page_title = "Register a New Summer Group"
+  #  @liaison = Liaison.find(params[:id])
+  #  @registration = Registration.new
+  #  @site_selection = ''
+  #  @available_sites = Site.all
+  #  @period_selection = ''
+  #  @periods_available = Period.all
+  #end
 
   def new
-    @page_title = "Register a New Summer Group"
-    @liaison = Liaison.find(params[:id])
-    @registration = Registration.new
-    @site_selection = ''
-    @available_sites = Site.all
-    @period_selection = ''
-    @periods_available = Period.all
-  end
-
-  def new_weekend
     puts (can? :create, Registration)
     @page_title = "Register a New Group"
     @liaison = Liaison.find(params[:liaison_id])
@@ -128,10 +128,9 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @limit_text = "Registering for #{session.name}. You may register up to #{session.available} persons in total. We recommend a ratio of about 1 adult for every 4 or 5 youth."
       @limit = session.available
     end
-
+    logger.debug session.inspect
     @group_type_name =  session.session_type.name
     @session_name =  session.name
-
     render :partial => "limit_info"
   end
 
@@ -276,7 +275,6 @@ check amount listed in the Amount Due column. This can be paid either by check o
     @registration.requested_youth = params[:requested_youth].to_i
     @registration.requested_total = params[:requested_youth].to_i + params[:requested_adults].to_i
     @registration.scheduled = false
-    logger.debug @registration.inspect
     if @registration.save
       @registration_saved = true
       @registration_id = @registration.id
@@ -287,6 +285,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
       log_activity("Registration Created", "Group Type: #{@registration.type } Total requested: #{@registration.requested_total}")
       ScheduledGroup.schedule(@registration_id, session.id, 0)
       @message = "Save of registration request and scheduled group was successful."
+      @group_type = session.program.program_type.name
     else
       @registration_saved = false
       @message = "A problem has occurred saving this registration. Please call the SSP office if you continue to have problems."
@@ -345,9 +344,11 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def set_registered_flag
     liaison = Liaison.find(@registration.liaison_id)
     liaison.registered = true
+    liaison.active = true
     liaison.save
     church = Church.find(@registration.church_id)
     church.registered = true
+    church.active = true
     church.save
   end
 

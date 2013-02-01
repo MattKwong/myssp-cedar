@@ -17,6 +17,7 @@ class ProgramType < ActiveRecord::Base
   validates :name, :uniqueness => true
 
   has_many :programs
+  #has_many :sessions, :through => :programs
 
 #  acts_as_list
 

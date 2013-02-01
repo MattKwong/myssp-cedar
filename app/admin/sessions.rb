@@ -6,14 +6,14 @@ ActiveAdmin.register Session do
   show :title => :name
 
   scope :active , :default => true
-  #scope :all,   scope :not_current, where('created_at < ?', '2012-09-01'.to_datetime)
+  scope :inactive
 
   index do
     column "Session Name", :name
     column "Maximum", :schedule_max
-    column "Accepts Groups" do |session|
-      (session.session_types.map{ |type| type.name}).join(', ')
-    end
+    column "Session Type", :session_type
+    column "Program", :program
+    column "Waitlist Flag", :waitlist_flag
     default_actions
   end
 
@@ -25,8 +25,9 @@ ActiveAdmin.register Session do
         row("Program") {session.program.name}
         row("Start Date") {session.period.start_date}
         row("End Date") {session.period.end_date}
-        row("Session Types") {(session.session_types.map{ |type| type.name}).join(', ')}
+        row("Session Type") {(session.session_type.name)}
         row("Schedule Max") {session.schedule_max }
+        row("Waitlist Flag") {session.waitlist_flag }
       end
     end
   end
@@ -36,17 +37,20 @@ ActiveAdmin.register Session do
       if f.object.new_record?
         f.input :site, :include_blank => false, :as => :select, :collection => Site.active
         f.input :period, :include_blank => false, :as => :select, :collection => Period.active
-        f.input :session_types, :as => :check_boxes
+        f.input :session_type, :as => :select
         f.input :payment_schedule
         f.input :program, :include_blank => false, :as => :select, :collection => Program.active
         f.input :name
         f.input :schedule_max, :include_blank => false
+        f.input :waitlist_flag, :default => true
       else
-        f.input :session_types, :as => :check_boxes
+        f.input :session_type, :as => :select
         f.input :payment_schedule
         f.input :program, :include_blank => false, :as => :select, :collection => Program.active
         f.input :name
         f.input :schedule_max, :include_blank => false
+        f.input :waitlist_flag
+
         end
     f.buttons
     end

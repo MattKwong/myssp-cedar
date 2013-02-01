@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224185158) do
+ActiveRecord::Schema.define(:version => 20130201234448) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -370,6 +370,7 @@ ActiveRecord::Schema.define(:version => 20121224185158) do
     t.date     "final_payment_date"
     t.date     "second_payment_late_date"
     t.date     "final_payment_late_date"
+    t.boolean  "final_due_at_start"
   end
 
   create_table "payments", :force => true do |t|
@@ -593,11 +594,6 @@ ActiveRecord::Schema.define(:version => 20121224185158) do
     t.datetime "updated_at"
   end
 
-  create_table "session_types_sessions", :id => false, :force => true do |t|
-    t.integer "session_id"
-    t.integer "session_type_id"
-  end
-
   create_table "sessions", :force => true do |t|
     t.string   "name"
     t.integer  "site_id"
@@ -609,6 +605,7 @@ ActiveRecord::Schema.define(:version => 20121224185158) do
     t.integer  "program_id"
     t.integer  "requests"
     t.integer  "schedule_max"
+    t.boolean  "waitlist_flag"
   end
 
   create_table "sites", :force => true do |t|
