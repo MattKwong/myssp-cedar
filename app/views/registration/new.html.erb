@@ -2,7 +2,10 @@
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "http://www.sierraserviceproject.org/2013/MySSP Registration User Guide.pdf" %></h4>
-        <img id="other_available_link" class="reg_buttons available_button">
+        <div class='scopes'>
+            <input id="summer_available_link" type="submit" value="View Summer Availability">
+            <input id="other_available_link" type="submit" value="View Other Availability">
+        </div>
         <div class="clear"></div>
         <div class="hidden" id="available_data"></div>
         <h3>This online system has been set up for your convenience. If you run into problems, refer to the user guide
@@ -14,8 +17,8 @@
     </div>
         <div id='reg_container'>
           <!--<form action="#" method="post">-->
-          <%=  form_for @registration do |r| %>
-              <div id="first_step_other">
+          <%= form_for @registration do |r| %>
+              <div id="first_step">
               <h1>Step 1: Confirm Church Information</h1>
                 <div class="form">
                     <p>Below is the information on file for you and your church.
@@ -36,12 +39,12 @@
                     </table>
                 </div>
               <div class="clear"></div>
-              <div class="button_container">
-                  <img class="reg_button next_button" id="submit_first_other"  >
-                  <div class="cancel_button"><%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back %></div>
+              <div class="scopes">
+                  <input id="submit_first" type="button" value = "Go to Next Step" >
+                  <input type="submit" value = "Cancel"  >
               </div>
             </div>
-            <div id="second_step_other">
+            <div id="second_step">
               <h1>Step 2: Select Group Type</h1>
               <div class="form_elements">
                   <div class="form" id align="group_type_buttons">

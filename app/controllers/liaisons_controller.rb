@@ -174,11 +174,11 @@ class LiaisonsController < ApplicationController
       end
       event_list << event
     end
-
-    event = [payment_schedule.final_payment_date, "Final payment of #{number_to_currency(payment_schedule.final_payment)} each for #{group.current_total} persons",
+    final_pay_date = payment_schedule.final_due_at_start? ? group.session.period.start_date.to_date : payment_schedule.final_payment_date
+    event = [final_pay_date, "Final payment of #{number_to_currency(payment_schedule.final_payment)} each for #{group.current_total} persons",
           "#{number_to_currency(payment_schedule.final_payment * group.current_total)}", ""]
     event_list << event
-
+    logger.debug event_list.inspect
     event_list = event_list.sort_by { |item| item[0] }
 
     invoice = {:group_id => group_id,:current_balance => current_balance, :payments => payments,

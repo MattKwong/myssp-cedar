@@ -94,23 +94,23 @@ input[type="submit"]:focus, input[type="button"]:focus {
             text-align: left;
         }
 
-    #reg_container input {
-        background: url("input.png");
-        color: #888;
-        border: 1px solid #ccc;
-        font-family: Cantarell, Verdana, sans-serif;
-        font-weight: normal;
-        font-size: 14px;
-        width: 50px;
-        height: 15px;
-        padding: 100 25px;
-        margin: 20px 0;
-        float: left;
-        text-align: right;
-        border-radius: 6px;
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px;
-    }
+    /*#reg_container input {*/
+        /*background: url("input.png");*/
+        /*color: #888;*/
+        /*border: 1px solid #ccc;*/
+        /*font-family: Cantarell, Verdana, sans-serif;*/
+        /*font-weight: normal;*/
+        /*font-size: 14px;*/
+        /*width: 50px;*/
+        /*height: 15px;*/
+        /*padding: 100 25px;*/
+        /*margin: 20px 0;*/
+        /*float: left;*/
+        /*text-align: right;*/
+        /*border-radius: 6px;*/
+        /*-moz-border-radius: 6px;*/
+        /*-webkit-border-radius: 6px;*/
+    /*}*/
 
     #reg_container select {
         background: url("input.png");
@@ -258,14 +258,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
             padding-left: 10px;
             background: url("popular.png") no-repeat;
         }
-        img.available_button {
-            border: none;
-            width: 175px;
-            height: 38px;
-            float: left;
-            padding-left: 10px;
-            background: url("availability.png") no-repeat;
-        }
+
         .center
         {
             margin-left:auto;

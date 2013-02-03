@@ -56,28 +56,28 @@ $(document).ready(function() {
         $('#second_step').slideDown();
     });
 });
-$(document).ready(function() {
-    $('#submit_first_other').click(function(){
-        liaison_id = $("td#liaison_id").text();
-        //update progress bar
-        $('#progress_text').html('12.5% Complete');
-        $('#progress').css('width','42.5px');
-        //slide steps
-        $('#first_step_other').slideUp();
-        $('#second_step_other').slideDown();
-    });
-});
-$(document).ready(function() {
-    $('#submit_first_other').click(function(){
-        liaison_id = $("td#liaison_id").text();
-        //update progress bar
-        $('#progress_text').html('12.5% Complete');
-        $('#progress').css('width','42.5px');
-        //slide steps
-        $('#first_step_other').slideUp();
-        $('#second_step_other').slideDown();
-    });
-});
+//$(document).ready(function() {
+//    $('#submit_first_other').click(function(){
+//        liaison_id = $("td#liaison_id").text();
+//        //update progress bar
+//        $('#progress_text').html('12.5% Complete');
+//        $('#progress').css('width','42.5px');
+//        //slide steps
+//        $('#first_step_other').slideUp();
+//        $('#second_step_other').slideDown();
+//    });
+////});
+//$(document).ready(function() {
+//    $('#submit_first_other').click(function(){
+//        liaison_id = $("td#liaison_id").text();
+//        //update progress bar
+//        $('#progress_text').html('12.5% Complete');
+//        $('#progress').css('width','42.5px');
+//        //slide steps
+//        $('#first_step_other').slideUp();
+//        $('#second_step_other').slideDown();
+//    });
+//});
 
 // Second step routines
 $(document).ready(function() {
@@ -796,13 +796,13 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $("#available_link").hover(function() {
+    $("#summer_available_link").hover(function() {
         $(this).addClass('hover');
     });
 });
 
 $(document).ready(function() {
-    $("#available_link").click(function() {
+    $("#summer_available_link").click(function() {
         $.get("availability_matrix",  function(data) {
             $('#available_data').html(data);
             $('#available_data').modal();
