@@ -39,11 +39,11 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $("#submit_first_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
+//$(document).ready(function() {
+//    $("#submit_first_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
 
 $(document).ready(function() {
     $('#submit_first').click(function(){
@@ -86,69 +86,69 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $("#submit_second_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
+//$(document).ready(function() {
+//    $("#submit_second_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
 $(document).ready(function() {
     $("#back_second").hover(function() {
         $(this).addClass('hover');
     });
 });
 
-$(document).ready(function() {
-    $("#submit_second_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
-$(document).ready(function() {
-    $("#back_second_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
+//$(document).ready(function() {
+//    $("#submit_second_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//$(document).ready(function() {
+//    $("#back_second_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+
+//$(document).ready(function() {
+//    $('#submit_second').click(function(){
+//        //remove classes
+//        $('#second_step').removeClass('error').removeClass('valid');
+//        var error = 0;
+//        //save the group type
+//        group_type = $("input[name=group_type]:checked").val();
+//        if( group_type == undefined) {
+//            $('#error_text_group').html('Error: You must select a group type.');
+//            error++
+//        } else {
+//            $("#second_step").addClass('valid');
+//        }
+//        if(!error) {
+//            $("#second_step").addClass('valid');
+//            //ajax call to get sites that are hosting group_type of groups
+//            $.get("get_sites_for_group_type?value="+ group_type,
+//                function(data){ $("#site_selector").html(data);} );
+//
+//            $('#site_info').html($('input[name=site_text]').val());
+////        enrollment_html = '';
+////        enrollment_html+= "<tr><td>Total Requested</td><td>";
+////        enrollment_html += total_requested;
+////        enrollment_html += "</td></tr>";
+////        $("#info_table_fourth").html(info_table + enrollment_html);
+//            group_type_name = $("input[name=group_type_name]").val();
+//
+//            //update progress bar
+//            $('#progress_text').html('25% Complete');
+//            $('#progress').css('width','132px');
+//            //slide steps
+//            $('#second_step').slideUp();
+//            $('#third_step').slideDown();
+//        } else {
+//            return false
+//        }
+//    });
+//});
 
 $(document).ready(function() {
     $('#submit_second').click(function(){
-        //remove classes
-        $('#second_step').removeClass('error').removeClass('valid');
-        var error = 0;
-        //save the group type
-        group_type = $("input[name=group_type]:checked").val();
-        if( group_type == undefined) {
-            $('#error_text_group').html('Error: You must select a group type.');
-            error++
-        } else {
-            $("#second_step").addClass('valid');
-        }
-        if(!error) {
-            $("#second_step").addClass('valid');
-            //ajax call to get sites that are hosting group_type of groups
-            $.get("get_sites_for_group_type?value="+ group_type,
-                function(data){ $("#site_selector").html(data);} );
-
-            $('#site_info').html($('input[name=site_text]').val());
-//        enrollment_html = '';
-//        enrollment_html+= "<tr><td>Total Requested</td><td>";
-//        enrollment_html += total_requested;
-//        enrollment_html += "</td></tr>";
-//        $("#info_table_fourth").html(info_table + enrollment_html);
-            group_type_name = $("input[name=group_type_name]").val();
-
-            //update progress bar
-            $('#progress_text').html('25% Complete');
-            $('#progress').css('width','132px');
-            //slide steps
-            $('#second_step').slideUp();
-            $('#third_step').slideDown();
-        } else {
-            return false
-        }
-    });
-});
-
-$(document).ready(function() {
-    $('#submit_second_other').click(function(){
         //remove classes
         $('#second_step').removeClass('error').removeClass('valid');
         var error = 0;
@@ -165,7 +165,7 @@ $(document).ready(function() {
             $("#second_step_other").addClass('valid');
             //ajax call to get sites that are hosting group_type of groups
             $.get("get_sites_for_other_groups?type=" + group_type,
-                function(data){ $("#site_selector_other").html(data);} );
+                function(data){ $("#site_selector").html(data);} );
 
             $('#site_info').html($('input[name=site_text]').val());
             group_type_name = $("input[name=group_type_name]").val();
@@ -173,8 +173,8 @@ $(document).ready(function() {
             $('#progress_text').html('25% Complete');
             $('#progress').css('width','132px');
             //slide steps
-            $('#second_step_other').slideUp();
-            $('#third_step_other').slideDown();
+            $('#second_step').slideUp();
+            $('#third_step').slideDown();
         } else {
             return false
         }
@@ -187,21 +187,21 @@ $(document).ready(function() {
         $('#progress_text').html('0% Complete');
         $('#progress').css('width','0px');
         //slide steps
-        $('#second_step_other').slideUp();
+        $('#second_step').slideUp();
         $('#first_step').slideDown();
     });
 });
-
-$(document).ready(function() {
-    $('#back_second_other').click(function(){
-        //update progress bar
-        $('#progress_text').html('0% Complete');
-        $('#progress').css('width','0px');
-        //slide steps
-        $('#second_step_other').slideUp();
-        $('#first_step_other').slideDown();
-    });
-});
+//
+//$(document).ready(function() {
+//    $('#back_second_other').click(function(){
+//        //update progress bar
+//        $('#progress_text').html('0% Complete');
+//        $('#progress').css('width','0px');
+//        //slide steps
+//        $('#second_step_other').slideUp();
+//        $('#first_step_other').slideDown();
+//    });
+//});
 
 $(document).ready(function() {
     $("#submit_third").hover(function() {
@@ -253,54 +253,54 @@ $(document).ready(function() {
         $('#second_step').slideDown();
     });
 });
+//
+//$(document).ready(function() {
+//    $("#submit_third_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//
+//$(document).ready(function() {
+//    $("#back_third_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
 
-$(document).ready(function() {
-    $("#submit_third_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
+//$(document).ready(function() {
+//    $('#submit_fourth_other').click(function(){
+//        //remove classes
+//        $('#fourth_step_other').removeClass('error').removeClass('valid');
+//        var error = 0;
+//        $('#error_text_numbers').html('')
+//        var group_limit = $("input[name=group_limit]").val();
+//        if( total_requested > parseInt(group_limit) ) {
+//            $('#error_text_numbers').html('Error: You may not request more than ' + group_limit + ' total spots.');
+//            error++
+//        }
+//        if( !error && requested_youth < 1 || requested_adults < 1 ) {
+//            $('#error_text_numbers').html('Error: You must request at least 1 counselor and 1 youth spot.');
+//            error++
+//        }
+//        if (!error) {
+//            $('#progress_text').html('62.5% Complete');
+//            $('#progress').css('width','212px');
+//            // slide steps
+//            $('#fourth_step_other').slideUp();
+//            $('#fifth_step').slideDown();
+//        }
+//    });
+//});
 
-$(document).ready(function() {
-    $("#back_third_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
-
-$(document).ready(function() {
-    $('#submit_fourth_other').click(function(){
-        //remove classes
-        $('#fourth_step_other').removeClass('error').removeClass('valid');
-        var error = 0;
-        $('#error_text_numbers').html('')
-        var group_limit = $("input[name=group_limit]").val();
-        if( total_requested > parseInt(group_limit) ) {
-            $('#error_text_numbers').html('Error: You may not request more than ' + group_limit + ' total spots.');
-            error++
-        }
-        if( !error && requested_youth < 1 || requested_adults < 1 ) {
-            $('#error_text_numbers').html('Error: You must request at least 1 counselor and 1 youth spot.');
-            error++
-        }
-        if (!error) {
-            $('#progress_text').html('62.5% Complete');
-            $('#progress').css('width','212px');
-            // slide steps
-            $('#fourth_step_other').slideUp();
-            $('#fifth_step').slideDown();
-        }
-    });
-});
-
-$(document).ready(function() {
-    $('#back_third_other').click(function(){
-        //update progress bar
-        $('#progress_text').html('12.5% Complete');
-        $('#progress').css('width','42.5px');
-        //slide steps
-        $('#third_step_other').slideUp();
-        $('#second_step_other').slideDown();
-    });
-});
+//$(document).ready(function() {
+//    $('#back_third_other').click(function(){
+//        //update progress bar
+//        $('#progress_text').html('12.5% Complete');
+//        $('#progress').css('width','42.5px');
+//        //slide steps
+//        $('#third_step_other').slideUp();
+//        $('#second_step_other').slideDown();
+//    });
+//});
 
 $(document).ready(function() {
     $("#registration_requested_youth").change(function(){
@@ -327,15 +327,15 @@ $(document).ready(function() {
     );
 });
 $(document).ready(function() {
-    $("#site_selector_other").change(function(){
+    $("#site_selector").change(function(){
             $.get("get_other_sessions_for_site?site="+ $("#site_selector_site_id").val()
                 + "&type=" + group_type,
-                function(data){ $("#session_selector_other").html(data);})
+                function(data){ $("#session_selector").html(data);})
         }
     );
 });
 $(document).ready(function() {
-    $("#session_selector_other").change(function(){
+    $("#session_selector").change(function(){
             $.get("get_session_name?site="+ $("#site_selector_site_id").val()
                 + "&session="+ $("#session_selector_session_id").val(),
                 function(data){ $("#session_name").html(data);})
@@ -361,7 +361,7 @@ $(document).ready(function() {
 
         var error = 0;
         if( site_choice == '' || week_choice == '') {
-            $('#error_text_selections').html('Error: You must select a valid site and a week.');
+            $('#error_text_selections').html('Error: You must select a valid site and session.');
             error++
         }
         if(!error){
@@ -415,48 +415,48 @@ $(document).ready(function() {
 //        }
     });
 });
-
-$(document).ready(function() {
-    $('#submit_third_other').click(function(){
-        //save the choices
-        if ($("#site_selector_site_id").val() == undefined) {
-            site_choice = ''
-        } else {
-            site_choice = $("#site_selector_site_id").val();
-        }
-
-        if ($("#session_selector_session_id").val() == '') {
-            week_choice = ''
-        } else {
-            week_choice = $("#session_selector_session_id").val();
-        }
-
-        var error = 0;
-        if( site_choice == '' || week_choice == '') {
-            $('#error_text_selections').html('Error: You must select a valid site and a week.');
-            error++
-        }
-        if(!error){
-        //ajax call to get group limits and appropriate text
-        $.get("get_limit_info?value="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
-            function(data){ $("#limit_info").html(data);
-        group_type_name = $("input[name=group_type_name]").val();
-        session_name = $("input[name=session_name]").val();
-        $("#registration_requested_youth").val=0;
-
-            } );
-        //update progress bar
-
-        $('#progress_text').html('25% Complete');
-        $('#progress').css('width','85px');
-        //slide steps
-        $('#third_step_other').slideUp();
-        $('#fourth_step_other').slideDown();
-    } else {
-        return false;
-    }
-    });
-});
+//
+//$(document).ready(function() {
+//    $('#submit_third_other').click(function(){
+//        //save the choices
+//        if ($("#site_selector_site_id").val() == undefined) {
+//            site_choice = ''
+//        } else {
+//            site_choice = $("#site_selector_site_id").val();
+//        }
+//
+//        if ($("#session_selector_session_id").val() == '') {
+//            week_choice = ''
+//        } else {
+//            week_choice = $("#session_selector_session_id").val();
+//        }
+//
+//        var error = 0;
+//        if( site_choice == '' || week_choice == '') {
+//            $('#error_text_selections').html('Error: You must select a valid site and a week.');
+//            error++
+//        }
+//        if(!error){
+//        //ajax call to get group limits and appropriate text
+//        $.get("get_limit_info?value="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
+//            function(data){ $("#limit_info").html(data);
+//        group_type_name = $("input[name=group_type_name]").val();
+//        session_name = $("input[name=session_name]").val();
+//        $("#registration_requested_youth").val=0;
+//
+//            } );
+//        //update progress bar
+//
+//        $('#progress_text').html('25% Complete');
+//        $('#progress').css('width','85px');
+//        //slide steps
+//        $('#third_step_other').slideUp();
+//        $('#fourth_step_other').slideDown();
+//    } else {
+//        return false;
+//    }
+//    });
+//});
 
 //$(document).ready(function() {
 //    $("#alt_site_selector").change(function(){
@@ -494,26 +494,26 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    $("#submit_fourth_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
-$(document).ready(function() {
-    $("#back_fourth_other").hover(function() {
-        $(this).addClass('hover');
-    });
-});
-$(document).ready(function() {
-    $('#back_fourth_other').click(function(){
-        //update progress bar
-        $('#progress_text').html('25% Complete');
-        $('#progress').css('width','85px');
-        //slide steps
-        $('#fourth_step_other').slideUp();
-        $('#third_step_other').slideDown();
-    });
-});
+//$(document).ready(function() {
+//    $("#submit_fourth_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//$(document).ready(function() {
+//    $("#back_fourth_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//$(document).ready(function() {
+//    $('#back_fourth_other').click(function(){
+//        //update progress bar
+//        $('#progress_text').html('25% Complete');
+//        $('#progress').css('width','85px');
+//        //slide steps
+//        $('#fourth_step_other').slideUp();
+//        $('#third_step_other').slideDown();
+//    });
+//});
 
 $(document).ready(function() {
     $("#submit_fifth").hover(function() {
@@ -534,7 +534,7 @@ $(document).ready(function() {
         $('#progress').css('width','228px');
         //slide steps
         $('#fifth_step').slideUp();
-        $('#fourth_step_other').slideDown();
+        $('#fourth_step').slideDown();
     });
 });
 $(document).ready(function() {
@@ -549,6 +549,8 @@ $(document).ready(function() {
         //update progress bar
         $('#progress_text').html('50% Complete');
         $('#progress').css('width','170px');
+        //Unappend the data which was appended in #submit_fifth
+        $("#registration_request_table > tbody:last").children( 'tr:gt(6)' ).remove();
         //slide steps
         $('#sixth_step').slideUp();
         $('#fifth_step').slideDown();

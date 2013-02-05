@@ -43,12 +43,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
 
     #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step,
     #seventh_step, #eighth_step , #ninth_step, #gateway_step {
-        display: none;
+       display:none ;
     }
-    #second_step_other, #third_step_other, #fourth_step_other, #fifth_step_other, #sixth_step,
-    #seventh_step, #eighth_step , #ninth_step, #gateway_step {
-        display: none;
-    }
+
     #reg_container #first_step { display: block; }
 
     #reg_container .form { margin: 10px 50px 0 72px;}
@@ -82,9 +79,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
             padding: 5px 10px;
         }
 
-            #reg_container table td:nth-child(2) {
-                color: #a90329;
-            }
+            /*#reg_container table td:nth-child(2) {*/
+                /*color: #a90329;*/
+            /*}*/
         #reg_container table input.card-number {
             width: 150px;
             text-align: left;
@@ -112,6 +109,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
         /*-webkit-border-radius: 6px;*/
     /*}*/
 
+
     #reg_container select {
         background: url("input.png");
         color: #888;
@@ -119,21 +117,22 @@ input[type="submit"]:focus, input[type="button"]:focus {
         font-family: Cantarell, Verdana, sans-serif;
         font-weight: normal;
         font-size: 14px;
-        width: 300px;
+        /*width: 300px;*/
         height: 30px;
-        padding: 0 25px;
-        margin: 0px 0;
-        float: left;
+        padding: 5px 0 5px 25px;
+        margin: 0px auto;
+        position:relative;
+        /*float: left;*/
         border-radius: 6px;
         -moz-border-radius: 6px;
         -webkit-border-radius: 6px;
     }
 
         .button_container {
-            width: 600px;
+            /*width: 600px;*/
             /*height: 50px;*/
             margin: auto;
-            padding: 0px 10px 0px 0px;
+            padding-top:10px;
             overflow: hidden;
             position: relative;
 
@@ -149,12 +148,8 @@ input[type="submit"]:focus, input[type="button"]:focus {
             /*left: 650px;*/
         }
         .next_button {
-            border: none;
             float: right;
-            width: 85px;
-            height: 38px;
-            padding-left: 10px;
-            background: url("next.png") no-repeat;
+            width: auto;
         }
         img.cancel_button {
             padding: 10px 10px 10px 10px;
@@ -226,14 +221,13 @@ input[type="submit"]:focus, input[type="button"]:focus {
             padding-bottom: 10px;
             background: url("pay_now.png") no-repeat;
         }
-        img.back_button {
-            float: left;
-            border: none;
-            width: 85px;
-            height: 38px;
-            padding-right: 10px;
-            background: url("back.png") no-repeat;
-        }
+        /*.back_button {*/
+            /*float: left;*/
+            /*border: none;*/
+            /*width: 85px;*/
+            /*height: 38px;*/
+            /*padding-right: 10px;*/
+        /*}*/
         img.add_choice_button {
             border: none;
             width: 135px;
@@ -273,25 +267,35 @@ input[type="submit"]:focus, input[type="button"]:focus {
         #reg_container input.error {border: 1px solid red; }
         #reg_container input.valid {border: 1px solid #1FFF00; }
 
-        #reg_container input:focus, #reg_container select:focus {
-            border: 1px solid #a90329;
-            color: #a90329;
-        }
+        /*#reg_container input:focus, #reg_container select:focus {*/
+            /*border: 1px solid #a90329;*/
+            /*color: #a90329;*/
+        /*}*/
 
-    #reg_container select { padding: 5px 0 5px 25px;}
-        #reg_container option { padding: 0 15px;}
+    /*#reg_container select { padding: 5px 0 5px 25px;}*/
+    #reg_container option { padding: 0 15px;}
+
+    #reg_container ul { padding: 5px 0 5px 25px;}
 
     #reg_container label {
         color: #666;
         font-size: 13px;
         font-weight: bold;
         /*line-height: 14px;*/
-        float: left;
-        margin: 20px;
+        text-align: center;
+        margin-right: 20px;
         /*width: 200px;*/
     }
+    #reg_container label.select {
+        text-align: left;
+    }
+    #reg_container .select_container {
+        width: 100%;
+        text-align: center;
+        position:relative;
+    }
 
-    #progress_bar {
+#progress_bar {
         background: url("progress_bar.png") no-repeat;
         width: 340px;
         height: 24px;

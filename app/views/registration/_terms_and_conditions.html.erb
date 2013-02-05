@@ -8,7 +8,12 @@
           <li>5. Volunteers are not covered by Workers' Compensation and each participant, both youth and adult, is responsible for his/her own medical expenses while at the project.</li>
           <li>6. Email is the primary means of communicating (other than via the phone) with SSP.</li>
         </ul>
-  <%= check_box_tag("accept_terms", "accepted", false) %>
-  <label>I have read and accept these terms and conditions.</label>
+        <ul class="check-statement">
+          <li>
+            <%= check_box_tag("accept_terms", "accepted", false) %>
+            <label>I have read and accept these terms and conditions.</label>
+          </li>
+        </ul>
+
 
 </div>
