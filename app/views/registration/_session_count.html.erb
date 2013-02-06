@@ -1,0 +1,6 @@
+<% if @session_count == 0 %>
+    <%= "There are currently no sessions scheduled for this type of group. Please call our office if you would like to discuss scheduling a session for your group." %>
+<% else %>
+    <%= "There #{ @session_count == 1 ? 'is' : 'are'} #{pluralize(@session_count, 'session') } scheduled for this type of group." %>
+<% end %>
+<input type = "hidden" name="session_count" value="<%= @session_count %>" />

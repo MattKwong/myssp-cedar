@@ -82,7 +82,7 @@ class Registration < ActiveRecord::Base
   end
 
   def type
-    self.junior_high? ? "Junior High" : "Senior High"
+    session_type.name
   end
   def junior_high?
     session.junior_high?

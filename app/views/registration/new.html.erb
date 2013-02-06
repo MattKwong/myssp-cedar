@@ -53,7 +53,9 @@
                         <td id="group_type"><%= select_tag "group_type", options_for_select(@group_types = SessionType.all.map{|a| a.name}) %></td>
                     </div>
                     <div class="clear"></div>
-                    <div class = "errors" id="error_text_group"></div>
+                  <div id="sessions_for_type"></div>
+
+                  <div class = "errors" id="error_text_group"></div>
                     <div class="button_container">
                         <input id="submit_second" type="button" value = "Go to Next Step" class = "next_button" >
                         <input id="back_second" type="button" value = "Go Back to Previous Step" class = "back_button" >
@@ -162,8 +164,13 @@
                   </table>
                   <table id="request_info_table"></table>
                   <div class="clear"></div>
-
-                  <%= render 'terms_and_conditions' %>
+                  <div id="terms_and_conditions"></div>
+                  <ul class="check-statement">
+                    <li>
+                      <%= check_box_tag("accept_terms", "accepted", false) %>
+                      <label>I have read and accept these terms and conditions.</label>
+                    </li>
+                  </ul>
                   <div class="button_container">
                     <input id="submit_sixth" type="button" value = "Go to Next Step" class = "next_button" >
                     <input id="back_sixth" type="button" value = "Go Back to Previous Step" class = "back_button" >
@@ -178,11 +185,13 @@
                 <h1>Step 7: Make Payment</h1>
                 <div class="hidden" id="step_six_data"></div>
                 <div class="form">
-                  <h4>You have two options to make your deposit payment.</h4>
-                  <h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit
-                    card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
-                  <div class="clear"></div>
+                  <!--<h4>You have two options to make your deposit payment.</h4>-->
+                  <!--<h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit-->
+                    <!--card to complete your deposit payment. SSP does not record or save your credit card information.</h4>-->
+                  <!--<div class="clear"></div>-->
                   <div class="button_container">
+                    <div><h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit
+                      card to complete your deposit payment. SSP does not record or save your credit card information.</h4></div>
                     <input id="pay_by_cc" type="button" value = "Pay By Credit Card" class = "next_button" >
                   </div>
                   <h4>Option Two: You may mail a check to the SSP office. Please include a copy of your confirmation

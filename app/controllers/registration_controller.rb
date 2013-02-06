@@ -128,10 +128,22 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @limit_text = "Registering for #{session.name}. You may register up to #{session.available} persons in total. We recommend a ratio of about 1 adult for every 4 or 5 youth."
       @limit = session.available
     end
-    logger.debug session.inspect
+
     @group_type_name =  session.session_type.name
     @session_name =  session.name
     render :partial => "limit_info"
+  end
+
+  def terms_and_conditions
+    session = Session.find_by_site_id_and_period_id(params[:site], params[:week])
+    if session.payment_schedule.second_payment_date
+      @second_pay_line_text = "3. Your second payment is due on #{session.payment_schedule.second_payment_date.strftime("%m/%d/%y")}."
+      @final_pay_line_text = "4. Your final payment is due on #{session.payment_schedule.final_payment_date.strftime("%m/%d/%y")}."
+    else
+      @second_pay_line_text = "3. You do not have a second payment due."
+      @final_pay_line_text = "4. Your final payment is due when you arrive at your session on #{session.session_start_date.strftime("%m/%d/%y")}."
+    end
+    render :partial => "terms_and_conditions"
   end
 
   def get_sites_for_group_type
@@ -147,6 +159,15 @@ check amount listed in the Amount Due column. This can be paid either by check o
     @list_of_sites = Session.sites_with_avail_for_type(params[:type])
     #@list_of_sites = Session.sites_with_avail_for_other
     render :partial => "site_selector"
+  end
+
+  def check_for_sessions_for_type
+    if session_type = SessionType.find_by_name(params[:type]).id
+      @session_count = Session.active.find_all_by_session_type_id(session_type).count
+    else
+      @session_count = 0
+    end
+    render :partial => "session_count"
   end
 
   #def get_sites_for_group_type
@@ -344,7 +365,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def set_registered_flag
     liaison = Liaison.find(@registration.liaison_id)
     liaison.registered = true
-    liaison.active = true
+    liaison.scheduled = true
     liaison.save
     church = Church.find(@registration.church_id)
     church.registered = true

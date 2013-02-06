@@ -72,6 +72,8 @@ Spoic3::Application.routes.draw do
 
 #Routes for registration jquery calls
   match 'registration/get_limit_info', :to => 'registration#get_limit_info'
+  match 'registration/check_for_sessions_for_type', :to => 'registration#check_for_sessions_for_type'
+  match 'registration/terms_and_conditions', :to => 'registration#terms_and_conditions'
   match 'registration/get_sites_for_group_type', :to => 'registration#get_sites_for_group_type'
   match 'registration/get_sites_for_other_groups', :to => 'registration#get_sites_for_other_groups'
   match 'registration/get_alt_sites_for_group_type', :to => 'registration#get_alt_sites_for_group_type'

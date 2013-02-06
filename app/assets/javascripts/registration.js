@@ -147,6 +147,28 @@ $(document).ready(function() {
 //    });
 //});
 
+// Add
+$(document).ready(function() {
+    $("#group_type").change(function(){
+            $.get("check_for_sessions_for_type?type=" + $("#group_type").val() ,
+                function(data){
+                    $("#sessions_for_type").html(data);
+                    if ( $("input[name=session_count]").val() == '0' ) {
+                       $("#submit_second").addClass('disabled');
+                       $("#submit_second").hover(function() {
+                           $(this).removeClass('hover');
+                            });
+                    } else {
+                       $("#submit_second").removeClass('disabled');
+                       $("#submit_second").hover(function() {
+                           $(this).addClass('hover');
+                           });
+                    };
+                }
+            );
+    });
+});
+
 $(document).ready(function() {
     $('#submit_second').click(function(){
         //remove classes
@@ -159,10 +181,10 @@ $(document).ready(function() {
             $('#error_text_group').html('Error: You must select a group type.');
             error++
         } else {
-            $("#second_step_other").addClass('valid');
+            $("#second_step").addClass('valid');
         }
         if(!error) {
-            $("#second_step_other").addClass('valid');
+            $("#second_step").addClass('valid');
             //ajax call to get sites that are hosting group_type of groups
             $.get("get_sites_for_other_groups?type=" + group_type,
                 function(data){ $("#site_selector").html(data);} );
@@ -560,8 +582,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_fifth').click(function(){
-
-        comments = $("textarea#registration_comments").val()
+        $.get("terms_and_conditions?type="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
+            function(data){ $("#terms_and_conditions").html(data);}
+        );
+        comments = $("textarea#registration_comments").val();
         table_html = '' ;
         table_html += "<tr><td>Group Type</td><td>";
         table_html += group_type_name;
