@@ -442,7 +442,19 @@ class Session < ActiveRecord::Base
 
   def self.sessions_with_avail_for_type_and_site_id(group_type, site_id)
     session_type_id = SessionType.find_by_name(group_type).id
-    sessions = Session.active.find_all_by_site_id_and_session_type_id(site_id, session_type_id)
+    sessions = Session.active.find_all_by_site_id_and_session_type_id(site_id, session_type_id).sort{|a, b| a.period.start_date <=> b.period.start_date}
+  end
+
+  def self.sessions_with_avail_for_type(group_type)
+    available_sessions = Array.new
+    session_type_id = SessionType.find_by_name(group_type).id
+    sessions = Session.active.find_all_by_session_type_id(session_type_id)
+    sessions.each do |session|
+      if session.available > 0
+        available_sessions.push(session)
+      end
+    end
+    available_sessions
   end
 
 

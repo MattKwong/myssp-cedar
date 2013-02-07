@@ -42,7 +42,7 @@ input[type="submit"]:focus, input[type="button"]:focus {
 }
 
     #reg_container #first_step, #second_step, #third_step, #fourth_step, #fifth_step, #sixth_step,
-    #seventh_step, #eighth_step , #ninth_step, #gateway_step {
+        #seventh_step, #eighth_step , #ninth_step, #gateway_step {
        display:none ;
     }
 
@@ -91,6 +91,11 @@ input[type="submit"]:focus, input[type="button"]:focus {
             text-align: left;
         }
 
+    #sessions_for_type {
+        text-align: center;
+        padding-top:15px;
+        font-size: small;
+    }
     /*#reg_container input {*/
         /*background: url("input.png");*/
         /*color: #888;*/
@@ -128,6 +133,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
         -webkit-border-radius: 6px;
     }
 
+    .hover {
+        color: green;
+    }
         .button_container {
             /*width: 600px;*/
             /*height: 50px;*/
@@ -151,9 +159,9 @@ input[type="submit"]:focus, input[type="button"]:focus {
             float: right;
             width: auto;
         }
-        img.cancel_button {
-            padding: 10px 10px 10px 10px;
-        }
+        /*img.cancel_button {*/
+            /*padding: 10px 10px 10px 10px;*/
+        /*}*/
 
         .confirm_button {
             float: right;
@@ -166,16 +174,16 @@ input[type="submit"]:focus, input[type="button"]:focus {
         .disabled {
             opacity: 0.4;
         }
-        .print_button {
-            margin-left: auto;
-            margin-right: auto;
+        /*.print_button {*/
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
             /*float: left;*/
-            border: none;
-            width: 100px;
-            height: 38px;
-            display: block;
-            padding-bottom: 10px;
-            background: url("print.png") no-repeat;
+            /*border: none;*/
+            /*width: 100px;*/
+            /*height: 38px;*/
+            /*display: block;*/
+            /*padding-bottom: 10px;*/
+            /*background: url("print.png") no-repeat;*/
         }
         .return_button {
             margin-left: auto;

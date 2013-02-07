@@ -131,6 +131,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
 
     @group_type_name =  session.session_type.name
     @session_name =  session.name
+    @waitlist_flag = session.waitlist_flag
     render :partial => "limit_info"
   end
 
@@ -164,8 +165,9 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def check_for_sessions_for_type
     if session_type = SessionType.find_by_name(params[:type]).id
       @session_count = Session.active.find_all_by_session_type_id(session_type).count
+      @available_session_count = Session.sessions_with_avail_for_type(params[:type]).count
     else
-      @session_count = 0
+      @session_count = @available_session_count = 0
     end
     render :partial => "session_count"
   end
@@ -259,8 +261,13 @@ check amount listed in the Amount Due column. This can be paid either by check o
 
   def get_session_name
     session = Session.find_by_site_id_and_period_id(params[:site], params[:session])
-    @available_spots = session.available
-    @session_name = session.name
+    if session.waitlist_flag?
+      @availability_text = "Registration is currently on hold for this session because there is a waitlist. Please contact the SSP office at 916-718-5063 to add your name to the waitlist and get more information."
+    else
+      @availability_text = "#{session.name} has #{session.available.to_i} spots available."
+    end
+    @waitlist_flag = session.waitlist_flag
+
     render :partial => "session_name"
   end
 

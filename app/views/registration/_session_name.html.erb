@@ -1,1 +1,2 @@
-<%= "#{@session_name} has #{@available_spots.to_i} spots available." %>
+<%= @availability_text %>
+<input type = "hidden" name="waitlist_flag" value="<%= @waitlist_flag %>" />

@@ -147,25 +147,33 @@ $(document).ready(function() {
 //    });
 //});
 
-// Add
 $(document).ready(function() {
     $("#group_type").change(function(){
             $.get("check_for_sessions_for_type?type=" + $("#group_type").val() ,
                 function(data){
                     $("#sessions_for_type").html(data);
-                    if ( $("input[name=session_count]").val() == '0' ) {
-                       $("#submit_second").addClass('disabled');
-                       $("#submit_second").hover(function() {
-                           $(this).removeClass('hover');
-                            });
+                    if ( $("input[name=available_session_count]").val() > 0 ) { //Everything is fine - enrollable sessions are available
+                        $("input[id=submit_second]").removeClass('disabled');
+                        $("input[id=submit_second]").removeAttr('disabled');
+                        $("#submit_second").hover(function() {
+                            $(this).addClass('hover');
+                        });
                     } else {
-                       $("#submit_second").removeClass('disabled');
-                       $("#submit_second").hover(function() {
-                           $(this).addClass('hover');
+                        if ( $("input[name=session_count]").val() > 0 ) { // Sessions exist, but they are full
+                            $("input[id=submit_second]").addClass('disabled');
+                            $("#submit_second").attr('disabled', 'disabled');
+                            $("#submit_second").hover(function() {
+                                $(this).removeClass('hover');
+                            });
+                        } else {  //no sessions exist - both variables are zero
+                           $("#submit_second").addClass('disabled');
+                           $("#submit_second").attr('disabled', 'disabled');
+                           $("#submit_second").hover(function() {
+                               $(this).removeClass('hover');
                            });
-                    };
-                }
-            );
+                        }
+                    }
+                })
     });
 });
 
@@ -188,12 +196,28 @@ $(document).ready(function() {
             //ajax call to get sites that are hosting group_type of groups
             $.get("get_sites_for_other_groups?type=" + group_type,
                 function(data){ $("#site_selector").html(data);} );
-
+            session_count = ($("input[name=session_count]").val()) ;
+            if (session_count > 0) {
+                $("#third_step_table").show();
+                $("#no_availability_text").hide();
+                $("input[id=submit_third]").removeAttr('disabled');
+                $("#submit_third").removeClass('disabled');
+                $("input[id=submit_third]").hover(function() {
+                    $(this).addClass('hover'); });
+            } else {
+                $("#third_step_table").hide();
+                $("#no_availability_text").show();
+                $("input[id=submit_third]").attr('disabled', 'disabled');
+                $("#submit_third").addClass('disabled');
+                $("input[id=submit_third]").hover(function() {
+                    $(this).removeClass('hover'); });
+            }
             $('#site_info').html($('input[name=site_text]').val());
             group_type_name = $("input[name=group_type_name]").val();
              //update progress bar
             $('#progress_text').html('25% Complete');
             $('#progress').css('width','132px');
+            $('#error_text_selections').html('');
             //slide steps
             $('#second_step').slideUp();
             $('#third_step').slideDown();
@@ -360,13 +384,25 @@ $(document).ready(function() {
     $("#session_selector").change(function(){
             $.get("get_session_name?site="+ $("#site_selector_site_id").val()
                 + "&session="+ $("#session_selector_session_id").val(),
-                function(data){ $("#session_name").html(data);})
+                function(data){ $("#session_name").html(data);
+                    waitlist_flag =  $("input[name=waitlist_flag]").val();
+                    if (waitlist_flag) {
+                        $("input[id=submit_third]").attr('disabled', 'disabled');
+                        $("input[id=submit_third]").addClass('disabled');
+                    }
+                    else {
+                        $("input[id=submit_third]").removeAttr('disabled');
+                        $("input[id=submit_third]").removeClass('disabled');
+                    }
+                })
         }
     );
 });
 
 $(document).ready(function() {
     $('#submit_third').click(function(){
+        $('#third_step').removeClass('error').removeClass('valid');
+        $('#error_text_selections').html('');
 
         //save the choices
         if ($("#site_selector_site_id").val() == undefined) {
@@ -392,6 +428,8 @@ $(document).ready(function() {
             function(data){ $("#limit_info").html(data);
         group_type_name = $("input[name=group_type_name]").val();
         session_name = $("input[name=session_name]").val();
+
+
         $("#registration_requested_youth").val=0;
 
             } );
