@@ -1,4 +1,4 @@
-require 'factory_girl'
+require 'factory_girl_rails'
 
 FactoryGirl.define do
 
@@ -13,10 +13,10 @@ FactoryGirl.define do
   sequence :phone do |n|
     "#{n}#{n}#{n}#{n}#{n}#{n}#{n}#{n}#{n}#{n}"
   end
-end
+#end
 
 #Matt's factory
-FactoryGirl.define do
+#FactoryGirl.define do
   factory :admin_user do
     first_name "John"
     last_name "Doe"
@@ -33,22 +33,6 @@ FactoryGirl.define do
   factory :user_role do
     id { 1 }
     name  "Admin"
-  end
-  factory :user_role2 do
-    id { 2 }
-    name  "Liaison"
-  end
-  factory :user_role3 do
-    id { 3 }
-    name  "Food Admin"
-  end
-  factory :user_role4 do
-    id { 4 }
-    name  "Construction Admin"
-  end
-  factory :user_role5 do
-    id { 5 }
-    name  "Stuff"
   end
 
 
