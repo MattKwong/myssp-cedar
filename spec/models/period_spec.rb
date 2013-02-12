@@ -45,17 +45,13 @@ describe Period do
   end
 
   it "start date cannot be in the past" do
-    pending "It seems that this functionality was commented out, so this test depends on that" do
-      item = Period.new(@attr.merge(:start_date => Date.today-4))
+      item = Period.new(@attr.merge(:start_date => Date.today-1.day))
       item.should_not be_valid
-    end
   end
 
-  it "start date should not be the same as end date" do
-    pending "Not sure if this is or isn't ok, so pending. WILL CAUSE AN ERROR" do
+  it "start date can be the same as end date" do
       item = Period.new(@attr.merge(:start_date => Date.today, :end_date => Date.today))
-      item.should_not be_valid
-    end
+      item.should be_valid
   end
 
   it "start date cannot be after end date" do

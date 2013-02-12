@@ -46,6 +46,9 @@ Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Sus
 Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city => "McDermitt", :state => "NV", :zip => "80000", :listing_priority => 20,
             :active => true, :phone => "800-700-6000", :abbr=>'T2')
 
+Site.create(:name => 'Test Site 3', :address1 => "100 Reservation Way", :city => "Los Angeles", :state => "CA", :zip => "80000", :listing_priority => 20,
+            :active => true, :phone => "800-700-6000", :abbr=>'T3')
+
 ['Site Director', 'Food', 'Construction', 'SLC'].each do |name|
 
   if JobType.find_by_name(name)
@@ -154,12 +157,12 @@ Church.create(:active => 't', :address1 => "100 Highway 99", :city => "Stockton"
 
 Program.delete_all
 Program.create(:site_id => Site.find_by_name('Test Site 1').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
-               :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"), :name=> "Test Program 2013",
+                 :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"), :name=> "Test Program 2013",
                :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 't' )
 
 #Inactive program
 Program.create(:site_id => Site.find_by_name('Test Site 2').id, :program_type_id => ProgramType.find_by_name('Summer Domestic').id,
-               :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"),
+               :start_date => Date.strptime("06/01/2013", "%m/%d/%Y"),:name => "Inactive Program 2013",
                :end_date => Date.strptime("08/31/2013", "%m/%d/%Y"), :active => 'f' )
 
 LiaisonType.delete_all
