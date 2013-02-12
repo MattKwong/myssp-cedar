@@ -387,7 +387,7 @@ $(document).ready(function() {
                 function(data){ $("#session_name").html(data);
                     waitlist_flag =  $("input[name=waitlist_flag]").val();
                     if (waitlist_flag) {
-                        alert("waitlist is true");
+                        alert("waitlist is true:" + waitlist_flag );
                         $("input[id=submit_third]").attr('disabled', 'disabled');
                         $("input[id=submit_third]").addClass('disabled');
                     }
