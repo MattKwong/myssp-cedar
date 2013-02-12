@@ -45,7 +45,7 @@ describe Period do
   end
 
   it "start date cannot be in the past" do
-      item = Period.new(@attr.merge(:start_date => Date.today-4))
+      item = Period.new(@attr.merge(:start_date => Date.today-1.day))
       item.should_not be_valid
   end
 

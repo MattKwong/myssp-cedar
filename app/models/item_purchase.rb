@@ -97,8 +97,10 @@ class ItemPurchase < ActiveRecord::Base
 
   private
 
+
   def update_base_units
-    self.total_base_units = (self.quantity * self.size.u).to(self.item.base_unit).abs
+    conversion = size.u.to(item.base_unit)
+    self.total_base_units = conversion * quantity
   end
 
   def update_derived_fields
