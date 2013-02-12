@@ -13,6 +13,7 @@ ActiveAdmin.register Session do
     column "Maximum", :schedule_max
     column "Session Type", :session_type
     column "Program", :program
+    column "Payment Schedule", :payment_schedule
     column "Waitlist Flag", :waitlist_flag
     default_actions
   end
@@ -23,6 +24,7 @@ ActiveAdmin.register Session do
         row("Session Name") {session.name}
         row("Site") {session.site.name}
         row("Program") {session.program.name}
+        row("Payment Schedule") {session.payment_schedule}
         row("Start Date") {session.period.start_date}
         row("End Date") {session.period.end_date}
         row("Session Type") {(session.session_type.name)}
