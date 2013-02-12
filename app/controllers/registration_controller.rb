@@ -262,7 +262,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def get_session_name
     session = Session.find_by_site_id_and_period_id(params[:site], params[:session])
     if session.waitlist_flag?
-      @availability_text = "Registration is currently on hold for this session because there is a waitlist. Please contact the SSP office at 916-718-5063 to add your name to the waitlist and get more information."
+      @availability_text = "Registration is currently on hold for this session because there is a waitlist. Please contact the SSP office at 916-488-6441 to add your name to the waitlist and get more information."
     else
       @availability_text = "#{session.name} has #{session.available.to_i} spots available."
     end
