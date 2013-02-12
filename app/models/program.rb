@@ -1,5 +1,6 @@
 
 class Program < ActiveRecord::Base
+  #changed
   attr_accessible :site_id, :start_date, :end_date, :program_type_id, :active, :name, :short_name
 
   belongs_to :site
@@ -15,6 +16,7 @@ class Program < ActiveRecord::Base
   has_many :items
   has_many :food_inventories
   has_many :projects
+
 
   before_validation :set_name
 
