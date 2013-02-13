@@ -433,7 +433,7 @@ class Session < ActiveRecord::Base
   def self.sites_with_avail_for_type(group_type)
     sites = Array.new
     session_type_id = SessionType.find_by_name(group_type).id
-    sessions = Session.active.find_all_by_session_type_id(session_type_id)
+    sessions = Session.order(:start_date).active.find_all_by_session_type_id(session_type_id)
     sessions.each do |session|
       if session.available > 0
         sites.push(session.site)
@@ -523,8 +523,9 @@ class Session < ActiveRecord::Base
     #Assumes summer domestic. Sites are the rows; weeks are the columns
     sum_dom = program_type == "Summer Domestic" ? "Summer Domestic" : "Other"
     @site_names = Site.order(:listing_priority).find_all_hosting(program_type).map { |s| s.name}
-    period_names = Period.order(:start_date).find_all_hosting(program_type).map { |p| p.name}
-    period_sh_dates = Period.order(:start_date).find_all_hosting(program_type).map do |p|
+    period_names = Period.find_all_hosting(program_type).map { |p| p.name}
+    logger.debug period_names
+    period_sh_dates = Period.find_all_hosting(program_type).map do |p|
         "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
     end
 

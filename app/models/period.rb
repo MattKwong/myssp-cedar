@@ -46,7 +46,9 @@ class Period < ActiveRecord::Base
     Session.find_all_by_program_type(program_type).each do |session|
       periods << session.period
     end
-    periods.uniq
+    periods.uniq!.sort_by!{|p| p[:start_date]}
+    logger.debug periods
+    periods
   end
 
   def self.summer_domestic
