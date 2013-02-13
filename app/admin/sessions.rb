@@ -5,8 +5,8 @@ ActiveAdmin.register Session do
 
   show :title => :name
 
-  scope :active , :default => true
-  scope :inactive
+  #scope :active , :default => true
+  #scope :inactive
 
   index do
     column "Session Name", :name
@@ -14,6 +14,7 @@ ActiveAdmin.register Session do
     column "Session Type", :session_type
     column "Program", :program
     column "Payment Schedule", :payment_schedule
+    column "Active", :active
     column "Waitlist Flag", :waitlist_flag
     default_actions
   end
@@ -29,6 +30,7 @@ ActiveAdmin.register Session do
         row("End Date") {session.period.end_date}
         row("Session Type") {(session.session_type.name)}
         row("Schedule Max") {session.schedule_max }
+        row("Active") {session.active }
         row("Waitlist Flag") {session.waitlist_flag }
       end
     end
@@ -44,6 +46,7 @@ ActiveAdmin.register Session do
         f.input :program, :include_blank => false, :as => :select, :collection => Program.active
         f.input :name
         f.input :schedule_max, :include_blank => false
+        f.input :active, :default => true
         f.input :waitlist_flag, :default => true
       else
         f.input :session_type, :as => :select
@@ -51,6 +54,7 @@ ActiveAdmin.register Session do
         f.input :program, :include_blank => false, :as => :select, :collection => Program.active
         f.input :name
         f.input :schedule_max, :include_blank => false
+        f.input :active
         f.input :waitlist_flag
 
         end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201234448) do
+ActiveRecord::Schema.define(:version => 20130213005353) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -606,6 +606,7 @@ ActiveRecord::Schema.define(:version => 20130201234448) do
     t.integer  "requests"
     t.integer  "schedule_max"
     t.boolean  "waitlist_flag"
+    t.boolean  "active"
   end
 
   create_table "sites", :force => true do |t|

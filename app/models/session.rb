@@ -27,11 +27,13 @@ class Session < ActiveRecord::Base
   #default_scope includes(:period).order('periods.start_date ASC')
 
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id,
-                  :requests, :schedule_max, :session_type_id, :waitlist_flag
+                  :requests, :schedule_max, :session_type_id, :active, :waitlist_flag
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
-  scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
-  scope :inactive, lambda { includes(:program).where("programs.active <> ?", 't') }
+  scope :active, where(:active => true)
+  scope :inactive, where(:active => false)
+  #scope :active, lambda { includes(:program, :period).where("programs.active = ?", 't') }
+  #scope :inactive, lambda { includes(:program).where("programs.active <> ?", 't') }
   scope :junior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Junior High') }
   scope :senior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Senior High') }
   scope :summer_domestic, lambda { summer_domestic? }

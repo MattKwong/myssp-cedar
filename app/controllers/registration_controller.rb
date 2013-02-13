@@ -454,7 +454,7 @@ check amount listed in the Amount Due column. This can be paid either by check o
   def other_availability_matrix
     jh_default = 50
     sh_default = 65
-    @matrices = Session.session_matrices("Other", sh_default, jh_default)
+    @matrices = Session.active.session_matrices("Other", sh_default, jh_default)
     render :partial => 'other_availability_matrix'
   end
 
