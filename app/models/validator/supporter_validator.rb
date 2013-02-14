@@ -5,7 +5,8 @@ class Validator::SupporterValidator < Validator
       :first,
       :last_name,
       :affiliation,
-      :occupation
+      :occupation,
+      :recaptcha
   )
 
   validates(

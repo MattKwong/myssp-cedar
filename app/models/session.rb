@@ -24,16 +24,37 @@ class Session < ActiveRecord::Base
   has_many :registrations
   accepts_nested_attributes_for :scheduled_groups
 
-  default_scope includes(:period).order('periods.start_date ASC')
+  #default_scope includes(:period).order('periods.start_date ASC')
 
   attr_accessible :name, :period_id, :site_id, :payment_schedule_id, :session_type_id, :program_id,
-                  :requests, :schedule_max
+                  :requests, :schedule_max, :session_type_id, :active, :waitlist_flag
   scope :by_budget_line_type, lambda { |id| joins(:item).where("budget_item_type_id = ?", id) }
   scope :to_date, lambda { joins(:period).where("start_date <= ?", Date.today) }
-  scope :active, lambda { includes(:program).where("programs.active = ?", 't') }
-  scope :junior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Junior High') }
-  scope :senior_high, lambda { joins(:session_type).where("session_types.name = ?", 'Summer Senior High') }
+  scope :active, where(:active => true)
+  scope :inactive, where(:active => false)
+  #scope :active, lambda { includes(:program, :period).where("programs.active = ?", 't') }
+  #scope :inactive, lambda { includes(:program).where("programs.active <> ?", 't') }
+  scope :junior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Junior High') }
+  scope :senior_high, lambda { joins(:session_types).where("session_types.name = ?", 'Senior High') }
+  scope :summer_domestic, lambda { summer_domestic? }
+  scope :weekend, lambda { joins(:session_types).where("session_types.name = ?", 'Weekend of Service') }
+  scope :other, lambda { joins(:session_type).where("session_types.name <> ? AND session_types.name <> ?", 'Summer Senior High', 'Summer Junior High') }
   scope :by_type, lambda { |group_type| where("session_type_id = ?", group_type ) }
+
+  def default_max
+    case
+      when session_type.senior_high?
+        sh_default
+      when session_type.junior_high?
+        jh_default
+      when session_type.break?
+        break_default
+      when session_type.weekend?
+        we_default
+      else
+        40
+    end
+  end
 
   def sh_default
     65
@@ -43,6 +64,14 @@ class Session < ActiveRecord::Base
     50
   end
 
+  def we_default
+    35
+  end
+
+  def break_default
+    35
+  end
+
   def senior_high?
     session_type.senior_high?
   end
@@ -50,6 +79,11 @@ class Session < ActiveRecord::Base
   def junior_high?
     session_type.junior_high?
   end
+
+  def summer_domestic?
+    program.summer_domestic?
+  end
+
   def rollback_requests
     ScheduledGroup.find_all_by_session_id(id).each do |group|
       Registration.find(group.registration_id).update_attribute(:scheduled, false)
@@ -383,7 +417,7 @@ class Session < ActiveRecord::Base
   def self.sites_for_group_type(group_type)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active.with_availability
     else
       sessions = Session.senior_high.active
@@ -398,24 +432,47 @@ class Session < ActiveRecord::Base
 
   def self.sites_with_avail_for_type(group_type)
     sites = Array.new
-
-    if SessionType.find(group_type).name == "Summer Junior High"
-      sessions = Session.junior_high.active
-    else
-      sessions = Session.senior_high.active
-    end
+    session_type_id = SessionType.find_by_name(group_type).id
+    sessions = Session.order(:start_date).active.find_all_by_session_type_id(session_type_id)
     sessions.each do |session|
-
       if session.available > 0
         sites.push(session.site)
       end
     end
-
     sites.uniq
   end
 
+  def self.sessions_with_avail_for_type_and_site_id(group_type, site_id)
+    session_type_id = SessionType.find_by_name(group_type).id
+    sessions = Session.active.find_all_by_site_id_and_session_type_id(site_id, session_type_id).sort{|a, b| a.period.start_date <=> b.period.start_date}
+  end
+
+  def self.sessions_with_avail_for_type(group_type)
+    available_sessions = Array.new
+    session_type_id = SessionType.find_by_name(group_type).id
+    sessions = Session.active.find_all_by_session_type_id(session_type_id)
+    sessions.each do |session|
+      if session.available > 0
+        available_sessions.push(session)
+      end
+    end
+    available_sessions
+  end
+
+
+  #def self.sites_with_avail_for_other
+  #  sites = Array.new
+  #  sessions = Session.weekend.active
+  #  sessions.each do |session|
+  #    if session.available > 0
+  #      sites.push(session.site)
+  #    end
+  #  end
+  #  sites.uniq
+  #end
+
   def available
-    default_max = self.junior_high? ? self.jh_default : self.sh_default
+    #default_max = self.junior_high? ? self.jh_default : self.sh_default
     session_max = self.schedule_max.nil? ? default_max : self.schedule_max
     session_available = session_max - self.scheduled_total
     if session_available < 2
@@ -427,14 +484,11 @@ class Session < ActiveRecord::Base
   def self.alt_sites_for_group_type(group_type, session_selections)
     sites = Array.new
 
-    if SessionType.find(group_type).name == "Summer Junior High"
+    if SessionType.find(group_type).name == "Junior High"
       sessions = Session.junior_high.active
     else
       sessions = Session.senior_high.active
     end
-
-    logger.debug sessions.inspect
-    logger.debug session_selections.inspect
 
     if session_selections
       sessions.delete_if {|s| session_selections.include?(s.id.to_s)}
@@ -451,11 +505,11 @@ class Session < ActiveRecord::Base
   end
 
   def self.sites_for_group_type_senior
-    group_type = SessionType.find_by_name("Summer Senior High").id
+    group_type = SessionType.find_by_name("Senior High").id
     self.sites_for_group_type(group_type)
   end
   def self.sites_with_avail_for_type_senior
-    group_type = SessionType.find_by_name("Summer Senior High").id
+    group_type = SessionType.find_by_name("Senior High").id
     self.sites_with_avail_for_type(group_type)
   end
 
@@ -463,15 +517,17 @@ class Session < ActiveRecord::Base
     site.abbr + " " + period.name.first + period.name.last
   end
 
-  def self.session_matrices(program_type, sh_maximum = 65, jh_maximum = 50)
+  def self.session_matrices(program_type, sh_maximum = 65, jh_maximum = 50, we_maximum = 30)
     #Returns a matrix of session availability, organized in rows and columns with row labels and column headers.
     #Matrix type is Registration, Scheduled or Availability
     #Assumes summer domestic. Sites are the rows; weeks are the columns
-      @site_names = Site.order(:listing_priority).find_all_by_active_and_summer_domestic(true, true).map { |s| s.name}
-      period_names = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map { |p| p.name}
-      period_sh_dates = Period.order(:start_date).find_all_by_active_and_summer_domestic(true, true).map do |p|
-          "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
-          end
+    sum_dom = program_type == "Summer Domestic" ? "Summer Domestic" : "Other"
+    @site_names = Site.order(:listing_priority).find_all_hosting(program_type).map { |s| s.name}
+    period_names = Period.find_all_hosting(program_type).map { |p| p.name}
+    logger.debug period_names
+    period_sh_dates = Period.find_all_hosting(program_type).map do |p|
+        "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
+    end
 
     #Assign a ordinal value to each row and column
       @site_ordinal = Array.new
@@ -491,27 +547,41 @@ class Session < ActiveRecord::Base
       @avail_matrix = Array.new(@site_names.size + 1){ Array.new(period_names.size + 1, 0)}
       @senior_high = Array.new(@site_names.size + 1){ Array.new(period_names.size + 1, true)}
 
-      Registration.all(:conditions => "(request1 IS NOT NULL) AND (scheduled = 'f')").each do |r|
-        @session = Session.find(r.request1)
-        @site = Site.find(@session.site_id)
-        @period = Period.find(@session.period_id)
-        @row_position = @site_ordinal.index(@site.name)
-        @column_position = @period_ordinal.index(@period.name)
-        @session_id_matrix[@row_position][@column_position] = @session.id
-        @registration_matrix[@row_position][@column_position] += r.requested_counselors + r.requested_youth
-        #unless (@column_position.nil? || @row_position.nil?)
-        #end
+      sum_dom ? registrations = Registration.summer_domestic.unscheduled.current : Registration.other.unscheduled.current
+
+      sessions = program_type == "Summer Domestic" ? Session.summer_domestic : Session.other
+      sessions.each do |session|
+        row_position = @site_ordinal.index(session.site.name)
+        column_position = @period_ordinal.index(session.period.name)
+        @session_id_matrix[row_position][column_position] = session.id
       end
 
-      ScheduledGroup.active_program.each do |r|
-        @session = Session.find(r.session_id)
-        @site = Site.find(@session.site_id)
-        @period = Period.find(@session.period_id)
-        @row_position = @site_ordinal.index(@site.name)
-        @column_position = @period_ordinal.index(@period.name)
-        @session_id_matrix[@row_position][@column_position] = @session.id
-        @scheduled_matrix[@row_position][@column_position] += r.current_total
-        unless (@column_position.nil? || @row_position.nil?)
+      if registrations
+        registrations.each do |r|
+          session = Session.find(r.request1)
+          site = Site.find(session.site_id)
+          period = Period.find(session.period_id)
+          row_position = @site_ordinal.index(site.name)
+          column_position = @period_ordinal.index(period.name)
+          @registration_matrix[row_position][column_position] += r.requested_counselors + r.requested_youth
+        end
+      end
+     #sum_dom ? sessions = Session.active.joins(:program, :program => :program_type).where('program_types.name = ?', "Summer Domestic").map {|s| s.id}
+     #           : Session.active.joins(:program, :program => :program_type).where('program_types.name <> ?', "Summer Domestic").map {|s| s.id}
+     # #sum_dom ? scheduled_groups = ScheduledGroup.summer_domestic.active_program : ScheduledGroup.other.active_program
+      sessions.map! {|s| s.id}
+      scheduled_groups =  ScheduledGroup.find_all_by_session_id(sessions)
+      logger.debug scheduled_groups.inspect
+      if scheduled_groups
+        scheduled_groups.each do |r|
+          session = Session.find(r.session_id)
+          site = Site.find(session.site_id)
+          period = Period.find(session.period_id)
+          row_position = @site_ordinal.index(site.name)
+          column_position = @period_ordinal.index(period.name)
+          @scheduled_matrix[row_position][column_position] += r.current_total
+          #unless (@column_position.nil? || @row_position.nil?)
+          #end
         end
       end
 
@@ -554,7 +624,7 @@ class Session < ActiveRecord::Base
         @reg_total = @sched_total = 0
       end
 
-    #Grand totalS
+    #Grand totals
       @reg_total = @sched_total = 0
       for i in 0..@site_names.size - 1 do
         @reg_total = @reg_total + @registration_matrix[i][period_names.size]
@@ -567,11 +637,23 @@ class Session < ActiveRecord::Base
       @site_names << "Total"
 
     #Replace zeros in cells which do not represent an active session
+    #  if sum_dom
+    #    for i in 0..@site_names.size - 2 do
+    #      site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
+    #      for j in 0..period_names.size - 2 do
+    #        period = Period.active.summer_domestic.find_by_name(period_names[j]).id
+    #        if Session.where('site_id = ? AND period_id = ?', site, period).size == 0
+    #          @registration_matrix[i][j] = "-"
+    #          @scheduled_matrix[i][j] = "-"
+    #          @avail_matrix[i][j] = "-"
+    #        end
+    #      end
+    #    end
+    #  end
+    #
       for i in 0..@site_names.size - 2 do
-        site = Site.active.summer_domestic.find_by_name(@site_names[i]).id
         for j in 0..period_names.size - 2 do
-          period = Period.active.summer_domestic.find_by_name(period_names[j]).id
-          if Session.where('site_id = ? AND period_id = ?', site, period).size == 0
+          if @session_id_matrix[i][j] == 0
             @registration_matrix[i][j] = "-"
             @scheduled_matrix[i][j] = "-"
             @avail_matrix[i][j] = "-"
@@ -587,4 +669,21 @@ class Session < ActiveRecord::Base
                     :avail_matrix => @avail_matrix, :senior_high => @senior_high, :period_sh_dates => period_sh_dates,
                     }
   end
+
+  def self.find_all_by_program_type(type)
+    if type == "Summer Domestic"
+      Session.active.joins(:program => :program_type).where('program_types.name = ?', "Summer Domestic")
+    else
+      Session.active.joins(:program => :program_type).where('program_types.name <> ?', "Summer Domestic")
+    end
+  end
+
+  def self.summer_domestic
+    active.find_all_by_program_type("Summer Domestic")
+  end
+
+  def self.other
+    active.find_all_by_program_type("Other")
+  end
+
 end

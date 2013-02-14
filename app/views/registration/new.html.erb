@@ -1,9 +1,11 @@
 <%= stylesheet_link_tag "print", :media => "print" %>
-<!--This version of 'new' is used for registering and scheduling groups after Nov 15. -->
 <div id='active_admin_content'>
     <div id='register_header'>
         <h4><%= link_to "Help with scheduling a group", "http://www.sierraserviceproject.org/2013/MySSP Registration User Guide.pdf" %></h4>
-        <img id="available_link" class="reg_buttons available_button">
+        <div class='scopes'>
+            <input id="summer_available_link" type="submit" value="View Summer Availability">
+            <input id="other_available_link" type="submit" value="View Other Availability">
+        </div>
         <div class="clear"></div>
         <div class="hidden" id="available_data"></div>
         <h3>This online system has been set up for your convenience. If you run into problems, refer to the user guide
@@ -12,12 +14,11 @@
           "meghan.osborn@sierraserviceproject.org", :subject => "Help with Registration" %>.</h3>
         <h3>Throughout this process, don't use the back arrow on your browser! If you want to back up and change something
         that you have already input, use the 'Back' button which will appear at the bottom of the form.</h3>
-    </div>
-        <div id='reg_container'>
-          <!--<form action="#" method="post">-->
-          <%=  form_for @registration do |r| %>
+
+          <%= form_for @registration do |r| %>
+            <div id='reg_container'>
               <div id="first_step">
-              <h1>Step 1: Confirm Church Information</h1>
+                <h1>Step 1: Confirm Church Information</h1>
                 <div class="form">
                     <p>Below is the information on file for you and your church.
                     If any of this needs to be updated, please cancel this registration process, update your liaison
@@ -35,95 +36,96 @@
                       <tr><td>City</td><td><%= @liaison.church.city %></td></tr>
                       <tr><td>State</td><td><%= @liaison.church.state %></td></tr>
                     </table>
+                    <div class="clear"></div>
+                    <div class="button_container" >
+                        <input id="submit_first" type="button" value = "Go to Next Step" class = "next_button" >
+                        <%= button_to 'Cancel', request.env["HTTP_REFERER"],
+                            :class => 'cancel',
+                            :confirm => 'Are you sure? Any changes will be lost.' %>
+                    </div>
                 </div>
-              <div class="clear"></div>
-              <div class="button_container">
-                  <img class="reg_button next_button" id="submit_first"  >
-                  <div class="cancel_button"><%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back %></div>
               </div>
-            </div>
-
-
-            <div id="second_step">
-              <h1>Step 2: Select Group Type</h1>
-              <div class="form_elements">
-              <div class="form" id align="group_type_buttons">
-                <p>Select the type of group you are registering.</p>
-                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Senior High').id) %>
-                    <%= label_tag(:group_senior, "Senior High") %>
-                    <%= radio_button_tag(:group_type, SessionType.find_by_name('Summer Junior High').id) %>
-                    <%= label_tag(:group_junior, "Junior High") %>
-              </div>
-              </div>
-              <div class="clear"></div>
-              <div class = "errors" id="error_text_group"></div>
-              <div class="button_container">
-                <img class="reg_button next_button" id="submit_second" >
-                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, title => 'Cancel and return to liaison page' %>
-                <img class="reg_button back_button" id="back_second" :alt align="Back" >
-              </div>
-            </div>
-            <div class="clear"></div>
-
-            <div id="third_step">
-
-              <h1>Step 3: Select Site and Session</h1>
-              <div class="form">
-                <div id='site_info'></div>
-                <table id="info_table_third" class="registration_table"></table>
-                <table>
-
-              <tr>
-                <td><%= r.label "Site" %></td>
-                <td id="site_selector"></td>
-              </tr>
-              <tr >
-                <td><%= r.label "Session" %></td>
-                <td id="session_selector"></td>
-              </tr>
-              </table>
+              <div id="second_step">
+                <h1>Step 2: Select Group Type</h1>
+                <div class="form">
+                    <div class="select_container">
+                        <td><%= r.label "Select group type" %></td>
+                        <td id="group_type"><%= select_tag "group_type", options_for_select(@group_types = SessionType.all.map{|a| a.name}),
+                                                           {:prompt => "Select one", :include_blank => false} %></td>
+                    </div>
+                    <div class="clear"></div>
+                  <div id="sessions_for_type"></div>
+                  <div class = "errors" id="error_text_group"></div>
+                    <div class="button_container">
+                        <input id="submit_second" type="button" value = "Go to Next Step" class = "next_button" >
+                        <input id="back_second" type="button" value = "Go Back to Previous Step" class = "back_button" >
+                        <%= button_to 'Cancel', request.env["HTTP_REFERER"],
+                                  :class => 'cancel',
+                                  :confirm => 'Are you sure? Any changes will be lost.' %>
+                    </div>
                 </div>
-              <h3 id="session_name" class align="center"></h3>
-                <div class="clear"></div>
-              <div class = "errors" id="error_text_selections"></div>
-              <div class="button_container">
-                <img class="reg_button next_button" id="submit_third" align="right" >
-                <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
-                     :title => 'Cancel and return to liaison page'} %>
-                <img class="reg_button back_button" id="back_third" >
               </div>
-            </div>
-                <div class="clear"></div>
-            <div id="fourth_step">
-            <h1>Step 4: Number of Participants</h1>
-            <div class="form">
-            <div id='limit_info'></div>
-            <table id="info_table_fourth" class="registration_table"></table>
-            <table class='registration_table'>
-            <tr>
-            <td><%= r.label "Youth" %></td>
-            <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
-            </tr>
-            <tr>
-            <td><%= r.label "Counselors" %></td>
-            <td><%= r.number_field :requested_counselors, :min => 1, :size => 2, :max => 8 %></td>
-            </tr>
-            <tr>
-            <td>Total Requested</td>
-            <td id="requested_total"></td>
-            </table>
-            </div>
-            <div class="clear"></div>
-            <div class = "errors" id="error_text_numbers"></div>
-            <div class="button_container">
-            <img class="reg_button next_button" id="submit_fourth" align="right">
-            <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
-                                                                                     :title => 'Cancel and return to liaison page'} %>
-            <img class="reg_button back_button" id="back_fourth" >
-            </div>
-            </div>
-            <div class="clear"></div>
-
+              <div id="third_step">
+                <h1>Step 3: Select Site and Session</h1>
+                <div class="form">
+                  <div id='site_info'></div>
+                  <table id="info_table_third" class="registration_table"></table>
+                  <table id="third_step_table">
+                      <tr>
+                        <td><%= r.label "Site" %></td>
+                        <td id="site_selector"></td>
+                      </tr>
+                      <tr >
+                        <td><%= r.label "Session" %></td>
+                        <td id="session_selector"></td>
+                      </tr>
+                  </table>
+                  <h4 id="no_availability_text">All of the available sessions for this type of group are currently full.
+                    To be placed on a waiting list, please call the SSP office at 916-488-6441.</h4>
+                  <h3 id="session_name" class align="center"></h3>
+                  <div class="clear"></div>
+                  <div class = "errors" id="error_text_selections"></div>
+                  <div class="button_container">
+                      <input id="submit_third" type="button" value = "Go to Next Step" class = "next_button" >
+                      <input id="back_third" type="button" value = "Go Back to Previous Step" class = "back_button" >
+                      <%= button_to 'Cancel', request.env["HTTP_REFERER"],
+                                :class => 'cancel',
+                                :confirm => 'Are you sure? Any changes will be lost.' %>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="clear"></div>-->
+              <div id="fourth_step">
+                <h1>Step 4: Number of Participants</h1>
+                <div class="form">
+                  <div id='limit_info'></div>
+                  <table id="info_table_fourth" class="registration_table"></table>
+                  <table class='registration_table'>
+                      <tr>
+                         <td><%= r.label "Youth" %></td>
+                         <td><%= r.number_field :requested_youth, :min => 1, :size => 2, :max => 25 %></td>
+                      </tr>
+                      <tr>
+                         <td><%= r.label "Adults" %></td>
+                         <td><%= r.number_field :requested_counselors, :min => 1, :size => 2, :max => 8 %></td>
+                      </tr>
+                      <tr>
+                        <td>Total Requested</td>
+                        <td id="requested_total"></td>
+                      <tr></tr>
+                  </table>
+                  <div class="clear"></div>
+                  <div class = "errors" id="error_text_numbers"></div>
+                  <div class="button_container">
+                    <input id="submit_fourth" type="button" value = "Go to Next Step" class = "next_button" >
+                    <input id="back_fourth" type="button" value = "Go Back to Previous Step" class = "back_button" >
+                    <%= button_to 'Cancel', request.env["HTTP_REFERER"],
+                                  :class => 'cancel',
+                                  :confirm => 'Are you sure? Any changes will be lost.' %>
+                  </div>
+                </div>
+              </div>
+            <!--<div class="clear"></div>-->
               <div id="fifth_step">
               <h1>Step 5: Add Comments and Special Notes</h1>
                 <table id="prev_choices_table6"></table>
@@ -133,18 +135,19 @@
                   <p>Please let us know if there is a scholarship need for the entire group or for just a specific
                     number of youth. Scholarships will be applied to the second and final payments.</p>
                   <%=  r.text_area("comments", :size => "80x4") %>
+                  <div class="clear"></div>
+                  <div class="button_container">
+                    <input id="submit_fifth" type="button" value = "Go to Next Step" class = "next_button" >
+                    <input id="back_fifth" type="button" value = "Go Back to Previous Step" class = "back_button" >
+                    <%= button_to 'Cancel', request.env["HTTP_REFERER"],
+                                  :class => 'cancel',
+                                  :confirm => 'Are you sure? Any changes will be lost.' %>
+                  </div>
+                  <div class="clear"></div>
                 </div>
-                <div class="clear"></div>
-                <div class="button_container">
-                  <img class="reg_button next_button" id="submit_fifth" align="right" >
-                  <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
-                       :title => 'Cancel and return to liaison page'} %>
-                  <img class="reg_button back_button" id="back_fifth" >
-                </div>
-                <div class="clear"></div>
               </div>
-            <div id="sixth_step">
-              <h1>Step 6: Confirm Registration</h1>
+              <div id="sixth_step">
+                <h1>Step 6: Confirm Registration</h1>
                 <div class="form">
                   <p>Please review this information for accuracy. Use the Back button below if you want to change anything
                     before submitting. Once you press the 'Confirm' button, your application will be recorded in our database.
@@ -162,42 +165,47 @@
                     <tr></tr>
                   </table>
                   <table id="request_info_table"></table>
-                  <%= render 'terms_and_conditions' %>
-                </div>
-              <div class="clear"></div>
-                <div class="button_container">
-                  <img class="reg_button confirm_button" id="submit_sixth" align="right" >
-                  <%=  link_to image_tag("cancel.png", :alt => "Cancel"), :back, :html => {:class=>"cancel_button",
-                       :title => 'Cancel and return to liaison page'} %>
-                  <img class="reg_button back_button" id="back_sixth" >
+                  <div class="clear"></div>
+                  <div id="terms_and_conditions"></div>
+                  <ul class="check-statement">
+                    <li>
+                      <%= check_box_tag("accept_terms", "accepted", false) %>
+                      <label>I have read and accept these terms and conditions.</label>
+                    </li>
+                  </ul>
+                  <div class="button_container">
+                    <input id="submit_sixth" type="button" value = "Go to Next Step" class = "next_button" >
+                    <input id="back_sixth" type="button" value = "Go Back to Previous Step" class = "back_button" >
+                    <%= button_to 'Cancel', request.env["HTTP_REFERER"],
+                                :class => 'cancel',
+                                :confirm => 'Are you sure? Any changes will be lost.' %>
+                  </div>
+                  <div class="clear"></div>
                 </div>
               </div>
-            <div class="clear"></div>
-
-
-            <div id="seventh_step">
-              <h1>Step 7: Make Payment</h1>
-              <div class="hidden" id="step_six_data"></div>
-              <div class="form">
+              <div id="seventh_step">
+                <h1>Step 7: Make Payment</h1>
+                <div class="hidden" id="step_six_data"></div>
+                <div class="form">
                   <h4>You have two options to make your deposit payment.</h4>
                   <h4>Option One: You may proceed to SSP's secure payment gateway and use a credit or debit
                     card to complete your deposit payment. SSP does not record or save your credit card information.</h4>
-                <div class="clear"></div>
-                <div class="button_container">
-                  <img class="reg_button gateway_button" id="pay_by_cc" align="right"  >
-
+                  <div class="clear"></div>
+                  <div class="button_container">
+                      <input id="pay_by_cc" type="button" value = "Pay By Credit Card" class = "next_button" >
+                  </div>
+                  <div class="clear"></div>
+                  <h4></h4>
+                  <h4>Option Two: You may mail a check to the SSP office. Please include a copy of your confirmation
+                      email or printed copy of the confirmation screen (this is the next screen you will see).
+                      Payment must be received promptly; otherwise, your registration may be cancelled. Checks
+                      should be made payable to Sierra Service Project.</h4>
+                  <div class="button_container">
+                    <input id="pay_by_check" type="button" value = "Pay By Check" class = "next_button" >
+                  </div>
                 </div>
-                <h4>Option Two: You may mail a check to the SSP office. Please include a copy of your confirmation
-                  email or printed copy of the confirmation screen (this is the next screen you will see).
-                  Payment must be received promptly; otherwise, your registration may be cancelled. Checks
-                  should be made payable to Sierra Service Project.</h4>
+                <div class="clear"></div>
               </div>
-              <div class="clear"></div>
-              <div class="button_container">
-                <img class="reg_button check_button" id="pay_by_check" align="right" >
-              </div>
-            </div>
-            <div class="clear"></div>
 
             <div id="eighth_step">
               <h1>Step 8: Registration Complete!</h1>
@@ -221,10 +229,10 @@
               </div>
               <div class="button_container">
                   <div class="reg_button center ">
-                    <img class="print_button" id="print_eighth" >
-                    <%=  link_to image_tag("return.png", :alt => ":return"), :back, :class=>"return_button",
-                                                                                             :title => 'Return to liaison page' %>
-                  </div>
+                    <input id="print_eighth" type="button" value = "Print" class = "next_button" >
+                    <%= button_to 'Return to Liaison Page', request.env["HTTP_REFERER"],
+                                  :class => 'cancel' %>
+                   </div>
               </div>
             </div>
             <div id="gateway_step">
@@ -279,5 +287,7 @@
             </div>
             </div>
         <% end %>
+    </div>
+    </div>
 
 

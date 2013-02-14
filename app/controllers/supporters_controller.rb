@@ -1,19 +1,21 @@
 class SupportersController < ApplicationController
 
   def new
-    @page_title = "Thank you for registering as an SSP supporter."
+    @page_title = "Registering as an SSP supporter."
     @supporter = Supporter.new()
   end
 
   def create
-    supporter = Supporter.new(params[:supporter])
-    if supporter.valid?
-      supporter.save!
+    @supporter = Supporter.new(params[:supporter])
+    #if supporter.valid?
+    if @supporter.save
       flash[:success] = "Supporter information successfully created."
-      redirect_to :back
+      redirect_to 'http://www.sierraserviceproject.org'
     else
-      @page_title = "Thank you for registering as an SSP supporter."
-      render :new
+      flash[:error] = "Errors prevented participant entry from being saved."
+      @page_title = "Registering as an SSP supporter."
+      render 'new'
     end
   end
+
 end

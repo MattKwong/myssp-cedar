@@ -590,7 +590,7 @@ form fieldset ol > li {
         display: list-item; }
     form fieldset > ol > li.error input[type=text], form fieldset > ol > li.error input[type=password], form fieldset > ol > li.error input[type=email], form fieldset > ol > li.error input[type=url], form fieldset > ol > li.error input[type=tel], form fieldset > ol > li.error textarea {
       border: 1px solid #932419; }
-  form input[type=submit] {
+  form input[type=submit], form input[type=button] {
     background: #838a90;
     background: -webkit-gradient(linear, left top, left bottom, from(#838a90), to(#414549));
     background: -moz-linear-gradient(-90deg, #838a90, #414549);
@@ -623,7 +623,7 @@ form fieldset ol > li {
     -webkit-font-smoothing: antialiased;
     cursor: pointer; }
 
-form input[type=submit] {
+form input[type=submit], form input[type=button] {
     background: #93A9BE;
     -moz-border-radius: 200px;
     border-radius: 200px;
@@ -636,15 +636,15 @@ form input[type=submit] {
     border: none;
     color: #efefef; }
 
-form input[type=submit]:hover {
-      color: #FFF;
-      background: #8b9297;
-      background: -webkit-gradient(linear, left top, left bottom, from(#8b9297), to(#484d51));
-      background: -moz-linear-gradient(-90deg, #8b9297, #484d51);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51);
-      -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51); }
+/*form input[type=submit]:hover {*/
+      /*color: #FFF;*/
+      /*background: #8b9297;*/
+      /*background: -webkit-gradient(linear, left top, left bottom, from(#8b9297), to(#484d51));*/
+      /*background: -moz-linear-gradient(-90deg, #8b9297, #484d51);*/
+      /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51);*/
+      /*-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51); }*/
 
-form input[type=submit]:hover {
+form input[type=submit]:hover, form input[type=button]:hover {
     background: #93A9BE;
     color: #1B3664;
     font-weight: normal;
@@ -1439,15 +1439,15 @@ a.button, a:link.button, a:visited.button, input[type=submit] {
   padding: 7px 16px 6px;
   text-decoration: none;
   -webkit-font-smoothing: antialiased; }
-  a.button:hover, a:link.button:hover, a:visited.button:hover, input[type=submit]:hover {
-    color: #FFF;
-    background: #8b9297;
-    background: -webkit-gradient(linear, left top, left bottom, from(#8b9297), to(#484d51));
-    background: -moz-linear-gradient(-90deg, #8b9297, #484d51);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51);
-    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51); }
-    a.button:hover span.icon svg path, a.button:hover span.icon svg polygon, a.button:hover span.icon svg rect, a.button:hover span.icon svg circle, a:link.button:hover span.icon svg path, a:link.button:hover span.icon svg polygon, a:link.button:hover span.icon svg rect, a:link.button:hover span.icon svg circle, a:visited.button:hover span.icon svg path, a:visited.button:hover span.icon svg polygon, a:visited.button:hover span.icon svg rect, a:visited.button:hover span.icon svg circle, input[type=submit]:hover span.icon svg path, input[type=submit]:hover span.icon svg polygon, input[type=submit]:hover span.icon svg rect, input[type=submit]:hover span.icon svg circle {
-      fill: white !important; }
+  /*a.button:hover, a:link.button:hover, a:visited.button:hover, input[type=submit]:hover {*/
+    /*color: #FFF;*/
+    /*background: #8b9297;*/
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#8b9297), to(#484d51));*/
+    /*background: -moz-linear-gradient(-90deg, #8b9297, #484d51);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51);*/
+    /*-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8b9297, endColorstr=#484d51); }*/
+    /*a.button:hover span.icon svg path, a.button:hover span.icon svg polygon, a.button:hover span.icon svg rect, a.button:hover span.icon svg circle, a:link.button:hover span.icon svg path, a:link.button:hover span.icon svg polygon, a:link.button:hover span.icon svg rect, a:link.button:hover span.icon svg circle, a:visited.button:hover span.icon svg path, a:visited.button:hover span.icon svg polygon, a:visited.button:hover span.icon svg rect, a:visited.button:hover span.icon svg circle, input[type=submit]:hover span.icon svg path, input[type=submit]:hover span.icon svg polygon, input[type=submit]:hover span.icon svg rect, input[type=submit]:hover span.icon svg circle {*/
+      /*fill: white !important; }*/
   a.button:active, a:link.button:active, a:visited.button:active, input[type=submit]:active {
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px white;
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px white;
@@ -2561,7 +2561,7 @@ a.button, input[type=submit] {
     /*  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
 -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
 -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);      */
-    background: #838a90;
+    background: #93A9BE;
     /*  background: -webkit-gradient(linear, left top, left bottom, from(#838a90), to(#414549));
  background: -moz-linear-gradient(-90deg, #838a90, #414549);
  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#838a90, endColorstr=#414549);
@@ -2579,7 +2579,7 @@ a.button, input[type=submit] {
     color: #efefef; }
 
 a.button:hover, input[type=submit]:hover {
-    color: #fff;
+    color: #1B3664;
 }
 #title_bar .action_items a:hover {
     background: #93A9BE;
@@ -2742,7 +2742,7 @@ table.dashboard .dashboard_section hr {
     border-bottom: 1px solid #E8E8E8; }
 
 .scopes {
-    float: left;
+    /*float: left;*/
     margin-bottom: 10px;
     font-size: 1.0em; }
 .scopes .scope {

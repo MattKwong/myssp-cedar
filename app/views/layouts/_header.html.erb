@@ -10,11 +10,14 @@
              <li class="has_nested" ><a href="#">Group Manager</a>
                 <ul>
                   <li><%= link_to "Schedule a group", admin_registrations_path%></li>
-                  <li><%= link_to "Invoice report", invoice_report_path%></li>
                   <li><%= link_to "Show the schedule - scheduled summer domestic",
-                          registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'summer_domestic')%></li>
+                          registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'Summer Domestic')%></li>
                   <li><%= link_to "Show the schedule - unscheduled summer domestic",
-                          registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'summer_domestic')%></li>
+                          registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'Summer Domestic')%></li>
+                 <li><%= link_to "Show the schedule - scheduled other programs",
+                          registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'other')%></li>
+                  <li><%= link_to "Show the schedule - scheduled other programs",
+                          registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'other')%></li>
                   <li><%= link_to "Reset user password",
                           new_admin_user_password_path %></li>
                   <li><%= link_to "Lock out non-admin users",
@@ -29,7 +32,8 @@
              </li>
              <li class="has_nested" ><a href="#">Reports</a>
                 <ul>
-                  <li><%= link_to "Invoice report", invoice_report_path%></li>
+                  <li><%= link_to "Invoice report: html", invoice_report_path(:format => :html)%></li>
+                  <li><%= link_to "Invoice report: CSV", invoice_report_path(:format => :csv)%></li>
                   <li><%= link_to "Scheduled Liaisons: Web page", scheduled_liaisons_html_path(:format => :html)%></li>
                   <li><%= link_to "Scheduled Liaisons: CSV", scheduled_liaisons_csv_path(:format => :csv)%></li>
                   <li><%= link_to "All Churches and Liaisons: CSV", church_and_liaison_csv_path(:format => :csv)%></li>
@@ -39,7 +43,8 @@
                   <li><%= link_to "Roster Summary: CSV", rosters_csv_path(:format => :csv)%></li>
                   <li><%= link_to "Purchases with Unaccounted $", unaccounted_report_path%></li>
                   <li><%= link_to "Spending Report", spending_by_site_report_path%></li>
-                  <li><%= link_to "Participant Summary: CSV", part_sum_csv_path(:format => :csv)%></li>
+                  <li><%= link_to "Participant Summary - Current year: CSV", part_sum_csv_path(:format => :csv)%></li>
+                  <li><%= link_to "Participant Summary - 2012: CSV", part_sum_csv_path(:format => :csv, :year => '2012')%></li>
                   <li><%= link_to "Year-to-Year: CSV", missing_churches_csv_path(:format => :csv)%></li>
                   <li><%= link_to "New Churches: CSV", new_churches_csv_path(:format => :csv)%></li>
                 </ul>
@@ -55,6 +60,7 @@
                <ul>
                   <li><%= link_to "Churches", admin_churches_path %></li>
                   <li><%= link_to "Liaisons", admin_liaisons_path %></li>
+                  <li><%= link_to "CC Payments", standalone_cc_payment_path %></li>
                   <li><%= link_to "Purchases", admin_purchases_path %></li>
                   <li><%= link_to "Admin Center", admin_path %></li>
                </ul>
@@ -89,7 +95,11 @@
         <% end %>
         <% if signed_in? && current_admin_user.liaison? %>
             <li><%= link_to "MySSP", myssp_path(current_admin_user.liaison_id) %></li>
-            <li><%= link_to "Register a Group", new_registration_path(:id => params[:id]) %></li>
+            <li class="has_nested" ><a href='#'>Register</a>
+                <ul>
+                    <li><%= link_to "Register a Summer Group", new_registration_path(:id => params[:id]) %></li>
+                    <li><%= link_to "Register a Weekend Group", new_weekend_registration_path(:id => params[:id]) %></li>
+                </ul>
         <% end %>
       <li><%= link_to "Help", help_path %></li>
     </ul>

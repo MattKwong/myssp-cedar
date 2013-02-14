@@ -1,11 +1,12 @@
 ActiveAdmin.register PaymentSchedule do
   controller.authorize_resource
+
   menu :if => proc{ can?(:read, PaymentSchedule) }, :parent => "Configuration"
 
-   show show :title => :name do
+  show show :title => :name do
     attributes_table :name, :deposit, :second_payment, :second_payment_date, :final_payment,
                      :final_payment_date, :total_payment, :second_payment_late_date,
-                      :final_payment_late_date
+                      :final_payment_late_date, :final_due_at_start
    end
 
   index do
@@ -18,6 +19,7 @@ ActiveAdmin.register PaymentSchedule do
     column "Final Payment" do |a|
       number_to_currency a.final_payment
     end
+    column :final_due_at_start
     column :final_payment_date
     column "Total Fee" do |a|
       number_to_currency a.total_payment

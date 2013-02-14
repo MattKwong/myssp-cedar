@@ -1,17 +1,15 @@
      <div id="active_admin_content" class="without_sidebar">
         <div id="main_content_wrapper">
             <div id="main_content">
-            <div class="panel">
-                <div class="panel_contents">
-                  <span class="scopes">
-                    <span class = scope><%= link_to "Domestic Summer Scheduled",
-                              registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'summer_domestic') %>
-                    </span>
-                    <span class = "scope"><%= link_to "Domestic Summer Unscheduled",
-                              registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'summer_domestic') %>
-                    </span>
-                   </span>
-                </div>
+            <div class="scopes">
+                    <%= button_to "Domestic Summer Scheduled", registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'Summer Domestic') %>
+                    <%= button_to "Domestic Summer Unscheduled",
+                              registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'Summer Domestic') %>
+                    <%= button_to "Other Scheduled",
+                              registration_show_schedule_path(:reg_or_sched => 'scheduled', :type => 'Other') %>
+                    <%= button_to "Other Unscheduled",
+                              registration_show_schedule_path(:reg_or_sched => 'registered', :type => 'Other') %>
+
             </div>
             <div class="panel">
               <div class = "panel contents">

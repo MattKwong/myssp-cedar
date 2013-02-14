@@ -23,24 +23,27 @@
                              <td></td>
                              <td></td>
                            </tr>
-                           <tr>
-                             <td><%= @group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y") %></td>
-                             <td>Second Payment</td>
-                             <td><% unless @group.second_pay_amount.nil? %>
-                                   <%= number_to_currency(@group.second_pay_amount) %><% end %>
-                             </td>
-                             <td></td>
-                             <td></td>
-                           </tr>
-                           <tr>
-                             <td><%= @group.session.payment_schedule.final_payment_date.strftime("%m/%d/%Y") %></td>
-                             <td>Final Payment</td>
-                             <td><% unless @group.final_pay_amount.nil? %>
-                                   <%= number_to_currency(@group.final_pay_amount) %><% end %>
-                             </td>
-                             <td></td>
-                             <td></td>
-                           </tr>
+                           <% if @group.session.payment_schedule.second_payment_date %>
+                               <tr>
+                                 <td><%= @group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y") %></td>
+                                 <td>Second Payment</td>
+                                 <td><% unless @group.second_pay_amount.nil? %>
+                                       <%= number_to_currency(@group.second_pay_amount) %><% end %>
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                               </tr>
+                           <% end %>
+                           <% final_pay_date = @group.session.payment_schedule.final_due_at_start? ? @group.session.session_start_date.to_date : @group.session.payment_schedule.final_payment_date %>
+                               <tr>
+                                 <td><%= final_pay_date.strftime("%m/%d/%Y") %></td>
+                                 <td>Final Payment</td>
+                                 <td><% unless @group.final_pay_amount.nil? %>
+                                       <%= number_to_currency(@group.final_pay_amount) %><% end %>
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                               </tr>
                            <tr>
                              <td></td>
                              <td>Total</td>
@@ -93,9 +96,19 @@
                </div>
         </div>
     <div class="panel">
+<<<<<<< .merge_file_lsWBvT
     <!-- if @group.second_payment_date.nil? %>-->
         <h3><%= "Current Invoice Due: #{@group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
           <div class="panel_contents">
+=======
+        <% if @group.session.payment_schedule.second_payment_date.nil? || @group.second_payment_date %>
+            <% final_pay_date = @group.session.payment_schedule.final_due_at_start? ? @group.session.session_start_date.to_date : @group.session.payment_schedule.final_payment_date %>
+            <h3><%= "Current Invoice Due: #{final_pay_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
+        <% else %>
+            <h3><%= "Current Invoice Due: #{@group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
+        <% end %>
+        <div class="panel_contents">
+>>>>>>> .merge_file_karJrS
             <table border="0" cellspacing="0" cellpadding="0">
               <thead>
               <th></th>
@@ -170,8 +183,11 @@
       To decrease, <%= link_to "click here", edit_scheduled_group_path(@group.id) %>.<br>
       2. To pay by credit card, <%= link_to "click here", record_payment_path(:group_id => @group.id) %>. To pay by check,
       <%= link_to "print this invoice", invoice_path(:group_id => @group.id, :format => "pdf") %> and mail it with a check to the SSP office.</div>
+<<<<<<< .merge_file_lsWBvT
 
         <!--<end %>-->
+=======
+>>>>>>> .merge_file_karJrS
         </div>
         </div>
      </div>
