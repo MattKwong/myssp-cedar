@@ -160,7 +160,7 @@ describe Report do
         report = Report.new
         ItemPurchase.create!(:item_id => @item2.id, :price => 45.75, :purchase_id => @purchase2.id, :quantity => 2,
                              :taxable => true, :size => 'each', :uom => "each")
-        report.spending_with_tax_total(@start_date, @end_date).should be_within(0.005).of(600.00)
+        report.spending_with_tax_total(@start_date, @end_date).should be_within(0.005).of(100.00)
       end
       it "should exclude purchase outside of date range" do
         report = Report.new
