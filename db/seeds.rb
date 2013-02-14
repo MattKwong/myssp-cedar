@@ -19,6 +19,8 @@
 #end
 #
 
+puts"test"
+
 if UserRole.find_by_name("Admin")
   UserRole.find_by_name("Admin").delete
 end
@@ -45,6 +47,9 @@ Site.create(:name => 'Test Site 1', :address1 => "100 Elm Street", :city => "Sus
 
 Site.create(:name => 'Test Site 2', :address1 => "100 Reservation Way", :city => "McDermitt", :state => "NV", :zip => "80000", :listing_priority => 20,
             :active => true, :phone => "800-700-6000", :abbr=>'T2')
+
+Site.create(:name => "Test Site 3", :address1 => "4410 S. Budlong Avenue", :city => "Los Angeles", :state => "CA",
+            :zip => "90037", :phone => "123-456-7890", :listing_priority => 1, :abbr => "SN")
 
 ['Site Director', 'Food', 'Construction', 'SLC'].each do |name|
 
