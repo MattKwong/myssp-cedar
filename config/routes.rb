@@ -231,6 +231,7 @@ Spoic3::Application.routes.draw do
   match '/signin', :to => 'pages#home'
   match '/signout', :to => 'pages#home'
   match '/availability', :to => 'pages#availability'
+  match '/availability_other', :to => 'pages#availability_other'
   root :to => 'pages#home'
 
   get "program_type/show"
