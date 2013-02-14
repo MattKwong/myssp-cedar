@@ -111,12 +111,13 @@ class ReportsController < ApplicationController
    end
 
   def participation_summary
+    year = params[:year]
     @headers = get_headers_part_sum
-    @rows = get_rows_part_sum
+    @rows = get_rows_part_sum(year)
 
     respond_to do |format|
-      format.csv { create_csv("part-sum-#{Time.now.strftime("%Y%m%d")}.csv") }
-      format.html { @title = 'Participation Summary'}
+      format.csv { create_csv("part-sum-#{year}-#{Time.now.strftime("%Y%m%d")}.csv") }
+      format.html { @title = "Participation Summary for #{year}"}
     end
   end
 
@@ -129,10 +130,10 @@ class ReportsController < ApplicationController
 
   end
 
-  def get_rows_part_sum
+  def get_rows_part_sum(year)
 
     @rows = []
-    ScheduledGroup.active.each do |g|
+    ScheduledGroup.in_fiscal_year(year).each do |g|
         row = []
         row << g.name << g.church.name << g.church.church_type.name << g.session.site.name << g.session.session_type.name
         row << g.current_youth.to_i << g.current_counselors.to_i << g.current_total << Roster.find_by_group_id(g.id).roster_items.count << ""

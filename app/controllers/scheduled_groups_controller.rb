@@ -113,7 +113,7 @@ class ScheduledGroupsController < ApplicationController
     @first_name = liaison.first_name
     @week = period.name
     @start_date = period.start_date.strftime("%A, %B %d, %Y at %l:%M %p")
-    @end_date = @session.period_end_date.strftime("%A, %B %d, %Y at %l:%M %p")
+    @end_date = @session.period.end_date.strftime("%A, %B %d, %Y at %l:%M %p")
     @group_name = @scheduled_group.name
     @church_name = Church.find(@scheduled_group.church_id).name
     @liaison_name = liaison.name

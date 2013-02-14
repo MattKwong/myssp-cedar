@@ -1,4 +1,5 @@
-require './../spec_helper'
+#require './../spec_helper'
+require 'spec_helper'
 
 feature "Signing in" do
   before :each do

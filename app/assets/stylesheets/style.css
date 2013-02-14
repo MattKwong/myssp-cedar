@@ -210,7 +210,7 @@ table tbody tr td {
 
 table tbody tr:nth-child(even) td,
 table tbody tr.even td {
-  background-color: #e2ebf0; }
+  background-color: #DFE1E2; }
 
 table tbody thead tr:first th:first {
   border-top-left-radius: 10px;

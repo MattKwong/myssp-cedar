@@ -39,6 +39,12 @@ $(document).ready(function() {
     });
 });
 
+//$(document).ready(function() {
+//    $("#submit_first_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+
 $(document).ready(function() {
     $('#submit_first').click(function(){
         liaison_id = $("td#liaison_id").text();
@@ -50,6 +56,28 @@ $(document).ready(function() {
         $('#second_step').slideDown();
     });
 });
+//$(document).ready(function() {
+//    $('#submit_first_other').click(function(){
+//        liaison_id = $("td#liaison_id").text();
+//        //update progress bar
+//        $('#progress_text').html('12.5% Complete');
+//        $('#progress').css('width','42.5px');
+//        //slide steps
+//        $('#first_step_other').slideUp();
+//        $('#second_step_other').slideDown();
+//    });
+////});
+//$(document).ready(function() {
+//    $('#submit_first_other').click(function(){
+//        liaison_id = $("td#liaison_id").text();
+//        //update progress bar
+//        $('#progress_text').html('12.5% Complete');
+//        $('#progress').css('width','42.5px');
+//        //slide steps
+//        $('#first_step_other').slideUp();
+//        $('#second_step_other').slideDown();
+//    });
+//});
 
 // Second step routines
 $(document).ready(function() {
@@ -57,9 +85,95 @@ $(document).ready(function() {
         $(this).addClass('hover');
     });
 });
+
+//$(document).ready(function() {
+//    $("#submit_second_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
 $(document).ready(function() {
     $("#back_second").hover(function() {
         $(this).addClass('hover');
+    });
+});
+
+//$(document).ready(function() {
+//    $("#submit_second_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//$(document).ready(function() {
+//    $("#back_second_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+
+//$(document).ready(function() {
+//    $('#submit_second').click(function(){
+//        //remove classes
+//        $('#second_step').removeClass('error').removeClass('valid');
+//        var error = 0;
+//        //save the group type
+//        group_type = $("input[name=group_type]:checked").val();
+//        if( group_type == undefined) {
+//            $('#error_text_group').html('Error: You must select a group type.');
+//            error++
+//        } else {
+//            $("#second_step").addClass('valid');
+//        }
+//        if(!error) {
+//            $("#second_step").addClass('valid');
+//            //ajax call to get sites that are hosting group_type of groups
+//            $.get("get_sites_for_group_type?value="+ group_type,
+//                function(data){ $("#site_selector").html(data);} );
+//
+//            $('#site_info').html($('input[name=site_text]').val());
+////        enrollment_html = '';
+////        enrollment_html+= "<tr><td>Total Requested</td><td>";
+////        enrollment_html += total_requested;
+////        enrollment_html += "</td></tr>";
+////        $("#info_table_fourth").html(info_table + enrollment_html);
+//            group_type_name = $("input[name=group_type_name]").val();
+//
+//            //update progress bar
+//            $('#progress_text').html('25% Complete');
+//            $('#progress').css('width','132px');
+//            //slide steps
+//            $('#second_step').slideUp();
+//            $('#third_step').slideDown();
+//        } else {
+//            return false
+//        }
+//    });
+//});
+
+$(document).ready(function() {
+    $("#group_type").change(function(){
+            $.get("check_for_sessions_for_type?type=" + $("#group_type").val() ,
+                function(data){
+                    $("#sessions_for_type").html(data);
+                    if ( $("input[name=available_session_count]").val() > 0 ) { //Everything is fine - enrollable sessions are available
+                        $("input[id=submit_second]").removeClass('disabled');
+                        $("input[id=submit_second]").removeAttr('disabled');
+                        $("#submit_second").hover(function() {
+                            $(this).addClass('hover');
+                        });
+                    } else {
+                        if ( $("input[name=session_count]").val() > 0 ) { // Sessions exist, but they are full
+                            $("input[id=submit_second]").addClass('disabled');
+                            $("#submit_second").attr('disabled', 'disabled');
+                            $("#submit_second").hover(function() {
+                                $(this).removeClass('hover');
+                            });
+                        } else {  //no sessions exist - both variables are zero
+                           $("#submit_second").addClass('disabled');
+                           $("#submit_second").attr('disabled', 'disabled');
+                           $("#submit_second").hover(function() {
+                               $(this).removeClass('hover');
+                           });
+                        }
+                    }
+                })
     });
 });
 
@@ -69,32 +183,41 @@ $(document).ready(function() {
         $('#second_step').removeClass('error').removeClass('valid');
         var error = 0;
         //save the group type
-        group_type = $("input[name=group_type]:checked").val();
+//        group_type = $("select[name=group_type]:selected").val();
+        group_type = $("#group_type").val();
         if( group_type == undefined) {
             $('#error_text_group').html('Error: You must select a group type.');
             error++
         } else {
             $("#second_step").addClass('valid');
         }
-
-
         if(!error) {
             $("#second_step").addClass('valid');
             //ajax call to get sites that are hosting group_type of groups
-            $.get("get_sites_for_group_type?value="+ group_type,
+            $.get("get_sites_for_other_groups?type=" + group_type,
                 function(data){ $("#site_selector").html(data);} );
-
+            session_count = ($("input[name=session_count]").val()) ;
+            if (session_count > 0) {
+                $("#third_step_table").show();
+                $("#no_availability_text").hide();
+                $("input[id=submit_third]").removeAttr('disabled');
+                $("#submit_third").removeClass('disabled');
+                $("input[id=submit_third]").hover(function() {
+                    $(this).addClass('hover'); });
+            } else {
+                $("#third_step_table").hide();
+                $("#no_availability_text").show();
+                $("input[id=submit_third]").attr('disabled', 'disabled');
+                $("#submit_third").addClass('disabled');
+                $("input[id=submit_third]").hover(function() {
+                    $(this).removeClass('hover'); });
+            }
             $('#site_info').html($('input[name=site_text]').val());
-//        enrollment_html = '';
-//        enrollment_html+= "<tr><td>Total Requested</td><td>";
-//        enrollment_html += total_requested;
-//        enrollment_html += "</td></tr>";
-//        $("#info_table_fourth").html(info_table + enrollment_html);
             group_type_name = $("input[name=group_type_name]").val();
-
-            //update progress bar
+             //update progress bar
             $('#progress_text').html('25% Complete');
             $('#progress').css('width','132px');
+            $('#error_text_selections').html('');
             //slide steps
             $('#second_step').slideUp();
             $('#third_step').slideDown();
@@ -103,6 +226,7 @@ $(document).ready(function() {
         }
     });
 });
+
 $(document).ready(function() {
     $('#back_second').click(function(){
         //update progress bar
@@ -113,7 +237,17 @@ $(document).ready(function() {
         $('#first_step').slideDown();
     });
 });
-
+//
+//$(document).ready(function() {
+//    $('#back_second_other').click(function(){
+//        //update progress bar
+//        $('#progress_text').html('0% Complete');
+//        $('#progress').css('width','0px');
+//        //slide steps
+//        $('#second_step_other').slideUp();
+//        $('#first_step_other').slideDown();
+//    });
+//});
 
 $(document).ready(function() {
     $("#submit_third").hover(function() {
@@ -143,16 +277,14 @@ $(document).ready(function() {
             $('#error_text_numbers').html('Error: You must request at least 1 counselor and 1 youth spot.');
             error++
         }
-
-
         if (!error) {
-        $("#prev_choices_table6").html(choice_html);
-        //update progress bar
-        $('#progress_text').html('62.5% Complete');
-        $('#progress').css('width','212px');
-        // slide steps
-        $('#fourth_step').slideUp();
-        $('#fifth_step').slideDown();
+            $("#prev_choices_table6").html(choice_html);
+            //update progress bar
+            $('#progress_text').html('62.5% Complete');
+            $('#progress').css('width','212px');
+            // slide steps
+            $('#fourth_step').slideUp();
+            $('#fifth_step').slideDown();
         }
     });
 });
@@ -167,6 +299,54 @@ $(document).ready(function() {
         $('#second_step').slideDown();
     });
 });
+//
+//$(document).ready(function() {
+//    $("#submit_third_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//
+//$(document).ready(function() {
+//    $("#back_third_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+
+//$(document).ready(function() {
+//    $('#submit_fourth_other').click(function(){
+//        //remove classes
+//        $('#fourth_step_other').removeClass('error').removeClass('valid');
+//        var error = 0;
+//        $('#error_text_numbers').html('')
+//        var group_limit = $("input[name=group_limit]").val();
+//        if( total_requested > parseInt(group_limit) ) {
+//            $('#error_text_numbers').html('Error: You may not request more than ' + group_limit + ' total spots.');
+//            error++
+//        }
+//        if( !error && requested_youth < 1 || requested_adults < 1 ) {
+//            $('#error_text_numbers').html('Error: You must request at least 1 counselor and 1 youth spot.');
+//            error++
+//        }
+//        if (!error) {
+//            $('#progress_text').html('62.5% Complete');
+//            $('#progress').css('width','212px');
+//            // slide steps
+//            $('#fourth_step_other').slideUp();
+//            $('#fifth_step').slideDown();
+//        }
+//    });
+//});
+
+//$(document).ready(function() {
+//    $('#back_third_other').click(function(){
+//        //update progress bar
+//        $('#progress_text').html('12.5% Complete');
+//        $('#progress').css('width','42.5px');
+//        //slide steps
+//        $('#third_step_other').slideUp();
+//        $('#second_step_other').slideDown();
+//    });
+//});
 
 $(document).ready(function() {
     $("#registration_requested_youth").change(function(){
@@ -194,22 +374,35 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $("#site_selector").change(function(){
-            $.get("get_sessions_for_type_and_site?value="+ group_type + "&site="+ $("#site_selector_site_id").val(),
+            $.get("get_other_sessions_for_site?site="+ $("#site_selector_site_id").val()
+                + "&type=" + group_type,
                 function(data){ $("#session_selector").html(data);})
         }
     );
 });
 $(document).ready(function() {
     $("#session_selector").change(function(){
-            $.get("get_session_name?value="+ group_type + "&site="+ $("#site_selector_site_id").val()
+            $.get("get_session_name?site="+ $("#site_selector_site_id").val()
                 + "&session="+ $("#session_selector_session_id").val(),
-                function(data){ $("#session_name").html(data);})
+                function(data){ $("#session_name").html(data);
+                    waitlist_flag =  $("input[name=waitlist_flag]").val();
+                    if (waitlist_flag == 'true') {
+                        $("input[id=submit_third]").attr('disabled', 'disabled');
+                        $("input[id=submit_third]").addClass('disabled');
+                    }
+                    else {
+                        $("input[id=submit_third]").removeAttr('disabled');
+                        $("input[id=submit_third]").removeClass('disabled');
+                    }
+                })
         }
     );
 });
 
 $(document).ready(function() {
     $('#submit_third').click(function(){
+        $('#third_step').removeClass('error').removeClass('valid');
+        $('#error_text_selections').html('');
 
         //save the choices
         if ($("#site_selector_site_id").val() == undefined) {
@@ -226,15 +419,17 @@ $(document).ready(function() {
 
         var error = 0;
         if( site_choice == '' || week_choice == '') {
-            $('#error_text_selections').html('Error: You must select a valid site and a week.');
+            $('#error_text_selections').html('Error: You must select a valid site and session.');
             error++
         }
         if(!error){
         //ajax call to get group limits and appropriate text
-        $.get("get_limit_info?value="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
+        $.get("get_limit_info?type="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
             function(data){ $("#limit_info").html(data);
         group_type_name = $("input[name=group_type_name]").val();
         session_name = $("input[name=session_name]").val();
+
+
         $("#registration_requested_youth").val=0;
 
             } );
@@ -280,6 +475,48 @@ $(document).ready(function() {
 //        }
     });
 });
+//
+//$(document).ready(function() {
+//    $('#submit_third_other').click(function(){
+//        //save the choices
+//        if ($("#site_selector_site_id").val() == undefined) {
+//            site_choice = ''
+//        } else {
+//            site_choice = $("#site_selector_site_id").val();
+//        }
+//
+//        if ($("#session_selector_session_id").val() == '') {
+//            week_choice = ''
+//        } else {
+//            week_choice = $("#session_selector_session_id").val();
+//        }
+//
+//        var error = 0;
+//        if( site_choice == '' || week_choice == '') {
+//            $('#error_text_selections').html('Error: You must select a valid site and a week.');
+//            error++
+//        }
+//        if(!error){
+//        //ajax call to get group limits and appropriate text
+//        $.get("get_limit_info?value="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
+//            function(data){ $("#limit_info").html(data);
+//        group_type_name = $("input[name=group_type_name]").val();
+//        session_name = $("input[name=session_name]").val();
+//        $("#registration_requested_youth").val=0;
+//
+//            } );
+//        //update progress bar
+//
+//        $('#progress_text').html('25% Complete');
+//        $('#progress').css('width','85px');
+//        //slide steps
+//        $('#third_step_other').slideUp();
+//        $('#fourth_step_other').slideDown();
+//    } else {
+//        return false;
+//    }
+//    });
+//});
 
 //$(document).ready(function() {
 //    $("#alt_site_selector").change(function(){
@@ -317,6 +554,27 @@ $(document).ready(function() {
     });
 });
 
+//$(document).ready(function() {
+//    $("#submit_fourth_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//$(document).ready(function() {
+//    $("#back_fourth_other").hover(function() {
+//        $(this).addClass('hover');
+//    });
+//});
+//$(document).ready(function() {
+//    $('#back_fourth_other').click(function(){
+//        //update progress bar
+//        $('#progress_text').html('25% Complete');
+//        $('#progress').css('width','85px');
+//        //slide steps
+//        $('#fourth_step_other').slideUp();
+//        $('#third_step_other').slideDown();
+//    });
+//});
+
 $(document).ready(function() {
     $("#submit_fifth").hover(function() {
         $(this).addClass('hover');
@@ -351,6 +609,8 @@ $(document).ready(function() {
         //update progress bar
         $('#progress_text').html('50% Complete');
         $('#progress').css('width','170px');
+        //Unappend the data which was appended in #submit_fifth
+        $("#registration_request_table > tbody:last").children( 'tr:gt(6)' ).remove();
         //slide steps
         $('#sixth_step').slideUp();
         $('#fifth_step').slideDown();
@@ -360,8 +620,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#submit_fifth').click(function(){
-
-        comments = $("textarea#registration_comments").val()
+        $.get("terms_and_conditions?type="+ group_type + "&site=" + site_choice + "&week=" + week_choice,
+            function(data){ $("#terms_and_conditions").html(data);}
+        );
+        comments = $("textarea#registration_comments").val();
         table_html = '' ;
         table_html += "<tr><td>Group Type</td><td>";
         table_html += group_type_name;
@@ -378,11 +640,10 @@ $(document).ready(function() {
         table_html += "<tr><td>Site and Week</td><td>";
         table_html += session_name;
         table_html += "</td></tr>";
-
         table_html += "<tr><td>Special Comments</td><td>";
         table_html += comments;
         table_html += "</td></tr>";
-        $('#request_info_table').html(table_html)
+        $('#registration_request_table').append(table_html)
         //update progress bar
         $('#progress_text').html('75% Complete');
         $('#progress').css('width','265px');
@@ -599,14 +860,30 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $("#available_link").hover(function() {
+    $("#summer_available_link").hover(function() {
         $(this).addClass('hover');
     });
 });
 
 $(document).ready(function() {
-    $("#available_link").click(function() {
+    $("#summer_available_link").click(function() {
         $.get("availability_matrix",  function(data) {
+            $('#available_data').html(data);
+            $('#available_data').modal();
+            $('#available_data').addClass("hidden")
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#other_available_link").hover(function() {
+        $(this).addClass('hover');
+    });
+});
+
+$(document).ready(function() {
+    $("#other_available_link").click(function() {
+        $.get("other_availability_matrix",  function(data) {
             $('#available_data').html(data);
             $('#available_data').modal();
             $('#available_data').addClass("hidden")
