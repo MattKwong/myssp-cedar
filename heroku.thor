@@ -5,7 +5,7 @@ module Heroku
     method_option :keep,   :type => :boolean, :default => false
     method_option :remote, :type => :string,  :default => "myssp-cedar"
     method_option :host,   :type => :string,  :default => "localhost"
-    method_option :user,   :type => :string,  :default => "postgres"
+    method_option :user,   :type => :string,  :default => "rickeaton"
     method_option :dbname, :type => :string,  :default => 'myssp_development'
     method_option :dump,   :type => :string,  :default => "latest.dump"
     method_option :app,   :type => :string,   :default => 'myssp-cedar'
