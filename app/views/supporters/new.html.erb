@@ -1,0 +1,27 @@
+<div id="active_admin_content">
+  <%= semantic_form_for @supporter do |form| %>
+    <div class='panel'>
+      The survey asks a lot of questions. If you don't feel like responding to any particular question or it doesn't apply to you,
+      simply enter "None" or "N/A" in that spot. If you have any question about any of this or would like to talk to someone in person, please contact
+      Rick Eaton, SSP's Executive Director, at 916-488-6441.
+    </div>
+      <%= form.inputs do %>
+          <%= form.input :first_name, :hint => "Your first name" , :input_html => {:size => 30} %>
+          <%= form.input :last_name, :hint => "Your last name", :input_html => {:size => 30}  %>
+          <%= form.input :address1 %>
+          <%= form.input :address2 %>
+          <%= form.input :city %>
+          <%= form.input :state, :input_html => {:size => 4, :max_length => 2} %>
+          <%= form.input :zip, :input_html => {:size => 10, :max_length => 5} %>
+          <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
+          <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
+          <%= form.input :gender, :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
+          <%= form.input :affiliation, :label => "Church", :hint => "What is your religious affiliation?" %>
+      <% end %>
+      <script>
+          var RecaptchaOptions = {theme:'clean'};
+      </script>
+      <%= render '/shared/recaptcha' %>
+      <%= form.actions %>
+  <% end %>
+</div>

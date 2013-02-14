@@ -76,14 +76,24 @@ describe PaymentSchedule do
     item.should_not be_valid
   end
 
-  it "should accept a nil final payment date" do
-    item = PaymentSchedule.new(@attr.merge(:final_payment_date => nil))
+  it "should accept a nil final payment date if :final_due_at_start is true" do
+    item = PaymentSchedule.new(@attr.merge(:final_payment_date => nil, :final_due_at_start => true))
     item.should be_valid
   end
 
-  it "should accept a valid final payment date" do
-    item = PaymentSchedule.new(@attr.merge(:final_payment_date => '2012/09/01'))
+  it "should reject a nil final payment date if :final_due_at_start is false" do
+    item = PaymentSchedule.new(@attr.merge(:final_payment_date => nil, :final_due_at_start => false))
+    item.should_not be_valid
+  end
+
+  it "should accept a valid final payment date if :final_due_at_start is false" do
+    item = PaymentSchedule.new(@attr.merge(:final_payment_date => '2012/09/01', :final_due_at_start => false))
     item.should be_valid
+  end
+
+  it "should reject a valid final payment date if :final_due_at_start is true" do
+    item = PaymentSchedule.new(@attr.merge(:final_payment_date => '2012/09/01', :final_due_at_start => true))
+    item.should_not be_valid
   end
 
   it "should reject an invalid final date" do

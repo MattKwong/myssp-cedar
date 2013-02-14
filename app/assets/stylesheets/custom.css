@@ -416,3 +416,12 @@ h1.process_step {
 .eight-steps ol li {
     width: 10%;
 }
+
+.button_to {
+    display: inline;
+}
+
+.button_to div {
+    display: inline;
+}
+

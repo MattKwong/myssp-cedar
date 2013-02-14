@@ -1,0 +1,33 @@
+<div id="active_admin_content">
+  <%= semantic_form_for @supporter do |form| %>
+      <div class="flashes">
+        <% if flash.count > 0 %>
+            <% flash.each do |key, value| %>
+                <% if key.to_s == 'notice' %>
+                    <div class="flash flash_notice"><%= value %></div>
+                <% else %>
+                    <div class="flash flash_error"><%= value %></div>
+                <% end %>
+            <% end %>
+        <% end %>
+      </div>
+      <%= form.inputs do %>
+          <%= form.input :first_name, :hint => "Your first name" , :input_html => {:size => 30} %>
+          <%= form.input :last_name, :hint => "Your last name", :input_html => {:size => 30}  %>
+          <%= form.input :address1 %>
+          <%= form.input :address2 %>
+          <%= form.input :city %>
+          <%= form.input :state, :input_html => {:size => 4, :max_length => 2} %>
+          <%= form.input :zip, :input_html => {:size => 10, :max_length => 5} %>
+          <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
+          <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
+          <%= form.input :gender, :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
+          <%= form.input :affiliation, :label => "Church", :hint => "What is your religious affiliation?" %>
+      <% end %>
+      <script>
+          var RecaptchaOptions = {theme:'clean'};
+      </script>
+      <%= render '/shared/recaptcha' %>
+      <%= form.actions %>
+  <% end %>
+</div>

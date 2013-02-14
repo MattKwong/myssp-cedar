@@ -1,5 +1,6 @@
 
 class Program < ActiveRecord::Base
+  #changed
   attr_accessible :site_id, :start_date, :end_date, :program_type_id, :active, :name, :short_name
 
   belongs_to :site
@@ -16,6 +17,7 @@ class Program < ActiveRecord::Base
   has_many :food_inventories
   has_many :projects
 
+
   before_validation :set_name
 
   validates :name, :presence => true, :uniqueness => true
@@ -25,13 +27,19 @@ class Program < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :program_type_id, :presence => true
   validates :active, :inclusion => [true, false]
-    validate :start_date_before_end_date
+  validate :start_date_before_end_date
   #validate :start_date_not_in_past
 
   scope :active, where(:active => true)
   scope :current, where(:active => true)
   scope :past, where(:active => false)
   scope :in_2012, where('start_date > ? AND start_date < ?', '2011-09-30', '2012-10-01')
+  scope :summer_domestic, lambda { joins(:program_type).where("program_types.name = ?", 'Summer Domestic') }
+  scope :weekend, lambda { joins(:program_type).where("program_types.name = ?", 'Weekend of Service') }
+
+  def summer_domestic?
+    program_type.summer_domestic?
+  end
 
   def total_days
     total = 0

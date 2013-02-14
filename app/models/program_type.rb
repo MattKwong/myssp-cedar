@@ -17,6 +17,7 @@ class ProgramType < ActiveRecord::Base
   validates :name, :uniqueness => true
 
   has_many :programs
+  #has_many :sessions, :through => :programs
 
 #  acts_as_list
 
@@ -26,6 +27,10 @@ class ProgramType < ActiveRecord::Base
 
   def abbr_name
     (name.split.collect { |i| i[0..1] }).join
+  end
+
+  def summer_domestic?
+    name == "Summer Domestic"
   end
 
 end

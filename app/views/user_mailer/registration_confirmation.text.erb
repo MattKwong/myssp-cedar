@@ -3,7 +3,7 @@
 Dear <%= @registration.liaison.first_name %>,
 
 Thank you for registering your group with Sierra Service Project.  This email confirms that your group is scheduled to
-participate in our summer 2013 program.
+participate in our upcoming <%= Session.find(@registration.request1).program.name %>.
 
 The following is the registration information that you provided to us:
 
