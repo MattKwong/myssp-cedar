@@ -7,7 +7,7 @@ class SupportersController < ApplicationController
 
   def create
     @supporter = Supporter.new(params[:supporter])
-    #if supporter.valid?
+
     if @supporter.save
       flash[:success] = "Supporter information successfully created."
       redirect_to 'http://www.sierraserviceproject.org'

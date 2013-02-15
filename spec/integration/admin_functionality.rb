@@ -60,7 +60,7 @@ feature "Logged in Admin" do
     fill_in 'Password', :with => TestUser.password
     click_button('Sign in')
     #save_and_open_page
-    visit '/admin/new_standalone_cc'
+    visit '/payment/new_standalone_cc'
   end
 
   scenario "can access CC Payment page by clicking link" do
@@ -70,7 +70,7 @@ feature "Logged in Admin" do
     click_button('Sign in')
     #save_and_open_page
     click_link('CC Payments')
-    current_path.should == 'new_standalone_cc'
+    current_path.should == '/payment/new_standalone_cc'
   end
 
   scenario "can access Purchases page by direct link" do

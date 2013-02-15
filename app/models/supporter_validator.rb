@@ -1,0 +1,16 @@
+class SupporterValidator < Validator
+  validates_with RecaptchaValidator
+
+  attr_accessor(
+      :first_name,
+      :last_name,
+      :affiliation,
+      :occupation,
+      :recaptcha
+  )
+
+  def validate
+    validates :first_name, :last_name, :affiliation, :presence => true
+  end
+
+end
