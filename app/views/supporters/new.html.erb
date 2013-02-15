@@ -18,10 +18,9 @@
           <%= form.input :gender, :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
           <%= form.input :affiliation, :label => "Church", :hint => "What is your religious affiliation?" %>
       <% end %>
-      <script>
-          var RecaptchaOptions = {theme:'clean'};
-      </script>
-      <%= render '/shared/recaptcha' %>
+      <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>
+
+
       <%= form.actions %>
   <% end %>
 </div>

@@ -26,6 +26,7 @@ gem "heroku"
 gem 'thin', '1.4.1'
 gem "pg"
 gem "stripe"
+gem "ruby-recaptcha"
 
 # Gems used only for assets and not required
 # in production environments by default.

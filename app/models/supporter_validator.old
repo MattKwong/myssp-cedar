@@ -8,8 +8,8 @@ class SupporterValidator < Validator
       :occupation,
       :recaptcha
   )
-
-  def validate
+  #
+  def validate(record)
     validates :first_name, :last_name, :affiliation, :presence => true
   end
 

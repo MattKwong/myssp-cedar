@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Rails.application.routes.url_helpers
+  include ReCaptcha::ViewHelper
 
   def cancel_link
     return link_to 'Cancel', request.env["HTTP_REFERER"],

@@ -433,7 +433,7 @@ class Session < ActiveRecord::Base
   def self.sites_with_avail_for_type(group_type)
     sites = Array.new
     session_type_id = SessionType.find_by_name(group_type).id
-    sessions = Session.order(:start_date).active.find_all_by_session_type_id(session_type_id)
+    sessions = Session.joins(:period).order('periods.start_date').active.find_all_by_session_type_id(session_type_id)
     sessions.each do |session|
       if session.available > 0
         sites.push(session.site)
