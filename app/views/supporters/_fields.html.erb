@@ -1,16 +1,5 @@
 <div id="active_admin_content">
   <%= semantic_form_for @supporter do |form| %>
-      <div class="flashes">
-        <% if flash.count > 0 %>
-            <% flash.each do |key, value| %>
-                <% if key.to_s == 'notice' %>
-                    <div class="flash flash_notice"><%= value %></div>
-                <% else %>
-                    <div class="flash flash_error"><%= value %></div>
-                <% end %>
-            <% end %>
-        <% end %>
-      </div>
       <%= form.inputs do %>
           <%= form.input :first_name, :hint => "Your first name" , :input_html => {:size => 30} %>
           <%= form.input :last_name, :hint => "Your last name", :input_html => {:size => 30}  %>
