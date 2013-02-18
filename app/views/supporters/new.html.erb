@@ -77,19 +77,31 @@
       </div>
       <div id="fundraising_section">
         <%= form.inputs do %>
-            <h3>Occupation Information</h3>
-            <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
-            <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
+            <h3>Fundraising Information</h3>
+            <%= form.input :fund_exper, :hint => "Do you have fundraising experience?" , :label => "Fundraising Experience", :as => :boolean %>
+            <%= form.input :fund_exper_comments, :label => "If yes, please explain.", :as => :text %>
+            <%= form.input :fund_connect, :hint => "Do you have connections with any foundations?" , :label => "Foundation Connections", :as => :boolean %>
+            <%= form.input :fund_connect_comments, :label => "If yes, please explain.", :as => :text %>
+            <%= form.input :fund_in_kind, :hint => "Do you have connections which might help SSP receive in kind donations? We need donations of food, tools, automobiles and trucks, construction materials and other items." , :label => "In Kind Donations", :as => :boolean %>
+            <%= form.input :fund_in_kind_comments, :label => "If yes, please explain.", :as => :text %>
         <% end %>
       </div>
       <div id="desires_section">
         <%= form.inputs do %>
-            <h3>Occupation Information</h3>
-            <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
-            <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
-        <% end %>
+            <h3>How Would You Like To Contribute To SSP's Mission?</h3>
+            <p>What kinds of volunteer activities would you be excited about? Please check as many as apply. If you have other ideas about how you could contribute, please use the space provided to tell us about them.</p>
+            <%= form.input :desire_board, :label => "Service on SSP's Board", :hint => "Service on the board requires 4 to 20 hours of work per month, attendance at four annual board meetings and participation in periodic teleconferences.", :as => :boolean %>
+            <%= form.input :desire_training, :label => "Staff Training", :hint => "Assist with staff training.", :as => :boolean %>
+            <%= form.input :desire_outreach, :label => "Outreach", :hint => "Outreach to churches and church-affiliated schools.", :as => :boolean %>
+            <%= form.input :desire_publicity, :label => "Publicity and PR", :hint => "Promoting SSP in the news media.", :as => :boolean %>
+            <%= form.input :desire_work_projects, :label => "Work Projects", :hint => "Working on occasional special construction projects.", :as => :boolean %>
+            <%= form.input :desire_web, :label => "Web Page Design / Production", :as => :boolean %>
+            <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
+            <%= form.input :desire_other_comments, :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
+
+      <% end %>
       </div>
       <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>
       <%= form.actions %>
-  <% end %>
+      <% end %>
 </div>
