@@ -5,8 +5,8 @@ class Supporter < ActiveRecord::Base
                   :church_name, :church_type, :church_denom
 
   #validates_with Validator::SupporterValidator
-  validates :first_name, :last_name, :address1, :city, :state, :employer,
-            :profession, :presence => true
+  validates :first_name, :last_name, :address1, :city, :state, :phone, :phone_type,
+            :gender, :presence => true
   validates_inclusion_of :state, :in => State::STATE_ABBREVIATIONS, :message => 'Invalid state.'
   validates :zip, :presence => true, :length => { :maximum => 10, :minimum => 5 }
   validates :phone, :length => { :maximum => 20 }

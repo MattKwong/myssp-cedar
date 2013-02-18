@@ -2,7 +2,7 @@
   <%= semantic_form_for @supporter do |form| %>
     <div class='panel'>
       The survey asks a lot of questions. If you don't feel like responding to any particular question or it doesn't apply to you,
-      simply enter "None" or "N/A" in that spot. If you have any question about any of this or would like to talk to someone in person, please contact
+      simply leave it blank. If you have any question about any of this or would like to talk to someone in person, please contact
       Rick Eaton, SSP's Executive Director, at 916-488-6441.
     </div>
       <div id="id_section">
@@ -97,8 +97,14 @@
             <%= form.input :desire_work_projects, :label => "Work Projects", :hint => "Working on occasional special construction projects.", :as => :boolean %>
             <%= form.input :desire_web, :label => "Web Page Design / Production", :as => :boolean %>
             <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
-            <%= form.input :desire_other_comments, :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
+            <%= form.input :desire_other_comments, :label => "Other Skills and Expertise", :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
 
+      <% end %>
+      </div>
+      <div id="final_section">
+        <%= form.inputs do %>
+            <h3>Please Add Any Additional Comments</h3>
+            <%= form.input :final_comments, :label => "Final Comments", :as => :text %>
       <% end %>
       </div>
       <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217013620) do
+ActiveRecord::Schema.define(:version => 20130218034040) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -698,6 +698,7 @@ ActiveRecord::Schema.define(:version => 20130217013620) do
     t.boolean  "desire_other"
     t.string   "desire_other_comments"
     t.boolean  "desire_publicity"
+    t.text     "final_comments"
   end
 
   create_table "user_roles", :force => true do |t|
