@@ -1,7 +1,7 @@
 class SupportersController < ApplicationController
 
   def new
-    @page_title = "Registering as an SSP supporter."
+    @page_title = "Please Complete the SSP Supporter Survey."
     @supporter = Supporter.new()
   end
 
@@ -13,7 +13,7 @@ class SupportersController < ApplicationController
       redirect_to 'http://www.sierraserviceproject.org'
     else
       flash[:error] = "Errors prevented participant entry from being saved."
-      @page_title = "Registering as an SSP supporter."
+      @page_title = "Please Complete the SSP Supporter Survey."
       render 'new'
     end
   end
