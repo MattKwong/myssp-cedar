@@ -12,7 +12,7 @@ prawn_document() do |pdf|
     end
     pdf.text "PO Box 992"
     pdf.move_up(16)
-    pdf.text "Date: #{Date.today}", :align => :right, :style => :bold
+    pdf.text "Date: #{Date.today.strftime("%m/%d/%y")}", :align => :right, :style => :bold
     pdf.text "Carmichael, CA 95609"
     pdf.text "916-488-6441"
 
