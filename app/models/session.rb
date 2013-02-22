@@ -686,4 +686,11 @@ class Session < ActiveRecord::Base
     active.find_all_by_program_type("Other")
   end
 
+  def final_payment_date
+    if payment_schedule.final_payment_date
+      payment_schedule.final_payment_date
+    else
+      period.start_date
+    end
+  end
 end

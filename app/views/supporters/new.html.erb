@@ -17,14 +17,14 @@
               <%= form.input :zip, :input_html => {:size => 10, :max_length => 5} %>
               <%= form.input :phone, :input_html => {:size => 30}, :hint => "What is the best number at which to reach you?" %>
               <%= form.input :phone_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"],:hint => "What type of phone number is this?" %>
-              <%= form.input :gender, :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
+              <%= form.input :gender, :hint_class => "label-hint", :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
 
         <% end %>
       </div>
       <div id="church_section">
         <%= form.inputs do %>
             <h3>Church Information</h3>
-            <%= form.input :church_name, :label => "Church", :hint => "What church do you attend?" %>
+            <%= form.input :church_name, :label => "Church", :hint_class => "label-hint", :hint => "What church do you attend?" %>
             <%= form.input :church_city, :label => "City", :label => "City and State", :hint => "Where is it located?" %>
             <%= form.input :church_denom,:collection => ["Episcopal", "United Methodist", "Presbyterian", "Lutheran", "UCC", "Nondenominational", "Baptist", "Catholic" "Other"], :label => "Denomination", :hint => "Select the denomination." %>
             <%= form.input :church_role,:collection => ["Clergy", "Lay person", "Volunteer Youth Leader", "Non-clergy staff"], :label => "Church Role", :hint => "What is your role in the church?." %>
