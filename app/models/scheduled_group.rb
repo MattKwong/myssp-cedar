@@ -183,7 +183,8 @@ class ScheduledGroup < ActiveRecord::Base
 
   def second_half_high_water
     if second_payment_date.nil?
-      overall_high_water
+      #overall_high_water
+      current_total
     else
       totals = ChangeHistory.find_all_by_group_id(id).map { |i| if i.created_at > second_payment_date
                                    i.new_total end }
@@ -271,7 +272,11 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def second_payment_due?
-    second_payment_date.nil? ? true : false
+    if session.payment_schedule.second_payment_date.nil?
+      false
+    else
+      second_payment_date.nil? ? true : false
+    end
   end
 
   def second_payment_required

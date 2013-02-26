@@ -117,12 +117,14 @@
                 <td><%= number_to_currency @group.session.payment_schedule.deposit %></td>
                 <td><%= number_to_currency @group.deposit_amount %></td>
               </tr>
-              <tr>
-                <td>2nd Payments</td>
-                <td><%= @group.second_half_high_water %></td>
-                <td><%= number_to_currency @group.session.payment_schedule.second_payment %></td>
-                <td><%= number_to_currency @group.second_pay_amount %></td>
-              </tr>
+              <% if @group.session.payment_schedule.second_payment_date  %>
+                <tr>
+                    <td>2nd Payments</td>
+                    <td><%= @group.second_half_high_water %></td>
+                    <td><%= number_to_currency @group.session.payment_schedule.second_payment %></td>
+                    <td><%= number_to_currency @group.second_pay_amount %></td>
+                </tr>
+              <% end %>
               <% if !@group.second_payment_due? %>
                   <tr>
                     <td>Final Payments</td>

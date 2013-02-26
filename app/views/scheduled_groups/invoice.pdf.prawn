@@ -38,9 +38,11 @@ prawn_document() do |pdf|
     items[i] = ["Deposits", @group.overall_high_water, number_to_currency(@group.session.payment_schedule.deposit),
             number_to_currency(@group.deposit_amount)]
     i += 1
-    items[i] = ["2nd Payments", @group.second_half_high_water, number_to_currency(@group.session.payment_schedule.second_payment),
-            number_to_currency(@group.second_pay_amount)]
-    i += 1
+    if @group.session.payment_schedule.second_payment_date
+        items[i] = ["2nd Payments", @group.second_half_high_water, number_to_currency(@group.session.payment_schedule.second_payment),
+                number_to_currency(@group.second_pay_amount)]
+        i += 1
+    end
     if !@group.second_payment_due?
         items[i] = ["Final Payments", @group.current_total, number_to_currency(@group.session.payment_schedule.final_payment),
                 number_to_currency(@group.final_pay_amount)]
@@ -54,8 +56,10 @@ prawn_document() do |pdf|
     i += 1
     items[i] = ["Paid to Date", "", "", number_to_currency(-@group.fee_amount_paid)]
     i += 1
-    items[i] = ["Second Payment Late Charge", "", "", number_to_currency(@group.second_late_penalty_amount)]
-    i += 1
+    if @group.session.payment_schedule.second_payment_date
+        items[i] = ["Second Payment Late Charge", "", "", number_to_currency(@group.second_late_penalty_amount)]
+        i += 1
+    end
     if !@group.second_payment_due?
         items[i] = ["Final Payment Late Charge", "", "", number_to_currency(@group.final_late_penalty_amount)]
         i += 1
