@@ -44,6 +44,18 @@
                                  <td></td>
                                  <td></td>
                                </tr>
+                           <% if @group.adjustments %>
+                               <% @group.adjustments.each do |a| %>
+                                   <tr>
+                                     <td><%= a.created_at.strftime("%m/%d/%Y")  %></td>
+                                     <td><%= "Adjustment: #{a.adjustment_code.short_name}" %></td>
+
+                                     <td><%= number_to_currency -a.amount %></td>
+                                     <td></td>
+                                     <td></td>
+                                   </tr>
+                               <% end %>
+                           <% end %>
                            <tr>
                              <td></td>
                              <td>Total</td>
