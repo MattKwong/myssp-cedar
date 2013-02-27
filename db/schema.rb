@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227021223) do
+ActiveRecord::Schema.define(:version => 20130227201855) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -708,6 +708,8 @@ ActiveRecord::Schema.define(:version => 20130227021223) do
     t.boolean  "ssp_friends"
     t.boolean  "ssp_web"
     t.string   "ssp_other"
+    t.boolean  "newsletter_subscribe"
+    t.string   "email"
   end
 
   create_table "user_roles", :force => true do |t|

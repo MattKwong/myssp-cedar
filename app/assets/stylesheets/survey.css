@@ -1,0 +1,13 @@
+#section2, #section3, #section4, #section5 {
+    display:none ;
+}
+.survey_error {
+    border-color: red !important;
+}
+#supporter_submit_action {
+    float:right;
+}
+
+#recaptcha_area {
+    margin: auto !important;
+}

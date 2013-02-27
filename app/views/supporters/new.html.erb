@@ -1,11 +1,11 @@
 <div id="active_admin_content">
   <%= semantic_form_for @supporter do |form| %>
-    <div id align="section1" class="">
-        <div id align="introduction">
-          <h3>The survey asks a lot of questions!</h3>
+    <div id="section1" >
+        <div id="introduction">
+          <h2>This survey asks a lot of questions!</h2>
           <h4>If you don't feel like responding to any particular question or if it doesn't apply to you,
           simply leave it blank. Required fields, which are related to your contact information, are indicate with an asterisk.</h4>
-          <h4>There are three sections to the survey. The entire process should take you less than ten minutes.
+          <h4>There are five short sections to the survey. The entire process should take you less than ten minutes.
             If you have any question about any of this or would like to talk to someone in person, please contact
           Rick Eaton, SSP's Executive Director, at 916-488-6441.</h4>
         </div>
@@ -18,12 +18,20 @@
                   <%= form.input :address2 %>
                   <%= form.input :city, :input_html => {:maxlength => 30} %>
                   <%= form.input :state, :label => "State (2 character abbreviation)", :input_html => {:maxlength => 2} %>
-                  <%= form.input :zip, :input_html => {:maxlength => 5} %>
-                  <%= form.input :phone, :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
+                  <%= form.input :zip, :label => "Zip (5 digit)", :input_html => {:maxlength => 5} %>
+                  <%= form.input :phone, :label => "Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
                   <%= form.input :phone_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"], :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
+                  <%= form.input :email, :required => true %>
+                  <%= form.input :newsletter_subscribe, :label => "I want to subscribe to SSP's monthly newsletter." %>
                   <%= form.input :gender, :hint_class => "label-hint-select", :hint => "What is your gender?", :as => :select, :required => true, :collection => ["Female", "Male"] %>
             <% end %>
           </div>
+      <div class="button_container" >
+        <input id="survey_submit_first" type="button" value = "Continue to the Next Section of the Survey" class = "next_button" >
+      </div>
+    </div> <!--Section 1-->
+    <div id="section2">
+        <h2>Section Two: Your SSP Connection and How You Would Like To Help</h2>
           <div id="ssp_connection_section">
             <%= form.inputs do %>
                 <h3>Your Connection To Sierra Service Project</h3>
@@ -53,13 +61,15 @@
                 <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
                 <%= form.input :desire_other_comments,  :label => "Please tell us about any other ways that you would like to contribute:", :as => :text %>
             <% end %>
-          </div>
-          <div class="button_container" >
-            <input id="submit_first" type="button" value = "Continue to the Next Section of the Survey" class = "next_button" >
-          </div>
-    </div>
-    <div id="section2">
-      <h3>Section Two: Church, Occupation and Community Connections</h3>
+      </div>
+        <div class="button_container" >
+          <input id="survey_submit_second" type="button" value = "Continue to the Next Section of the Survey" class = "next_button" >
+          <input id="survey_back_second" type="button" value = "Go Back to Previous Section" class = "back_button" >
+        </div>
+    </div> <!--Section 2 -->
+
+    <div id="section3">
+      <h2>Section Three: Church, Occupation and Community Connections</h2>
         <div id="church_section">
         <%= form.inputs do %>
             <h3>Church Information</h3>
@@ -68,8 +78,7 @@
             <%= form.input :church_denom,:collection => ["Episcopal", "United Methodist", "Presbyterian", "Lutheran", "UCC", "Nondenominational", "Baptist", "Catholic", "Other"], :label => "Please select the denomination" %>
             <%= form.input :church_role,:collection => ["Clergy", "Lay person", "Volunteer Youth Leader", "Non-clergy staff"], :label => "What is your role in the church?" %>
         <% end %>
-      </div>
-      <div id="occupation_section">
+       <div id="occupation_section">
         <%= form.inputs do %>
             <h3>Occupation Information</h3>
             <%= form.input :profession, :label => "What is your occupation or profession?" %>
@@ -92,11 +101,13 @@
         <% end %>
       </div>
       <div class="button_container" >
-        <input id="submit_second" type="button" value = "Continue to the Final Section of the Survey" class = "next_button" >
+        <input id="survey_submit_third" type="button" value = "Continue to the Next Section of the Survey" class = "next_button" >
+        <input id="survey_back_third" type="button" value = "Go Back to Previous Section" class = "back_button" >
       </div>
-    </div>
-    <div id="section3">
-      <h3>Section Three: Skills, Expertise and Fundraising Experience</h3>
+        </div>
+    </div> <!-- Section 3 -->
+    <div id="section4">
+      <h2>Section Four: Skills and Expertise</h2>
       <div id="skills_exp_section">
         <%= form.inputs do %>
             <h3>Skills and Professional Experience</h3>
@@ -121,6 +132,13 @@
             <%= form.input :skill_other_comments, :label => "What other skills and expertise do you have that might help SSP?", :as => :text %>
         <% end %>
       </div>
+      <div class="button_container" >
+        <input id="survey_submit_fourth" type="button" value = "Continue to the Final Section of the Survey" class = "next_button" >
+        <input id="survey_back_fourth" type="button" value = "Go Back to Previous Section" class = "back_button" >
+      </div>
+    </div>  <!-- Section 4 -->
+    <div id="section5">
+      <h2>Section Five: Fundraising Experience and Additional Comments</h2>
       <div id="fundraising_section">
         <%= form.inputs do %>
             <h3>Fundraising Information</h3>
@@ -132,17 +150,28 @@
             <%= form.input :fund_in_kind_comments, :label => "Please explain your in-kind donation connections.", :as => :text %>
         <% end %>
       </div>
-
       <div id="final_section">
         <%= form.inputs do %>
             <h3>Please Add Any Additional Comments</h3>
             <%= form.input :final_comments, :label => "If you have any final comments or information you would like to pass along, please enter it here:", :as => :text %>
       <% end %>
       </div>
-      <h4>To submit the survey and have your information save, enter in the two words below and click on 'Submit Survey'. </h4>
+      <h4>To submit the survey and have your information saved, enter in the two challenge words below and click on the 'Submit Survey' button on the right. (The challenge words prevent attacks by spammers.)</h4>
       <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>
-      <br>
-      <%= form.action :submit,  :label => "Submit Survey" %>
+        <br>
+      <div class="button_container" >
+        <!--<%= form.action :submit, :label => "You Are Finished! Please Submit The Survey.",  :submit_html => { :class => "test" } %>-->
+        <input id="survey_back_fifth" type="button" value = "Go Back to Previous Section" class = "back_button" >
+        <input id="supporter_submit_action" type="submit" value = "You Are Finished! Please Submit The Survey." name="commit" >
+
+      </div>
+
       <% end %>
+  </div> <!-- Section 5 -->
+  <div class="clear"></div>
+      <div id="progress_bar">
+        <div id="progress"></div>
+        <div id="progress_text">0% Complete</div>
+      </div>
   </div>
 </div>
