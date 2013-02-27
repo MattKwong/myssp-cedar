@@ -425,3 +425,12 @@ h1.process_step {
     display: inline;
 }
 
+.label-hint-string {
+    display: inline-block;
+}
+
+p.label-hint-text {
+    display: block;
+}
+
+

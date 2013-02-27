@@ -1,66 +1,113 @@
 <div id="active_admin_content">
   <%= semantic_form_for @supporter do |form| %>
-    <div class='panel'>
-      The survey asks a lot of questions. If you don't feel like responding to any particular question or it doesn't apply to you,
-      simply leave it blank. If you have any question about any of this or would like to talk to someone in person, please contact
-      Rick Eaton, SSP's Executive Director, at 916-488-6441.
-    </div>
-      <div id="id_section">
-        <%= form.inputs do %>
-              <h3>Identification and Contact Information</h3>
-              <%= form.input :first_name, :hint => "Your first name" , :input_html => {:size => 30} %>
-              <%= form.input :last_name, :hint => "Your last name", :input_html => {:size => 30}  %>
-              <%= form.input :address1 %>
-              <%= form.input :address2 %>
-              <%= form.input :city %>
-              <%= form.input :state, :input_html => {:size => 4, :max_length => 2} %>
-              <%= form.input :zip, :input_html => {:size => 10, :max_length => 5} %>
-              <%= form.input :phone, :input_html => {:size => 30}, :hint => "What is the best number at which to reach you?" %>
-              <%= form.input :phone_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"],:hint => "What type of phone number is this?" %>
-              <%= form.input :gender, :hint_class => "label-hint", :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
+    <div id align="section1" class="">
+        <div id align="introduction">
+          <h3>The survey asks a lot of questions!</h3>
+          <h4>If you don't feel like responding to any particular question or if it doesn't apply to you,
+          simply leave it blank. Required fields, which are related to your contact information, are indicate with an asterisk.</h4>
+          <h4>There are three sections to the survey. The entire process should take you less than ten minutes.
+            If you have any question about any of this or would like to talk to someone in person, please contact
+          Rick Eaton, SSP's Executive Director, at 916-488-6441.</h4>
+        </div>
+          <div id="id_section">
+            <%= form.inputs do %>
+                  <h3>Identification and Contact Information</h3>
+                  <%= form.input :first_name, :input_html => {:maxlength => 30} %>
+                  <%= form.input :last_name, :input_html => {:maxlength => 30}  %>
+                  <%= form.input :address1 %>
+                  <%= form.input :address2 %>
+                  <%= form.input :city, :input_html => {:maxlength => 30} %>
+                  <%= form.input :state, :label => "State (2 character abbreviation)", :input_html => {:maxlength => 2} %>
+                  <%= form.input :zip, :input_html => {:maxlength => 5} %>
+                  <%= form.input :phone, :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
+                  <%= form.input :phone_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"], :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
+                  <%= form.input :gender, :hint_class => "label-hint-select", :hint => "What is your gender?", :as => :select, :required => true, :collection => ["Female", "Male"] %>
+            <% end %>
+          </div>
+          <div id="ssp_connection_section">
+            <%= form.inputs do %>
+                <h3>Your Connection To Sierra Service Project</h3>
+                <h4>Please tell us how you are connected to SSP. Check as many boxes as apply.</h4>
+                <%= form.input :ssp_youth, :label => "I was a youth participant.", :as => :boolean %>
+                <%= form.input :ssp_adult, :label => "I was/am an adult counselor.", :as => :boolean %>
+                <%= form.input :ssp_parent, :label => "I am the parent of a current or former youth volunteer.", :as => :boolean %>
+                <%= form.input :ssp_grandparent, :label => "I am the grandparent of a current or former youth volunteer.", :as => :boolean %>
+                <%= form.input :ssp_leader, :label => "I am a youth leader or pastor at my church.", :as => :boolean %>
+                <%= form.input :ssp_heard, :label => "I have heard about SSP at my church.", :as => :boolean %>
+                <%= form.input :ssp_friends, :label => "I have heard about SSP from friends and acquaintances.", :as => :boolean %>
+                <%= form.input :ssp_web, :label => "I learned about SSP on the web.", :as => :boolean %>
+                <%= form.input :ssp_other, :label => "If you are connected in another (or additional) way, please tell us:", :as => :text %>
 
-        <% end %>
-      </div>
-      <div id="church_section">
+            <% end %>
+          </div>
+          <div id="desires_section">
+            <%= form.inputs do %>
+                <h3>How Would You Like To Contribute To SSP's Mission? How Would You Like To Get Involved?</h3>
+                <h4>What kinds of volunteer activities would you be excited about? Please check as many as apply. If you have other ideas about how you could contribute, please use the space provided to tell us about them.</h4>
+                <%= form.input :desire_board, :label => "Service on SSP's Board (Service on the board requires 4 to 20 hours of work per month, attendance at four annual board meetings and participation in periodic teleconferences)", :as => :boolean %>
+                <%= form.input :desire_training, :label => "Staff Training (Assist with staff training)", :as => :boolean %>
+                <%= form.input :desire_outreach, :label => "Outreach. (Outreach to churches and church-affiliated schools to spread the word about SSP)", :as => :boolean %>
+                <%= form.input :desire_publicity, :label => "Publicity and PR (Promoting SSP in the news media)", :as => :boolean %>
+                <%= form.input :desire_work_projects, :label => "Work Projects (Working on and helping to lead occasional special construction projects)", :as => :boolean %>
+                <%= form.input :desire_web, :label => "Web Page Design / Production", :as => :boolean %>
+                <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
+                <%= form.input :desire_other_comments,  :label => "Please tell us about any other ways that you would like to contribute:", :as => :text %>
+            <% end %>
+          </div>
+          <div class="button_container" >
+            <input id="submit_first" type="button" value = "Continue to the Next Section of the Survey" class = "next_button" >
+          </div>
+    </div>
+    <div id="section2">
+      <h3>Section Two: Church, Occupation and Community Connections</h3>
+        <div id="church_section">
         <%= form.inputs do %>
             <h3>Church Information</h3>
-            <%= form.input :church_name, :label => "Church", :hint_class => "label-hint", :hint => "What church do you attend?" %>
-            <%= form.input :church_city, :label => "City", :label => "City and State", :hint => "Where is it located?" %>
-            <%= form.input :church_denom,:collection => ["Episcopal", "United Methodist", "Presbyterian", "Lutheran", "UCC", "Nondenominational", "Baptist", "Catholic" "Other"], :label => "Denomination", :hint => "Select the denomination." %>
-            <%= form.input :church_role,:collection => ["Clergy", "Lay person", "Volunteer Youth Leader", "Non-clergy staff"], :label => "Church Role", :hint => "What is your role in the church?." %>
+            <%= form.input :church_name, :label => "Church: What church do you attend?" %>
+            <%= form.input :church_city, :label => "Where is it located? Please enter the city and state." %>
+            <%= form.input :church_denom,:collection => ["Episcopal", "United Methodist", "Presbyterian", "Lutheran", "UCC", "Nondenominational", "Baptist", "Catholic", "Other"], :label => "Please select the denomination" %>
+            <%= form.input :church_role,:collection => ["Clergy", "Lay person", "Volunteer Youth Leader", "Non-clergy staff"], :label => "What is your role in the church?" %>
         <% end %>
       </div>
       <div id="occupation_section">
         <%= form.inputs do %>
             <h3>Occupation Information</h3>
-            <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
-            <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
-            <%= form.input :employer_match, :label => "Employer Donation Match", :as => :radio, :hint => "Does your employer match personal charitable contributions?" %>
-            <%= form.input :employer_foundation, :label => "Employer Foundation", :as => :radio, :hint => "Does your employer have a foundation?" %>
-            <%= form.input :employer_comments, :label => "Other Comments", :as => :text, :hint => "Are there other ways that your work could benefit SSP?" %>
+            <%= form.input :profession, :label => "What is your occupation or profession?" %>
+            <%= form.input :employer, :label => "Who do you work for?" %>
+            <%= form.input :employer_match, :as => :radio, :label => "Does your employer match personal charitable contributions?" %>
+            <%= form.input :employer_foundation, :label => "Does your employer have a foundation?", :as => :radio %>
+            <%= form.input :employer_comments, :label => "Are there other ways that your work could benefit SSP?", :as => :text %>
         <% end %>
       </div>
       <div id="comm_cx_section">
         <%= form.inputs do %>
             <h3>Community Connections</h3>
-            <%= form.input :service_club, :hint => "Do you belong to a service club? Please indicate which type." , :as => :select,
+            <%= form.input :service_club, :label => "Do you belong to a service club? Please indicate which type." , :as => :select,
                         :collection => ["None", "Rotary", "Kiwanis", "Lions", "POE", "Other"] %>
-            <%= form.input :other_community, :hint => "Do you belong to any other community or civic organizations? (Chamber of Commerce, School Board, etc)",
-                        :label => "Other Community Involvement", :as => :radio, :collection => ["Yes", "No"] %>
-            <%= form.input :other_community_text, :hint => "Please provide details.", :as => :text %>
+            <%= form.input :other_community, :label => "Do you belong to any other community or civic organizations? (Chamber of Commerce, School Board, etc)",
+                        :as => :text %>
+            <%= form.input :other_community_text, :label => "Do you have any other community connections which may be helpful to your work with SSP? If
+                so, please indicate:", :as => :text %>
 
         <% end %>
       </div>
+      <div class="button_container" >
+        <input id="submit_second" type="button" value = "Continue to the Final Section of the Survey" class = "next_button" >
+      </div>
+    </div>
+    <div id="section3">
+      <h3>Section Three: Skills, Expertise and Fundraising Experience</h3>
       <div id="skills_exp_section">
         <%= form.inputs do %>
             <h3>Skills and Professional Experience</h3>
-            <p>Please tell us as much as you can about your professional skills and expertise. Please check as many items as apply, and provide additional information in the space provided.</p>
+            <h4>Please tell us as much as you can about your professional skills and expertise. Please check as many items as apply,
+              and provide additional information in the space provided.</h4>
             <%= form.input :skill_architecture, :label => "Architecture/Structure Design", :as => :boolean %>
             <%= form.input :skill_auto_repair, :label => "Auto Repair", :as => :boolean %>
             <%= form.input :skill_board, :label => "Nonprofit Board Service", :as => :boolean %>
             <%= form.input :skill_carpentry, :label => "Carpentry / Construction", :as => :boolean %>
             <%= form.input :skill_comp_prog, :label => "Computer Programming", :as => :boolean %>
-            <%= form.input :skill_comp_prog_comments, :hint => "What type? Please provide some details.", :as => :text %>
+            <%= form.input :skill_comp_prog_comments, :label => "If you have computer programming expertise, please indicate what type(s)?", :as => :text %>
             <%= form.input :skill_const, :label => "Construction Training", :as => :boolean %>
             <%= form.input :skill_electrical, :label => "Electrical / Electrician", :as => :boolean %>
             <%= form.input :skill_food_prep, :label => "Food Prep Training", :as => :boolean %>
@@ -71,43 +118,31 @@
             <%= form.input :skill_tool_repair, :label => "Tool Repair", :as => :boolean %>
             <%= form.input :skill_video, :label => "Video Production", :as => :boolean %>
             <%= form.input :skill_web, :label => "Web Page Design / Production", :as => :boolean %>
-            <%= form.input :skill_other, :label => "Other Skills", :as => :boolean %>
-            <%= form.input :skill_other_comments, :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
+            <%= form.input :skill_other_comments, :label => "What other skills and expertise do you have that might help SSP?", :as => :text %>
         <% end %>
       </div>
       <div id="fundraising_section">
         <%= form.inputs do %>
             <h3>Fundraising Information</h3>
-            <%= form.input :fund_exper, :hint => "Do you have fundraising experience?" , :label => "Fundraising Experience", :as => :boolean %>
-            <%= form.input :fund_exper_comments, :label => "If yes, please explain.", :as => :text %>
-            <%= form.input :fund_connect, :hint => "Do you have connections with any foundations?" , :label => "Foundation Connections", :as => :boolean %>
-            <%= form.input :fund_connect_comments, :label => "If yes, please explain.", :as => :text %>
-            <%= form.input :fund_in_kind, :hint => "Do you have connections which might help SSP receive in kind donations? We need donations of food, tools, automobiles and trucks, construction materials and other items." , :label => "In Kind Donations", :as => :boolean %>
-            <%= form.input :fund_in_kind_comments, :label => "If yes, please explain.", :as => :text %>
+            <%= form.input :fund_exper, :label => "Do you have fundraising experience?", :as => :boolean %>
+            <%= form.input :fund_exper_comments, :label => "Please explain your fundraising experience.", :as => :text %>
+            <%= form.input :fund_connect, :label => "Do you have connections with any foundations?" , :as => :boolean %>
+            <%= form.input :fund_connect_comments, :label => "Please explain your foundation connections.", :as => :text %>
+            <%= form.input :fund_in_kind, :label => "Do you have connections which might help SSP receive in kind donations? We need donations of food, tools, automobiles and trucks, construction materials and other items." ,  :as => :boolean %>
+            <%= form.input :fund_in_kind_comments, :label => "Please explain your in-kind donation connections.", :as => :text %>
         <% end %>
       </div>
-      <div id="desires_section">
-        <%= form.inputs do %>
-            <h3>How Would You Like To Contribute To SSP's Mission?</h3>
-            <p>What kinds of volunteer activities would you be excited about? Please check as many as apply. If you have other ideas about how you could contribute, please use the space provided to tell us about them.</p>
-            <%= form.input :desire_board, :label => "Service on SSP's Board", :hint => "Service on the board requires 4 to 20 hours of work per month, attendance at four annual board meetings and participation in periodic teleconferences.", :as => :boolean %>
-            <%= form.input :desire_training, :label => "Staff Training", :hint => "Assist with staff training.", :as => :boolean %>
-            <%= form.input :desire_outreach, :label => "Outreach", :hint => "Outreach to churches and church-affiliated schools.", :as => :boolean %>
-            <%= form.input :desire_publicity, :label => "Publicity and PR", :hint => "Promoting SSP in the news media.", :as => :boolean %>
-            <%= form.input :desire_work_projects, :label => "Work Projects", :hint => "Working on occasional special construction projects.", :as => :boolean %>
-            <%= form.input :desire_web, :label => "Web Page Design / Production", :as => :boolean %>
-            <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
-            <%= form.input :desire_other_comments, :label => "Other Skills and Expertise", :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
 
-      <% end %>
-      </div>
       <div id="final_section">
         <%= form.inputs do %>
             <h3>Please Add Any Additional Comments</h3>
-            <%= form.input :final_comments, :label => "Final Comments", :as => :text %>
+            <%= form.input :final_comments, :label => "If you have any final comments or information you would like to pass along, please enter it here:", :as => :text %>
       <% end %>
       </div>
+      <h4>To submit the survey and have your information save, enter in the two words below and click on 'Submit Survey'. </h4>
       <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>
-      <%= form.actions %>
+      <br>
+      <%= form.action :submit,  :label => "Submit Survey" %>
       <% end %>
+  </div>
 </div>
