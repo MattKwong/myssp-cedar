@@ -32,8 +32,8 @@ class Payment < ActiveRecord::Base
     Payment.find_all_by_registration_id_and_payment_type(reg_id, 'Deposit').sum(&:payment_amount)
   end
 
-  def self.record_deposit(reg_id, deposit_amount, processing_charge, type, notes)
-    p = Payment.create(:payment_date => Date.today, :registration_id => reg_id, :payment_amount => deposit_amount,
+  def self.record_deposit(reg_id, group_id, deposit_amount, processing_charge, type, notes)
+    p = Payment.create(:payment_date => Date.today, :scheduled_group_id => group_id, :registration_id => reg_id, :payment_amount => deposit_amount,
           :payment_method => type, :payment_type => 'Deposit', :payment_notes => notes)
     if processing_charge.to_i > 0
       p = Payment.create(:payment_date => Date.today, :registration_id => reg_id, :payment_amount => processing_charge,
@@ -46,7 +46,9 @@ class Payment < ActiveRecord::Base
     p = Payment.new(:payment_date => Date.today, :scheduled_group_id => group_id, :registration_id => ScheduledGroup.find(group_id).registration_id,
                    :payment_amount => payment_amount,
                     :payment_method => method, :payment_type => "Second", :payment_notes => notes)
-    p.save
+    if p.save
+
+    end
     if processing_charge.to_i > 0
       q = Payment.create(:payment_date => Date.today, :scheduled_group_id => group_id, :registration_id => ScheduledGroup.find(group_id).registration_id,
                     :payment_amount => processing_charge,

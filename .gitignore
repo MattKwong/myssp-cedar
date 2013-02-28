@@ -5,5 +5,5 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .sass-cache/
-stripe.rb
+config/initializers/stripe.rb
 heroku.thor

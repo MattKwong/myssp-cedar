@@ -9,13 +9,13 @@
                    <thead>
                        <th>Date</th>
                        <th>Description</th>
-                       <th>Amount Due</th>
+                       <th>Fees</th>
                        <th>Amount Received</th>
                        <th>Processing Charges</th>
                    </thead>
                    <tbody>
                            <tr>
-                             <td><%= Registration.find(@group.registration_id).created_at.strftime("%m/%d/%Y") %></td>
+                             <td><%= @registration.created_at.strftime("%m/%d/%Y") %></td>
                              <td>Deposit</td>
                              <td><% unless @group.deposit_amount.nil? %>
                                    <%= number_to_currency(@group.deposit_amount) %><% end %>
@@ -44,6 +44,18 @@
                                  <td></td>
                                  <td></td>
                                </tr>
+                           <% if @group.adjustments %>
+                               <% @group.adjustments.each do |a| %>
+                                   <tr>
+                                     <td><%= a.created_at.strftime("%m/%d/%Y")  %></td>
+                                     <td><%= "Adjustment: #{a.adjustment_code.short_name}" %></td>
+
+                                     <td><%= number_to_currency -a.amount %></td>
+                                     <td></td>
+                                     <td></td>
+                                   </tr>
+                               <% end %>
+                           <% end %>
                            <tr>
                              <td></td>
                              <td>Total</td>
@@ -73,15 +85,15 @@
                        <% end %>
                        <tr>
                            <td></td>
-                           <td>Total paid to date</td>
+                           <td>Total Paid to Date</td>
                          <td></td>
                          <td><%= number_to_currency(@group.fee_amount_paid) %></td>
                          <td></td>
                        </tr>
                        <tr>
                            <td></td>
-                           <td>Balance Due</td>
-                           <td><%= number_to_currency(@group.current_balance) %></td>
+                           <td>Total Remaining To Be Paid</td>
+                           <td><%= number_to_currency(@group.total_balance_due) %></td>
                            <td></td>
                            <td></td>
                         </tr>
@@ -96,11 +108,6 @@
                </div>
         </div>
     <div class="panel">
-<<<<<<< .merge_file_lsWBvT
-    <!-- if @group.second_payment_date.nil? %>-->
-        <h3><%= "Current Invoice Due: #{@group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
-          <div class="panel_contents">
-=======
         <% if @group.session.payment_schedule.second_payment_date.nil? || @group.second_payment_date %>
             <% final_pay_date = @group.session.payment_schedule.final_due_at_start? ? @group.session.session_start_date.to_date : @group.session.payment_schedule.final_payment_date %>
             <h3><%= "Current Invoice Due: #{final_pay_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
@@ -108,7 +115,6 @@
             <h3><%= "Current Invoice Due: #{@group.session.payment_schedule.second_payment_date.strftime("%m/%d/%Y")}. A 10 percent late fee will be applied to all late payments."%></h3>
         <% end %>
         <div class="panel_contents">
->>>>>>> .merge_file_karJrS
             <table border="0" cellspacing="0" cellpadding="0">
               <thead>
               <th></th>
@@ -123,35 +129,43 @@
                 <td><%= number_to_currency @group.session.payment_schedule.deposit %></td>
                 <td><%= number_to_currency @group.deposit_amount %></td>
               </tr>
-              <tr>
-                <td>2nd Payments</td>
-                <td><%= @group.second_half_high_water %></td>
-                <td><%= number_to_currency @group.session.payment_schedule.second_payment %></td>
-                <td><%= number_to_currency @group.second_pay_amount %></td>
-              </tr>
-              <tr>
-                <td>Final Payments</td>
-                <td><%= @group.current_total %></td>
-                <td><%= number_to_currency @group.session.payment_schedule.final_payment %></td>
-                <td><%= number_to_currency @group.final_pay_amount %></td>
-              </tr>
-              <tr>
-                <td>Net Adjustments</td>
-                <td></td>
-                <td></td>
-                <td><%= number_to_currency @group.adjustment_total %></td>
-              </tr>
+              <% if @group.session.payment_schedule.second_payment_date  %>
+                <tr>
+                    <td>2nd Payments</td>
+                    <td><%= @group.second_half_high_water %></td>
+                    <td><%= number_to_currency @group.session.payment_schedule.second_payment %></td>
+                    <td><%= number_to_currency @group.second_pay_amount %></td>
+                </tr>
+              <% end %>
+              <% if !@group.second_payment_due? %>
+                  <tr>
+                    <td>Final Payments</td>
+                    <td><%= @group.current_total %></td>
+                    <td><%= number_to_currency @group.session.payment_schedule.final_payment %></td>
+                    <td><%= number_to_currency @group.final_pay_amount %></td>
+                  </tr>
+              <% end %>
+              <% if @group.adjustments %>
+                <% @group.adjustments.each do |a| %>
+                  <tr>
+                    <td><%= "Adjustment: #{a.adjustment_code.short_name} (#{a.created_at.strftime("%m/%d/%Y")})" %></td>
+                    <td></td>
+                    <td></td>
+                    <td><%= number_to_currency -a.amount %></td>
+                  </tr>
+                <% end %>
+              <% end %>
               <tr>
                 <td>Total</td>
                 <td></td>
                 <td></td>
-                <td><%= number_to_currency @group.total_due %></td>
+                <td><%= number_to_currency @group.total_due_now %></td>
               </tr>
               <tr>
                 <td>Paid to date</td>
                 <td></td>
                 <td></td>
-                <td><%= number_to_currency @group.fee_amount_paid %></td>
+                <td><%= number_to_currency -@group.fee_amount_paid %></td>
               </tr>
               <% if @group.second_late_penalty_due? %>
                   <tr>
@@ -161,7 +175,7 @@
                     <td><%= number_to_currency @group.second_late_penalty_amount %></td>
                   </tr>
               <% end %>
-              <% if @group.final_late_penalty_due? %>
+              <% if @group.second_payment_due? && @group.final_late_penalty_due? %>
                   <tr>
                     <td>Final Payment Late Charge</td>
                     <td></td>
@@ -170,10 +184,10 @@
                   </tr>
               <% end %>
               <tr>
-                <td>Balance Due</td>
+                <td>Current Balance Due</td>
                 <td></td>
                 <td></td>
-                <td><%= number_to_currency @group.current_balance %></td>
+                <td><%= number_to_currency @group.current_balance_due %></td>
               </tr>
               </tbody>
               </table>
@@ -182,12 +196,7 @@
       1. If necessary, update your enrollment numbers. To increase them, call the office at 916-488-6441.
       To decrease, <%= link_to "click here", edit_scheduled_group_path(@group.id) %>.<br>
       2. To pay by credit card, <%= link_to "click here", record_payment_path(:group_id => @group.id) %>. To pay by check,
-      <%= link_to "print this invoice", invoice_path(:group_id => @group.id, :format => "pdf") %> and mail it with a check to the SSP office.</div>
-<<<<<<< .merge_file_lsWBvT
-
-        <!--<end %>-->
-=======
->>>>>>> .merge_file_karJrS
+      <%= link_to "print this invoice", invoice_path(@group.id, :format => "pdf") %> and mail it with a check to the SSP office.</div>
         </div>
         </div>
      </div>

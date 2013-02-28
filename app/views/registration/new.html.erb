@@ -231,7 +231,7 @@
                   <div class="reg_button center ">
                     <input id="print_eighth" type="button" value = "Print" class = "next_button" >
                     <%= button_to 'Return to Liaison Page', request.env["HTTP_REFERER"],
-                                  :class => 'cancel' %>
+                                  :class => 'cancel', :method => :get %>
                    </div>
               </div>
             </div>

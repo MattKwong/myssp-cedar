@@ -420,8 +420,10 @@ check amount listed in the Amount Due column. This can be paid either by check o
       @registration.amount_paid = params[:amount_paid]
       @registration.payment_notes = params[:payment_tracking_number]
       @registration.save
+      scheduled_group_id = ScheduledGroup.find_by_registration_id(params[:reg_id]).id
+
       @deposit_amount = @registration.requested_total * 50
-      p = Payment.record_deposit(@registration.id, @deposit_amount, params[:processing_charge], "cc", @registration.payment_notes)
+      p = Payment.record_deposit(@registration.id, scheduled_group_id, @deposit_amount, params[:processing_charge], "cc", @registration.payment_notes)
       #Create the confirmation email
       if p
         log_activity("CC Payment", "Group: #{@registration.name} Fee amount: $#{sprintf('%.2f', params[:deposit_amount].to_f)} Processing chg: $#{sprintf('%.2f', params[:processing_charge].to_f)}")

@@ -2,26 +2,112 @@
   <%= semantic_form_for @supporter do |form| %>
     <div class='panel'>
       The survey asks a lot of questions. If you don't feel like responding to any particular question or it doesn't apply to you,
-      simply enter "None" or "N/A" in that spot. If you have any question about any of this or would like to talk to someone in person, please contact
+      simply leave it blank. If you have any question about any of this or would like to talk to someone in person, please contact
       Rick Eaton, SSP's Executive Director, at 916-488-6441.
     </div>
-      <%= form.inputs do %>
-          <%= form.input :first_name, :hint => "Your first name" , :input_html => {:size => 30} %>
-          <%= form.input :last_name, :hint => "Your last name", :input_html => {:size => 30}  %>
-          <%= form.input :address1 %>
-          <%= form.input :address2 %>
-          <%= form.input :city %>
-          <%= form.input :state, :input_html => {:size => 4, :max_length => 2} %>
-          <%= form.input :zip, :input_html => {:size => 10, :max_length => 5} %>
-          <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
-          <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
-          <%= form.input :gender, :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
-          <%= form.input :affiliation, :label => "Church", :hint => "What is your religious affiliation?" %>
+      <div id="id_section">
+        <%= form.inputs do %>
+              <h3>Identification and Contact Information</h3>
+              <%= form.input :first_name, :hint => "Your first name" , :input_html => {:size => 30} %>
+              <%= form.input :last_name, :hint => "Your last name", :input_html => {:size => 30}  %>
+              <%= form.input :address1 %>
+              <%= form.input :address2 %>
+              <%= form.input :city %>
+              <%= form.input :state, :input_html => {:size => 4, :max_length => 2} %>
+              <%= form.input :zip, :input_html => {:size => 10, :max_length => 5} %>
+              <%= form.input :phone, :input_html => {:size => 30}, :hint => "What is the best number at which to reach you?" %>
+              <%= form.input :phone_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"],:hint => "What type of phone number is this?" %>
+              <%= form.input :gender, :hint_class => "label-hint", :hint => "What is your gender?", :as => :select, :collection => ["Female", "Male"] %>
+
+        <% end %>
+      </div>
+      <div id="church_section">
+        <%= form.inputs do %>
+            <h3>Church Information</h3>
+            <%= form.input :church_name, :label => "Church", :hint_class => "label-hint", :hint => "What church do you attend?" %>
+            <%= form.input :church_city, :label => "City", :label => "City and State", :hint => "Where is it located?" %>
+            <%= form.input :church_denom,:collection => ["Episcopal", "United Methodist", "Presbyterian", "Lutheran", "UCC", "Nondenominational", "Baptist", "Catholic" "Other"], :label => "Denomination", :hint => "Select the denomination." %>
+            <%= form.input :church_role,:collection => ["Clergy", "Lay person", "Volunteer Youth Leader", "Non-clergy staff"], :label => "Church Role", :hint => "What is your role in the church?." %>
+        <% end %>
+      </div>
+      <div id="occupation_section">
+        <%= form.inputs do %>
+            <h3>Occupation Information</h3>
+            <%= form.input :profession, :hint => "What is your occupation?" , :input_html => {:size => 30} %>
+            <%= form.input :employer, :hint => "Who do you work for?", :input_html => {:size => 30} %>
+            <%= form.input :employer_match, :label => "Employer Donation Match", :as => :radio, :hint => "Does your employer match personal charitable contributions?" %>
+            <%= form.input :employer_foundation, :label => "Employer Foundation", :as => :radio, :hint => "Does your employer have a foundation?" %>
+            <%= form.input :employer_comments, :label => "Other Comments", :as => :text, :hint => "Are there other ways that your work could benefit SSP?" %>
+        <% end %>
+      </div>
+      <div id="comm_cx_section">
+        <%= form.inputs do %>
+            <h3>Community Connections</h3>
+            <%= form.input :service_club, :hint => "Do you belong to a service club? Please indicate which type." , :as => :select,
+                        :collection => ["None", "Rotary", "Kiwanis", "Lions", "POE", "Other"] %>
+            <%= form.input :other_community, :hint => "Do you belong to any other community or civic organizations? (Chamber of Commerce, School Board, etc)",
+                        :label => "Other Community Involvement", :as => :radio, :collection => ["Yes", "No"] %>
+            <%= form.input :other_community_text, :hint => "Please provide details.", :as => :text %>
+
+        <% end %>
+      </div>
+      <div id="skills_exp_section">
+        <%= form.inputs do %>
+            <h3>Skills and Professional Experience</h3>
+            <p>Please tell us as much as you can about your professional skills and expertise. Please check as many items as apply, and provide additional information in the space provided.</p>
+            <%= form.input :skill_architecture, :label => "Architecture/Structure Design", :as => :boolean %>
+            <%= form.input :skill_auto_repair, :label => "Auto Repair", :as => :boolean %>
+            <%= form.input :skill_board, :label => "Nonprofit Board Service", :as => :boolean %>
+            <%= form.input :skill_carpentry, :label => "Carpentry / Construction", :as => :boolean %>
+            <%= form.input :skill_comp_prog, :label => "Computer Programming", :as => :boolean %>
+            <%= form.input :skill_comp_prog_comments, :hint => "What type? Please provide some details.", :as => :text %>
+            <%= form.input :skill_const, :label => "Construction Training", :as => :boolean %>
+            <%= form.input :skill_electrical, :label => "Electrical / Electrician", :as => :boolean %>
+            <%= form.input :skill_food_prep, :label => "Food Prep Training", :as => :boolean %>
+            <%= form.input :skill_plumbing, :label => "Plumbing", :as => :boolean %>
+            <%= form.input :skill_press, :label => "Press / Public Relations", :as => :boolean %>
+            <%= form.input :skill_safety, :label => "Safety", :as => :boolean %>
+            <%= form.input :skill_sewing, :label => "Sewing", :as => :boolean %>
+            <%= form.input :skill_tool_repair, :label => "Tool Repair", :as => :boolean %>
+            <%= form.input :skill_video, :label => "Video Production", :as => :boolean %>
+            <%= form.input :skill_web, :label => "Web Page Design / Production", :as => :boolean %>
+            <%= form.input :skill_other, :label => "Other Skills", :as => :boolean %>
+            <%= form.input :skill_other_comments, :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
+        <% end %>
+      </div>
+      <div id="fundraising_section">
+        <%= form.inputs do %>
+            <h3>Fundraising Information</h3>
+            <%= form.input :fund_exper, :hint => "Do you have fundraising experience?" , :label => "Fundraising Experience", :as => :boolean %>
+            <%= form.input :fund_exper_comments, :label => "If yes, please explain.", :as => :text %>
+            <%= form.input :fund_connect, :hint => "Do you have connections with any foundations?" , :label => "Foundation Connections", :as => :boolean %>
+            <%= form.input :fund_connect_comments, :label => "If yes, please explain.", :as => :text %>
+            <%= form.input :fund_in_kind, :hint => "Do you have connections which might help SSP receive in kind donations? We need donations of food, tools, automobiles and trucks, construction materials and other items." , :label => "In Kind Donations", :as => :boolean %>
+            <%= form.input :fund_in_kind_comments, :label => "If yes, please explain.", :as => :text %>
+        <% end %>
+      </div>
+      <div id="desires_section">
+        <%= form.inputs do %>
+            <h3>How Would You Like To Contribute To SSP's Mission?</h3>
+            <p>What kinds of volunteer activities would you be excited about? Please check as many as apply. If you have other ideas about how you could contribute, please use the space provided to tell us about them.</p>
+            <%= form.input :desire_board, :label => "Service on SSP's Board", :hint => "Service on the board requires 4 to 20 hours of work per month, attendance at four annual board meetings and participation in periodic teleconferences.", :as => :boolean %>
+            <%= form.input :desire_training, :label => "Staff Training", :hint => "Assist with staff training.", :as => :boolean %>
+            <%= form.input :desire_outreach, :label => "Outreach", :hint => "Outreach to churches and church-affiliated schools.", :as => :boolean %>
+            <%= form.input :desire_publicity, :label => "Publicity and PR", :hint => "Promoting SSP in the news media.", :as => :boolean %>
+            <%= form.input :desire_work_projects, :label => "Work Projects", :hint => "Working on occasional special construction projects.", :as => :boolean %>
+            <%= form.input :desire_web, :label => "Web Page Design / Production", :as => :boolean %>
+            <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
+            <%= form.input :desire_other_comments, :label => "Other Skills and Expertise", :hint => "What other skills and expertise do you have that might help SSP?", :as => :text %>
+
       <% end %>
-      <script>
-          var RecaptchaOptions = {theme:'clean'};
-      </script>
-      <%= render '/shared/recaptcha' %>
+      </div>
+      <div id="final_section">
+        <%= form.inputs do %>
+            <h3>Please Add Any Additional Comments</h3>
+            <%= form.input :final_comments, :label => "Final Comments", :as => :text %>
+      <% end %>
+      </div>
+      <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>
       <%= form.actions %>
-  <% end %>
+      <% end %>
 </div>

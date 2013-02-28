@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   layout 'admin_layout'
   rescue_from Timeout::Error, :with => :rescue_from_timeout
   before_filter :check_for_non_admin_lock_out , :except => [:create, :destroy]
+  include ReCaptcha::AppHelper
 
   def auto_schedule
     @page_title = "Auto Schedule Groups"

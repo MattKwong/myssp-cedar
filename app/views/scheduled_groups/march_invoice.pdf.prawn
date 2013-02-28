@@ -5,14 +5,10 @@ prawn_document() do |pdf|
 
     pdf.text "Sierra Service Project"
     pdf.move_up(16)
-    if @group.second_payment_due?
-        pdf.text "MARCH INVOICE", :align => :right, :style => :bold
-    else
-        pdf.text "FINAL INVOICE", :align => :right, :style => :bold
-    end
+    pdf.text "MARCH INVOICE", :align => :right, :style => :bold
     pdf.text "PO Box 992"
     pdf.move_up(16)
-    pdf.text "Date: #{Date.today.strftime("%m/%d/%y")}", :align => :right, :style => :bold
+    pdf.text "Date: #{Date.today}", :align => :right, :style => :bold
     pdf.text "Carmichael, CA 95609"
     pdf.text "916-488-6441"
 
@@ -38,33 +34,20 @@ prawn_document() do |pdf|
     items[i] = ["Deposits", @group.overall_high_water, number_to_currency(@group.session.payment_schedule.deposit),
             number_to_currency(@group.deposit_amount)]
     i += 1
-    if @group.session.payment_schedule.second_payment_date
-        items[i] = ["2nd Payments", @group.second_half_high_water, number_to_currency(@group.session.payment_schedule.second_payment),
-                number_to_currency(@group.second_pay_amount)]
-        i += 1
-    end
-    if !@group.second_payment_due?
-        items[i] = ["Final Payments", @group.current_total, number_to_currency(@group.session.payment_schedule.final_payment),
-                number_to_currency(@group.final_pay_amount)]
-        i += 1
-    end
+    items[i] = ["2nd Payments", @group.second_half_high_water, number_to_currency(@group.session.payment_schedule.second_payment),
+            number_to_currency(@group.second_pay_amount)]
+    i += 1
     @group.adjustments.each { |a|
         items[i] = ["Adjustment: #{a.adjustment_code.short_name} (#{a.created_at.strftime("%m/%d/%Y")})", "", "", number_to_currency(-a.amount)]
         i += 1
     }
-    items[i] = ["Total", "", "", number_to_currency(@group.total_due_now)]
+    items[i] = ["Total", "", "", number_to_currency(@group.total_due)]
     i += 1
     items[i] = ["Paid to Date", "", "", number_to_currency(-@group.fee_amount_paid)]
     i += 1
-    if @group.session.payment_schedule.second_payment_date
-        items[i] = ["Second Payment Late Charge", "", "", number_to_currency(@group.second_late_penalty_amount)]
-        i += 1
-    end
-    if !@group.second_payment_due?
-        items[i] = ["Final Payment Late Charge", "", "", number_to_currency(@group.final_late_penalty_amount)]
-        i += 1
-    end
-    items[i] = ["Balance Due", "", "", number_to_currency(@group.current_balance_due)]
+    items[i] = ["Second Payment Late Charge", "", "", number_to_currency(@group.second_late_penalty_amount)]
+    i += 1
+    items[i] = ["Current Balance Due", "", "", number_to_currency(@group.current_balance_march)]
 
     pdf.table(items, :header => true,
             :column_widths => {0 => 120, 1 => 140, 2 => 140, 3 => 140},
@@ -77,13 +60,6 @@ prawn_document() do |pdf|
             column(4).style :align => :right
     end
 
-
     pdf.move_down(60)
     pdf.text "If you have any questions about this invoice call the SSP office at 916-488-6441."
-
-
-
-
-
-
 end

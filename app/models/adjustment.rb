@@ -17,7 +17,7 @@ class Adjustment < ActiveRecord::Base
                   :note, :group_id, :updated_by
 
   belongs_to :scheduled_group
-
+  belongs_to :adjustment_code, :foreign_key => :reason_code
   validates :amount, :reason_code, :presence => true
   validates_numericality_of :amount
 
