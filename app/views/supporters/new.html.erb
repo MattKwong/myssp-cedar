@@ -17,13 +17,13 @@
                   <%= form.input :address1 %>
                   <%= form.input :address2 %>
                   <%= form.input :city, :input_html => {:maxlength => 30} %>
-                  <%= form.input :state, :label => "State (2 character abbreviation)", :input_html => {:maxlength => 2} %>
+                  <%= form.input :state, :label => "State", :as => :select, :collection => State::STATE_ABBREVIATIONS %>
                   <%= form.input :zip, :label => "Zip (5 digit)", :input_html => {:maxlength => 5} %>
                   <%= form.input :phone, :label => "Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
                   <%= form.input :phone_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"], :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
                   <%= form.input :email, :required => true %>
-                  <%= form.input :newsletter_subscribe, :label => "I want to subscribe to SSP's monthly newsletter." %>
-                  <%= form.input :gender, :hint_class => "label-hint-select", :hint => "What is your gender?", :as => :select, :required => true, :collection => ["Female", "Male"] %>
+                  <%= form.input :newsletter_subscribe, :label => "I want to subscribe to SSP's monthly newsletter.", :input_html => {:checked => "checked"} %>
+                  <%= form.input :gender, :hint_class => "label-hint-select", :hint => "What is your gender?", :as => :select, :required => true, :collection => ["Female", "Male", "Decline to state"] %>
             <% end %>
           </div>
       <div class="button_container" >
@@ -36,7 +36,8 @@
             <%= form.inputs do %>
                 <h3>Your Connection To Sierra Service Project</h3>
                 <h4>Please tell us how you are connected to SSP. Check as many boxes as apply.</h4>
-                <%= form.input :ssp_youth, :label => "I was a youth participant.", :as => :boolean %>
+                <%= form.input :ssp_current_youth, :label => "I am a current youth participant.", :as => :boolean %>
+                <%= form.input :ssp_former_youth, :label => "I was a youth participant.", :as => :boolean %>
                 <%= form.input :ssp_adult, :label => "I was/am an adult counselor.", :as => :boolean %>
                 <%= form.input :ssp_parent, :label => "I am the parent of a current or former youth volunteer.", :as => :boolean %>
                 <%= form.input :ssp_grandparent, :label => "I am the grandparent of a current or former youth volunteer.", :as => :boolean %>
