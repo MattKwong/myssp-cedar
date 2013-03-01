@@ -7,6 +7,17 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+    if ($("#captcha_error").text() == 'true') {
+
+        //slide steps
+        $('#section1').slideUp();
+        $('#section5').slideDown();
+        alert("The captcha challenge has failed. Please re-enter the words below.")
+        $('#recaptcha_response_field').focus()
+    }
+});
+
+$(document).ready(function() {
         $('#survey_submit_first').click(function(){
             var error = 0
             var email_error = 0
@@ -134,7 +145,6 @@ $(document).ready(function() {
             }
         });
     });
-
 
 $(document).ready(function() {
     $("#survey_submit_second").hover(function() {

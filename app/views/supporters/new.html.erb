@@ -1,5 +1,6 @@
 <div id="active_admin_content">
   <%= semantic_form_for @supporter do |form| %>
+    <div id='captcha_error' class='hidden' ><%= @captcha_error %></div>
     <div id="section1" >
         <div id="introduction">
           <h2>This survey asks a lot of questions!</h2>
@@ -143,11 +144,11 @@
       <div id="fundraising_section">
         <%= form.inputs do %>
             <h3>Fundraising Information</h3>
-            <%= form.input :fund_exper, :label => "Do you have fundraising experience?", :as => :boolean %>
+            <%= form.input :fund_exper, :label => "Do you have fundraising experience?", :as => :radio %>
             <%= form.input :fund_exper_comments, :label => "Please explain your fundraising experience.", :as => :text %>
-            <%= form.input :fund_connect, :label => "Do you have connections with any foundations?" , :as => :boolean %>
+            <%= form.input :fund_connect, :label => "Do you have connections with any foundations?" , :as => :radio %>
             <%= form.input :fund_connect_comments, :label => "Please explain your foundation connections.", :as => :text %>
-            <%= form.input :fund_in_kind, :label => "Do you have connections which might help SSP receive in kind donations? We need donations of food, tools, automobiles and trucks, construction materials and other items." ,  :as => :boolean %>
+            <%= form.input :fund_in_kind, :label => "Do you have connections to in-kind donations like food, tools, vehicles, construction materials and other items?" ,  :as => :radio %>
             <%= form.input :fund_in_kind_comments, :label => "Please explain your in-kind donation connections.", :as => :text %>
         <% end %>
       </div>
@@ -160,6 +161,7 @@
       <h4>To submit the survey and have your information saved, enter in the two challenge words below and click on the 'Submit Survey' button on the right. (The challenge words prevent attacks by spammers.)</h4>
       <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT"> </script> <noscript> <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lf_N9oSAAAAADaWcPeGxsDJr1e6rBgh1OnDBRhT" height="300" width="500" frameborder="0"></iframe><br> <textarea name="recaptcha_challenge_field" rows="3" cols="40"> </textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge"> </noscript>
         <br>
+      <div id="challenge_failed" ></div>
       <div class="button_container" >
         <!--<%= form.action :submit, :label => "You Are Finished! Please Submit The Survey.",  :submit_html => { :class => "test" } %>-->
         <input id="survey_back_fifth" type="button" value = "Go Back to Previous Section" class = "back_button" >

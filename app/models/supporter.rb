@@ -14,7 +14,7 @@ class Supporter < ActiveRecord::Base
                   :skill_plumbing, :skill_press, :skill_safety, :skill_sewing, :skill_tool_repair,
                   :skill_video, :skill_web, :skill_other_comments, :fund_exper, :fund_exper_comments,
                   :fund_connect, :fund_connect_comments, :fund_in_kind, :fund_in_kind_comments,
-                  :final_comments
+                  :final_comments, :employer_match, :employer_foundation
 
   #validates_with Validator::SupporterValidator
   validates :first_name, :last_name, :address1, :city, :state, :email,
