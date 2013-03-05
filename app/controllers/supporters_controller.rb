@@ -10,13 +10,13 @@ class SupportersController < ApplicationController
     @captcha_error = false
 
     if !validate_recap(params, @supporter.errors)
-      flash[:error] = "Please re-enter the challange words in the Captcha dialog box."
+      flash[:error] = "Please re-enter the challenge words in the Captcha dialog box."
       @page_title = "Please Complete the SSP Supporter Survey."
       @captcha_error = true
       render 'new'
     else if @supporter.save
         flash[:success] = "Supporter information successfully created."
-        @supporter.destroy
+        #@supporter.destroy
         redirect_to 'http://www.sierraserviceproject.org/supportersurvey_thankyou.html'
       else
         flash[:error] = "Errors prevented participant entry from being saved."
