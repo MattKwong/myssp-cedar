@@ -113,6 +113,8 @@ Spoic3::Application.routes.draw do
   resources :standard_items
   resources :supporters
   match "supporter_survey", :to => 'supporters#new'
+  resources :login_requests
+  match "login_request", :to => 'login_requests#new'
 
   match "purchase/show_budgets/:id", :to => 'purchases#show_budgets', :as => 'purchase_budget'
   match "material_item_estimated/add_standard/:id", :to => 'material_item_estimateds#add_standard', :as => 'add_standard_item'
