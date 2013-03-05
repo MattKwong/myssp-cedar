@@ -113,8 +113,8 @@ Spoic3::Application.routes.draw do
   resources :standard_items
   resources :supporters
   match "supporter_survey", :to => 'supporters#new'
-  resources :login_requests
-  match "login_request", :to => 'login_requests#new'
+  #resources :login_requests
+  match "/login_request", :to => 'ssp_web#login_request'
 
   match "purchase/show_budgets/:id", :to => 'purchases#show_budgets', :as => 'purchase_budget'
   match "material_item_estimated/add_standard/:id", :to => 'material_item_estimateds#add_standard', :as => 'add_standard_item'
@@ -234,6 +234,8 @@ Spoic3::Application.routes.draw do
   match '/signout', :to => 'pages#home'
   match '/availability', :to => 'pages#availability'
   match '/availability_other', :to => 'pages#availability_other'
+  match '/index', :to => 'SspWeb#index'
+  match '/support', :to => 'SspWeb#support'
   root :to => 'pages#home'
 
   get "program_type/show"
