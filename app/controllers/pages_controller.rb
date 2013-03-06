@@ -30,8 +30,9 @@ class PagesController < ApplicationController
   def availability_other
     @page_title = "Current Availability"
     @title = "Availability"
+    @type = "Other"
 
-    @matrices = Session.session_matrices("Other", 65, 50, 40)
+    @matrices = Session.session_matrices(@type, 65, 50, 40)
     #render :partial => 'availability_matrix'
     render :layout => nil
   end
