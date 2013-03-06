@@ -5,7 +5,7 @@
     </td>
     <% for i in 0..@matrices[:period_count] -1 do %>
         <td class="intext_emphasis">
-          <% if @type = "Other"%>
+          <% if @type == "Other"%>
             <%= @matrices[:period_sh_dates][i] %></td>
           <% else %>
             <%= @matrices[:period_names][i]%><br><%= @matrices[:period_sh_dates][i] %></td>
