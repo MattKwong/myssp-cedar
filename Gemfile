@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
-gem 'bundler', '1.2.0'
+gem 'bundler', '1.2.1'
 gem 'rake'
 gem 'haml'
 gem "formtastic", "2.1.0"
@@ -51,6 +51,7 @@ group :test do
   gem 'factory_girl_rails', "~> 4.0"
   gem "capybara"
   gem "guard-rspec"
+  gem "selenium-webdriver"
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   #gem 'sqlite3-ruby', :require => 'sqlite3'

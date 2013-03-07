@@ -13,6 +13,10 @@ FactoryGirl.define do
   sequence :phone do |n|
     "#{n}#{n}#{n}#{n}#{n}#{n}#{n}#{n}#{n}#{n}"
   end
+
+  sequence :inc_number do |n|
+    "#{n}"
+  end
 #end
 
 #Matt's factory
@@ -28,6 +32,7 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
     phone FactoryGirl.generate :phone
+    #liaison_id FactoryGirl.generate :inc_number
   end
 
   factory :user_role do

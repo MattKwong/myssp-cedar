@@ -277,7 +277,7 @@ DEPENDENCIES
   annotate (>= 2.5.0)
   bcrypt-ruby
   breadcrumbs_on_rails
-  bundler (= 1.2.0)
+  bundler (= 1.2.1)
   cancan
   capybara
   cucumber-rails
@@ -302,6 +302,7 @@ DEPENDENCIES
   ruby-recaptcha
   ruby-units
   sass-rails
+  selenium-webdriver
   spork-rails (= 3.2.0)
   sprockets
   stripe
