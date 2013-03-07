@@ -46,7 +46,7 @@
                 <%= form.input :ssp_heard, :label => "I have heard about SSP at my church.", :as => :boolean %>
                 <%= form.input :ssp_friends, :label => "I have heard about SSP from friends and acquaintances.", :as => :boolean %>
                 <%= form.input :ssp_web, :label => "I learned about SSP on the web.", :as => :boolean %>
-                <%= form.input :ssp_other, :label => "If you are connected in another (or additional) way, please tell us:", :as => :text, :input_html => {:maxlength => 255} %>
+                <%= form.input :ssp_other, :label => "If you are connected in another (or additional) way, please tell us:", :as => :text, :input_html => {:maxlength => 200} %>
 
             <% end %>
           </div>
@@ -61,7 +61,7 @@
                 <%= form.input :desire_work_projects, :label => "Work Projects (Working on and helping to lead occasional special construction projects)", :as => :boolean %>
                 <%= form.input :desire_web, :label => "Web Page Design / Production", :as => :boolean %>
                 <%= form.input :desire_other, :label => "Other Skills", :as => :boolean %>
-                <%= form.input :desire_other_comments,  :label => "Please tell us about any other ways that you would like to contribute:", :as => :text, :input_html => {:maxlength => 255} %>
+                <%= form.input :desire_other_comments,  :label => "Please tell us about any other ways that you would like to contribute:", :as => :text, :input_html => {:maxlength => 200} %>
             <% end %>
       </div>
         <div class="button_container" >
@@ -83,11 +83,11 @@
        <div id="occupation_section">
         <%= form.inputs do %>
             <h3>Occupation Information</h3>
-            <%= form.input :profession, :label => "What is your occupation or profession?", :input_html => {:maxlength => 255} %>
-            <%= form.input :employer, :label => "Who do you work for?", :input_html => {:maxlength => 255} %>
+            <%= form.input :profession, :label => "What is your occupation or profession?", :input_html => {:maxlength => 200} %>
+            <%= form.input :employer, :label => "Who do you work for?", :input_html => {:maxlength => 200} %>
             <%= form.input :employer_match, :as => :radio, :label => "Does your employer match personal charitable contributions?" %>
             <%= form.input :employer_foundation, :label => "Does your employer have a foundation?", :as => :radio %>
-            <%= form.input :employer_comments, :label => "Are there other ways that your work could benefit SSP?", :as => :text, :input_html => {:maxlength => 255} %>
+            <%= form.input :employer_comments, :label => "Are there other ways that your work could benefit SSP?", :as => :text, :input_html => {:maxlength => 200} %>
         <% end %>
       </div>
       <div id="comm_cx_section">
@@ -96,9 +96,9 @@
             <%= form.input :service_club, :label => "Do you belong to a service club? Please indicate which type." , :as => :select,
                         :collection => ["None", "Rotary", "Kiwanis", "Lions", "POE", "Other"] %>
             <%= form.input :other_community, :label => "Do you belong to any other community or civic organizations? (Chamber of Commerce, School Board, etc)",
-                        :as => :text, :input_html => {:maxlength => 255} %>
+                        :as => :text, :input_html => {:maxlength => 200} %>
             <%= form.input :other_community_text, :label => "Do you have any other community connections which may be helpful to your work with SSP? If
-                so, please indicate:", :as => :text, :input_html => {:maxlength => 255} %>
+                so, please indicate:", :as => :text, :input_html => {:maxlength => 200} %>
 
         <% end %>
       </div>
@@ -121,7 +121,7 @@
             <%= form.input :skill_carpentry, :label => "Carpentry / Construction", :as => :boolean %>
             <%= form.input :skill_comp_prog, :label => "Computer Programming", :as => :boolean %>
             <%= form.input :skill_comp_prog_comments, :label => "If you have computer programming expertise, please indicate what type(s)?", :as => :text,
-                :input_html => {:maxlength => 255}%>
+                :input_html => {:maxlength => 200}%>
             <%= form.input :skill_const, :label => "Construction Training", :as => :boolean %>
             <%= form.input :skill_electrical, :label => "Electrical / Electrician", :as => :boolean %>
             <%= form.input :skill_food_prep, :label => "Food Prep Training", :as => :boolean %>
@@ -133,7 +133,7 @@
             <%= form.input :skill_video, :label => "Video Production", :as => :boolean %>
             <%= form.input :skill_web, :label => "Web Page Design / Production", :as => :boolean %>
             <%= form.input :skill_other_comments, :label => "What other skills and expertise do you have that might help SSP?",
-                           :as => :text, :input_html => {:maxlength => 255} %>
+                           :as => :text, :input_html => {:maxlength => 200} %>
         <% end %>
       </div>
       <div class="button_container" >
@@ -147,17 +147,17 @@
         <%= form.inputs do %>
             <h3>Fundraising Information</h3>
             <%= form.input :fund_exper, :label => "Do you have fundraising experience?", :as => :radio %>
-            <%= form.input :fund_exper_comments, :label => "Please explain your fundraising experience.", :as => :text, :input_html => {:maxlength => 255} %>
+            <%= form.input :fund_exper_comments, :label => "Please explain your fundraising experience.", :as => :string, :input_html => {:maxlength => 200} %>
             <%= form.input :fund_connect, :label => "Do you have connections with any foundations?" , :as => :radio %>
-            <%= form.input :fund_connect_comments, :label => "Please explain your foundation connections.", :as => :text, :input_html => {:maxlength => 255} %>
+            <%= form.input :fund_connect_comments, :label => "Please explain your foundation connections.", :as => :text, :input_html => {:maxlength => 200} %>
             <%= form.input :fund_in_kind, :label => "Do you have connections to in-kind donations like food, tools, vehicles, construction materials and other items?" ,  :as => :radio %>
-            <%= form.input :fund_in_kind_comments, :label => "Please explain your in-kind donation connections.", :as => :text, :input_html => {:maxlength => 255} %>
+            <%= form.input :fund_in_kind_comments, :label => "Please explain your in-kind donation connections.", :as => :text, :input_html => {:maxlength => 200} %>
         <% end %>
       </div>
       <div id="final_section">
         <%= form.inputs do %>
             <h3>Please Add Any Additional Comments</h3>
-            <%= form.input :final_comments, :label => "If you have any final comments or information you would like to pass along, please enter it here:", :as => :text, :input_html => {:maxlength => 255} %>
+            <%= form.input :final_comments, :label => "If you have any final comments or information you would like to pass along, please enter it here:", :as => :text, :input_html => {:maxlength => 200} %>
       <% end %>
       </div>
       <h4>To submit the survey and have your information saved, enter in the two challenge words below and click on the 'Submit Survey' button on the right. (The challenge words prevent attacks by spammers.)</h4>
@@ -175,8 +175,8 @@
   </div> <!-- Section 5 -->
   <div class="clear"></div>
       <div id="progress_bar">
-        <div id="progress"></div>
         <div id="progress_text">0% Complete</div>
       </div>
   </div>
 </div>
+<div id="progress"></div>
