@@ -3,6 +3,15 @@
   <component name="ChangeListManager">
     <list id="379a22e9-9cc6-4325-ab88-44d916e9f998" name="Default" comment="" />
     <list id="6515e16b-01b0-44f6-bd49-9d9ce8271564" name="Failed commit: Default" comment="Added update of second payment fields in ScheduledGroup to payment controller code." />
+<<<<<<< Temporary merge branch 1
+    <list default="true" id="c348ecdd-aae3-4f28-9dd6-ff71435a4076" name="Postponed" comment="Updated typo in report_spec">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/rickeaton.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+=======
     <list default="true" id="c348ecdd-aae3-4f28-9dd6-ff71435a4076" name="Postponed" comment="Fixed merge error in invoice and removed plugins causing deprication warning.">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/scheduled_groups/march_invoice.pdf.prawn" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/supporters/_fields.html.erb" afterPath="" />
@@ -18,9 +27,16 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn" afterPath="$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/supporters/new.html.erb" afterPath="$PROJECT_DIR$/app/views/supporters/new.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/stripe.rb" afterPath="$PROJECT_DIR$/config/initializers/stripe.rb" />
+>>>>>>> Temporary merge branch 2
     </list>
-    <ignored path="spoic3.iws" />
-    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/*" />
+    <ignored path="config/database.yml" />
+    <ignored path="heroku.thor" />
+    <ignored path="db/*.sqlite3" />
+    <ignored path=".bundle" />
+    <ignored path="tmp/**/*" />
+    <ignored path=".sass-cache/" />
+    <ignored path="stripe.rb" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,17 +59,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< Temporary merge branch 1
+      <file leaf-file-name="seeds.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="33" selection-start="2011" selection-end="2011" vertical-scroll-proportion="0.0">
+=======
       <file leaf-file-name="scheduled_group.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/scheduled_group.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="274" column="37" selection-start="9176" selection-end="9176" vertical-scroll-proportion="-108.5">
+>>>>>>> Temporary merge branch 2
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Temporary merge branch 1
+      <file leaf-file-name="application_controller_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/controllers/application_controller_spec.rb">
+=======
       <file leaf-file-name="payment_schedule.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/payment_schedule.rb">
+>>>>>>> Temporary merge branch 2
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -61,45 +89,94 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Temporary merge branch 1
+      <file leaf-file-name="liaison_login_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/integration/liaison_login_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register-group_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/integration/register-group_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="program_spec.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spec/models/program_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="43" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.2">
+=======
       <file leaf-file-name="scheduled_groups_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/scheduled_groups_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="183" column="90" selection-start="7848" selection-end="7848" vertical-scroll-proportion="-7.8076925">
+>>>>>>> Temporary merge branch 2
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Temporary merge branch 1
+      <file leaf-file-name="site_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/models/site_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="0" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.0">
+=======
       <file leaf-file-name="statement.pdf.prawn" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn">
           <provider selected="true" editor-type-id="text-editor">
             <state line="56" column="46" selection-start="2775" selection-end="2775" vertical-scroll-proportion="0.51878357">
+>>>>>>> Temporary merge branch 2
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Temporary merge branch 1
+      <file leaf-file-name="session_types_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/models/session_types_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
       <file leaf-file-name="stripe.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/initializers/stripe.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="4" column="36" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
+>>>>>>> Temporary merge branch 2
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Temporary merge branch 1
+      <file leaf-file-name="admin_functionality_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/integration/admin_functionality_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
       <file leaf-file-name="invoice.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/scheduled_groups/invoice.html.erb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="55" column="26" selection-start="2944" selection-end="3027" vertical-scroll-proportion="-0.9493671">
+>>>>>>> Temporary merge branch 2
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <file leaf-file-name="report_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/models/report_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Temporary merge branch 1
+            <state line="162" column="91" selection-start="10787" selection-end="10787" vertical-scroll-proportion="-8.096774">
+=======
             <state line="166" column="0" selection-start="10774" selection-end="10774" vertical-scroll-proportion="-7.230769">
               <folding />
             </state>
@@ -110,8 +187,16 @@
         <entry file="file://$PROJECT_DIR$/app/views/scheduled_groups/invoice.pdf.prawn">
           <provider selected="true" editor-type-id="text-editor">
             <state line="42" column="59" selection-start="1853" selection-end="1853" vertical-scroll-proportion="0.0">
+>>>>>>> Temporary merge branch 2
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".public.item_purchases" pinned="false" current="false" current-in-tab="false">
+        <entry file="dbDummy://dbElement:/aca76e22/ce0276de-85a4-468b-81b4-ae571b72f1ae/.public.item_purchases">
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -139,6 +224,30 @@
       </map>
     </option>
   </component>
+<<<<<<< Temporary merge branch 1
+  <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/spec/models/program_type_spec.rb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/spec/models/admin_user_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/integration/admin_login.rb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/spec/integration/admin_functionality.rb" />
+        <option value="$PROJECT_DIR$/spec/integration/register-group_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/integration/admin_login2.rb" />
+        <option value="$PROJECT_DIR$/spec/factories.rb" />
+        <option value="$PROJECT_DIR$/spec/integration/liaison_login.rb" />
+        <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
+        <option value="$PROJECT_DIR$/spec/models/period_spec.rb" />
+        <option value="$PROJECT_DIR$/db/seeds.rb" />
+        <option value="$PROJECT_DIR$/spec/models/report_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/models/program_spec.rb" />
+=======
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -158,6 +267,7 @@
         <option value="$PROJECT_DIR$/config/initializers/stripe.rb" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn" />
+>>>>>>> Temporary merge branch 2
       </list>
     </option>
   </component>
@@ -169,10 +279,17 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< Temporary merge branch 1
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
+=======
     <option name="x" value="35" />
     <option name="y" value="22" />
     <option name="width" value="1612" />
     <option name="height" value="956" />
+>>>>>>> Temporary merge branch 2
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -230,7 +347,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
+              <option name="myItemId" value="my myssp-cedar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -240,7 +357,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
+              <option name="myItemId" value="my myssp-cedar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -254,15 +371,57 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
+              <option name="myItemId" value="my myssp-cedar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< Temporary merge branch 1
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="support" />
+=======
               <option name="myItemId" value="lib" />
+>>>>>>> Temporary merge branch 2
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< Temporary merge branch 1
+              <option name="myItemId" value="spoic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="my myssp-cedar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spoic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="my myssp-cedar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="integration" />
+=======
               <option name="myItemId" value="tasks" />
+>>>>>>> Temporary merge branch 2
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -272,11 +431,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
+              <option name="myItemId" value="my myssp-cedar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< Temporary merge branch 1
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+=======
               <option name="myItemId" value="config" />
+>>>>>>> Temporary merge branch 2
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -286,6 +453,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< Temporary merge branch 1
+              <option name="myItemId" value="my myssp-cedar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+=======
               <option name="myItemId" value="myssp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -295,6 +469,7 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="initializers" />
+>>>>>>> Temporary merge branch 2
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -304,13 +479,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
+              <option name="myItemId" value="my myssp-cedar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< Temporary merge branch 1
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -318,7 +494,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="myssp" />
+              <option name="myItemId" value="my myssp-cedar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+=======
+>>>>>>> Temporary merge branch 2
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spoic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="my myssp-cedar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -326,7 +518,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< Temporary merge branch 1
+              <option name="myItemId" value="models" />
+=======
               <option name="myItemId" value="controllers" />
+>>>>>>> Temporary merge branch 2
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -343,15 +539,33 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< Temporary merge branch 1
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="103" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="125" />
+=======
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="63" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="71" />
+>>>>>>> Temporary merge branch 2
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="115" />
     <property name="recentsLimit" value="10" />
+<<<<<<< Temporary merge branch 1
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+=======
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="66" />
+>>>>>>> Temporary merge branch 2
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/models/Unit.rb" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="111" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
+<<<<<<< Temporary merge branch 1
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="862" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="869" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="117" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="114" />
+    <property name="Database.TableEditor.Splitter" value="0.73253024" />
+=======
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="68" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="448" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="451" />
@@ -359,6 +573,7 @@
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="66" />
     <property name="Database.TableEditor.Splitter" value="0.7325302" />
+>>>>>>> Temporary merge branch 2
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
@@ -371,18 +586,62 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyIdeSdkConfigurable" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/views/ops_pages" />
-      <recent name="$PROJECT_DIR$/app/views/reports" />
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/app/views/pages" />
-      <recent name="$PROJECT_DIR$/app/assets/images" />
+      <recent name="$PROJECT_DIR$/spec/integration" />
+      <recent name="C:\Users\Rick\railsprojects\myssp\db\migrate" />
+      <recent name="C:\Users\Rick\railsprojects\myssp\app\views\roster_item" />
+      <recent name="C:\Users\Rick\railsprojects\myssp\public\stylesheets" />
+      <recent name="C:\Users\Rick\railsprojects\myssp\app\views\reports" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+<<<<<<< Temporary merge branch 1
+      <recent name="$PROJECT_DIR$/app/assets/javascripts" />
+      <recent name="$PROJECT_DIR$/app/assets/stylesheets" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/app/assets" />
+      <recent name="C:\Users\Rick\railsprojects\myssp\db\migrate" />
+    </key>
+  </component>
+  <component name="RunManager" selected="RSpec.program_spec">
+    <configuration default="false" name="db:seed" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="myssp-cedar" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:seed" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="admin_login" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="myssp-cedar" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/spec/integration" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+=======
       <recent name="$PROJECT_DIR$/app/models" />
       <recent name="$PROJECT_DIR$/app/views/pages" />
       <recent name="$PROJECT_DIR$/public" />
@@ -403,12 +662,17 @@
         <env name="RAILS_ENV" value="test" />
         <env name="JRUBY_OPTS" value="-X+O" />
       </envs>
+>>>>>>> Temporary merge branch 2
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
         <COVERAGE_PATTERN ENABLED="true">
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
+<<<<<<< Temporary merge branch 1
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/integration/admin_login.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+=======
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="$PROJECT_DIR$/spec/models" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
@@ -420,10 +684,21 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+>>>>>>> Temporary merge branch 2
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+    <configuration default="false" name="admin_login2" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="myssp-cedar" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/spec/integration" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+=======
     <configuration default="false" name="All specs in: controllers" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="spoic3" />
@@ -436,12 +711,17 @@
         <env name="RAILS_ENV" value="test" />
         <env name="JRUBY_OPTS" value="-X+O" />
       </envs>
+>>>>>>> Temporary merge branch 2
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
         <COVERAGE_PATTERN ENABLED="true">
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
+<<<<<<< Temporary merge branch 1
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/integration/admin_login2.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+=======
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="$PROJECT_DIR$/spec/controllers" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
@@ -454,11 +734,41 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <RunnerSettings RunnerId="RubyDebugRunner" />
+>>>>>>> Temporary merge branch 2
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyDebugRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+    <configuration default="false" name="admin_functionality" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="myssp-cedar" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/spec/integration" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/integration/admin_functionality.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="db:migrate" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="myssp-cedar" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+=======
     <configuration default="false" name="registration_controller_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="spoic3" />
@@ -467,16 +777,66 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+>>>>>>> Temporary merge branch 2
       <envs>
         <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
       </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:migrate" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="liaison_login" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="myssp-cedar" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/spec/integration" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/integration/liaison_login.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="factories" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="myssp-cedar" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$/spec" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
         <COVERAGE_PATTERN ENABLED="true">
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
+<<<<<<< Temporary merge branch 1
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/factories.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+=======
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/controllers/registration_controller_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
@@ -488,10 +848,21 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+>>>>>>> Temporary merge branch 2
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+    <configuration default="false" name="report_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="myssp-cedar" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+=======
     <configuration default="false" name="routes" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
       <module name="spoic3" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -543,6 +914,7 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+>>>>>>> Temporary merge branch 2
       <envs>
         <env name="RAILS_ENV" value="test" />
       </envs>
@@ -552,16 +924,40 @@
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
+<<<<<<< Temporary merge branch 1
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/report_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+=======
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:seed" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+>>>>>>> Temporary merge branch 2
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+    <configuration default="false" name="liaison_login_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="myssp-cedar" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+=======
     <configuration default="false" name="All features in: integration" type="CucumberRunConfigurationType" factoryName="Cucumber" temporary="true">
       <predefined_log_file id="RUBY_CUCUMBER" enabled="true" />
       <module name="spoic3" />
@@ -570,6 +966,7 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+>>>>>>> Temporary merge branch 2
       <envs>
         <env name="ANSICON" value="" />
         <env name="JRUBY_OPTS" value="-X+O" />
@@ -580,6 +977,19 @@
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
+<<<<<<< Temporary merge branch 1
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/integration/liaison_login_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+=======
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*.feature" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="ALL_IN_FOLDER" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="$PROJECT_DIR$/spec/integration" />
@@ -594,13 +1004,18 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="CUCUMBER_RUNNER_PATH" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_RUNNER" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
+>>>>>>> Temporary merge branch 2
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+    <configuration default="false" name="program_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+=======
     <configuration default="false" name="report_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+>>>>>>> Temporary merge branch 2
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="spoic3" />
+      <module name="myssp-cedar" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
@@ -617,7 +1032,11 @@
         </COVERAGE_PATTERN>
       </EXTENSION>
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+<<<<<<< Temporary merge branch 1
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/program_spec.rb" />
+=======
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/report_spec.rb" />
+>>>>>>> Temporary merge branch 2
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
@@ -631,6 +1050,8 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+=======
     <configuration default="false" name="Rails console: spoic3" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
       <module name="spoic3" />
       <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -676,6 +1097,7 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
+>>>>>>> Temporary merge branch 2
     <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -811,6 +1233,13 @@
       <IRB_RUN_CONFIG NAME="IS_RAILS_CONSOLE" VALUE="false" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
+      <JSRemoteDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSRemoteDebuggerConfigurationSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="CucumberRunConfigurationType" factoryName="Cucumber">
       <predefined_log_file id="RUBY_CUCUMBER" enabled="true" />
       <module name="" />
@@ -844,13 +1273,6 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
-      <JSRemoteDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSRemoteDebuggerConfigurationSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="SporkRunConfigurationType" factoryName="Spork DRb">
       <module name="" />
       <SPORK_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -875,30 +1297,6 @@
       <option name="VM_PARAMETERS" value="" />
       <option name="USER_CFG_CLASS" />
       <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
-    <configuration default="false" name="assets:precompile" type="RakeRunConfigurationType" factoryName="Rake">
-      <module name="spoic3" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="assets:precompile" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
-      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
     <configuration default="false" name="All Requests" type="RSpecRunConfigurationType" factoryName="RSpec">
@@ -1072,6 +1470,39 @@
       </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
+<<<<<<< Temporary merge branch 1
+    <list size="17">
+      <item index="0" class="java.lang.String" itemvalue="RSpec.All Requests" />
+      <item index="1" class="java.lang.String" itemvalue="RSpec.All Tests" />
+      <item index="2" class="java.lang.String" itemvalue="Rails.Development: spoic3" />
+      <item index="3" class="java.lang.String" itemvalue="Rails.Production: spoic3" />
+      <item index="4" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="5" class="java.lang.String" itemvalue="Rake.test" />
+      <item index="6" class="java.lang.String" itemvalue="JavaScript Debug.confirmation.html.erb" />
+      <item index="7" class="java.lang.String" itemvalue="Rake.db:seed" />
+      <item index="8" class="java.lang.String" itemvalue="Ruby.admin_login" />
+      <item index="9" class="java.lang.String" itemvalue="Ruby.admin_login2" />
+      <item index="10" class="java.lang.String" itemvalue="Ruby.admin_functionality" />
+      <item index="11" class="java.lang.String" itemvalue="Rake.db:migrate" />
+      <item index="12" class="java.lang.String" itemvalue="Ruby.liaison_login" />
+      <item index="13" class="java.lang.String" itemvalue="Ruby.factories" />
+      <item index="14" class="java.lang.String" itemvalue="RSpec.report_spec" />
+      <item index="15" class="java.lang.String" itemvalue="RSpec.liaison_login_spec" />
+      <item index="16" class="java.lang.String" itemvalue="RSpec.program_spec" />
+    </list>
+    <recent_temporary>
+      <list size="10">
+        <item index="0" class="java.lang.String" itemvalue="RSpec.program_spec" />
+        <item index="1" class="java.lang.String" itemvalue="RSpec.liaison_login_spec" />
+        <item index="2" class="java.lang.String" itemvalue="RSpec.report_spec" />
+        <item index="3" class="java.lang.String" itemvalue="Rake.db:seed" />
+        <item index="4" class="java.lang.String" itemvalue="RSpec.report_spec" />
+        <item index="5" class="java.lang.String" itemvalue="RSpec.program_spec" />
+        <item index="6" class="java.lang.String" itemvalue="RSpec.program_spec" />
+        <item index="7" class="java.lang.String" itemvalue="Ruby.liaison_login" />
+        <item index="8" class="java.lang.String" itemvalue="Ruby.admin_login2" />
+        <item index="9" class="java.lang.String" itemvalue="Ruby.factories" />
+=======
     <list size="18">
       <item index="0" class="java.lang.String" itemvalue="Rake.assets:precompile" />
       <item index="1" class="java.lang.String" itemvalue="RSpec.All Requests" />
@@ -1104,6 +1535,7 @@
         <item index="7" class="java.lang.String" itemvalue="IRB console.Rails console: spoic3" />
         <item index="8" class="java.lang.String" itemvalue="IRB console.Rails console: spoic3" />
         <item index="9" class="java.lang.String" itemvalue="RSpec.report_spec" />
+>>>>>>> Temporary merge branch 2
       </list>
     </recent_temporary>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda">
@@ -1381,86 +1813,77 @@
       <created>1351023692770</created>
       <updated>1351023692770</updated>
     </task>
-    <task id="LOCAL-00058" summary="Merge of Matt's changes">
-      <created>1353019222565</created>
-      <updated>1353019222565</updated>
+    <task id="LOCAL-00058" summary="Added to test files">
+      <created>1351806220735</created>
+      <updated>1351806220735</updated>
     </task>
-    <task id="LOCAL-00059" summary="Modified factories file to get tests to run.">
-      <created>1353029789515</created>
-      <updated>1353029789515</updated>
+    <task id="LOCAL-00059" summary="Added database.yml and .idea folder to git ignore file">
+      <created>1351807575766</created>
+      <updated>1351807575766</updated>
     </task>
-    <task id="LOCAL-00060" summary="Modified factories file to get tests to run.">
-      <created>1353030790280</created>
-      <updated>1353030790281</updated>
+    <task id="LOCAL-00060" summary="Improved activity model tests">
+      <created>1351807633817</created>
+      <updated>1351807633817</updated>
     </task>
-    <task id="LOCAL-00061" summary="Started work on auto scheduling logic.">
-      <created>1353044655314</created>
-      <updated>1353044655315</updated>
+    <task id="LOCAL-00061" summary="Added to Adjustment and Activity Model Tests">
+      <created>1351808812513</created>
+      <updated>1351808812513</updated>
     </task>
-    <task id="LOCAL-00062" summary="More work on auto schedule logic">
-      <created>1353179882067</created>
-      <updated>1353179882067</updated>
+    <task id="LOCAL-00062" summary="Expanded tests for adjustment model">
+      <created>1353007510674</created>
+      <updated>1353007510675</updated>
     </task>
-    <task id="LOCAL-00063" summary="Added db migration">
-      <created>1353305253667</created>
-      <updated>1353305253667</updated>
+    <task id="LOCAL-00063" summary="Expanded more model test files">
+      <created>1353018491749</created>
+      <updated>1353018491749</updated>
     </task>
-    <task id="LOCAL-00064" summary="Correction to auto schedule logic, added edits to request values and added &quot;year&quot; column to request display.">
-      <created>1353350526819</created>
-      <updated>1353350526819</updated>
+    <task id="LOCAL-00064" summary="Merged with Rick's Repo">
+      <created>1354784542532</created>
+      <updated>1354784542532</updated>
     </task>
-    <task id="LOCAL-00065" summary="Added priority choice to schedule group list.">
-      <created>1353366315357</created>
-      <updated>1353366315358</updated>
+    <task id="LOCAL-00065" summary="Fixed a messed up merge">
+      <created>1354784872446</created>
+      <updated>1354784872446</updated>
     </task>
-    <task id="LOCAL-00066" summary="Added db migration">
-      <created>1353370294614</created>
-      <updated>1353370294614</updated>
+    <task id="LOCAL-00066" summary="N/A">
+      <created>1354785142161</created>
+      <updated>1354785142162</updated>
     </task>
-    <task id="LOCAL-00067" summary="Add schedule summary report.">
-      <created>1353377658043</created>
-      <updated>1353377658044</updated>
+    <task id="LOCAL-00067" summary="Updating to Rick's version">
+      <created>1359054783763</created>
+      <updated>1359054783763</updated>
     </task>
-    <task id="LOCAL-00068" summary="Added mass email notification for schedules. Corrected bug in schedule report.">
-      <created>1353434043271</created>
-      <updated>1353434043271</updated>
+    <task id="LOCAL-00068" summary="New tests">
+      <created>1359657572106</created>
+      <updated>1359657572106</updated>
     </task>
-    <task id="LOCAL-00069" summary="Added db migration">
-      <created>1353456301331</created>
-      <updated>1353456301331</updated>
+    <task id="LOCAL-00069" summary="Fixed a typo">
+      <created>1359658240068</created>
+      <updated>1359658240068</updated>
     </task>
-    <task id="LOCAL-00070" summary="Quick fix to increase timeout value to run emails.">
-      <created>1353457398964</created>
-      <updated>1353457398965</updated>
+    <task id="LOCAL-00070" summary="Added my factories file">
+      <created>1359659971874</created>
+      <updated>1359659971875</updated>
     </task>
-    <task id="LOCAL-00071" summary="Restored timeout value after sending emails.">
-      <created>1353458536523</created>
-      <updated>1353458536523</updated>
+    <task id="LOCAL-00071" summary="Added CC Payment Link test">
+      <created>1359667872250</created>
+      <updated>1359667872250</updated>
     </task>
-    <task id="LOCAL-00072" summary="Added schedule_max field to Session. Show availability as matrix.">
-      <created>1353892904419</created>
-      <updated>1353892904419</updated>
+    <task id="LOCAL-00072" summary="Updated factories.rb">
+      <created>1360347347142</created>
+      <updated>1360347347142</updated>
     </task>
-    <task id="LOCAL-00073" summary="Migration of Session">
-      <created>1354061095659</created>
-      <updated>1354061095659</updated>
+    <task id="LOCAL-00073" summary="Beginning work on a couple more integration tests">
+      <created>1360864011067</created>
+      <updated>1360864011067</updated>
     </task>
-    <task id="LOCAL-00074" summary="Troubleshooting comments problem and cc routing problem.">
-      <created>1354122243385</created>
-      <updated>1354122243386</updated>
+    <task id="LOCAL-00074" summary="Updated typo in report_spec">
+      <created>1360882556210</created>
+      <updated>1360882556210</updated>
     </task>
-    <task id="LOCAL-00075" summary="More changes to handle credit card payments.">
-      <created>1354161585304</created>
-      <updated>1354161585305</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Update scheduled flag when registering group.">
-      <created>1354162862604</created>
-      <updated>1354162862604</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Added basic availability page.">
-      <created>1354165186707</created>
-      <updated>1354165186707</updated>
-    </task>
+<<<<<<< Temporary merge branch 1
+    <option name="localTasksCounter" value="75" />
+=======
     <task id="LOCAL-00078" summary="Flip to live strip keys.">
       <created>1354209702267</created>
       <updated>1354209702267</updated>
@@ -1586,6 +2009,7 @@
       <updated>1361385585099</updated>
     </task>
     <option name="localTasksCounter" value="109" />
+>>>>>>> Temporary merge branch 2
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1609,6 +2033,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Temporary merge branch 1
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32398754" sideWeight="0.5139888" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.4268585" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20063949" sideWeight="0.6292835" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21494183" sideWeight="0.21516165" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25579536" sideWeight="0.6292835" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39910814" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37383178" sideWeight="0.3261391" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3707165" sideWeight="0.6682654" order="2" side_tool="false" content_ui="tabs" x="77" y="500" width="1633" height="304" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554516" sideWeight="0.48760992" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271028" sideWeight="0.74420464" order="8" side_tool="false" content_ui="tabs" />
+=======
     <frame x="35" y="22" width="1612" height="956" extended-state="0" />
     <editor active="true" />
     <layout>
@@ -1624,10 +2065,15 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27706635" sideWeight="0.77203065" order="2" side_tool="false" content_ui="tabs" x="77" y="500" width="1633" height="304" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484847" sideWeight="0.48852223" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32848486" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+>>>>>>> Temporary merge branch 2
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21446079" sideWeight="0.57865167" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+<<<<<<< Temporary merge branch 1
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3317757" sideWeight="0.4780176" order="1" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> Temporary merge branch 2
       <window_info id="CSS Styles" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3277592" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32267037" sideWeight="0.48914433" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1671,7 +2117,11 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+<<<<<<< Temporary merge branch 1
+    <option name="LAST_COMMIT_MESSAGE" value="Updated typo in report_spec" />
+=======
     <option name="LAST_COMMIT_MESSAGE" value="Fixed merge error in invoice and removed plugins causing deprication warning." />
+>>>>>>> Temporary merge branch 2
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1684,6 +2134,33 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+<<<<<<< Temporary merge branch 1
+    <MESSAGE value="Merge corrections" />
+    <MESSAGE value="    Migration to Cedar&#10;" />
+    <MESSAGE value="Updated period_spec, program_type_spec, and site_spec to be more comprehensive.&#10;" />
+    <MESSAGE value="Some spec file changes" />
+    <MESSAGE value="Updated to latest version of Rick's Repo" />
+    <MESSAGE value="Improved readability. Made changes to accommodate function on my computer." />
+    <MESSAGE value="Modified factories file to get tests to run." />
+    <MESSAGE value="Added to test files" />
+    <MESSAGE value="Added database.yml and .idea folder to git ignore file" />
+    <MESSAGE value="Improved activity model tests" />
+    <MESSAGE value="Added to Adjustment and Activity Model Tests" />
+    <MESSAGE value="Expanded tests for adjustment model" />
+    <MESSAGE value="Expanded more model test files" />
+    <MESSAGE value="Removed extra files from tracking (I think)" />
+    <MESSAGE value="Merged with Rick's Repo" />
+    <MESSAGE value="Fixed a messed up merge" />
+    <MESSAGE value="N/A" />
+    <MESSAGE value="Updating to Rick's version" />
+    <MESSAGE value="New tests" />
+    <MESSAGE value="Fixed a typo" />
+    <MESSAGE value="Added my factories file" />
+    <MESSAGE value="Added CC Payment Link test" />
+    <MESSAGE value="Updated factories.rb" />
+    <MESSAGE value="Beginning work on a couple more integration tests" />
+    <MESSAGE value="Updated typo in report_spec" />
+=======
     <confirmMoveToFailedCommit value="1" />
     <MESSAGE value="Styling of availability table." />
     <MESSAGE value="Styling and logic for availability page." />
@@ -1710,25 +2187,45 @@
     <MESSAGE value="More changes to supporter survey." />
     <MESSAGE value="Supporter survey title change." />
     <MESSAGE value="Fixed merge error in invoice and removed plugins causing deprication warning." />
+>>>>>>> Temporary merge branch 2
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
+=======
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.3-p194/gems/formtastic-2.1.0/lib/formtastic/inputs/base/hints.rb">
+>>>>>>> Temporary merge branch 2
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="24" column="42" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/factories.rb">
+=======
     <entry file="file://$PROJECT_DIR$/app/models/adjustment_code.rb">
+>>>>>>> Temporary merge branch 2
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="35" column="48" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/models/special_needs_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/models/registration_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/program.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="172" column="0" selection-start="4952" selection-end="4952" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/app/models/adjustment.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="44" selection-start="607" selection-end="607" vertical-scroll-proportion="0.0">
@@ -1746,45 +2243,84 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/liaisons_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="6" selection-start="3091" selection-end="3091" vertical-scroll-proportion="0.0">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="11" selection-start="102" selection-end="102" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/app/views/liaisons/_schedule_info.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="57" selection-start="1940" selection-end="1940" vertical-scroll-proportion="1.0821643">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="dbDummy://dbElement:/aca76e22/ce0276de-85a4-468b-81b4-ae571b72f1ae/.public.item_purchases">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/models/report_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="162" column="91" selection-start="10787" selection-end="10787" vertical-scroll-proportion="-8.096774">
+=======
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="166" column="0" selection-start="10774" selection-end="10774" vertical-scroll-proportion="-7.230769">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="33" selection-start="2011" selection-end="2011" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/app/views/scheduled_groups/invoice.pdf.prawn">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="59" selection-start="1853" selection-end="1853" vertical-scroll-proportion="0.0">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/controllers/application_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/app/controllers/scheduled_groups_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="183" column="90" selection-start="7848" selection-end="7848" vertical-scroll-proportion="-7.8076925">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/integration/register-group_spec.rb">
+=======
     <entry file="file://$PROJECT_DIR$/app/models/payment_schedule.rb">
+>>>>>>> Temporary merge branch 2
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/integration/liaison_login_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/app/models/scheduled_group.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="274" column="37" selection-start="9176" selection-end="9176" vertical-scroll-proportion="-108.5">
@@ -1795,34 +2331,59 @@
     <entry file="file://$PROJECT_DIR$/app/models/session.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="692" column="59" selection-start="25395" selection-end="25395" vertical-scroll-proportion="0.0">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/models/site_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="0" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/app/views/scheduled_groups/invoice.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="26" selection-start="2944" selection-end="3027" vertical-scroll-proportion="-0.9493671">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/models/session_types_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="66" selection-start="122" selection-end="122" vertical-scroll-proportion="0.20979021">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/integration/admin_functionality_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
     <entry file="file://$PROJECT_DIR$/config/initializers/stripe.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="36" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< Temporary merge branch 1
+    <entry file="file://$PROJECT_DIR$/spec/models/program_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="43" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.2">
+=======
     <entry file="file://$PROJECT_DIR$/app/views/scheduled_groups/statement.pdf.prawn">
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="46" selection-start="2775" selection-end="2775" vertical-scroll-proportion="0.51878357">
+>>>>>>> Temporary merge branch 2
           <folding />
         </state>
       </provider>

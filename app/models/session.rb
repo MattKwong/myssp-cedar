@@ -524,9 +524,9 @@ class Session < ActiveRecord::Base
     sum_dom = program_type == "Summer Domestic" ? "Summer Domestic" : "Other"
     @site_names = Site.order(:listing_priority).find_all_hosting(program_type).map { |s| s.name}
     period_names = Period.find_all_hosting(program_type).map { |p| p.name}
-    logger.debug period_names
+
     period_sh_dates = Period.find_all_hosting(program_type).map do |p|
-        "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
+      "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
     end
 
     #Assign a ordinal value to each row and column
