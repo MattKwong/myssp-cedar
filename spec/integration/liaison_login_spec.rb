@@ -3,7 +3,7 @@ require 'spec_helper'
 
 feature "Signing in" do
   before :each do
-    TestUser = FactoryGirl.create(:admin_user, :user_role_id => UserRole.find_by_name("Liaison").id, liaison_id:1, admin:'f')
+    TestUser = FactoryGirl.create(:admin_user, :user_role_id => UserRole.find_by_name("Liaison").id, liaison_id:Liaison.find_by_name("Susan Liaison").id, admin:'f')
   end
 
   scenario "access sign in page by direct link" do
