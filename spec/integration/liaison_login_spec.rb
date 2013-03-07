@@ -61,7 +61,7 @@ feature "Signing in" do
     fill_in 'Password', :with => TestUser.password
     #save_and_open_page
     click_button('Sign in')
-    click_link('Logout')
+    click_link('Sign out')
     current_path.should == '/' and page.should have_content("Signed out successfully.")
   end
 
