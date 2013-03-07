@@ -14,7 +14,7 @@
     text-decoration: none;
 }
 body {
-    background-image: url(assets/SSP%20static%20background.gif);
+    background-image: url("/assets/background and navigation/SSP static background.gif");
     background-repeat: repeat-y;
     background-attachment: fixed;
     background-position: center top;
