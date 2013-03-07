@@ -27,7 +27,7 @@ FactoryGirl.define do
     email FactoryGirl.generate :email
     confirmation_sent_at { 2.day.ago }
     confirmed_at { 1.day.ago }
-    user_role_id { 1 }
+    user_role_id { UserRole.find_by_name("Admin").id }
     username FactoryGirl.generate :username
     password "foobar"
     password_confirmation "foobar"
