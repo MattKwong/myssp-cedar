@@ -1,10 +1,9 @@
-require './../spec_helper'
+require 'spec_helper'
 
 feature "Logged in Admin" do
   before :each do
     TestUser = FactoryGirl.create(:admin_user)
-    TestRole = FactoryGirl.create(:user_role)
-    #TestRole2 = FactoryGirl.create(:user_role2)
+    #TestRole = FactoryGirl.create(:user_role)
   end
 
   scenario "valid admin user logs in" do
