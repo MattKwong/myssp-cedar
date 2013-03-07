@@ -121,8 +121,12 @@ class ScheduledGroup < ActiveRecord::Base
      session_type.name.include?("Junior High")
   end
 
-  def current_balance
+  def total_balance_due
     total_due - fee_amount_paid
+  end
+
+  def current_balance_due
+    total_due_now - fee_amount_paid
   end
 
   def total_amount_paid  #this needs to be checked out - is it picking up all of the payments and excluding processing charges?
@@ -136,11 +140,23 @@ class ScheduledGroup < ActiveRecord::Base
   end
 
   def total_due
-    deposit_amount + second_pay_amount + final_pay_amount - adjustment_total
+    deposit_amount + second_pay_amount + final_pay_amount - adjustment_total + late_payments
+  end
+
+  def total_due_now
+    if second_payment_due?
+      deposit_amount + second_pay_amount - adjustment_total + late_payments
+    else
+      total_due
+    end
   end
 
   def adjustment_total
     Adjustment.sum(:amount, :conditions => ['group_id = ?', id])
+  end
+
+  def adjustments
+    Adjustment.find_all_by_group_id(id)
   end
 
   def deposit_amount #the amount due for deposits
@@ -167,7 +183,8 @@ class ScheduledGroup < ActiveRecord::Base
 
   def second_half_high_water
     if second_payment_date.nil?
-      overall_high_water
+      #overall_high_water
+      current_total
     else
       totals = ChangeHistory.find_all_by_group_id(id).map { |i| if i.created_at > second_payment_date
                                    i.new_total end }
@@ -222,12 +239,16 @@ class ScheduledGroup < ActiveRecord::Base
     end
   end
 
-    def final_pay_paid #the amount of the deposit_amount that has actually been paid
+  def final_pay_paid #the amount of the deposit_amount that has actually been paid
     if second_pay_outstanding > 0 #no money left for final payments
       0
     else
       deposit_amount + second_pay_amount + final_pay_amount - fee_amount_paid
     end
+  end
+
+  def late_payments
+    final_late_penalty_amount + second_late_penalty_amount
   end
 
   def final_pay_outstanding
@@ -248,6 +269,22 @@ class ScheduledGroup < ActiveRecord::Base
 
   def likely_next_pay_amount
     likely_next_payment == 'Second' ? second_pay_outstanding : final_pay_outstanding
+  end
+
+  def second_payment_due?
+    if session.payment_schedule.second_payment_date.nil?
+      false
+    else
+      second_payment_date.nil? ? true : false
+    end
+  end
+
+  def second_payment_required
+    if session.payment_schedule.second_payment_date
+      true
+    else
+      false
+    end
   end
 
 end

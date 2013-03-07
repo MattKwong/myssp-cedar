@@ -174,10 +174,13 @@ class ScheduledGroupsController < ApplicationController
   def invoice
     @group= ScheduledGroup.find(params[:id])
     @page_title = "Invoice for: #{@group.name}"
+    @registration = Registration.find(@group.registration_id)
   end
+
 
   def statement
     @group = ScheduledGroup.find(params[:id])
+    @registration = Registration.find(@group.registration_id)
   end
 
   def invoice_report

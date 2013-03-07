@@ -433,7 +433,7 @@ class Session < ActiveRecord::Base
   def self.sites_with_avail_for_type(group_type)
     sites = Array.new
     session_type_id = SessionType.find_by_name(group_type).id
-    sessions = Session.order(:start_date).active.find_all_by_session_type_id(session_type_id)
+    sessions = Session.joins(:period).order('periods.start_date').active.find_all_by_session_type_id(session_type_id)
     sessions.each do |session|
       if session.available > 0
         sites.push(session.site)
@@ -524,9 +524,9 @@ class Session < ActiveRecord::Base
     sum_dom = program_type == "Summer Domestic" ? "Summer Domestic" : "Other"
     @site_names = Site.order(:listing_priority).find_all_hosting(program_type).map { |s| s.name}
     period_names = Period.find_all_hosting(program_type).map { |p| p.name}
-    logger.debug period_names
+
     period_sh_dates = Period.find_all_hosting(program_type).map do |p|
-        "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
+      "#{p.start_date.strftime("%b %-d")} - #{p.start_date.month == p.end_date.month ? p.end_date.strftime(" %-d") : p.end_date.strftime("%b %-d")}"
     end
 
     #Assign a ordinal value to each row and column
@@ -686,4 +686,11 @@ class Session < ActiveRecord::Base
     active.find_all_by_program_type("Other")
   end
 
+  def final_payment_date
+    if payment_schedule.final_payment_date
+      payment_schedule.final_payment_date
+    else
+      period.start_date
+    end
+  end
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require './../spec_helper'
 
 feature "Logged in Admin" do
   before :each do
@@ -69,8 +69,8 @@ feature "Logged in Admin" do
     fill_in 'Password', :with => TestUser.password
     click_button('Sign in')
     #save_and_open_page
-    click_button('CC Payments')
-    current_path.should == 'new_standalone_cc'
+    click_link('CC Payments')
+    current_path.should == '/payment/new_standalone_cc'
   end
 
   scenario "can access Purchases page by direct link" do
@@ -130,8 +130,7 @@ feature "Logged in Admin" do
     current_path.should == '/admin/scheduled_groups'
   end
 
-  scenario "Check that all groups are shown" do
-    pending "Not sure how to test this yet."
+  pending scenario "Check that all groups are shown" do
     # Not sure yet
   end
 
@@ -154,13 +153,11 @@ feature "Logged in Admin" do
     current_path.should == '/admin/admin_users'
   end
 
-  scenario "Check that all admin users are shown" do
-    pending "Not sure how to test this yet"
+  pending scenario "Check that all admin users are shown" do
     # Not sure yet
   end
 
-  scenario "can 'inactivate' user" do
-    pending "Not sure how to test this yet"
+  pending scenario "can 'inactivate' user" do
     # Make a user to test with
     @attr = { :email => "deactivate@me.com", :first_name => "Test", :last_name => "User",
               :user_role_id => 2, :username => "Deactivate"  }

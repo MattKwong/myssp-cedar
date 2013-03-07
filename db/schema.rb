@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20130213005353) do
+ActiveRecord::Schema.define(:version => 20130228032557) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -653,8 +652,65 @@ ActiveRecord::Schema.define(:version => 20130213005353) do
     t.string   "profession"
     t.string   "employer"
     t.string   "gender"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.string   "phone"
+    t.string   "church_name"
+    t.string   "church_city"
+    t.string   "church_denom"
+    t.string   "church_role"
+    t.string   "phone_type"
+    t.boolean  "employer_match"
+    t.boolean  "employer_foundation"
+    t.string   "employer_comments"
+    t.string   "service_club"
+    t.boolean  "other_community"
+    t.string   "other_community_text"
+    t.boolean  "skill_comp_prog"
+    t.string   "skill_comp_prog_comments"
+    t.boolean  "skill_architecture"
+    t.boolean  "skill_auto_repair"
+    t.boolean  "skill_board"
+    t.boolean  "skill_carpentry"
+    t.boolean  "skill_const"
+    t.boolean  "skill_electrical"
+    t.boolean  "skill_plumbing"
+    t.boolean  "skill_press"
+    t.boolean  "skill_safety"
+    t.boolean  "skill_sewing"
+    t.boolean  "skill_tool_repair"
+    t.boolean  "skill_video"
+    t.boolean  "skill_web"
+    t.boolean  "skill_other"
+    t.string   "skill_other_comments"
+    t.boolean  "skill_food_prep"
+    t.boolean  "fund_exper"
+    t.string   "fund_exper_comments"
+    t.boolean  "fund_connect"
+    t.string   "fund_connect_comments"
+    t.boolean  "fund_in_kind"
+    t.string   "fund_in_kind_comments"
+    t.boolean  "desire_board"
+    t.boolean  "desire_training"
+    t.boolean  "desire_outreach"
+    t.boolean  "desire_work_projects"
+    t.boolean  "desire_web"
+    t.boolean  "desire_other"
+    t.string   "desire_other_comments"
+    t.boolean  "desire_publicity"
+    t.text     "final_comments"
+    t.boolean  "ssp_parent"
+    t.boolean  "ssp_adult"
+    t.boolean  "ssp_grandparent"
+    t.boolean  "ssp_leader"
+    t.boolean  "ssp_heard"
+    t.boolean  "ssp_friends"
+    t.boolean  "ssp_web"
+    t.string   "ssp_other"
+    t.boolean  "newsletter_subscribe"
+    t.string   "email"
+    t.boolean  "ssp_current_youth"
+    t.boolean  "ssp_former_youth"
   end
 
   create_table "user_roles", :force => true do |t|
