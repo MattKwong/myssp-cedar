@@ -10,7 +10,7 @@ class SupportersController < ApplicationController
     @captcha_error = false
 
     if !validate_recap(params, @supporter.errors)
-      flash[:error] = "Please re-enter the challange words in the Captcha dialog box."
+      flash[:error] = "Please re-enter the challenge words in the Captcha dialog box."
       @page_title = "Please Complete the SSP Supporter Survey."
       @captcha_error = true
       render 'new'

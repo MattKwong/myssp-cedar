@@ -16,7 +16,7 @@ test: &test
   adapter: postgresql
   encoding: unicode
   database: myssp_test
-  username: rickeaton
+  username:   rickeaton
   pool: 5
   timeout: 5000
 
