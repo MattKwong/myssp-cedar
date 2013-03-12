@@ -45,8 +45,8 @@ class ItemPurchasesController < ApplicationController
       else
         @title = "Purchase Item"
         flash[:error] = @item_purchase.errors.first[1].humanize
-#        @purchase
-        render @purchase
+        @items = Item.all_for_program(@purchase.program)
+        render :new
       end
   end
 
