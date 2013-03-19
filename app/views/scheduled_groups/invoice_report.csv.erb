@@ -6,7 +6,7 @@
     <% row = [ i.church.name, i[:name], i[:current_youth], i[:current_counselors], i.deposit_amount,
         i.deposit_paid, i.deposit_outstanding, i.second_pay_amount, i.second_pay_paid,
         i.second_pay_outstanding, i.final_pay_amount, i.final_pay_paid,
-        i.final_pay_outstanding, i.adjustment_total, i.total_due, i.fee_amount_paid, i.current_balance ] %>
+        i.final_pay_outstanding, i.adjustment_total, i.total_due, i.fee_amount_paid, i.current_balance_due ] %>
     <%= CSV.generate_line row, :col_sep => ?\,, :row_sep => ?\t, :quote_char => ?\ %>
 <% end %>
                                                                                                                                    0
