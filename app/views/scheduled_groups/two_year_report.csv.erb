@@ -1,0 +1,6 @@
+<% headers = ['Church Name', "City", "State" ] %>
+<%= CSV.generate_line headers, :col_sep => ?\,, :row_sep => ?\t, :quote_char => ?\ %>
+<% @groups.each do |i| %>
+    <% row = [ i.name.gsub(/\,/,""), i.city.gsub(/\,/,""), i.state ] %>
+    <%= CSV.generate_line row, :col_sep => ?\,, :row_sep => ?\t, :quote_char => ?\ %>
+<% end %>

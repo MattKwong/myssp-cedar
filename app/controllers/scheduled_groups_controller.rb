@@ -186,11 +186,28 @@ class ScheduledGroupsController < ApplicationController
   def invoice_report
     @groups = ScheduledGroup.active.active_program
     @page_title = 'Invoice Report'
-    logger.debug @groups.inspect
     respond_to do |format|
       format.csv { create_csv("invoice-#{Time.now.strftime("%Y%m%d")}.csv") }
       format.html { @title = 'Invoice Report'}
     end
+  end
+
+  def two_year_report
+    @page_title = 'Two Year Participation Report'
+    @groups = Array.new
+    current_groups = ScheduledGroup.active.active_program
+    current_groups.each do |g|
+      if ScheduledGroup.program_2012.find_by_church_id(g.church_id)
+        @groups << g.church
+      end
+    end
+    @groups.uniq!
+
+    respond_to do |format|
+      format.csv { create_csv("invoice-#{Time.now.strftime("%Y%m%d")}.csv") }
+      format.html { @title = 'Invoice Report'}
+    end
+
   end
 
   def tshirt_report

@@ -45,6 +45,7 @@
                   <li><%= link_to "Spending Report", spending_by_site_report_path%></li>
                   <li><%= link_to "Participant Summary - Current year: CSV", part_sum_csv_path(:format => :csv)%></li>
                   <li><%= link_to "Participant Summary - 2012: CSV", part_sum_csv_path(:format => :csv, :year => '2012')%></li>
+                  <li><%= link_to "Two Year Churches (2012 & 2013): CSV", two_year_report_csv_path(:format => :csv)%></li>
                   <li><%= link_to "Year-to-Year: CSV", missing_churches_csv_path(:format => :csv)%></li>
                   <li><%= link_to "New Churches: CSV", new_churches_csv_path(:format => :csv)%></li>
                 </ul>
