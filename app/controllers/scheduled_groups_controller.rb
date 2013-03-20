@@ -204,8 +204,8 @@ class ScheduledGroupsController < ApplicationController
     @groups.uniq!
 
     respond_to do |format|
-      format.csv { create_csv("invoice-#{Time.now.strftime("%Y%m%d")}.csv") }
-      format.html { @title = 'Invoice Report'}
+      format.csv { create_csv("two-year-report-#{Time.now.strftime("%Y%m%d")}.csv") }
+      format.html { @title = 'Two Year Participation'}
     end
 
   end
