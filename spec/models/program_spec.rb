@@ -101,9 +101,20 @@ describe Program do
     item.summer_domestic?.should == true
   end
 
+  #it "summer_domestic? should return false if it is not a Summer Domestic Program" do
+  #  item = Program.new(@attr.merge(:program_type => "Not a Summer Domestic"))
+  #  item.summer_domestic?.should == false
+  #end
+
   pending "How to test total days?" do
     item = Program.new(@attr)
     puts(item.total_days)
+  end
+
+  it "start date should be before end date" do
+    #expect { item = Program.create!(@attr.merge(:active => "")) }.to raise_error
+    item = Program.new(@attr.merge(:end_date => Date.today, :start_date => Date.today+1))
+    item.should_not be_valid
   end
 
   it "start date should not be in the past" do
@@ -111,5 +122,45 @@ describe Program do
     item = Program.new(@attr.merge(:end_date => Date.today-3))
     item.should_not be_valid
   end
+
+  it "How to test to_current?"
+
+  it "How to test first_session_start?"
+
+  it "How to test last_session_end?"
+
+  it "How to test to_s"
+
+  it "How to test number of adults"
+
+  it "How to test number of youth"
+
+  it "How to test budget_item_name"
+
+  it "How to test budget_item_spent"
+
+  it "How to test budget_item_spent_with_tax"
+
+  it "How to test budget_item_budgeted"
+
+  it "How to test budget_item_remaining"
+
+  it "How to test spent_total"
+
+  it "How to test spent_with_tax_total"
+
+  it "How to test budgeted_total"
+
+  it "How to test remaining_total"
+
+  it "How to test purchased_items"
+
+  it "How to test purchased_food_items"
+
+  it "How to test purchased_food_items (there are 2 of these?)"
+
+  it "How to test first_session_id"
+
+  it "How to test last_session_id"
 
 end

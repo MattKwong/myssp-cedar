@@ -16,17 +16,21 @@ describe Organization do
   end
 
   it "should create a new instance with valid attributes" do
-    Organization.create!(@attr)
+    item = Organization.create!(@attr)
+    item.should be_valid
   end
 
-  it "name should not be blank" do
-    no_name = Organization.new(@attr.merge(:name => ""))
-    no_name.should_not be_valid
+  describe "name tests" do
+    it "name should not be blank" do
+      no_name = Organization.new(@attr.merge(:name => ""))
+      no_name.should_not be_valid
+    end
+
+    it "name should be unique" do
+      item1 = Organization.create!(@attr)
+      item2 = Organization.new(@attr)
+      item2.should_not be_valid
+    end
   end
 
-  it "name should be unique" do
-    item1 = Organization.create!(@attr)
-    item2 = Organization.new(@attr)
-    item2.should_not be_valid
-  end
 end
