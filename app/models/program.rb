@@ -159,10 +159,10 @@ class Program < ActiveRecord::Base
     (item_purchases.by_budget_line_type(id).collect &:item).uniq
   end
 
-  def purchased_food_items
-    food_id = BudgetItemType.find_by_name('Food').id
-    (item_purchases.by_budget_line_type(food_id).collect &:item).uniq
-  end
+  #def purchased_food_items
+  #  food_id = BudgetItemType.find_by_name('Food').id
+  #  (item_purchases.by_budget_line_type(food_id).collect &:item).uniq
+  #end
 
   def first_session_id
     s = self.sessions.sort {|a,b| a.period.start_date <=> b.period.start_date }

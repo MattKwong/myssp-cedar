@@ -1,6 +1,7 @@
 class SspWebController < ActionController::Base
   rescue_from Timeout::Error, :with => :rescue_from_timeout
   include ReCaptcha::AppHelper
+  layout 'admin_layout'
 
   def new_login_request
     @page_title = "Request a MySSP Login."
@@ -18,7 +19,8 @@ class SspWebController < ActionController::Base
       render 'new_login_request'
     else if @login_request.save
            flash[:success] = "Login request has been submitted. You will be contacted via email soon."
-           log_activity("Login Request", "#{@login_request.first_name} #{@login_request.last_name} of #{@login_request.church_name}, #{@login_request.church_city}.")
+           log_activity(Date.today, "Login Request",
+                        "#{params[:login_request][:first_name]} #{params[:login_request][:last_name]} of #{params[:login_request][:church_name]}, #{params[:login_request][:church_city]}.")
            UserMailer.login_request(@login_request).deliver
            redirect_to :back
          else
@@ -33,10 +35,12 @@ class SspWebController < ActionController::Base
 
   def log_activity(date, type, description)
       a = Activity.new
-      a.activity_date = activity_date
-      a.activity_type = activity_type
-      a.activity_details = activity_details
-      a.user_name = user_name
+      a.activity_date = date
+      a.activity_type = type
+      a.activity_details = description
+      a.user_name = 'Guest'
+      a.user_id = 1
+      logger.debug a.inspect
       unless a.save!
         flash[:error] = "Unknown problem occurred logging a transaction."
       end
