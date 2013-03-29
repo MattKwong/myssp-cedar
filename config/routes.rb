@@ -116,6 +116,7 @@ Spoic3::Application.routes.draw do
   #resources :login_requests
   match "/new_login_request", :to => 'ssp_web#new_login_request'
   match "/login_requests", :to => 'ssp_web#create_login_request'
+  match "/thank_you", :to => 'ssp_web#thank_you'
 
   match "purchase/show_budgets/:id", :to => 'purchases#show_budgets', :as => 'purchase_budget'
   match "material_item_estimated/add_standard/:id", :to => 'material_item_estimateds#add_standard', :as => 'add_standard_item'

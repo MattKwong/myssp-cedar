@@ -8,6 +8,10 @@ class SspWebController < ActionController::Base
     @login_request = LoginRequest.new()
   end
 
+  def thank_you
+    @page_title = "Thank You for Submitting a Login Request"
+  end
+
   def create_login_request
     @login_request = LoginRequest.new(params[:login_requests])
     @captcha_error = false
@@ -18,11 +22,11 @@ class SspWebController < ActionController::Base
       @captcha_error = true
       render 'new_login_request'
     else if @login_request.save
-           flash[:success] = "Login request has been submitted. You will be contacted via email soon."
+           flash[:notice] = "Login request has been submitted. You will be contacted via email soon."
            log_activity(Date.today, "Login Request",
                         "#{params[:login_request][:first_name]} #{params[:login_request][:last_name]} of #{params[:login_request][:church_name]}, #{params[:login_request][:church_city]}.")
            UserMailer.login_request(@login_request).deliver
-           redirect_to :back
+           redirect_to '/thank_you'
          else
            flash[:error] = "Errors prevented participant entry from being saved."
            @page_title = "Request a MySSP Login."

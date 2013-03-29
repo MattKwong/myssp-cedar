@@ -5,6 +5,10 @@ class LoginRequestsController < ApplicationController
     @login_request = LoginRequest.new()
   end
 
+  def thank_you
+    @page_title = "Thank You"
+  end
+
   def create
     @login_request = LoginRequest.new(params[:login_requests])
     @captcha_error = false
@@ -18,7 +22,7 @@ class LoginRequestsController < ApplicationController
            flash[:success] = "Login request has been submitted. You will be contacted via email soon."
            log_activity("Login Request", "#{@login_request.first_name} #{@login_request.last_name} of #{@login_request.church_name}, #{@login_request.church_city}.")
            UserMailer.login_request(@login_request).deliver
-           redirect_to :back
+           redirect_to 'thank_you'
          else
            flash[:error] = "Errors prevented participant entry from being saved."
            @page_title = "Request a MySSP Login."
