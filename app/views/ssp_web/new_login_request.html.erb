@@ -1,6 +1,6 @@
 <div id="active_admin_content">
   <%= semantic_form_for @login_request do |form| %>
-    <div id='captcha_error' class='hidden' ><%= @captcha_error %></div>
+    <div id='captcha_error' class='hidden' ></div>
     <div>
         <div id="introduction">
           <h2>Request a Login to SSP's Group Portal</h2>
@@ -21,9 +21,9 @@
               <%= form.input :state, :label => "State", :as => :select, :collection => State::STATE_ABBREVIATIONS %>
               <%= form.input :zip, :label => "Zip (5 digit)", :input_html => {:maxlength => 5} %>
               <%= form.input :phone_number, :label => "Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
-              <%= form.input :phone_number_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"], :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
-              <%= form.input :alt_phone_number, :label => "Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
-              <%= form.input :alt_phone_number_type, :as => :select, :collection => ["Mobile", "Home", "Work", "Other"], :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
+              <%= form.input :phone_number_type, :as => :select, :collection => PhoneType::NAMES, :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
+              <%= form.input :alt_phone_number, :label => "Alternate Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "Please provide an alternate number." %>
+              <%= form.input :alt_phone_number_type, :as => :select, :collection => PhoneType::NAMES, :hint_class => "label-hint-select", :hint => "What type of phone number is this?" %>
               <%= form.input :email, :required => true %>
               <h3>Please Identify Your Church</h3>
               <%= form.input :church_name, :input_html => {:maxlength => 30 }, :label => "What is the name of your church?" %>
@@ -32,8 +32,8 @@
               <%= form.input :church_city, :input_html => {:maxlength => 30 }, :label => "What city is the church located in?" %>
               <%= form.input :church_state, :label => "State", :as => :select, :collection => State::STATE_ABBREVIATIONS %>
               <%= form.input :church_zip, :label => "Zip (5 digit)", :input_html => {:maxlength => 5} %>
-              <%= form.input :church_office_phone, :label => "Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
-              <%= form.input :church_office_fax, :label => "Phone (10 digits, with or without separators)", :hint_class => "label-hint-string", :hint => "What is the best number to reach you?" %>
+              <%= form.input :church_office_phone, :label => "Church office phone (10 digits, with or without separators)", :hint_class => "label-hint-string" %>
+              <%= form.input :church_office_fax, :label => "Church fax number (10 digits, with or without separators)", :hint_class => "label-hint-string" %>
               <%= form.input :how_heard, :label => "How did you heard about SSP?" %>
             <% end %>
           </div>

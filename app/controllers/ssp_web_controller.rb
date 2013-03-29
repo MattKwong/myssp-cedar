@@ -3,6 +3,11 @@ class SspWebController < ActionController::Base
   include ReCaptcha::AppHelper
   layout 'admin_layout'
 
+  def login_requests_index
+    @page_title = "Login Requests"
+    @requests = LoginRequest.all
+  end
+
   def new_login_request
     @page_title = "Request a MySSP Login."
     @login_request = LoginRequest.new()
@@ -13,7 +18,7 @@ class SspWebController < ActionController::Base
   end
 
   def create_login_request
-    @login_request = LoginRequest.new(params[:login_requests])
+    @login_request = LoginRequest.new(params[:login_request])
     @captcha_error = false
 
     if !validate_recap(params, @login_request.errors)
@@ -33,6 +38,19 @@ class SspWebController < ActionController::Base
            render 'new_login_request'
          end
     end
+  end
+
+  def process_login_request
+
+  end
+  def delete_login_request
+    request = LoginRequest.find(params[:id])
+    if request.destroy
+      flash[:notice] = "Login request has been successfully deleted."
+    else
+      flash[:error] = "Deletion of login request has failed. Contact the administrator."
+    end
+    redirect_to '/login_requests'
   end
 
   private

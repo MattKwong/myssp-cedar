@@ -16,7 +16,7 @@ class SupportersController < ApplicationController
       render 'new'
     else if @supporter.save
         flash[:success] = "Supporter information successfully created."
-        @supporter.destroy
+        #@supporter.destroy
         redirect_to 'http://www.sierraserviceproject.org/supportersurvey_thankyou.html'
       else
         flash[:error] = "Errors prevented participant entry from being saved."
