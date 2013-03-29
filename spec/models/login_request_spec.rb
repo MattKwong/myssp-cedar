@@ -73,6 +73,9 @@ describe LoginRequest do
     it "should reject an alt phone number type with a blank number" do
       LoginRequest.new(@attr.merge(:alt_phone_number => "", :alt_phone_number_type => "Home")).should_not be_valid
     end
+    it "should reject an alt phone number with a blank number type" do
+      LoginRequest.new(@attr.merge(:alt_phone_number => "800-123-1234", :alt_phone_number_type => "")).should_not be_valid
+    end
   end
 
   describe "Required field - church info" do
