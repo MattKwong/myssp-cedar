@@ -115,10 +115,13 @@ Spoic3::Application.routes.draw do
   match "supporter_survey", :to => 'supporters#new'
   #resources :login_requests
   match "/new_login_request", :to => 'ssp_web#new_login_request'
-  match "/login_requests", :to => 'ssp_web#login_requests_index'
+  match "/login_requests", :to => 'ssp_web#create_login_request'
+  match "/show_login_requests", :to => 'ssp_web#login_requests_index'
   match "/thank_you", :to => 'ssp_web#thank_you'
   match "/process_login_request/:id", :to => 'ssp_web#process_login_request', :as => 'process_login_request'
   match "/delete_login_request/:id", :to => 'ssp_web#delete_login_request', :as => 'delete_login_request'
+  match "/create_church_from_request/:id", :to => 'ssp_web#create_church', :as => 'create_church_from_request'
+
 
   match "purchase/show_budgets/:id", :to => 'purchases#show_budgets', :as => 'purchase_budget'
   match "material_item_estimated/add_standard/:id", :to => 'material_item_estimateds#add_standard', :as => 'add_standard_item'

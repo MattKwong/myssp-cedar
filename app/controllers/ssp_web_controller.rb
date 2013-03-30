@@ -27,10 +27,11 @@ class SspWebController < ActionController::Base
       @captcha_error = true
       render 'new_login_request'
     else if @login_request.save
+           id = LoginRequest.last.id
            flash[:notice] = "Login request has been submitted. You will be contacted via email soon."
            log_activity(Date.today, "Login Request",
                         "#{params[:login_request][:first_name]} #{params[:login_request][:last_name]} of #{params[:login_request][:church_name]}, #{params[:login_request][:church_city]}.")
-           UserMailer.login_request(@login_request).deliver
+           UserMailer.login_request(@login_request, id).deliver
            redirect_to '/thank_you'
          else
            flash[:error] = "Errors prevented participant entry from being saved."
@@ -41,8 +42,15 @@ class SspWebController < ActionController::Base
   end
 
   def process_login_request
+    @page_title = "Process Login Request"
+    @login_request = LoginRequest.find(params[:id])
+  end
+
+  def create_church
+    @page_title = "Create Church from Login Request"
 
   end
+
   def delete_login_request
     request = LoginRequest.find(params[:id])
     if request.destroy
