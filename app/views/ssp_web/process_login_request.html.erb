@@ -80,11 +80,18 @@
           <td><%= @login_request.how_heard %></td>
           <td></td><td></td>
         </tr>
+        <input type = "hidden" name="church_id" value= <%= @church_id %> />
     </tbody>
   </table>
   <div>
-    <h4>To create church and liaison records for this request, follow these steps:</h4>
-    <h4>1. Check to see if the church already exists. If it does not, click here to create it: </h4>
-        <%= link_to "Create Church", create_church_from_request_path(@login_request) %>
+    <h4 >To create church and liaison records for this request, follow these steps:</h4>
+    <div><h4>1. Check to see if the church already exists. If it does not, click here to create it: </h4>
+      <%= button_to "Create Church", create_church_from_request_path(@login_request), :class => 'link_text'%></div>
+    <br>
+    <h4>2. Check to see if the liaison already exists. If it does not, click here to create it: </h4>
+        <%= button_to "Create Liaison", create_liaison_from_request_path(@login_request, :church_id => @church_id),
+                :class => 'link_text'%>
+    <br>
+    <h4>3. Send an activation email to the new liaison: </h4>
   </div>
 </div>

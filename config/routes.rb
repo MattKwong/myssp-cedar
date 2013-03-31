@@ -121,6 +121,7 @@ Spoic3::Application.routes.draw do
   match "/process_login_request/:id", :to => 'ssp_web#process_login_request', :as => 'process_login_request'
   match "/delete_login_request/:id", :to => 'ssp_web#delete_login_request', :as => 'delete_login_request'
   match "/create_church_from_request/:id", :to => 'ssp_web#create_church', :as => 'create_church_from_request'
+  match "/create_liaison_from_request/:id", :to => 'ssp_web#create_liaison', :as => 'create_liaison_from_request'
 
 
   match "purchase/show_budgets/:id", :to => 'purchases#show_budgets', :as => 'purchase_budget'

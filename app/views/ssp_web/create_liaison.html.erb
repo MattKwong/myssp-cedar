@@ -1,0 +1,49 @@
+<div id="active_admin_content">
+  <div>
+    <div>
+      <h3><%=  @church_id %></h3>
+      <h3>Edit the information below and click on 'Submit' to create the liaison.</h3>
+      <%= semantic_form_for @liaison do |form| %>
+          <%= form.inputs do %>
+              <%= form.input :first_name, :input_html => { :value => @login_request.first_name }%>
+              <%= form.input :last_name, :input_html => { :value => @login_request.last_name }%>
+              <%= form.input :church_id, :label => "Church", :as => :select, :collection => Church.all,
+                             :selected => @church_id, :include_blank => false %>
+              <%= form.input :title %>
+              <%= form.input :liaison_type, :label => "Liaison Type", :as => :select, :collection => LiaisonType.all.map { |l| l.name }, :include_blank => false %>
+              <%= form.input :address1, :input_html => { :value => @login_request.address1 }%>
+              <%= form.input :address2, :input_html => { :value => @login_request.address2 }%>
+              <%= form.input :city, :input_html => { :value => @login_request.city }%>
+              <%= form.input :state, :label => "State", :as => :select, :collection => State::STATE_ABBREVIATIONS, :selected => @login_request.state  %>
+              <%= form.input :zip, :input_html => { :value => @login_request.zip }%>
+              <%= form.input :email1, :input_html => { :value => @login_request.email }%>
+              <%= form.input :email2 %>
+              <% if @login_request.phone_number_type == "Home" %>
+                <% home_phone = @login_request.phone_number %>
+              <% else if @login_request.phone_number_type == "Mobile" %>
+                 <% cell_phone = @login_request.phone_number %>
+              <% else %>
+                 <% work_phone = @login_request.phone_number %>
+              <% end %>
+              <% end %>
+              <% if @login_request.alt_phone_number_type == "Home" %>
+                <% home_phone = @login_request.alt_phone_number %>
+              <% else if @login_request.alt_phone_number_type == "Mobile" %>
+                 <% cell_phone = @login_request.alt_phone_number %>
+              <% else %>
+                 <% work_phone = @login_request.alt_phone_number %>
+              <% end %>
+              <% end %>
+              <%= form.input :home_phone, :input_html => { :value => home_phone }%>
+              <%= form.input :cell_phone, :input_html => { :value => cell_phone }%>
+              <%= form.input :work_phone, :input_html => { :value => work_phone }%>
+              <%= form.input :fax %>
+              <%= form.input :scheduled, :as => :boolean %>
+              <%= form.input :registered, :as => :boolean %>
+              <input type = "hidden" name="request_id" value= <%= @login_request.id %> />
+          <% end %>
+          <%= form.actions %>
+      <% end %>
+    </div>
+  </div>
+</div>

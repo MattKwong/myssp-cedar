@@ -432,5 +432,8 @@ h1.process_step {
 p.label-hint-text {
     display: block;
 }
+input.link_text {
+    margin-left:50px;
+}
 
 

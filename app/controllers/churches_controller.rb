@@ -19,6 +19,20 @@ class ChurchesController < ApplicationController
     end
 
   end
+
+  def create
+    if @church.save
+      flash[:notice] = "New church record has been successfully created."
+      church_id = @church
+      redirect_to process_login_request_path(params[:request_id], :church_id => church_id)
+    else
+      flash[:error] = "Errors prevented this record from being created."
+      @login_request = LoginRequest.find(params[:request_id])
+      #@church = Church.new
+      render '/ssp_web/create_church'
+    end
+
+  end
 end
 
 

@@ -44,11 +44,20 @@ class SspWebController < ActionController::Base
   def process_login_request
     @page_title = "Process Login Request"
     @login_request = LoginRequest.find(params[:id])
+    @church_id = params[:church_id]
   end
 
   def create_church
     @page_title = "Create Church from Login Request"
+    @login_request = LoginRequest.find(params[:id])
+    @church = Church.new
+  end
 
+  def create_liaison
+    @page_title = "Create Liaison from Login Request"
+    @login_request = LoginRequest.find(params[:id])
+    @liaison = Liaison.new
+    @church_id = params[:church_id]
   end
 
   def delete_login_request
@@ -58,7 +67,7 @@ class SspWebController < ActionController::Base
     else
       flash[:error] = "Deletion of login request has failed. Contact the administrator."
     end
-    redirect_to '/login_requests'
+    redirect_to '/show_login_requests'
   end
 
   private
