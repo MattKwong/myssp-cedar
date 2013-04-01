@@ -50,4 +50,11 @@ class UserMailer < ActionMailer::Base
     @group = group
     mail(:to => @group.liaison.email1, :subject => "2013 SSP Placement Confirmation for your #{@group.session_type.name} Group")
   end
+
+  def login_request(request, id)
+    @login_request = request
+    @id = id
+    mail(:to => "meghan.osborn@sierraserviceproject.org", :subject => "Login Request for #{request.first_name} #{request.last_name}")
+
+  end
 end

@@ -12,6 +12,7 @@ class Vendor < ActiveRecord::Base
 
   before_validation do
     self.phone = phone.gsub(/[^0-9]/, "")
+    self.state = state.upcase.first(2)
   end
 
   belongs_to :site

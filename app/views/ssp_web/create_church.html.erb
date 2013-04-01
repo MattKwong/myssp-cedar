@@ -1,0 +1,28 @@
+<div id="active_admin_content">
+  <div>
+    <div>
+      <h3>Edit the information below and click on 'Submit' to create the church.</h3>
+        <%= semantic_form_for @church do |form| %>
+            <%= form.inputs do %>
+                <%= form.input :name, :input_html => { :value => @login_request.church_name }%>
+                <%= form.input :address1, :input_html => { :value => @login_request.church_address1 }%>
+                <%= form.input :address2, :input_html => { :value => @login_request.church_address2 }%>
+                <%= form.input :city, :input_html => { :value => @login_request.church_city }%>
+                <%= form.input :state, :label => "State", :as => :select, :collection => State::STATE_ABBREVIATIONS, :selected => @login_request.church_state,
+                                    :allow_blanks => false %>
+                <%= form.input :zip, :input_html => { :value => @login_request.church_zip }%>
+                <%= form.input :church_type_id, :label => "Church Type", :as => :select, :collection => ChurchType.all,
+                               :allow_blank => false  %>
+                <%= form.input :email1, :label => "Church Email", :allow_blank => true %>
+
+                <%= form.input :office_phone, :input_html => { :value => @login_request.church_office_phone }%>
+                <%= form.input :fax, :input_html => { :value => @login_request.church_office_fax } %>
+                <%= form.input :active, :as => :boolean %>
+                <%= form.input :registered, :as => :boolean %>
+                <input type = "hidden" name="request_id" value= <%= @login_request.id %> />
+            <% end %>
+            <%= form.actions %>
+        <% end %>
+    </div>
+  </div>
+</div>

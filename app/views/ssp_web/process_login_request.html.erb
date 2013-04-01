@@ -1,0 +1,97 @@
+<div id="active_admin_content">
+  <table>
+    <thead>
+        <tr>
+          <th colspan="2">Liaison Information</th>
+          <th colspan="2">Church Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>First Name</td>
+          <td><%= @login_request.first_name %></td>
+          <td>Church Name</td>
+          <td><%= @login_request.church_name%></td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td><%= @login_request.last_name %></td>
+          <td>Church Address 1</td>
+          <td><%= @login_request.church_address1 %></td>
+        </tr>
+        <tr>
+          <td>Address 1</td>
+          <td><%= @login_request.address1 %></td>
+          <td>Church Address 2</td>
+          <td><%= @login_request.church_address2 %></td>
+        </tr>
+        <tr>
+          <td>Address 2</td>
+          <td><%= @login_request.address2 %></td>
+          <td>Church City</td>
+          <td><%= @login_request.church_city %></td>
+        </tr>
+        <tr>
+            <td>City</td>
+          <td><%= @login_request.city %></td>
+          <td>Church State</td>
+          <td><%= @login_request.church_state %></td>
+        </tr>
+        <tr>
+          <td>State</td>
+          <td><%= @login_request.state %></td>
+          <td>Church Zip</td>
+          <td><%= @login_request.church_zip%></td>
+        </tr>
+        <tr>
+          <td>Zip</td>
+          <td><%= @login_request.zip%></td>
+          <td>Church Office Phone</td>
+          <td><%= @login_request.church_office_phone %></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><%= @login_request.email %></td>
+          <td>Church Office Fax</td>
+          <td><%= @login_request.church_office_fax %></td>
+        </tr>
+        <tr>
+          <td>Phone Number</td>
+          <td><%= @login_request.phone_number%></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>Phone Number Type</td>
+          <td><%= @login_request.phone_number_type%></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>Alternate Phone Number</td>
+          <td><%= @login_request.alt_phone_number%></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>Alternate Phone Number Type</td>
+          <td><%= @login_request.alt_phone_number_type%></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>How did they hear about SSP?</td>
+          <td><%= @login_request.how_heard %></td>
+          <td></td><td></td>
+        </tr>
+        <input type = "hidden" name="church_id" value= <%= @church_id %> />
+    </tbody>
+  </table>
+  <div>
+    <h4 >To create church and liaison records for this request, follow these steps:</h4>
+    <div><h4>1. Check to see if the church already exists. If it does not, click here to create it: </h4>
+      <%= button_to "Create Church", create_church_from_request_path(@login_request), :class => 'link_text'%></div>
+    <br>
+    <h4>2. Check to see if the liaison already exists. If it does not, click here to create it: </h4>
+        <%= button_to "Create Liaison", create_liaison_from_request_path(@login_request, :church_id => @church_id),
+                :class => 'link_text'%>
+    <br>
+    <h4>3. After the liaison is created, you will be taken to the Liaison page to send an activation email to the new liaison.</h4>
+  </div>
+</div>

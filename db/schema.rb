@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307232350) do
+ActiveRecord::Schema.define(:version => 20130228032557) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -324,21 +324,6 @@ ActiveRecord::Schema.define(:version => 20130307232350) do
     t.boolean  "user_created"
     t.boolean  "scheduled"
     t.boolean  "registered"
-  end
-
-  create_table "login_requests", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "church_name"
-    t.string   "church_city"
-    t.string   "phone_number"
-    t.string   "phone_number_type"
-    t.string   "email"
-    t.string   "how_heard"
-    t.boolean  "approved"
-    t.boolean  "user_created"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
   end
 
   create_table "material_item_delivereds", :force => true do |t|
@@ -682,7 +667,7 @@ ActiveRecord::Schema.define(:version => 20130307232350) do
     t.boolean  "other_community"
     t.text     "other_community_text"
     t.boolean  "skill_comp_prog"
-    t.text     "skill_comp_prog_comments"
+    t.string   "skill_comp_prog_comments"
     t.boolean  "skill_architecture"
     t.boolean  "skill_auto_repair"
     t.boolean  "skill_board"
@@ -700,11 +685,11 @@ ActiveRecord::Schema.define(:version => 20130307232350) do
     t.text     "skill_other_comments"
     t.boolean  "skill_food_prep"
     t.boolean  "fund_exper"
-    t.text     "fund_exper_comments"
+    t.string   "fund_exper_comments"
     t.boolean  "fund_connect"
     t.text     "fund_connect_comments"
     t.boolean  "fund_in_kind"
-    t.text     "fund_in_kind_comments"
+    t.string   "fund_in_kind_comments"
     t.boolean  "desire_board"
     t.boolean  "desire_training"
     t.boolean  "desire_outreach"
@@ -721,7 +706,7 @@ ActiveRecord::Schema.define(:version => 20130307232350) do
     t.boolean  "ssp_heard"
     t.boolean  "ssp_friends"
     t.boolean  "ssp_web"
-    t.text     "ssp_other"
+    t.string   "ssp_other"
     t.boolean  "newsletter_subscribe"
     t.string   "email"
     t.boolean  "ssp_current_youth"

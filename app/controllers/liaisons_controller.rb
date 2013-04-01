@@ -36,24 +36,24 @@ class LiaisonsController < ApplicationController
     invoices = grab_invoice_balances(groups)
     notes_and_reminders = Reminder.find_all_by_active(true, :order => 'seq_number')
 
-    #checklists = []
-    #for j in 0..groups.size - 1
-    #  checklist = ChecklistItem.all(:order => 'seq_number')
-    #  checklist_item = []
-    #  for i in 0..checklist.length - 1
-    #    checklist_item[i] = {:name => checklist[i].name, :due_date => checklist[i].due_date,
-    #    :notes => checklist[i].notes, :default_status => checklist[i].default_status,
-    #    :status => get_checklist_status(groups[j], checklist[i], invoices[j])}
-    #  end
-    #  checklists[j] = checklist_item
-    #end
-
     documents = DownloadableDocument.find_all_by_active(true, :order => 'name')
 
     @screen_info = {:church_info => church, :registration_info => registrations,
       :group_info => groups, :invoice_info => invoices, :notes_and_reminders => notes_and_reminders,
       #:checklist => checklists,
       :documents => documents,:roster_info => rosters, :liaison => liaison }
+  end
+
+  def create
+    if @liaison.save
+      flash[:notice] = "New liaison record has been successfully created."
+      redirect_to admin_liaison_path(@liaison)
+    else
+      flash[:error] = "Errors prevented this record from being saved."
+      @login_request = LoginRequest.find(params[:request_id])
+      @church = Liaison.new
+      render '/ssp_web/create_liaison'
+    end
   end
 
   def create_user
@@ -65,15 +65,8 @@ class LiaisonsController < ApplicationController
     user.last_name = liaison.last_name
     user.liaison_id = liaison.id
     user.name = liaison.name
-
-    user.user_role_id = UserRole.find_by_name("Liaison").id
-#    user.reset_password_token = AdminUser.reset_password_token
-#    user.password = random_pronouncable_password(8)
-
     user.user_role_id = UserRole.find_by_name('Liaison').id
     user.username = liaison.first_name + liaison.last_name + liaison.id.to_s
-    #logger.debug liaison.inspect
-    #logger.debug user.inspect
 
 #TODO: change logic to update the admin user record if one exists.
     unless user.save!
@@ -83,6 +76,12 @@ class LiaisonsController < ApplicationController
       unless liaison.save!
         flash[:error] = "A problem occurred in updating logon information for this liaison."
       else
+        if LoginRequest.find_by_email(liaison.email1) #Update a login request if one exists
+          request = LoginRequest.find_by_email(liaison.email1)
+          request.user_created = 't'
+          request.save!
+        end
+        flash[:notice] = "An email has been sent to #{liaison.first_name} containing logon information."
         redirect_to admin_liaison_path(liaison.id)
       end
     end
