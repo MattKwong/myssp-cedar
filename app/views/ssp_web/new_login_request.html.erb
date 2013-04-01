@@ -32,7 +32,7 @@
               <%= form.input :church_city, :input_html => {:maxlength => 30 }, :label => "What city is the church located in?" %>
               <%= form.input :church_state, :label => "State", :as => :select, :collection => State::STATE_ABBREVIATIONS %>
               <%= form.input :church_zip, :label => "Zip (5 digit)", :input_html => {:maxlength => 5} %>
-              <%= form.input :church_office_phone, :label => "Church office phone (10 digits, with or without separators)", :hint_class => "label-hint-string" %>
+              <%= form.input :church_office_phone, :label => "Church office phone (10 digits, with or withou separators)", :hint_class => "label-hint-string" %>
               <%= form.input :church_office_fax, :label => "Church fax number (10 digits, with or without separators)", :hint_class => "label-hint-string" %>
               <%= form.input :how_heard, :label => "How did you heard about SSP?" %>
             <% end %>

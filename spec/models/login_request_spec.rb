@@ -9,7 +9,7 @@ describe LoginRequest do
               :zip => "90037", :email => "test_user@ssp.org", :phone_number => "916-488-6441", :phone_number_type => "Mobile",
               :alt_phone_number => "916-488-6441", :alt_phone_number_type => "Work", :user_created => false, :approved => false,
               :church_name => "First Community Church", :church_address1 => "100 First Street", :church_city => "Los Angeles",
-              :church_state => "CA", :church_zip => "99999", :church_office_fax => "213-123-1234"
+              :church_state => "CA", :church_zip => "99999", :church_office_fax => "213-123-1234", :church_office_phone => "213-123-1234"
                }
   end
 
@@ -75,6 +75,42 @@ describe LoginRequest do
     end
     it "should reject an alt phone number with a blank number type" do
       LoginRequest.new(@attr.merge(:alt_phone_number => "800-123-1234", :alt_phone_number_type => "")).should_not be_valid
+    end
+    it "should accept a phone number without separators" do
+      LoginRequest.new(@attr.merge(:phone_number => "8001231234")).should be_valid
+    end
+    it "should accept a phone number with 1- in front" do
+      LoginRequest.new(@attr.merge(:phone_number => "1-800-123-1234")).should be_valid
+    end
+    it "should accept phone number with period as separator" do
+      LoginRequest.new(@attr.merge(:phone_number => "800.123.1234")).should be_valid
+    end
+    it "should accept a alt phone number without separators" do
+      LoginRequest.new(@attr.merge(:alt_phone_number => "8001231234")).should be_valid
+    end
+    it "should accept a alt phone number with 1- in front" do
+      LoginRequest.new(@attr.merge(:alt_phone_number => "1-800-123-1234")).should be_valid
+    end
+    it "should accept alt phone number with non-dash separator" do
+      LoginRequest.new(@attr.merge(:alt_phone_number => "800 123 1234")).should be_valid
+    end
+    it "should accept a church office number without separators" do
+      LoginRequest.new(@attr.merge(:church_office_phone => "8001231234")).should be_valid
+    end
+    it "should accept a church office phone with 1- in front" do
+      LoginRequest.new(@attr.merge(:church_office_phone => "1-800-123-1234")).should be_valid
+    end
+    it "should accept church office phone with non-dash separator" do
+      LoginRequest.new(@attr.merge(:church_office_phone => "800 123 1234")).should be_valid
+    end
+    it "should accept a church office fax without separators" do
+      LoginRequest.new(@attr.merge(:church_office_fax => "8001231234")).should be_valid
+    end
+    it "should accept a church office fax with 1- in front" do
+      LoginRequest.new(@attr.merge(:church_office_fax => "1-800-123-1234")).should be_valid
+    end
+    it "should accept church office fax with non-dash separator" do
+      LoginRequest.new(@attr.merge(:church_office_fax=> "800 123 1234")).should be_valid
     end
   end
 

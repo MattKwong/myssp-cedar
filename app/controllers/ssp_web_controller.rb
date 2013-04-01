@@ -5,7 +5,7 @@ class SspWebController < ActionController::Base
 
   def login_requests_index
     @page_title = "Login Requests"
-    @requests = LoginRequest.all
+    @requests = LoginRequest.unprocessed
   end
 
   def new_login_request

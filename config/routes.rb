@@ -116,7 +116,7 @@ Spoic3::Application.routes.draw do
   #resources :login_requests
   match "/new_login_request", :to => 'ssp_web#new_login_request'
   match "/login_requests", :to => 'ssp_web#create_login_request'
-  match "/show_login_requests", :to => 'ssp_web#login_requests_index'
+  match "/show_login_requests", :to => 'ssp_web#login_requests_index', :as => 'show_requests'
   match "/thank_you", :to => 'ssp_web#thank_you'
   match "/process_login_request/:id", :to => 'ssp_web#process_login_request', :as => 'process_login_request'
   match "/delete_login_request/:id", :to => 'ssp_web#delete_login_request', :as => 'delete_login_request'

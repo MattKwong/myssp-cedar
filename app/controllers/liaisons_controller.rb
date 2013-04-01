@@ -47,7 +47,7 @@ class LiaisonsController < ApplicationController
   def create
     if @liaison.save
       flash[:notice] = "New liaison record has been successfully created."
-      redirect_to process_login_request_path(params[:request_id])
+      redirect_to admin_liaison_path(@liaison)
     else
       flash[:error] = "Errors prevented this record from being saved."
       @login_request = LoginRequest.find(params[:request_id])
@@ -76,6 +76,12 @@ class LiaisonsController < ApplicationController
       unless liaison.save!
         flash[:error] = "A problem occurred in updating logon information for this liaison."
       else
+        if LoginRequest.find_by_email(liaison.email1) #Update a login request if one exists
+          request = LoginRequest.find_by_email(liaison.email1)
+          request.user_created = 't'
+          request.save!
+        end
+        flash[:notice] = "An email has been sent to #{liaison.first_name} containing logon information."
         redirect_to admin_liaison_path(liaison.id)
       end
     end

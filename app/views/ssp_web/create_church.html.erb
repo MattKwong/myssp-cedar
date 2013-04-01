@@ -13,6 +13,8 @@
                 <%= form.input :zip, :input_html => { :value => @login_request.church_zip }%>
                 <%= form.input :church_type_id, :label => "Church Type", :as => :select, :collection => ChurchType.all,
                                :allow_blank => false  %>
+                <%= form.input :email1, :label => "Church Email", :allow_blank => true %>
+
                 <%= form.input :office_phone, :input_html => { :value => @login_request.church_office_phone }%>
                 <%= form.input :fax, :input_html => { :value => @login_request.church_office_fax } %>
                 <%= form.input :active, :as => :boolean %>
