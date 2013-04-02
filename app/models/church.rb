@@ -60,15 +60,39 @@ class Church < ActiveRecord::Base
             :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
             :message => 'Email appears to be invalid.', :allow_blank => true
 
-  validates_format_of :office_phone, :with => /\A[0-9]{3}-[0-9]{3}-[0-9]{4}/,
-                      :message => 'Please enter phone numbers in the 123-456-7890 format.',
-                      :allow_blank => false
-
-  validates_format_of :fax, :with => /\A[0-9]{3}-[0-9]{3}-[0-9]{4}/,
-                      :message => 'Please enter phone numbers in the 123-456-7890 format.',
-                      :allow_blank => true
+  #validates_format_of :office_phone, :with => /\A[0-9]{3}-[0-9]{3}-[0-9]{4}/,
+  #                    :message => 'Please enter phone numbers in the 123-456-7890 format.',
+  #                    :allow_blank => false
+  #
+  #validates_format_of :fax, :with => /\A[0-9]{3}-[0-9]{3}-[0-9]{4}/,
+  #                    :message => 'Please enter phone numbers in the 123-456-7890 format.',
+  #                    :allow_blank => true
 
 #  validates :liaison_id, :presence => true
   validates :church_type_id, :presence => true
+  before_validation do
+    if self.office_phone[0..1] == '1-'
+      self.office_phone[0..1] = ''
+    end
+    if self.fax[0..1] == '1-'
+      self.fax[0..1] = ''
+    end
+
+    self.state = self.state.upcase.first(2)
+    self.office_phone = self.office_phone.gsub(/\D/,'')
+    self.fax = self.fax.gsub(/\D/,'')
+  end
+  before_save :format_phone_numbers
+
+  def format_phone_numbers
+    unless self.office_phone == ""
+      self.office_phone = self.office_phone.insert 6, '-'
+      self.office_phone = self.office_phone.insert 3, '-'
+    end
+    unless self.fax == ""
+      self.fax = self.fax.insert 6, '-'
+      self.fax = self.fax.insert 3, '-'
+    end
+  end
 
 end

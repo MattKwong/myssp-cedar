@@ -17,7 +17,7 @@
 
                 <%= form.input :office_phone, :input_html => { :value => @login_request.church_office_phone }%>
                 <%= form.input :fax, :input_html => { :value => @login_request.church_office_fax } %>
-                <%= form.input :active, :as => :boolean %>
+                <%= form.input :active, :as => :boolean, :input_html => { :checked => 'checked' }%>
                 <%= form.input :registered, :as => :boolean %>
                 <input type = "hidden" name="request_id" value= <%= @login_request.id %> />
             <% end %>
