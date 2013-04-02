@@ -54,7 +54,7 @@ class UserMailer < ActionMailer::Base
   def login_request(request, id)
     @login_request = request
     @id = id
-    mail(:to => "meghan.osborn@sierraserviceproject.org", :subject => "Login Request for #{request.first_name} #{request.last_name}")
+    mail(:to => "rickeaton@sierraserviceproject.org", :subject => "Login Request for #{request.first_name} #{request.last_name}")
 
   end
 end
