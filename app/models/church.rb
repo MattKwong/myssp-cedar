@@ -47,8 +47,7 @@ class Church < ActiveRecord::Base
   validates :name,  :presence => true,
                     :length => { :within => 6..45},
                     :uniqueness => true
-  validates :address1, :presence => true
-  validates :city, :presence => true
+  validates :address1,:city, :office_phone, :presence => true
   validates :state, :presence => true,
                     :length => { :is => 2}
   validates_inclusion_of :state, :in => State::STATE_ABBREVIATIONS, :message => 'Invalid state.'
@@ -59,6 +58,15 @@ class Church < ActiveRecord::Base
   validates_format_of :email1,
             :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
             :message => 'Email appears to be invalid.', :allow_blank => true
+
+  validates_numericality_of :office_phone, :fax,
+                            :message => 'Phone number must be 10 digits plus optional separators.',
+                            :allow_blank => true
+
+  validates_length_of :office_phone, :fax,
+                      :is => 10,
+                      :message => 'Phone numbers must be 10 digits plus optional separators.',
+                      :allow_blank => true
 
   #validates_format_of :office_phone, :with => /\A[0-9]{3}-[0-9]{3}-[0-9]{4}/,
   #                    :message => 'Please enter phone numbers in the 123-456-7890 format.',
