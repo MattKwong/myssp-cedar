@@ -52,7 +52,7 @@ class LiaisonsController < ApplicationController
       flash[:error] = "Errors prevented this record from being saved."
       @login_request = LoginRequest.find(params[:request_id])
       @church = Liaison.new
-      render '/ssp_web/create_liaison'
+      render '/login_requests/create_liaison'
     end
   end
 

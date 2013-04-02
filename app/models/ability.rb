@@ -3,6 +3,7 @@ class Ability
   # used to authorize program user actions
 
   def initialize(user)
+    #user ||= AdminUser.new
     if user.liaison?
        liaison = Liaison.find(user.liaison_id)
 #      can :manage, Payment
