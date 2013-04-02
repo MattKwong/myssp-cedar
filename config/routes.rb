@@ -114,7 +114,7 @@ Spoic3::Application.routes.draw do
   resources :supporters
   match "supporter_survey", :to => 'supporters#new'
   #resources :login_requests
-  match "/new_login_request", :to => 'login_requests#new_login_request'
+  match "/new_login_request", :to => 'login_requests#new_login_request', :as => 'new_login_request'
   match "/login_requests", :to => 'login_requests#create_login_request'
   match "/show_login_requests", :to => 'login_requests#login_requests_index', :as => 'show_requests'
   match "/thank_you", :to => 'login_requests#thank_you'
