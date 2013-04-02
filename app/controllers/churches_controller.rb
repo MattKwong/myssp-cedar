@@ -29,7 +29,7 @@ class ChurchesController < ApplicationController
       flash[:error] = "Errors prevented this record from being created."
       @login_request = LoginRequest.find(params[:request_id])
       #@church = Church.new
-      render '/ssp_web/create_church'
+      render '/login_requests/create_church'
     end
 
   end
