@@ -18,7 +18,7 @@
                             </tr>
                         </thead>
                         <% total_youth = total_counselors = grand_total = 0 %>
-                        <% if signed_in? && current_admin_user.admin? %>
+                        <% if signed_in? && current_admin_user.admin?  %>
                             <tbody>
                             <% @groups.each do |r| %>
                                         <tr>
@@ -38,11 +38,17 @@
                             <% @groups.each do |r| %>
                                         <tr>
                                             <td><%= r.name %></td>
+                                            <% if signed_in? && current_admin_user.staff? %>
+                                            <td><%= link_to Liaison.find(r.liaison_id).name, admin_liaison_path(r.liaison_id) %></td>
+                                            <td><%= link_to Church.find(r.church_id).name, admin_church_path(r.church.id)%></td><td><%= r.current_youth %></td>
+                                            <% else %>
                                             <td><%= Liaison.find(r.liaison_id).name %></td>
                                             <td><%= Church.find(r.church_id).name %></td>
+                                            <% end %>
                                             <td><%= r.current_youth %></td>
                                             <td><%= r.current_counselors %></td>
                                             <td><%= r.current_total %></td>
+                                            <td></td>
                                             <% total_youth += r.current_youth %>
                                             <% total_counselors += r.current_counselors %>
                                             <% grand_total += r.current_total %>
