@@ -19,8 +19,6 @@
 #end
 #
 
-puts"test"
-
 if UserRole.find_by_name("Admin")
   UserRole.find_by_name("Admin").delete
 end

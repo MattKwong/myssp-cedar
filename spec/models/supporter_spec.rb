@@ -47,7 +47,7 @@ describe Supporter do
   end
 
   describe "email tests" do
-    it "do we need email tests?"
+    it "do we need email tests? should zip and phone variables have more constraints?"
   end
 
   describe "gender tests" do
