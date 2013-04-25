@@ -162,4 +162,9 @@ describe Site do
 
   end
 
+  pending "not sure yet how to test the remaining functions" do
+    item = Site.new(@attr)
+    puts(item.summer_domestic)
+  end
+
 end
